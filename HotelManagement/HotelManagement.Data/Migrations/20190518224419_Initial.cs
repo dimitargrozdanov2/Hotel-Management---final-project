@@ -208,7 +208,7 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 80, nullable: false),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
                     LogbookId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

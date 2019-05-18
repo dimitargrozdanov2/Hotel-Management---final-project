@@ -12,7 +12,7 @@ namespace HotelManagement.Data.Configurations
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder.Property(a => a.UserName)
-               .HasMaxLength(50)
+               .HasMaxLength(ConfigConstants.UsernameLength)
                .IsRequired();
         }
     }

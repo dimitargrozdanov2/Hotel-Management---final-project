@@ -131,7 +131,7 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(80);
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 

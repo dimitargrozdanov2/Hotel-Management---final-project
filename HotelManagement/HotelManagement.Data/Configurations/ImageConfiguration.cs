@@ -13,7 +13,7 @@ namespace HotelManagement.Data.Configurations
         public void Configure(EntityTypeBuilder<Image> builder)
         {
             builder.Property(a => a.Name)
-                .HasMaxLength(80)
+                .HasMaxLength(ConfigConstants.NameLength)
                 .IsRequired();
         }
     }

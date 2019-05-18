@@ -12,10 +12,10 @@ namespace HotelManagement.Data.Configurations
         public void Configure(EntityTypeBuilder<Feedback> builder)
         {
             builder.Property(a => a.Name)
-                .HasMaxLength(50);
+                .HasMaxLength(ConfigConstants.NameLength);
 
             builder.Property(a => a.Comment)
-                .HasMaxLength(200)
+                .HasMaxLength(ConfigConstants.CommentLength)
                 .IsRequired();
         }
     }

@@ -12,7 +12,7 @@ namespace HotelManagement.Data.Configurations
         public void Configure(EntityTypeBuilder<Note> builder)
         {
             builder.Property(a => a.Text)
-                .HasMaxLength(200)
+                .HasMaxLength(ConfigConstants.TextLength)
                 .IsRequired();
         }
     }
