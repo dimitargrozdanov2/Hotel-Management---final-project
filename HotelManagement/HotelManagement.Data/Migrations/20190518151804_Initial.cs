@@ -27,7 +27,7 @@ namespace HotelManagement.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    UserName = table.Column<string>(maxLength: 50, nullable: false),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
@@ -55,7 +55,7 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,8 +70,8 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Comment = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Comment = table.Column<string>(maxLength: 200, nullable: false),
                     Number = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -87,7 +87,7 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -208,7 +208,7 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 80, nullable: false),
                     LogbookId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -254,7 +254,7 @@ namespace HotelManagement.Data.Migrations
                     IsDeleted = table.Column<bool>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Text = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(maxLength: 200, nullable: false),
                     CategoryID = table.Column<string>(nullable: true),
                     ApplicationUserId = table.Column<string>(nullable: true),
                     LogbookId = table.Column<string>(nullable: true)

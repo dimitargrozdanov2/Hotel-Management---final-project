@@ -41,9 +41,19 @@ namespace HotelManagement.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
+            builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new CategoryConfiguration());
+            builder.ApplyConfiguration(new FeedbackConfiguration());
+            builder.ApplyConfiguration(new ImageConfiguration());
+            builder.ApplyConfiguration(new LogbookConfiguration());
+            builder.ApplyConfiguration(new LogBookManagersConfiguration());
+            builder.ApplyConfiguration(new NoteConfiguration());
 
             // TODO: might have to create this for each entity
-            //builder.Entity<Note>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Note>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Logbook>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Feedback>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
         }
     }
 }
