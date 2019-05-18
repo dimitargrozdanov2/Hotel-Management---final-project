@@ -19,7 +19,7 @@ namespace HotelManagement.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HotelManagement.Web.Models.ApplicationUser", b =>
+            modelBuilder.Entity("HotelManagement.DataModels.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,6 +68,129 @@ namespace HotelManagement.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Category", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Feedback", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Number");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Feedback");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LogbookId");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LogbookId");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Logbook", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logbooks");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.LogbookManagers", b =>
+                {
+                    b.Property<string>("ManagerId");
+
+                    b.Property<string>("LogbookId");
+
+                    b.HasKey("ManagerId", "LogbookId");
+
+                    b.HasIndex("LogbookId");
+
+                    b.ToTable("LogbookManagers");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Note", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("CategoryID");
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LogbookId");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("LogbookId");
+
+                    b.ToTable("Notes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -180,6 +303,41 @@ namespace HotelManagement.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HotelManagement.DataModels.Image", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
+                        .WithMany("Images")
+                        .HasForeignKey("LogbookId");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.LogbookManagers", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser", "Manager")
+                        .WithMany("LogbookManagers")
+                        .HasForeignKey("LogbookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
+                        .WithMany("LogbookManagers")
+                        .HasForeignKey("LogbookId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Note", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("HotelManagement.DataModels.Category", "Category")
+                        .WithMany("Notes")
+                        .HasForeignKey("CategoryID");
+
+                    b.HasOne("HotelManagement.DataModels.Logbook")
+                        .WithMany("Notes")
+                        .HasForeignKey("LogbookId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -190,7 +348,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("HotelManagement.Web.Models.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -198,7 +356,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("HotelManagement.Web.Models.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -211,7 +369,7 @@ namespace HotelManagement.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HotelManagement.Web.Models.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -219,7 +377,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("HotelManagement.Web.Models.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

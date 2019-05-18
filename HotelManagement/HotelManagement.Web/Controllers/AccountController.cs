@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using HotelManagement.Web.Models.AccountViewModels;
 using HotelManagement.Web.Services;
 using HotelManagement.Web.Models;
+using HotelManagement.DataModels;
 
 namespace HotelManagement.Web.Controllers
 {

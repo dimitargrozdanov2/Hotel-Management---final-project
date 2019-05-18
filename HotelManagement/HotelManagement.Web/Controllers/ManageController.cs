@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using HotelManagement.DataModels;
+using HotelManagement.Web.Models.ManageViewModels;
+using HotelManagement.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using HotelManagement.Web.Models;
-using HotelManagement.Web.Models.ManageViewModels;
-using HotelManagement.Web.Services;
 
-namespace HotelManagement.Web.Controllers
+
+namespace WebApplication3.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -522,7 +523,7 @@ namespace HotelManagement.Web.Controllers
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("HotelManagement.Web"),
+                _urlEncoder.Encode("WebApplication3"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

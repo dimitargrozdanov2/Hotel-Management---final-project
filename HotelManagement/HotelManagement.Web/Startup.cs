@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HotelManagement.Web.Models;
 using HotelManagement.Web.Services;
 using HotelManagement.Data;
+using HotelManagement.DataModels;
 
 namespace HotelManagement.Web
 {
