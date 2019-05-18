@@ -18,4 +18,12 @@
     <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Controllers\" />
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
+    <Folder Include="Areas\Administration\Views\" />
+  </ItemGroup>
+
 </Project>
