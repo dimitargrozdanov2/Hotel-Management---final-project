@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
+    internal class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
     {
         public void Configure(EntityTypeBuilder<Feedback> builder)
         {

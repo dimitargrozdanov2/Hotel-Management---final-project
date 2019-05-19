@@ -7,9 +7,9 @@ using System.Text;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+    internal class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.Property(a => a.UserName)
                .HasMaxLength(ConfigConstants.UsernameLength)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class LogBookManagersConfiguration : IEntityTypeConfiguration<LogbookManagers>
+    internal class LogBookManagersConfiguration : IEntityTypeConfiguration<LogbookManagers>
     {
         public void Configure(EntityTypeBuilder<LogbookManagers> builder)
         {

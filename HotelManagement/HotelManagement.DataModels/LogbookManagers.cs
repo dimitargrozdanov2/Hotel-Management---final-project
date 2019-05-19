@@ -10,6 +10,6 @@ namespace HotelManagement.DataModels
         public Logbook Logbook { get; set; }
 
         public string ManagerId { get; set; }
-        public ApplicationUser Manager { get; set; }
+        public User Manager { get; set; }
     }
 }

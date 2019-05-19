@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class NoteConfiguration : IEntityTypeConfiguration<Note>
+    internal class NoteConfiguration : IEntityTypeConfiguration<Note>
     {
         public void Configure(EntityTypeBuilder<Note> builder)
         {

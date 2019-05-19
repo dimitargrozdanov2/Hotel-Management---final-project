@@ -25,7 +25,7 @@ namespace HotelManagement.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(this.Configuration.GetConnectionString("TConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

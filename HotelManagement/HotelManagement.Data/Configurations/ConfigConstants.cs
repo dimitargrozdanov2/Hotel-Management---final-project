@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class ConfigConstants
+    internal class ConfigConstants
     {
         public const int TitleLength = 50;
 
@@ -15,9 +15,5 @@ namespace HotelManagement.Data.Configurations
         public const int CommentLength = 200;
 
         public const int TextLength = 200;
-
-
-
-
     }
 }

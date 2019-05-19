@@ -8,7 +8,7 @@ using HotelManagement.DataModels;
 
 namespace HotelManagement.Data.Configurations
 {
-    public class ImageConfiguration : IEntityTypeConfiguration<Image>
+    internal class ImageConfiguration : IEntityTypeConfiguration<Image>
     {
         public void Configure(EntityTypeBuilder<Image> builder)
         {

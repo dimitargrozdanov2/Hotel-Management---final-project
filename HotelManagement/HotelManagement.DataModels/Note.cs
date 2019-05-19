@@ -12,7 +12,7 @@ namespace HotelManagement.DataModels
         public string CategoryID { get; set; }
         public Category Category { get; set; }
 
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
+        public string UserID { get; set; }
+        public User User { get; set; }
     }
 }

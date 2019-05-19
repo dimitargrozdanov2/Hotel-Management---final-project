@@ -19,58 +19,6 @@ namespace HotelManagement.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("HotelManagement.DataModels.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken();
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256);
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("HotelManagement.DataModels.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -178,8 +126,6 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<string>("CategoryID");
 
                     b.Property<DateTime?>("CreatedOn");
@@ -194,15 +140,69 @@ namespace HotelManagement.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserID");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryID");
 
                     b.HasIndex("LogbookId");
 
+                    b.HasIndex("UserID");
+
                     b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -324,12 +324,12 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("HotelManagement.DataModels.LogbookManagers", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser", "Manager")
+                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
                         .WithMany("LogbookManagers")
                         .HasForeignKey("LogbookId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
+                    b.HasOne("HotelManagement.DataModels.User", "Manager")
                         .WithMany("LogbookManagers")
                         .HasForeignKey("LogbookId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -337,10 +337,6 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("HotelManagement.DataModels.Note", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("HotelManagement.DataModels.Category", "Category")
                         .WithMany("Notes")
                         .HasForeignKey("CategoryID");
@@ -348,6 +344,10 @@ namespace HotelManagement.Data.Migrations
                     b.HasOne("HotelManagement.DataModels.Logbook")
                         .WithMany("Notes")
                         .HasForeignKey("LogbookId");
+
+                    b.HasOne("HotelManagement.DataModels.User", "User")
+                        .WithMany("Notes")
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -360,7 +360,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -368,7 +368,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -381,7 +381,7 @@ namespace HotelManagement.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -389,7 +389,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.ApplicationUser")
+                    b.HasOne("HotelManagement.DataModels.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

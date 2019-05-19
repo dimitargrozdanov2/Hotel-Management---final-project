@@ -233,15 +233,15 @@ namespace HotelManagement.Data.Migrations
                 {
                     table.PrimaryKey("PK_LogbookManagers", x => new { x.ManagerId, x.LogbookId });
                     table.ForeignKey(
-                        name: "FK_LogbookManagers_AspNetUsers_LogbookId",
-                        column: x => x.LogbookId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_LogbookManagers_Logbooks_LogbookId",
                         column: x => x.LogbookId,
                         principalTable: "Logbooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LogbookManagers_AspNetUsers_LogbookId",
+                        column: x => x.LogbookId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -256,18 +256,12 @@ namespace HotelManagement.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(maxLength: 200, nullable: false),
                     CategoryID = table.Column<string>(nullable: true),
-                    ApplicationUserId = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true),
                     LogbookId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Notes_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Notes_Categories_CategoryID",
                         column: x => x.CategoryID,
@@ -278,6 +272,12 @@ namespace HotelManagement.Data.Migrations
                         name: "FK_Notes_Logbooks_LogbookId",
                         column: x => x.LogbookId,
                         principalTable: "Logbooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Notes_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -332,11 +332,6 @@ namespace HotelManagement.Data.Migrations
                 column: "LogbookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notes_ApplicationUserId",
-                table: "Notes",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Notes_CategoryID",
                 table: "Notes",
                 column: "CategoryID");
@@ -345,6 +340,11 @@ namespace HotelManagement.Data.Migrations
                 name: "IX_Notes_LogbookId",
                 table: "Notes",
                 column: "LogbookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notes_UserID",
+                table: "Notes",
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -380,13 +380,13 @@ namespace HotelManagement.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Logbooks");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 namespace HotelManagement.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext()
         {
@@ -41,7 +41,7 @@ namespace HotelManagement.Data
             // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
-            builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new FeedbackConfiguration());
             builder.ApplyConfiguration(new ImageConfiguration());
