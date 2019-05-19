@@ -2,6 +2,7 @@
 using HotelManagement.DataModels;
 using HotelManagement.Services;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Web.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -43,11 +44,14 @@ namespace HotelManagement.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.CustomExceptionHandling();
 
             app.UseStaticFiles();
 
