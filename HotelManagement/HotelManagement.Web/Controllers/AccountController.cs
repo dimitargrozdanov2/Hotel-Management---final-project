@@ -11,9 +11,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using HotelManagement.Web.Models.AccountViewModels;
-using HotelManagement.Web.Services;
-using HotelManagement.Web.Models;
 using HotelManagement.DataModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace HotelManagement.Web.Controllers
 {

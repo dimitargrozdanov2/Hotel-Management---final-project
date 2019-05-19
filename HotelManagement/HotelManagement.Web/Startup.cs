@@ -1,6 +1,7 @@
 ﻿using HotelManagement.Data;
 using HotelManagement.DataModels;
-using HotelManagement.Web.Services;
+using HotelManagement.Services;
+using HotelManagement.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -55,8 +56,16 @@ namespace HotelManagement.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    name: "administration",
+                    template: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "management",
+                    template: "{area:exists}/{controller=Manager}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "moderation",
+                    template: "{area:exists}/{controller=Moderator}/{action=Index}/{id?}");
 
                 routes.MapRoute(
                     name: "default",

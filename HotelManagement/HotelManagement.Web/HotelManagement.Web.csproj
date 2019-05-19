@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HotelManagement.DataModels\HotelManagement.DataModels.csproj" />
     <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj" />
+    <ProjectReference Include="..\HotelManagement.Services\HotelManagement.Services.csproj" />
   </ItemGroup>
 
 
@@ -24,6 +25,14 @@
     <Folder Include="Areas\Administration\Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\" />
+    <Folder Include="Areas\Management\Controllers\" />
+    <Folder Include="Areas\Management\Data\" />
+    <Folder Include="Areas\Management\Models\" />
+    <Folder Include="Areas\Management\Views\" />
+    <Folder Include="Areas\Moderation\Controllers\" />
+    <Folder Include="Areas\Moderation\Data\" />
+    <Folder Include="Areas\Moderation\Models\" />
+    <Folder Include="Areas\Moderation\Views\" />
   </ItemGroup>
 
 </Project>
