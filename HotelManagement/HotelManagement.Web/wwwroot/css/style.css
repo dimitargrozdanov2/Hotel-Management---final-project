@@ -130,7 +130,6 @@ button {
     padding-left: 9.5px; } }
 
 .header_area {
-  position: absolute;
   width: 100%;
   z-index: 999999;
   background: #fff;
@@ -170,7 +169,7 @@ button {
           background: #fff; }
           @media (min-width: 992px) {
             .header_area .navbar .nav .nav-item.submenu ul {
-              position: absolute;
+              /*position: absolute;*/
               top: 120%;
               left: 0px;
               min-width: 200px;
@@ -321,8 +320,8 @@ button {
     .navbar-toggler:focus {
       outline: 0;
       box-shadow: none; }
-  .header_area {
-    position: absolute; }
+  /*.header_area {
+    position: absolute; }*/
   .navbar-toggler[aria-expanded="false"] span:nth-child(2) {
     opacity: 1; }
   .navbar-toggler[aria-expanded="true"] span:nth-child(2) {
