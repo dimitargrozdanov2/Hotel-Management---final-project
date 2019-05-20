@@ -1,18 +1,8 @@
-﻿.body-section-area {
-    height: 380px;
-    position: relative;
-    margin-bottom: 50px;
-}
-
-
-.body-section-area .body-section {
-    position: absolute;
-    margin-top: 20%;
-    left: 50%;
-    width: 100%;
-    transform: translateX(-50%);
-}
-
-.errorText {
+﻿.errorText {
     color: red;
+}
+
+.bodyArea{
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
