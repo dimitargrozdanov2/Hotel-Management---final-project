@@ -9,10 +9,10 @@ namespace HotelManagement.DataModels
     {
         public string Text { get; set; }
 
-        public string CategoryID { get; set; }
+        public string CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public string UserID { get; set; }
+        public string UserId { get; set; }
         public User User { get; set; }
     }
 }
