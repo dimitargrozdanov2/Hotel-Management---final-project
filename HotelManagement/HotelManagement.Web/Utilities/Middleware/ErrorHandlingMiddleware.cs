@@ -31,10 +31,10 @@ namespace HotelManagement.Web.Utilities.Middleware
             {
                 context.Response.Redirect($"/error/invalid?error={ex.Message}");
             }
-            catch (Exception)
-            {
-                context.Response.Redirect("/error/servererror");
-            }
+            //catch (Exception)
+            //{
+            //    context.Response.Redirect("/error/servererror");
+            //}
         }
     }
 }

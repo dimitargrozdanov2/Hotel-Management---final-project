@@ -68,8 +68,8 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                             <li class="nav-item active"><a class="nav-link" href="properties.html">Properties</a></li>
                             <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                             <li class="nav-item submenu dropdown">
@@ -80,7 +80,7 @@
                                     <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
                         </ul>
                     </div>
 
@@ -90,7 +90,10 @@
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                         <li><a href="#"><i class="fas fa-rss"></i></a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html">LOGIN</a></li>
+                        <li><partial name="_LoginPartial" /></li>
+                    </ul>
+                    <ul class="social-icons ml-auto">
+                        
                     </ul>
                 </div>
             </nav>
@@ -204,10 +207,7 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>
-
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
-
