@@ -180,6 +180,13 @@ namespace HotelManagement.Data.Migrations
                     b.HasIndex("LogbookId");
 
                     b.ToTable("LogbookManagers");
+
+                    b.HasData(
+                        new
+                        {
+                            ManagerId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2"
+                        });
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.Note", b =>
@@ -220,6 +227,7 @@ namespace HotelManagement.Data.Migrations
                             CategoryId = "450b6f6e-95b3-400d-a258-aafc6b6ecd07",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2",
                             Text = "Check reception documents!",
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97"
                         });
@@ -451,7 +459,7 @@ namespace HotelManagement.Data.Migrations
 
                     b.HasOne("HotelManagement.DataModels.User", "Manager")
                         .WithMany("LogbookManagers")
-                        .HasForeignKey("LogbookId")
+                        .HasForeignKey("ManagerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -461,7 +469,7 @@ namespace HotelManagement.Data.Migrations
                         .WithMany("Notes")
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("HotelManagement.DataModels.Logbook")
+                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
                         .WithMany("Notes")
                         .HasForeignKey("LogbookId");
 

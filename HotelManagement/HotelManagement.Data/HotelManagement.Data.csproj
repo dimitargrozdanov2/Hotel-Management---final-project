@@ -15,8 +15,4 @@
     <ProjectReference Include="..\HotelManagement.DataModels\HotelManagement.DataModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="JsonFiles\" />
-  </ItemGroup>
-
 </Project>

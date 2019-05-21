@@ -1,10 +1,13 @@
-﻿using System;
+﻿using HotelManagement.DataModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Services.Contracts
 {
-    interface INoteService
+    public interface INoteService
     {
+        Task<ICollection<Note>> GetNotes();
     }
 }

@@ -22,7 +22,7 @@ namespace HotelManagement.Data.Configurations
             builder
                 .HasOne(um => um.Manager)
                 .WithMany(u => u.LogbookManagers)
-                .HasForeignKey(um => um.LogbookId);
+                .HasForeignKey(um => um.ManagerId);
         }
     }
 }

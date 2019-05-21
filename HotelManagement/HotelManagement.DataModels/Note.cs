@@ -9,6 +9,9 @@ namespace HotelManagement.DataModels
     {
         public string Text { get; set; }
 
+        public string LogbookId { get; set; }
+        public Logbook Logbook { get; set; }
+
         public string CategoryId { get; set; }
         public Category Category { get; set; }
 

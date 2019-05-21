@@ -239,8 +239,8 @@ namespace HotelManagement.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_LogbookManagers_AspNetUsers_LogbookId",
-                        column: x => x.LogbookId,
+                        name: "FK_LogbookManagers_AspNetUsers_ManagerId",
+                        column: x => x.ManagerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -255,9 +255,9 @@ namespace HotelManagement.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Text = table.Column<string>(maxLength: 200, nullable: false),
+                    LogbookId = table.Column<string>(nullable: true),
                     CategoryId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    LogbookId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -318,9 +318,24 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Logbooks",
+                columns: new[] { "Id", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
+                values: new object[] { "3d71d939-dc61-46f8-af46-ed6a618036c2", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Hotel" });
+
+            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" });
+
+            migrationBuilder.InsertData(
+                table: "LogbookManagers",
+                columns: new[] { "ManagerId", "LogbookId" },
+                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "3d71d939-dc61-46f8-af46-ed6a618036c2" });
+
+            migrationBuilder.InsertData(
+                table: "Notes",
+                columns: new[] { "Id", "CategoryId", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "Text", "UserId" },
+                values: new object[] { "f7257688-84ea-4327-8841-ac78f3e8d2f6", "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, "Check reception documents!", "6404c00f-c0e6-4a92-ad71-43b24f5f0e97" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

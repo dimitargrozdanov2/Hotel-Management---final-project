@@ -65,12 +65,15 @@ namespace HotelManagement.Data
             var notesPath = @"..\HotelManagement.Data\JsonFiles\notes.json";
             var logbooksPath = @"..\HotelManagement.Data\JsonFiles\logbooks.json";
 
+            var logbookManagersPath = @"..\HotelManagement.Data\JsonFiles\logbookManagers.json";
+
+
             var usersPath = @"..\HotelManagement.Data\JsonFiles\users.json";
             var rolesPath = @"..\HotelManagement.Data\JsonFiles\roles.json";
             var userRolesPath = @"..\HotelManagement.Data\JsonFiles\userRoles.json";
 
             var isPathFound = File.Exists(feedbackPath) && File.Exists(categoriesPath) && File.Exists(notesPath)
-                                && File.Exists(logbooksPath);
+                                && File.Exists(logbooksPath) && File.Exists(logbookManagersPath);
             if (isPathFound)
             {
                 var feedback = JsonConvert.DeserializeObject<Feedback[]>(File.ReadAllText(feedbackPath));
@@ -78,7 +81,7 @@ namespace HotelManagement.Data
                 var notes = JsonConvert.DeserializeObject<Note[]>(File.ReadAllText(notesPath));
                 var logbooks = JsonConvert.DeserializeObject<Logbook[]>(File.ReadAllText(logbooksPath));
 
-                //var movieActors = JsonConvert.DeserializeObject<MovieActor[]>(File.ReadAllText(movieActorsPath));
+                var logbookManagers = JsonConvert.DeserializeObject<LogbookManagers[]>(File.ReadAllText(logbookManagersPath));
 
                 var users = JsonConvert.DeserializeObject<User[]>(File.ReadAllText(usersPath));
                 var roles = JsonConvert.DeserializeObject<IdentityRole[]>(File.ReadAllText(rolesPath));
@@ -89,7 +92,8 @@ namespace HotelManagement.Data
                 modelBuilder.Entity<Note>().HasData(notes);
                 modelBuilder.Entity<Logbook>().HasData(logbooks);
 
-                //modelBuilder.Entity<MovieActor>().HasData(movieActors);
+                modelBuilder.Entity<LogbookManagers>().HasData(logbookManagers);
+
 
                 modelBuilder.Entity<User>().HasData(users);
                 modelBuilder.Entity<IdentityRole>().HasData(roles);
