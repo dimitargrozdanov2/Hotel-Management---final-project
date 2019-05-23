@@ -245,6 +245,8 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn");
 
+                    b.Property<int>("PriorityType");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -269,6 +271,7 @@ namespace HotelManagement.Data.Migrations
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2",
+                            PriorityType = 1,
                             Text = "Check reception documents!",
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97"
                         });
@@ -500,7 +503,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("HotelManagement.DataModels.Logbook", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.Business")
+                    b.HasOne("HotelManagement.DataModels.Business", "Business")
                         .WithMany("BusinessUnits")
                         .HasForeignKey("BusinessId");
                 });

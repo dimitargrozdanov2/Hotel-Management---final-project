@@ -1,4 +1,5 @@
 ﻿using HotelManagement.DataModels.Base;
+using HotelManagement.DataModels.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,7 @@ namespace HotelManagement.DataModels
 
         public string UserId { get; set; }
         public User User { get; set; }
+
+        public PriorityType PriorityType { get; set; }
     }
 }

@@ -287,7 +287,8 @@ namespace HotelManagement.Data.Migrations
                     Text = table.Column<string>(maxLength: 200, nullable: false),
                     LogbookId = table.Column<string>(nullable: true),
                     CategoryId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    PriorityType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -369,8 +370,8 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Notes",
-                columns: new[] { "Id", "CategoryId", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "Text", "UserId" },
-                values: new object[] { "f7257688-84ea-4327-8841-ac78f3e8d2f6", "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, "Check reception documents!", "6404c00f-c0e6-4a92-ad71-43b24f5f0e97" });
+                columns: new[] { "Id", "CategoryId", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "PriorityType", "Text", "UserId" },
+                values: new object[] { "f7257688-84ea-4327-8841-ac78f3e8d2f6", "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, 1, "Check reception documents!", "6404c00f-c0e6-4a92-ad71-43b24f5f0e97" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
