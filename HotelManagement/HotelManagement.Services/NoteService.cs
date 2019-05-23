@@ -17,12 +17,16 @@ namespace HotelManagement.Services
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
-         
+
+        // Having 2 thenInclude on the same property written twice is okay
+        //  ..because ef will NOT generate redundant joins
         public async Task<ICollection<Note>> GetNotes()
         {
             var notes = await this.dbContext.Notes
                 .Include(l => l.Logbook)
                     .ThenInclude(x => x.LogbookManagers)
+                .Include(x => x.Logbook)
+                    .ThenInclude(s => s.Business)
                 .Include(c => c.Category)
                 .Include(u => u.User).ToListAsync();
 
