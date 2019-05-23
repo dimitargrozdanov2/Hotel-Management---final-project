@@ -19,6 +19,7 @@ namespace HotelManagement.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Feedback> Feedback { get; set; }
@@ -29,6 +30,8 @@ namespace HotelManagement.Data
 
         public DbSet<Logbook> Logbooks { get; set; }
 
+        public DbSet<Business> Businesses { get; set; }
+
         public DbSet<LogbookManagers> LogbookManagers { get; set; }
 
         public DbSet<Note> Notes { get; set; }
@@ -38,9 +41,6 @@ namespace HotelManagement.Data
             this.LoadJsonFilesInDatabase(builder);
 
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
@@ -50,13 +50,13 @@ namespace HotelManagement.Data
             builder.ApplyConfiguration(new LogbookConfiguration());
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
             builder.ApplyConfiguration(new NoteConfiguration());
+            builder.ApplyConfiguration(new BusinessConfiguration());
 
             // TODO: might have to create this for each entity
-            builder.Entity<Note>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
-            builder.Entity<Logbook>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
-            builder.Entity<Feedback>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
-            builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            CheckIsDeleted(builder);
         }
+
+        
 
         private void LoadJsonFilesInDatabase(ModelBuilder modelBuilder)
         {
@@ -64,6 +64,7 @@ namespace HotelManagement.Data
             var categoriesPath = @"..\HotelManagement.Data\JsonFiles\categories.json";
             var notesPath = @"..\HotelManagement.Data\JsonFiles\notes.json";
             var logbooksPath = @"..\HotelManagement.Data\JsonFiles\logbooks.json";
+            var businessesPath = @"..\HotelManagement.Data\JsonFiles\businesses.json";
 
             var logbookManagersPath = @"..\HotelManagement.Data\JsonFiles\logbookManagers.json";
 
@@ -73,13 +74,14 @@ namespace HotelManagement.Data
             var userRolesPath = @"..\HotelManagement.Data\JsonFiles\userRoles.json";
 
             var isPathFound = File.Exists(feedbackPath) && File.Exists(categoriesPath) && File.Exists(notesPath)
-                                && File.Exists(logbooksPath) && File.Exists(logbookManagersPath);
+                                && File.Exists(logbooksPath) && File.Exists(logbookManagersPath) && File.Exists(businessesPath);
             if (isPathFound)
             {
                 var feedback = JsonConvert.DeserializeObject<Feedback[]>(File.ReadAllText(feedbackPath));
                 var categories = JsonConvert.DeserializeObject<Category[]>(File.ReadAllText(categoriesPath));
                 var notes = JsonConvert.DeserializeObject<Note[]>(File.ReadAllText(notesPath));
                 var logbooks = JsonConvert.DeserializeObject<Logbook[]>(File.ReadAllText(logbooksPath));
+                var businesses = JsonConvert.DeserializeObject<Business[]>(File.ReadAllText(businessesPath));
 
                 var logbookManagers = JsonConvert.DeserializeObject<LogbookManagers[]>(File.ReadAllText(logbookManagersPath));
 
@@ -91,6 +93,7 @@ namespace HotelManagement.Data
                 modelBuilder.Entity<Category>().HasData(categories);
                 modelBuilder.Entity<Note>().HasData(notes);
                 modelBuilder.Entity<Logbook>().HasData(logbooks);
+                modelBuilder.Entity<Business>().HasData(businesses);
 
                 modelBuilder.Entity<LogbookManagers>().HasData(logbookManagers);
 
@@ -99,6 +102,15 @@ namespace HotelManagement.Data
                 modelBuilder.Entity<IdentityRole>().HasData(roles);
                 modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
             }
+        }
+
+        private static void CheckIsDeleted(ModelBuilder builder)
+        {
+            builder.Entity<Note>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Logbook>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Feedback>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Business>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
         }
     }
 }

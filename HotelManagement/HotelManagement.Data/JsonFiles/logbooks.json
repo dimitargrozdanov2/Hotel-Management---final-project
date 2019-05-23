@@ -1,7 +1,8 @@
 [
-    {
-        "ID": "3d71d939-dc61-46f8-af46-ed6a618036c2",
-        "Name": "Hotel",
-        "CreatedOn": "5/4/2019 2:40:05 PM"
-    }
+  {
+    "ID": "3d71d939-dc61-46f8-af46-ed6a618036c2",
+    "Name": "Restaurant",
+    "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e",
+    "CreatedOn": "5/4/2019 2:40:05 PM"
+  }
 ]

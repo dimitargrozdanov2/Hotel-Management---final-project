@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HotelManagement.DataModels
 {
-    public class Feedback : Entity
+    public class Feedback : BaseEntity
     {
         public string Name { get; set; }
 

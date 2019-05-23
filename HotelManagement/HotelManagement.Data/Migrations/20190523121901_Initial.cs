@@ -48,6 +48,22 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Businesses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Location = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Businesses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -60,38 +76,6 @@ namespace HotelManagement.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Feedback",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Comment = table.Column<string>(maxLength: 200, nullable: false),
-                    Number = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Feedback", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Logbooks",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logbooks", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,6 +185,52 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Feedback",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Comment = table.Column<string>(maxLength: 200, nullable: false),
+                    Number = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedback", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Feedback_Businesses_BusinessId",
+                        column: x => x.BusinessId,
+                        principalTable: "Businesses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Logbooks",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    BusinessId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logbooks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Logbooks_Businesses_BusinessId",
+                        column: x => x.BusinessId,
+                        principalTable: "Businesses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -298,6 +328,11 @@ namespace HotelManagement.Data.Migrations
                 values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", 0, "b318fa87-5d53-4bc3-8019-23d7aa37da20", "admin@admin.admin", false, false, null, "ADMIN@ADMIN.ADMIN", "ADMIN", "AQAAAAEAACcQAAAAEHzP/Ds0oHiv5C7IjlaA+ce9X9hucPveVIL0EgYgT7ScxgYCFnZFsMQQZLRC5BPKLw==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "admin" });
 
             migrationBuilder.InsertData(
+                table: "Businesses",
+                columns: new[] { "Id", "CreatedOn", "IsDeleted", "Location", "ModifiedOn", "Name" },
+                values: new object[] { "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 3, 17, 10, 20, 0, DateTimeKind.Unspecified), false, "Bulgaria, Sofia", null, "Diamonds Grand Hotel" });
+
+            migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
                 values: new object[,]
@@ -309,23 +344,23 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Feedback",
-                columns: new[] { "Id", "Comment", "CreatedOn", "IsDeleted", "ModifiedOn", "Name", "Number" },
+                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "IsDeleted", "ModifiedOn", "Name", "Number" },
                 values: new object[,]
                 {
-                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Jeff Goldblum", "+359 896 71 99 88" },
-                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Scarlett Johansson", "+359 893 92 00 55" },
-                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Sandra Bullock", "+359 898 11 23 44" }
+                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", null, "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Jeff Goldblum", "+359 896 71 99 88" },
+                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", null, "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Scarlett Johansson", "+359 893 92 00 55" },
+                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", null, "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Sandra Bullock", "+359 898 11 23 44" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Logbooks",
-                columns: new[] { "Id", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
-                values: new object[] { "3d71d939-dc61-46f8-af46-ed6a618036c2", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Hotel" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" });
+
+            migrationBuilder.InsertData(
+                table: "Logbooks",
+                columns: new[] { "Id", "BusinessId", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
+                values: new object[] { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Restaurant" });
 
             migrationBuilder.InsertData(
                 table: "LogbookManagers",
@@ -377,6 +412,11 @@ namespace HotelManagement.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedback_BusinessId",
+                table: "Feedback",
+                column: "BusinessId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_LogbookId",
                 table: "Images",
                 column: "LogbookId");
@@ -385,6 +425,11 @@ namespace HotelManagement.Data.Migrations
                 name: "IX_LogbookManagers_LogbookId",
                 table: "LogbookManagers",
                 column: "LogbookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Logbooks_BusinessId",
+                table: "Logbooks",
+                column: "BusinessId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notes_CategoryId",
@@ -442,6 +487,9 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Businesses");
         }
     }
 }

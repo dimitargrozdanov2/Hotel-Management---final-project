@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HotelManagement.DataModels
 {
-    public class Image : Entity
+    public class Image : BaseEntity
     {
         public string Name { get; set; }
 

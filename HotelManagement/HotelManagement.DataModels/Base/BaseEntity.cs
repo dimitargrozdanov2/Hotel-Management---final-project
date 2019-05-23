@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace HotelManagement.DataModels.Base
 {
-    public class Entity :IDeletable, IModifiable
+    public class BaseEntity :IDeletable, IModifiable
     {
+        [Key]
         public string Id { get; set; }
 
         public bool IsDeleted { get; set; }

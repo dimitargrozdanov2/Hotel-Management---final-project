@@ -19,6 +19,38 @@ namespace HotelManagement.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HotelManagement.DataModels.Business", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("Location");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Businesses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "14f77522-b07f-4ad8-855b-d93923bea56e",
+                            CreatedOn = new DateTime(2019, 5, 3, 17, 10, 20, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Location = "Bulgaria, Sofia",
+                            Name = "Diamonds Grand Hotel"
+                        });
+                });
+
             modelBuilder.Entity("HotelManagement.DataModels.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -67,6 +99,8 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("BusinessId");
+
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(200);
@@ -83,6 +117,8 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("Number");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BusinessId");
 
                     b.ToTable("Feedback");
 
@@ -145,6 +181,8 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("BusinessId");
+
                     b.Property<DateTime?>("CreatedOn");
 
                     b.Property<bool>("IsDeleted");
@@ -157,15 +195,18 @@ namespace HotelManagement.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BusinessId");
+
                     b.ToTable("Logbooks");
 
                     b.HasData(
                         new
                         {
                             Id = "3d71d939-dc61-46f8-af46-ed6a618036c2",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             CreatedOn = new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            Name = "Hotel"
+                            Name = "Restaurant"
                         });
                 });
 
@@ -443,11 +484,25 @@ namespace HotelManagement.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HotelManagement.DataModels.Feedback", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.Business")
+                        .WithMany("Feedback")
+                        .HasForeignKey("BusinessId");
+                });
+
             modelBuilder.Entity("HotelManagement.DataModels.Image", b =>
                 {
                     b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
                         .WithMany("Images")
                         .HasForeignKey("LogbookId");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Logbook", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.Business")
+                        .WithMany("BusinessUnits")
+                        .HasForeignKey("BusinessId");
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.LogbookManagers", b =>

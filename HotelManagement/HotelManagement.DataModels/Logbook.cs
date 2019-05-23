@@ -5,9 +5,11 @@ using System.Text;
 
 namespace HotelManagement.DataModels
 {
-    public class Logbook : Entity
+    public class Logbook : BaseEntity
     {
         public string Name { get; set; }
+
+        public string BusinessId { get; set; }
 
         public ICollection<Note> Notes { get; set; }
 
