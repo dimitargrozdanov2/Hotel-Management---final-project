@@ -11,16 +11,16 @@ namespace HotelManagement.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly INoteService noteService;
+        private readonly IBusinessService businessService;
 
-        public HomeController(INoteService noteService)
+        public HomeController(IBusinessService businessService)
         {
-            this.noteService = noteService ?? throw new ArgumentNullException(nameof(noteService));
+            this.businessService = businessService ?? throw new ArgumentNullException(nameof(businessService));
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var notes = this.noteService.GetNotes();
+            var business = await this.businessService.GetBusinesses("rating");
             return View();
         }
 

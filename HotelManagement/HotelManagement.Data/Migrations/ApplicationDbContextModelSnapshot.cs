@@ -26,6 +26,8 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<DateTime?>("CreatedOn");
 
+                    b.Property<string>("Description");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Location");
@@ -45,9 +47,19 @@ namespace HotelManagement.Data.Migrations
                         {
                             Id = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             CreatedOn = new DateTime(2019, 5, 3, 17, 10, 20, 0, DateTimeKind.Unspecified),
+                            Description = "Located in the bustling Dubai Marina neighbourhood, Rove Dubai Marina is the perfect location to start your next adventure.",
                             IsDeleted = false,
-                            Location = "Bulgaria, Sofia",
-                            Name = "Diamonds Grand Hotel"
+                            Location = "United Arab Emirates, Dubai",
+                            Name = "Rove Dubai Marina"
+                        },
+                        new
+                        {
+                            Id = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 4, 3, 15, 20, 11, 0, DateTimeKind.Unspecified),
+                            Description = "This hotel is located on a front of the Palm Islands. Perfect for honeymoons, this hotel has 64 rooms, 26 suites, and four Moorish-style villas.",
+                            IsDeleted = false,
+                            Location = "United Arab Emirates, Dubai",
+                            Name = "One & Only The Palm"
                         });
                 });
 
@@ -116,6 +128,8 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<string>("Number");
 
+                    b.Property<double?>("Rating");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessId");
@@ -126,29 +140,35 @@ namespace HotelManagement.Data.Migrations
                         new
                         {
                             Id = "b4f2f3c8-a725-44a0-8fd6-651ee45a9690",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
                             Comment = "Great location, really clean rooms, awesome staff!",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Jeff Goldblum",
-                            Number = "+359 896 71 99 88"
+                            Number = "+359 896 71 99 88",
+                            Rating = 5.0
                         },
                         new
                         {
                             Id = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "We had a wonderful stay! The staff could not have been more helpful!",
                             CreatedOn = new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Scarlett Johansson",
-                            Number = "+359 893 92 00 55"
+                            Number = "+359 893 92 00 55",
+                            Rating = 3.0
                         },
                         new
                         {
                             Id = "d2dd7ddf-ac78-42f1-963a-16f06406bd9d",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "The hotel is in a very good location, visited the restaurant and had a really great time!",
                             CreatedOn = new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Sandra Bullock",
-                            Number = "+359 898 11 23 44"
+                            Number = "+359 898 11 23 44",
+                            Rating = 1.0
                         });
                 });
 
@@ -207,6 +227,14 @@ namespace HotelManagement.Data.Migrations
                             CreatedOn = new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Restaurant"
+                        },
+                        new
+                        {
+                            Id = "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Lounge Bar"
                         });
                 });
 
@@ -489,7 +517,7 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("HotelManagement.DataModels.Feedback", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.Business")
+                    b.HasOne("HotelManagement.DataModels.Business", "Business")
                         .WithMany("Feedback")
                         .HasForeignKey("BusinessId");
                 });

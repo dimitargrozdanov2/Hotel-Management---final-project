@@ -12,6 +12,8 @@ namespace HotelManagement.DataModels
 
         public string Location { get; set; }
 
+        public string Description { get; set; }
+
         public ICollection<Logbook> BusinessUnits { get; set; }
 
         public ICollection<Feedback> Feedback { get; set; }

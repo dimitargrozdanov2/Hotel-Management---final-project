@@ -56,7 +56,8 @@ namespace HotelManagement.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Location = table.Column<string>(nullable: true)
+                    Location = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,6 +196,7 @@ namespace HotelManagement.Data.Migrations
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Comment = table.Column<string>(maxLength: 200, nullable: false),
                     Number = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: true),
                     BusinessId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -330,8 +332,12 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Businesses",
-                columns: new[] { "Id", "CreatedOn", "IsDeleted", "Location", "ModifiedOn", "Name" },
-                values: new object[] { "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 3, 17, 10, 20, 0, DateTimeKind.Unspecified), false, "Bulgaria, Sofia", null, "Diamonds Grand Hotel" });
+                columns: new[] { "Id", "CreatedOn", "Description", "IsDeleted", "Location", "ModifiedOn", "Name" },
+                values: new object[,]
+                {
+                    { "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 3, 17, 10, 20, 0, DateTimeKind.Unspecified), "Located in the bustling Dubai Marina neighbourhood, Rove Dubai Marina is the perfect location to start your next adventure.", false, "United Arab Emirates, Dubai", null, "Rove Dubai Marina" },
+                    { "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 4, 3, 15, 20, 11, 0, DateTimeKind.Unspecified), "This hotel is located on a front of the Palm Islands. Perfect for honeymoons, this hotel has 64 rooms, 26 suites, and four Moorish-style villas.", false, "United Arab Emirates, Dubai", null, "One & Only The Palm" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Categories",
@@ -344,24 +350,28 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Feedback",
-                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "IsDeleted", "ModifiedOn", "Name", "Number" },
-                values: new object[,]
-                {
-                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", null, "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Jeff Goldblum", "+359 896 71 99 88" },
-                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", null, "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Scarlett Johansson", "+359 893 92 00 55" },
-                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", null, "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Sandra Bullock", "+359 898 11 23 44" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" });
 
             migrationBuilder.InsertData(
+                table: "Feedback",
+                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "IsDeleted", "ModifiedOn", "Name", "Number", "Rating" },
+                values: new object[,]
+                {
+                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Scarlett Johansson", "+359 893 92 00 55", 3.0 },
+                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Sandra Bullock", "+359 898 11 23 44", 1.0 },
+                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Jeff Goldblum", "+359 896 71 99 88", 5.0 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Logbooks",
                 columns: new[] { "Id", "BusinessId", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
-                values: new object[] { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Restaurant" });
+                values: new object[,]
+                {
+                    { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Restaurant" },
+                    { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), false, null, "Lounge Bar" }
+                });
 
             migrationBuilder.InsertData(
                 table: "LogbookManagers",

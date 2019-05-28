@@ -1,8 +1,16 @@
 ﻿[
-    {
-        "ID": "14f77522-b07f-4ad8-855b-d93923bea56e",
-        "Name": "Diamonds Grand Hotel",
-        "Location": "Bulgaria, Sofia",
-        "CreatedOn": "5/3/2019 5:10:20 PM"
-    }
+  {
+    "ID": "14f77522-b07f-4ad8-855b-d93923bea56e",
+    "Name": "Rove Dubai Marina",
+    "Description": "Located in the bustling Dubai Marina neighbourhood, Rove Dubai Marina is the perfect location to start your next adventure.",
+    "Location": "United Arab Emirates, Dubai",
+    "CreatedOn": "5/3/2019 5:10:20 PM"
+  },
+  {
+    "ID": "687af33b-3084-43b6-bacb-4c8847559ee4",
+    "Name": "One & Only The Palm",
+    "Description": "This hotel is located on a front of the Palm Islands. Perfect for honeymoons, this hotel has 64 rooms, 26 suites, and four Moorish-style villas.",
+    "Location": "United Arab Emirates, Dubai",
+    "CreatedOn": "4/3/2019 3:20:11 PM"
+  }
 ]
