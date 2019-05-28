@@ -20,7 +20,7 @@ namespace HotelManagement.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var business = await this.businessService.GetBusinesses("rating");
+            var business = await this.businessService.GetBusinesses("name");
             return View();
         }
 
