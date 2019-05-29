@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HotelManagement.Web.Models;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Web.Models.HomeViewModels;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -20,8 +21,12 @@ namespace HotelManagement.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var model = new HomeIndexViewModel();
+
             var business = await this.businessService.GetBusinesses("name");
-            return View();
+            model.Businesses = business;
+
+            return View(model);
         }
 
         public IActionResult About()
