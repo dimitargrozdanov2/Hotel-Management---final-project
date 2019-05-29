@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190529162652_Initial")]
+    [Migration("20190529164618_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,7 +204,7 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            Name = "The Palm_logo"
+                            Name = "The Palm_logo.jpg"
                         },
                         new
                         {
@@ -212,7 +212,7 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
-                            Name = "Rove Dubai Marina_logo"
+                            Name = "Rove Dubai Marina_logo.jpg"
                         });
                 });
 

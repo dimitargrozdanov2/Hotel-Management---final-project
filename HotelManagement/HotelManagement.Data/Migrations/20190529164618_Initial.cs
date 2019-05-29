@@ -369,8 +369,8 @@ namespace HotelManagement.Data.Migrations
                 columns: new[] { "Id", "BusinessId", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
                 values: new object[,]
                 {
-                    { "0f34be57-d215-43fb-b442-45f246b651d5", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_logo" },
-                    { "83705aa7-d523-4978-b799-84e15468a088", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_logo" }
+                    { "0f34be57-d215-43fb-b442-45f246b651d5", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_logo.jpg" },
+                    { "83705aa7-d523-4978-b799-84e15468a088", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_logo.jpg" }
                 });
 
             migrationBuilder.InsertData(
