@@ -1,6 +1,6 @@
 [
     {
-        "ID": "b4f2f3c8-a725-44a0-8fd6-651ee45a9690",
+        "Id": "b4f2f3c8-a725-44a0-8fd6-651ee45a9690",
         "Name": "Jeff Goldblum",
         "CreatedOn": "5/4/2019 4:36:05 PM",
         "Comment": "Great location, really clean rooms, awesome staff!",
@@ -9,7 +9,7 @@
         "Number":  "+359 896 71 99 88"
     },
     {
-        "ID": "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+        "Id": "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
         "Name": "Scarlett Johansson",
         "CreatedOn": "5/2/2019 3:26:10 PM",
         "Comment": "We had a wonderful stay! The staff could not have been more helpful!",
@@ -18,7 +18,7 @@
         "Number":  "+359 893 92 00 55"
     },
     {
-        "ID": "d2dd7ddf-ac78-42f1-963a-16f06406bd9d",
+        "Id": "d2dd7ddf-ac78-42f1-963a-16f06406bd9d",
         "Name": "Sandra Bullock",
         "CreatedOn": "5/3/2019 6:45:23 PM",
         "Comment": "The hotel is in a very good location, visited the restaurant and had a really great time!",

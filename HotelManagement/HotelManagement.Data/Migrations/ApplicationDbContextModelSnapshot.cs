@@ -59,7 +59,7 @@ namespace HotelManagement.Data.Migrations
                             Description = "This hotel is located on a front of the Palm Islands. Perfect for honeymoons, this hotel has 64 rooms, 26 suites, and four Moorish-style villas.",
                             IsDeleted = false,
                             Location = "United Arab Emirates, Dubai",
-                            Name = "One & Only The Palm"
+                            Name = "The Palm"
                         });
                 });
 
@@ -177,11 +177,11 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("BusinessId");
+
                     b.Property<DateTime?>("CreatedOn");
 
                     b.Property<bool>("IsDeleted");
-
-                    b.Property<string>("LogbookId");
 
                     b.Property<DateTime?>("ModifiedOn");
 
@@ -191,9 +191,27 @@ namespace HotelManagement.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LogbookId");
+                    b.HasIndex("BusinessId");
 
                     b.ToTable("Images");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "83705aa7-d523-4978-b799-84e15468a088",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "The Palm_logo"
+                        },
+                        new
+                        {
+                            Id = "0f34be57-d215-43fb-b442-45f246b651d5",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
+                            CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Rove Dubai Marina_logo"
+                        });
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.Logbook", b =>
@@ -524,9 +542,9 @@ namespace HotelManagement.Data.Migrations
 
             modelBuilder.Entity("HotelManagement.DataModels.Image", b =>
                 {
-                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
+                    b.HasOne("HotelManagement.DataModels.Business", "Business")
                         .WithMany("Images")
-                        .HasForeignKey("LogbookId");
+                        .HasForeignKey("BusinessId");
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.Logbook", b =>

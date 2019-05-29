@@ -21,10 +21,10 @@ namespace HotelManagement.Services
         public async Task<Business> GetBusinessByNameAsync(string name)
         {
             var business = await this.context.Businesses
-                 .Include(bu => bu.BusinessUnits)
-                     .ThenInclude(i => i.Images)
-                 .Include(f => f.Feedback)
-                 .FirstOrDefaultAsync(b => b.Name == name);
+                .Include(bu => bu.BusinessUnits)
+                .Include(i => i.Images)
+                .Include(f => f.Feedback)
+                .FirstOrDefaultAsync(b => b.Name == name);
 
             return business;
         }
@@ -36,27 +36,27 @@ namespace HotelManagement.Services
             if (key == "name")
             {
                 businesses = await this.context.Businesses
-                .Include(bu => bu.BusinessUnits)
-                    .ThenInclude(i => i.Images)
-                .Include(f => f.Feedback)
-                .OrderBy(k => k.Name)
-                .ToListAsync();
+                    .Include(bu => bu.BusinessUnits)
+                    .Include(f => f.Feedback)
+                    .Include(i => i.Images)
+                    .OrderBy(k => k.Name)
+                    .ToListAsync();
 
             }
             else if (key == "rating")
             {
                 businesses = await this.context.Businesses
-                .Include(bu => bu.BusinessUnits)
-                    .ThenInclude(i => i.Images)
-                .Include(f => f.Feedback)
-                .OrderByDescending(k => k.Feedback.Sum(x => x.Rating))
-                .ToListAsync();
+                    .Include(bu => bu.BusinessUnits)
+                    .Include(i => i.Images)
+                    .Include(f => f.Feedback)
+                    .OrderByDescending(k => k.Feedback.Sum(x => x.Rating))
+                    .ToListAsync();
             }
             else if (key == "date")
             {
                 businesses = await this.context.Businesses
-                   .Include(bu => bu.BusinessUnits)
-                       .ThenInclude(i => i.Images)
+                    .Include(bu => bu.BusinessUnits)
+                   .Include(i => i.Images)
                    .Include(f => f.Feedback)
                    .OrderBy(k => k.CreatedOn)
                    .ToListAsync();
@@ -65,11 +65,11 @@ namespace HotelManagement.Services
             else if (key == "location") // by country mostly
             {
                 businesses = await this.context.Businesses
-                .Include(bu => bu.BusinessUnits)
-                    .ThenInclude(i => i.Images)
-                .Include(f => f.Feedback)
-                .Where(l => l.Location.Contains(location))
-                .ToListAsync();
+                    .Include(bu => bu.BusinessUnits)
+                    .Include(i => i.Images)
+                    .Include(f => f.Feedback)
+                    .Where(l => l.Location.Contains(location))
+                    .ToListAsync();
             }
 
             return businesses;

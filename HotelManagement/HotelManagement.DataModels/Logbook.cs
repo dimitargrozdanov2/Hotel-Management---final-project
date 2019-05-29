@@ -15,7 +15,5 @@ namespace HotelManagement.DataModels
         public ICollection<Note> Notes { get; set; }
 
         public ICollection<LogbookManagers> LogbookManagers { get; set; }
-
-        public ICollection<Image> Images { get; set; }
     }
 }

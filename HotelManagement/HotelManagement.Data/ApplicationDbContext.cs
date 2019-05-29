@@ -56,8 +56,6 @@ namespace HotelManagement.Data
             CheckIsDeleted(builder);
         }
 
-        
-
         private void LoadJsonFilesInDatabase(ModelBuilder modelBuilder)
         {
             var feedbackPath = @"..\HotelManagement.Data\JsonFiles\feedback.json";
@@ -65,6 +63,7 @@ namespace HotelManagement.Data
             var notesPath = @"..\HotelManagement.Data\JsonFiles\notes.json";
             var logbooksPath = @"..\HotelManagement.Data\JsonFiles\logbooks.json";
             var businessesPath = @"..\HotelManagement.Data\JsonFiles\businesses.json";
+            var imagesPath = @"..\HotelManagement.Data\JsonFiles\images.json";
 
             var logbookManagersPath = @"..\HotelManagement.Data\JsonFiles\logbookManagers.json";
 
@@ -74,7 +73,8 @@ namespace HotelManagement.Data
             var userRolesPath = @"..\HotelManagement.Data\JsonFiles\userRoles.json";
 
             var isPathFound = File.Exists(feedbackPath) && File.Exists(categoriesPath) && File.Exists(notesPath)
-                                && File.Exists(logbooksPath) && File.Exists(logbookManagersPath) && File.Exists(businessesPath);
+                                && File.Exists(logbooksPath) && File.Exists(logbookManagersPath) && File.Exists(businessesPath)
+                                && File.Exists(imagesPath);
             if (isPathFound)
             {
                 var feedback = JsonConvert.DeserializeObject<Feedback[]>(File.ReadAllText(feedbackPath));
@@ -82,6 +82,7 @@ namespace HotelManagement.Data
                 var notes = JsonConvert.DeserializeObject<Note[]>(File.ReadAllText(notesPath));
                 var logbooks = JsonConvert.DeserializeObject<Logbook[]>(File.ReadAllText(logbooksPath));
                 var businesses = JsonConvert.DeserializeObject<Business[]>(File.ReadAllText(businessesPath));
+                var images = JsonConvert.DeserializeObject<Image[]>(File.ReadAllText(imagesPath));
 
                 var logbookManagers = JsonConvert.DeserializeObject<LogbookManagers[]>(File.ReadAllText(logbookManagersPath));
 
@@ -94,6 +95,7 @@ namespace HotelManagement.Data
                 modelBuilder.Entity<Note>().HasData(notes);
                 modelBuilder.Entity<Logbook>().HasData(logbooks);
                 modelBuilder.Entity<Business>().HasData(businesses);
+                modelBuilder.Entity<Image>().HasData(images);
 
                 modelBuilder.Entity<LogbookManagers>().HasData(logbookManagers);
 
@@ -111,6 +113,7 @@ namespace HotelManagement.Data
             builder.Entity<Feedback>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Business>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            //builder.Entity<BaseEntity>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
         }
     }
 }
