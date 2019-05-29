@@ -1,12 +1,12 @@
 [
-    {
-        "Id": "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
-        "UserName": "admin",
-        "NormalizedUserName": "ADMIN",
-        "Email": "admin@admin.admin",
-        "NormalizedEmail": "ADMIN@ADMIN.ADMIN",
-        "PasswordHash": "AQAAAAEAACcQAAAAEHzP/Ds0oHiv5C7IjlaA+ce9X9hucPveVIL0EgYgT7ScxgYCFnZFsMQQZLRC5BPKLw==",
-        "SecurityStamp": "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
-        "ConcurrencyStamp": "b318fa87-5d53-4bc3-8019-23d7aa37da20"
-    }
+  {
+    "Id": "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+    "UserName": "admin@admin.admin",
+    "NormalizedUserName": "ADMIN@ADMIN.ADMIN",
+    "Email": "admin@admin.admin",
+    "NormalizedEmail": "ADMIN@ADMIN.ADMIN",
+    "PasswordHash": "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==",
+    "SecurityStamp": "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
+    "ConcurrencyStamp": "b318fa87-5d53-4bc3-8019-23d7aa37da20"
+  }
 ]

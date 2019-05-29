@@ -328,7 +328,7 @@ namespace HotelManagement.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", 0, "b318fa87-5d53-4bc3-8019-23d7aa37da20", "admin@admin.admin", false, false, null, "ADMIN@ADMIN.ADMIN", "ADMIN", "AQAAAAEAACcQAAAAEHzP/Ds0oHiv5C7IjlaA+ce9X9hucPveVIL0EgYgT7ScxgYCFnZFsMQQZLRC5BPKLw==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "admin" });
+                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", 0, "b318fa87-5d53-4bc3-8019-23d7aa37da20", "admin@admin.admin", false, false, null, "ADMIN@ADMIN.ADMIN", "ADMIN@ADMIN.ADMIN", "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "admin@admin.admin" });
 
             migrationBuilder.InsertData(
                 table: "Businesses",

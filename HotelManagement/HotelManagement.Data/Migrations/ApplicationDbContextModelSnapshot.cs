@@ -384,12 +384,12 @@ namespace HotelManagement.Data.Migrations
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.ADMIN",
-                            NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHzP/Ds0oHiv5C7IjlaA+ce9X9hucPveVIL0EgYgT7ScxgYCFnZFsMQQZLRC5BPKLw==",
+                            NormalizedUserName = "ADMIN@ADMIN.ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
                             TwoFactorEnabled = false,
-                            UserName = "admin"
+                            UserName = "admin@admin.admin"
                         });
                 });
 
