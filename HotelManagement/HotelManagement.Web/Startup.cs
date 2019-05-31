@@ -29,7 +29,7 @@ namespace HotelManagement.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("TConnection")));
+                options.UseSqlServer(this.Configuration.GetConnectionString("DConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>() // TODO: Might remove it
