@@ -13,17 +13,21 @@ namespace HotelManagement.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IBusinessService businessService;
+        private readonly IUserService userService;
 
-        public HomeController(IBusinessService businessService)
+        public HomeController(IBusinessService businessService, IUserService userService)
         {
             this.businessService = businessService ?? throw new ArgumentNullException(nameof(businessService));
+            this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         public async Task<IActionResult> Index()
         {
+            // FOR TESTING PURPOSES: TODO
             var model = new HomeIndexViewModel();
 
             var business = await this.businessService.GetBusinesses("name");
+            var users = await this.userService.GetAllUsers();
             model.Businesses = business;
 
             return View(model);

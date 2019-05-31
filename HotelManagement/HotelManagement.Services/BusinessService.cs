@@ -46,8 +46,8 @@ namespace HotelManagement.Services
             //var users = await this.context.Users.Include(x => x.LogbookManagers).Include(x => x.Notes).ToListAsync();
             //var mappedUsers = this.mappingProvider.MapTo<ICollection<UserViewModel>>(users);
 
-            var categories = await this.context.Categories.Include(x => x.Notes).ToListAsync();
-            var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
+            //var categories = await this.context.Categories.Include(x => x.Notes).ToListAsync();
+            //var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
 
             //var category = new Category()
             //{
