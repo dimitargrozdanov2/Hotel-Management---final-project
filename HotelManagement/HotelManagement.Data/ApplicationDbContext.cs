@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HotelManagement.Data.Configurations;
 using HotelManagement.DataModels;
@@ -38,6 +39,8 @@ namespace HotelManagement.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            CheckIsDeleted(builder);
+
             this.LoadJsonFilesInDatabase(builder);
 
             base.OnModelCreating(builder);
@@ -52,8 +55,54 @@ namespace HotelManagement.Data
             builder.ApplyConfiguration(new NoteConfiguration());
             builder.ApplyConfiguration(new BusinessConfiguration());
 
-            // TODO: might have to create this for each entity
-            CheckIsDeleted(builder);
+        }
+
+        public override int SaveChanges()
+        {
+            this.ApplyAuditInfoRules();
+            this.ApplyDeletionRules();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        {
+            this.ApplyAuditInfoRules();
+            this.ApplyDeletionRules();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        private void ApplyDeletionRules()
+        {
+            var entitiesForDeletion = this.ChangeTracker.Entries()
+                .Where(e => e.State == EntityState.Deleted && e.Entity is IDeletable);
+
+            foreach (var entry in entitiesForDeletion)
+            {
+                var entity = (IDeletable)entry.Entity;
+                //entity.DeletedOn = DateTime.Now;
+                entity.IsDeleted = true;
+                entry.State = EntityState.Modified;
+            }
+        }
+
+        private void ApplyAuditInfoRules()
+        {
+            var newlyCreatedEntities = this.ChangeTracker.Entries()
+                .Where(e => e.Entity is IModifiable && ((e.State == EntityState.Added) || (e.State == EntityState.Modified)));
+
+            foreach (var entry in newlyCreatedEntities)
+            {
+                var entity = (IModifiable)entry.Entity;
+
+                if (entry.State == EntityState.Added && entity.CreatedOn == null)
+                {
+                    entity.CreatedOn = DateTime.Now;
+                }
+                else
+                {
+                    entity.ModifiedOn = DateTime.Now;
+                }
+            }
         }
 
         private void LoadJsonFilesInDatabase(ModelBuilder modelBuilder)
@@ -113,6 +162,7 @@ namespace HotelManagement.Data
             builder.Entity<Feedback>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Business>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+            builder.Entity<Category>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             //builder.Entity<BaseEntity>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
         }
     }

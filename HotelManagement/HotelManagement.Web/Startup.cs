@@ -5,6 +5,8 @@ using HotelManagement.Infrastructure;
 using HotelManagement.Services;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Web.Utilities;
+using HotelManagement.Web.Utilities.Wrappers;
+using HotelManagement.Web.Utilities.Wrappers.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +41,8 @@ namespace HotelManagement.Web
             services.AddScoped<IMappingProvider, MappingProvider>();
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IBusinessService, BusinessService>();
+            services.AddScoped<IUserManagerWrapper, UserManagerWrapper>();
+            services.AddScoped<IRoleManagerWrapper, RoleManagerWrapper>();
 
             services.AddAutoMapper(typeof(Startup));
 

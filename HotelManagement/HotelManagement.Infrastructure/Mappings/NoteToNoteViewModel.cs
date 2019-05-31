@@ -20,7 +20,6 @@ namespace HotelManagement.Infrastructure.Mappings
               .ForMember(dest => dest.Logbook, opts => opts.MapFrom(src => src.Logbook))
               .ForMember(dest => dest.Category, opts => opts.MapFrom(src => src.Category))
               .ForMember(dest => dest.User, opts => opts.MapFrom(src => src.User))
-              //.ForMember(dest => dest.PriorityType, opts => opts.MapFrom(src => Enum.Parse<PriorityType>(src.Type.Name, true)))
               .ForMember(dest => dest.PriorityType, opts => opts.MapFrom(src => src.PriorityType))
               .ReverseMap();
         }

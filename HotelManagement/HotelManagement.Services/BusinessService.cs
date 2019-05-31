@@ -39,6 +39,28 @@ namespace HotelManagement.Services
         {
             ICollection<Business> businesses = null;
 
+            // // FOR TESTING PURPOSES, DO NOT REMOVE!!!!! // TODO
+            //var notes = await this.context.Notes.Include(x => x.Logbook).Include(x => x.Category).Include(x => x.User).ToListAsync();
+            //var mappedNotes = this.mappingProvider.MapTo<ICollection<NoteViewModel>>(notes);
+
+            //var users = await this.context.Users.Include(x => x.LogbookManagers).Include(x => x.Notes).ToListAsync();
+            //var mappedUsers = this.mappingProvider.MapTo<ICollection<UserViewModel>>(users);
+
+            var categories = await this.context.Categories.Include(x => x.Notes).ToListAsync();
+            var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
+
+            //var category = new Category()
+            //{
+            //    Name = "TestNote",
+            //    Id = "d31280391391"
+            //};
+
+            //var insert = await this.context.Categories.FirstOrDefaultAsync(x => x.Name == "ivanNote");
+            //this.context.Categories.Remove(insert);
+            //await context.SaveChangesAsync();
+
+            // END OF TEST CODE;
+
             if (key == "name")
             {
                 businesses = await this.context.Businesses
@@ -47,7 +69,6 @@ namespace HotelManagement.Services
                     .Include(i => i.Images)
                     .OrderBy(k => k.Name)
                     .ToListAsync();
-
             }
             else if (key == "rating")
             {

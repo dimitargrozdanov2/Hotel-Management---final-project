@@ -25,10 +25,10 @@ namespace HotelManagement.ViewModels
         [Required]
         public string Description { get; set; }
 
-        public ICollection<LogbookViewModel> BusinessUnits { get; set; } // TODO: Change this to LogbookViewModel
+        public ICollection<LogbookViewModel> BusinessUnits { get; set; }
 
-        public ICollection<FeedbackViewModel> Feedback { get; set; } // TODO: Change this to FeedbackViewModel
+        public ICollection<FeedbackViewModel> Feedback { get; set; }
 
-        public ICollection<ImageViewModel> Images { get; set; } // TODO: Change this to FeedbackViewModel
+        public ICollection<ImageViewModel> Images { get; set; }
     }
 }
