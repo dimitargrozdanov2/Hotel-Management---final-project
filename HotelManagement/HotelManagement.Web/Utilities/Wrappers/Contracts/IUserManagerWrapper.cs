@@ -14,5 +14,7 @@ namespace HotelManagement.Web.Utilities.Wrappers.Contracts
         Task<IdentityResult> AddToRoleAsync(User user, string role);
 
         Task<IdentityResult> UpdateUserAsync(User user);
+
+        Task<IList<string>> GetAllRoles(string userName);
     }
 }

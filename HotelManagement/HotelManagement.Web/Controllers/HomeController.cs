@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using HotelManagement.Web.Models;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Web.Models.HomeViewModels;
+using HotelManagement.Web.Utilities.Wrappers.Contracts;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -14,11 +15,13 @@ namespace HotelManagement.Web.Controllers
     {
         private readonly IBusinessService businessService;
         private readonly IUserService userService;
+        private readonly IUserManagerWrapper userManagerWrapper;
 
-        public HomeController(IBusinessService businessService, IUserService userService)
+        public HomeController(IBusinessService businessService, IUserService userService, IUserManagerWrapper userManagerWrapper)
         {
             this.businessService = businessService ?? throw new ArgumentNullException(nameof(businessService));
             this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            this.userManagerWrapper = userManagerWrapper ?? throw new ArgumentNullException(nameof(userManagerWrapper));
         }
 
         public async Task<IActionResult> Index()
@@ -28,6 +31,9 @@ namespace HotelManagement.Web.Controllers
 
             var business = await this.businessService.GetBusinesses("name");
             var users = await this.userService.GetAllUsers();
+
+            var roles = await this.userManagerWrapper.GetAllRoles("admin@admin.admin");
+
             model.Businesses = business;
 
             return View(model);

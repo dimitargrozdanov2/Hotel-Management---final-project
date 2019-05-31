@@ -2,6 +2,7 @@
 using HotelManagement.Web.Utilities.Wrappers.Contracts;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Utilities.Wrappers
@@ -28,6 +29,13 @@ namespace HotelManagement.Web.Utilities.Wrappers
         public async Task<IdentityResult> UpdateUserAsync(User user)
         {
             return await this.userManager.UpdateAsync(user);
+        }
+
+        public async Task<IList<string>> GetAllRoles(string userName)
+        {
+            User user = await this.userManager.FindByNameAsync(userName);
+
+            return await this.userManager.GetRolesAsync(user);
         }
     }
 }
