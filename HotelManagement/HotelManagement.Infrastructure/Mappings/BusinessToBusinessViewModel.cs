@@ -20,7 +20,8 @@ namespace HotelManagement.Infrastructure.Mappings
                 .ForMember(dest => dest.ModifiedOn, opts => opts.MapFrom(src => src.ModifiedOn))
                 .ForMember(dest => dest.BusinessUnits, opts => opts.MapFrom(src => src.BusinessUnits))
                 .ForMember(dest => dest.Feedback, opts => opts.MapFrom(src => src.Feedback))
-                .ForMember(dest => dest.Images, opts => opts.MapFrom(src => src.Images));
+                .ForMember(dest => dest.Images, opts => opts.MapFrom(src => src.Images))
+                .ReverseMap();
         }
     }
 }

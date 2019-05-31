@@ -15,9 +15,9 @@ namespace HotelManagement.ViewModels
         public string Name { get; set; }
 
         [Required]
-        public DateTime? CreatedOn { get; set; } // might remove
+        public DateTime? CreatedOn { get; set; }
 
-        public DateTime? ModifiedOn { get; set; } // might remove
+        public DateTime? ModifiedOn { get; set; }
 
         [Required]
         public string Location { get; set; }
@@ -25,10 +25,10 @@ namespace HotelManagement.ViewModels
         [Required]
         public string Description { get; set; }
 
-        public ICollection<Logbook> BusinessUnits { get; set; } // TODO: Change this to LogbookViewModel
+        public ICollection<LogbookViewModel> BusinessUnits { get; set; } // TODO: Change this to LogbookViewModel
 
-        public ICollection<Feedback> Feedback { get; set; } // TODO: Change this to FeedbackViewModel
+        public ICollection<FeedbackViewModel> Feedback { get; set; } // TODO: Change this to FeedbackViewModel
 
-        public ICollection<Image> Images { get; set; } // TODO: Change this to FeedbackViewModel
+        public ICollection<ImageViewModel> Images { get; set; } // TODO: Change this to FeedbackViewModel
     }
 }
