@@ -1,5 +1,7 @@
-﻿using HotelManagement.Data;
+﻿using AutoMapper;
+using HotelManagement.Data;
 using HotelManagement.DataModels;
+using HotelManagement.Infrastructure;
 using HotelManagement.Services;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Web.Utilities;
@@ -28,13 +30,17 @@ namespace HotelManagement.Web
                 options.UseSqlServer(this.Configuration.GetConnectionString("TConnection")));
 
             services.AddIdentity<User, IdentityRole>()
+                .AddRoleManager<RoleManager<IdentityRole>>() // TODO: Might remove it
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IMappingProvider, MappingProvider>();
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IBusinessService, BusinessService>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc()
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);

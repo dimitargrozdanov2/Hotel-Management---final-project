@@ -28,5 +28,7 @@ namespace HotelManagement.ViewModels
         public ICollection<Logbook> BusinessUnits { get; set; } // TODO: Change this to LogbookViewModel
 
         public ICollection<Feedback> Feedback { get; set; } // TODO: Change this to FeedbackViewModel
+
+        public ICollection<Image> Images { get; set; } // TODO: Change this to FeedbackViewModel
     }
 }

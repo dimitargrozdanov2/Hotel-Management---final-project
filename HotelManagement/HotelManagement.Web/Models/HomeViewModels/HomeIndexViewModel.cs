@@ -9,6 +9,6 @@ namespace HotelManagement.Web.Models.HomeViewModels
 {
     public class HomeIndexViewModel
     {
-        public IEnumerable<Business> Businesses { get; set; }
+        public IEnumerable<BusinessViewModel> Businesses { get; set; }
     }
 }

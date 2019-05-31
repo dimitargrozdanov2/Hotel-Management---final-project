@@ -1,6 +1,8 @@
 ﻿using HotelManagement.Data;
 using HotelManagement.DataModels;
+using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
+using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,15 @@ namespace HotelManagement.Services
     public class BusinessService : IBusinessService
     {
         private readonly ApplicationDbContext context;
+        private readonly IMappingProvider mappingProvider;
 
-        public BusinessService(ApplicationDbContext context)
+        public BusinessService(ApplicationDbContext context, IMappingProvider mappingProvider)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
-        public async Task<Business> GetBusinessByNameAsync(string name)
+        public async Task<BusinessViewModel> GetBusinessByNameAsync(string name)
         {
             var business = await this.context.Businesses
                 .Include(bu => bu.BusinessUnits)
@@ -26,10 +30,12 @@ namespace HotelManagement.Services
                 .Include(f => f.Feedback)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
-            return business;
+            var mappedBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
+
+            return mappedBusiness;
         }
 
-        public async Task<ICollection<Business>> GetBusinesses(string key, string location = null)
+        public async Task<ICollection<BusinessViewModel>> GetBusinesses(string key, string location = null)
         {
             ICollection<Business> businesses = null;
 
@@ -72,7 +78,9 @@ namespace HotelManagement.Services
                     .ToListAsync();
             }
 
-            return businesses;
+            var mappedBusinesses = this.mappingProvider.MapTo<ICollection<BusinessViewModel>>(businesses);
+
+            return mappedBusinesses;
         }
     }
 }

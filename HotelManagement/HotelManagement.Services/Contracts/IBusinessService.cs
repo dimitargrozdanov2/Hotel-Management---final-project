@@ -1,4 +1,5 @@
 ﻿using HotelManagement.DataModels;
+using HotelManagement.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,9 +9,9 @@ namespace HotelManagement.Services.Contracts
 {
     public interface IBusinessService
     {
-        Task<Business> GetBusinessByNameAsync(string name);
+        Task<BusinessViewModel> GetBusinessByNameAsync(string name);
 
-        Task<ICollection<Business>> GetBusinesses(string key, string location = null);
+        Task<ICollection<BusinessViewModel>> GetBusinesses(string key, string location = null);
 
     }
 }
