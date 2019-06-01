@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Web.Areas.Administration.Models.Admin;
 using HotelManagement.Web.Utilities.Wrappers.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,15 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             this.userManagerWrapper = userManagerWrapper;
             this.userService = userService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var model = new IndexViewModel();
+
+            var users = await this.userService.GetAllUsers();
+
+            model.Users = users;
+
+            return this.View(model);
         }
     }
 }
