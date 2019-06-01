@@ -11,14 +11,20 @@
 </div>
 
 
-
+<div class="col text-center">
+    <a style="vertical-align:middle" class="btn btn-lg text-danger "
+       asp-area="Administration" asp-controller="Admin" asp-action="CreateUser">
+        <i class="btn btn-primary btn-block">Create user</i>
+    </a>
+</div>
 <table id="table" class="table table-hover">
     <thead>
         <tr>
             <th class="info ">Username</th>
             <th class="info ">Email</th>
             <th class="info ">Role</th>
-            <th class="info ">Delete</th>
+            <th class="info ">Promote</th>
+            <th class="info ">Delete</th> 
         </tr>
     </thead>
     @foreach (var user in Model.Users)
@@ -29,15 +35,20 @@
         <td style="vertical-align:middle">@await UserManager.GetRole(user.UserName)</td>
         <td style="vertical-align:top">
             @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block">Delete user</button>
-                </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block">Delete user</button>
+            </div>
 
-            </form>*@
-
+        </form>*@
+            <a class="btn btn-lg text-danger "
+               asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@user.Id">
+                <i class="btn btn-success btn-block">Promote user</i>
+            </a>
+        </td>
+        <td>
             <a class="btn btn-lg text-danger "
                asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                <i class="btn btn-success btn-block">Delete user</i>
+                <i class="btn btn-danger btn-block">Delete user</i>
             </a>
 
         </td>

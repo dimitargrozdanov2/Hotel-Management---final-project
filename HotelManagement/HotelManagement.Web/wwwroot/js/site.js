@@ -1,7 +1,7 @@
 ﻿// Write your JavaScript code.
-$('.dropdown').on('mouseenter', () => {
-    $('.dropdown-menu').show();
+$('#admindropdown').on('mouseenter', () => {
+    $('#admindropdown-menu').show();
 });
-$('.dropdown').on('mouseleave', () => {
-    $('.dropdown-menu').hide();
+$('#admindropdown').on('mouseleave', () => {
+    $('#admindropdown-menu').hide();
 });
