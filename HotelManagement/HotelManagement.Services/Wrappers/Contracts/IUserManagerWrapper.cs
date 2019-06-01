@@ -16,5 +16,7 @@ namespace HotelManagement.Services.Wrappers.Contracts
         Task<IdentityResult> UpdateUserAsync(User user);
 
         Task<IList<string>> GetAllRoles(string userName);
+
+        Task<string> GetRole(string userName);
     }
 }
