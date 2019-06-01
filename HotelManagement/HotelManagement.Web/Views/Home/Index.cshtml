@@ -1,0 +1,59 @@
+﻿@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- ================ start banner area ================= -->
+@*<section class="contact-banner-area" id="contact">
+        <div class="container h-100">
+            <div class="contact-banner">
+                <div class="text-center">
+                    <h1>Diamonds Grand Hotel</h1>
+                    <nav aria-label="breadcrumb" class="banner-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Page</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>*@
+<!-- ================ end banner area ================= -->
+<!-- ================ Explore section start ================= -->
+<section class="section-margin section-margin--small">
+    <div class="container">
+        <div class="section-intro text-center pb-80px">
+            <div class="section-intro__style">
+                <img src="~/images/home/bed-icon.png" alt="">
+            </div>
+            <h2>Explore Our Facilities</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        @foreach (var business in Model.Businesses)
+                        {
+                            <partial name="_IndexBusinessPartial" model="business" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-md-6 col-xl-4 mb-5">
+                <div class="card card-explore">
+                    <div class="card-explore__img">
+                        <img class="card-img" src="~/images/Project/hotel_two.jpg" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-explore__price">Bar / Lounge</h3>
+                        <p>Beginning fourth dominion creeping god was. Beginning, which fly yieldi dry beast moved blessed </p>
+                        <a class="card-explore__link" href="#">Visit <i class="ti-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</section>

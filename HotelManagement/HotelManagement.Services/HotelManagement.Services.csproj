@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HotelManagement.DataModels\HotelManagement.DataModels.csproj" />
+    <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj" />
+    <ProjectReference Include="..\HotelManagement.Infrastructure\HotelManagement.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\system.text.encodings.web\4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+@using Microsoft.AspNetCore.Identity
+@using HotelManagement.Web.Models
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Log in</a>
+    </li>
+}

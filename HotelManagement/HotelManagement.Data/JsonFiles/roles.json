@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "Admin",
+        "NormalizedName": "ADMIN",
+        "ConcurrencyStamp": "6e63ab39-a514-4e99-ba86-296cfe8d15b5",
+        "Id": "0e78767e-b4d2-456f-b029-5ad4c454589a"
+    },
+    {
+        "Name": "Manager",
+        "NormalizedName": "MANAGER",
+        "ConcurrencyStamp": "190ecb23-4911-48ee-bf11-62b3157eb20b",
+        "Id": "ca8a9288-1bda-4320-8929-731d721be047"
+    },
+    {
+        "Name": "Moderator",
+        "NormalizedName": "MODERATOR",
+        "ConcurrencyStamp": "846eb2cf-9cce-4b54-99db-f87cbde271df",
+        "Id": "2c9e83b9-1015-42b6-9df5-ad54b3d98224"
+    }
+  ]
