@@ -4,9 +4,9 @@ using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Services.Wrappers;
+using HotelManagement.Services.Wrappers.Contracts;
 using HotelManagement.Web.Utilities;
-using HotelManagement.Web.Utilities.Wrappers;
-using HotelManagement.Web.Utilities.Wrappers.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -29,7 +29,7 @@ namespace HotelManagement.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(this.Configuration.GetConnectionString("DConnection")));
+                options.UseSqlServer(this.Configuration.GetConnectionString("TConnection")));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddRoleManager<RoleManager<IdentityRole>>() // TODO: Might remove it
