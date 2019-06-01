@@ -1,11 +1,62 @@
 ﻿@model IndexViewModel
 
-@{ 
+@{
     ViewData["Title"] = "All Users";
 }
-<div class="container">
-    <div class="row">
-        <div class="col-md-11 text-md-center">
-            <h4 class="display-4">Administration Dashboard</h4>
-        </div>
+<div class="divider">
+    <div class="text-center">
+        <h2>All Users</h2>
     </div>
+</div>
+
+
+
+<table id="table" class="table table-hover">
+    <thead>
+        <tr>
+            <th class="info ">Username</th>
+            <th class="info ">Email</th>
+            <th class="info ">Role</th>
+            <th class="info ">Delete</th>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <td style="vertical-align:middle">@user.UserName</td>
+            <td style="vertical-align:middle">@user.Email</td>
+            <td style="vertical-align:middle">@user.UserName</td>
+            <td style="vertical-align:top">
+                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
+                        </div>
+
+                    </form>*@
+
+                <a class="btn btn-lg text-danger "
+                   asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                    <i class="btn btn-success btn-block">Delete user</i>
+                </a>
+
+            </td>
+        </tr>
+    }
+</table>
+@section Scripts
+    {
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                 "ordering": false,
+                responsive: true,
+                stateSave: true,
+                 searching:false,
+                "iDisplayLength": 5,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
+            });
+        });
+    </script>
+}
