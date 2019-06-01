@@ -1,4 +1,5 @@
 ﻿@model IndexViewModel
+@inject IUserManagerWrapper UserManager
 
 @{
     ViewData["Title"] = "All Users";
@@ -25,7 +26,8 @@
         <tr>
             <td style="vertical-align:middle">@user.UserName</td>
             <td style="vertical-align:middle">@user.Email</td>
-            <td style="vertical-align:middle">@user.UserName</td>
+            <td style="vertical-align:middle">@UserManager.GetAllRoles(user.UserName).Result.FirstOrDefault()</td>
+            @*TODO REMOVE THIS .RESULT*@
             <td style="vertical-align:top">
                 @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
                         <div class="form-group">
@@ -50,10 +52,10 @@
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                 "ordering": false,
+                "ordering": false,
                 responsive: true,
                 stateSave: true,
-                 searching:false,
+                searching: false,
                 "iDisplayLength": 5,
                 "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
             });

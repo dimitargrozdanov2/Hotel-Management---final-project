@@ -1,11 +1,12 @@
 ﻿using HotelManagement.DataModels;
-using HotelManagement.Web.Utilities.Wrappers.Contracts;
+using HotelManagement.Services.Wrappers.Contracts;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace HotelManagement.Web.Utilities.Wrappers
+namespace HotelManagement.Services.Wrappers
 {
     public class UserManagerWrapper : IUserManagerWrapper
     {

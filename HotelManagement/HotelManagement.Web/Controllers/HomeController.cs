@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using HotelManagement.Web.Models;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Web.Models.HomeViewModels;
-using HotelManagement.Web.Utilities.Wrappers.Contracts;
+using HotelManagement.Services.Wrappers.Contracts;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -30,9 +30,8 @@ namespace HotelManagement.Web.Controllers
             var model = new HomeIndexViewModel();
 
             var business = await this.businessService.GetBusinesses("name");
-            var users = await this.userService.GetAllUsers();
+            //var users = await this.userService.GetAllUsers();
 
-            var roles = await this.userManagerWrapper.GetAllRoles("admin@admin.admin");
 
             model.Businesses = business;
 

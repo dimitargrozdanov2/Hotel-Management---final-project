@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Services.Wrappers.Contracts;
 using HotelManagement.Web.Areas.Administration.Models.Admin;
-using HotelManagement.Web.Utilities.Wrappers.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
