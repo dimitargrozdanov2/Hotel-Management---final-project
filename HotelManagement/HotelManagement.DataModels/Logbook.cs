@@ -9,6 +9,8 @@ namespace HotelManagement.DataModels
     {
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public string BusinessId { get; set; }
         public Business Business { get; set; }
 

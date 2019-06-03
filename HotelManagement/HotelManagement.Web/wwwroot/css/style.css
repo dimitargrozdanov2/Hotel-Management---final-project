@@ -1079,8 +1079,6 @@ button {
         font-size: 48px; } }
 
   .contact-banner-area {
-    height: 380px;
-    background: url("../images/home/contact-bg.png") center center no-repeat;
     background-size: cover;
     position: relative;
     z-index: 1; }
