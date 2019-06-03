@@ -515,6 +515,16 @@ namespace HotelManagement.Data.Migrations
                         {
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
                             RoleId = "0e78767e-b4d2-456f-b029-5ad4c454589a"
+                        },
+                        new
+                        {
+                            UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            RoleId = "ca8a9288-1bda-4320-8929-731d721be047"
+                        },
+                        new
+                        {
+                            UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            RoleId = "2c9e83b9-1015-42b6-9df5-ad54b3d98224"
                         });
                 });
 

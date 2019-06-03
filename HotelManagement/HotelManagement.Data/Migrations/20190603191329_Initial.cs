@@ -352,7 +352,12 @@ namespace HotelManagement.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
-                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" });
+                values: new object[,]
+                {
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" },
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "ca8a9288-1bda-4320-8929-731d721be047" },
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "2c9e83b9-1015-42b6-9df5-ad54b3d98224" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Feedback",
