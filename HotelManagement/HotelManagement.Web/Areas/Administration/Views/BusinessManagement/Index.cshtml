@@ -1,0 +1,85 @@
+﻿@model ListBusinessesViewModel
+
+@{
+    ViewData["Title"] = "All Businesses";
+}
+
+<div class="divider">
+    <div class="text-center">
+        <h2>All Businesses</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-primary btn-block" style="margin-bottom:10px"
+           asp-area="Administration" asp-controller="BusinessManagement" asp-action="Create">
+            <i class="fas fa-plus-circle"></i>
+            Create Business
+        </a>
+    </div>
+</div>
+<table id="table" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th class="info ">Name</th>
+            <th class="info ">Location</th>
+            <th class="info ">Description</th>
+            <th class="info" id="Operations" width="25%">Operations </th>
+        </tr>
+    </thead>
+    @foreach (var business in Model.Businesses)
+    {
+        <tr>
+            <td>@business.Name</td>
+            <td>@business.Location</td>
+            <td>@business.Description</td>
+            <td>
+                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
+                        </div>
+
+                    </form>*@
+                <a class="btn btn-info btn-sm"
+                   asp-area="Administration" asp-controller="BusinessManagement" asp-action="Details" asp-route-id="@business.Id">
+                    <i class="fas fa-pencil-alt"></i>
+                    Manage Logbooks
+                </a>
+                <a class="btn btn-primary btn-sm" style="margin-top:10px"
+                   asp-area="Administration" asp-controller="BusinessManagement" asp-action="AddImage" asp-route-id="@business.Id">
+                    <i class="fas fa-images"></i>
+                    Add Image
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+@section Scripts
+    {
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table').DataTable({
+                responsive: true,
+                stateSave: true,
+                //"lengthChange": false,
+                "iDisplayLength": 10,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    { "orderable": false }
+                ]
+            });
+        });
+    </script>
+}

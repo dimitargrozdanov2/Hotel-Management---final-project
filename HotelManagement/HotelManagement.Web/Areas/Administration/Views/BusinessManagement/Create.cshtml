@@ -1,0 +1,37 @@
+﻿@model CreateBusinessViewModel
+
+@{
+    ViewData["Title"] = "Create Business";
+}
+
+<h1 class="headerText">Create Business</h1>
+
+<div class="form-row">
+    <form class="col-lg-7" method="post">
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input class="form-control" asp-for="Name"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Location">Location</label>
+            <input class="form-control" asp-for="Location" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description">Description</label>
+            <input class="form-control" asp-for="Description" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-warning" type="submit">Create</button>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Reset</a>
+</div>

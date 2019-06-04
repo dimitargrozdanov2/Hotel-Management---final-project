@@ -2,6 +2,7 @@
 using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -35,6 +36,35 @@ namespace HotelManagement.Services
             return mappedBusiness;
         }
 
+        public async Task<ICollection<BusinessViewModel>> GetAllBusinessesAsync()
+        {
+            //includes images and logbooks, does not include feedback
+            var businesses = await this.context.Businesses
+                .Include(b => b.BusinessUnits)
+                .Include(b => b.Images)
+                 .OrderByDescending(x => x.Name).ToListAsync();
+
+            var returnBusinesses = this.mappingProvider.MapTo<ICollection<BusinessViewModel>>(businesses);
+
+            return returnBusinesses;
+        }
+
+        public async Task<BusinessViewModel> CreateBusinessAsync(string name, string location, string description)
+        {
+            if (await this.context.Businesses.AnyAsync(m => m.Name == name))
+            {
+                throw new EntityAlreadyExistsException($"Business with '{name}' name already exist!");
+            }
+
+            var business = new Business() { Name = name, Location = location, Description = description};
+
+            await this.context.Businesses.AddAsync(business);
+            await this.context.SaveChangesAsync();
+
+            var returnBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
+
+            return returnBusiness;
+        }
         public async Task<ICollection<BusinessViewModel>> GetBusinesses(string key, string location = null)
         {
             ICollection<Business> businesses = null;

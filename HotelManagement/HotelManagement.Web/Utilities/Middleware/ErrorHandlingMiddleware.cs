@@ -27,6 +27,10 @@ namespace HotelManagement.Web.Utilities.Middleware
                     context.Response.Redirect("/error/pagenotfound");
                 }
             }
+            catch (EntityAlreadyExistsException ex)
+            {
+                context.Response.Redirect($"/error/alreadyexistserror?error={ex.Message}");
+            }
             catch (EntityInvalidException ex)
             {
                 context.Response.Redirect($"/error/invalid?error={ex.Message}");
