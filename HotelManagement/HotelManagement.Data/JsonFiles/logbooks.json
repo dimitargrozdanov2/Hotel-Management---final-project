@@ -2,13 +2,29 @@
   {
     "Id": "3d71d939-dc61-46f8-af46-ed6a618036c2",
     "Name": "Restaurant",
-    "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e",
+    "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e", // Rove Dubai Marina
+    "Description": "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!",
     "CreatedOn": "5/4/2019 2:40:05 PM"
   },
   {
+    "Id": "1fc92a85-06de-4c97-9230-295d4d2b445c",
+    "Name": "Exclusive Lounge",
+    "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e", // Rove Dubai Marina
+    "Description": "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.",
+    "CreatedOn": "5/4/2019 2:41:05 PM"
+  },
+  {
+    "Id": "834c3420-56d9-4dbc-900b-c792cb15be83",
+    "Name": "Restaurant",
+    "BusinessId": "687af33b-3084-43b6-bacb-4c8847559ee4", // The Palm
+    "Description": "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!",
+    "CreatedOn": "3/4/2019 4:21:10 PM"
+  },
+  {
     "Id": "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae",
-    "Name": "Lounge Bar",
-    "BusinessId": "687af33b-3084-43b6-bacb-4c8847559ee4",
+    "Name": "Bar",
+    "BusinessId": "687af33b-3084-43b6-bacb-4c8847559ee4", // The Palm
+    "Description": "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!",
     "CreatedOn": "3/4/2019 4:20:10 PM"
   }
 ]

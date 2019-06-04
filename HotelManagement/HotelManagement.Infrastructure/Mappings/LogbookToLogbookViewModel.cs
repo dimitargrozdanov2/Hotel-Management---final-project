@@ -14,6 +14,7 @@ namespace HotelManagement.Infrastructure.Mappings
             this.CreateMap<Logbook, LogbookViewModel>()
               .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id))
               .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
+              .ForMember(dest => dest.Description, opts => opts.MapFrom(src => src.Description))
               .ForMember(dest => dest.CreatedOn, opts => opts.MapFrom(src => src.CreatedOn))
               .ForMember(dest => dest.ModifiedOn, opts => opts.MapFrom(src => src.ModifiedOn))
               .ForMember(dest => dest.Business, opts => opts.MapFrom(src => src.Business))

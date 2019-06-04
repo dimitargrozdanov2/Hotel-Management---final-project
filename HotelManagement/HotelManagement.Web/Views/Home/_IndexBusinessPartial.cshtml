@@ -7,12 +7,15 @@
     <div>
         <div class="card card-explore">
             <div class="card-explore__img">
-                <img class="card-img" src="~/images/Project/@Model.Images.FirstOrDefault(i => i.Name.Contains("logo")).Name" alt="Business Image">
+                @if (Model.Images.Count != 0)
+                {
+                    <img class="card-img" src="~/images/Project/@Model.Images.FirstOrDefault(i => i.Name.Contains("logo")).Name" alt="Business Image">
+                }
             </div>
             <div class="card-body">
                 <h3 class="card-explore__title">@Model.Name</h3>
                 <p>@Model.Description</p>
-                <a asp-area="" asp-controller="Business" asp-action="Details" asp-route-id="@Model.Name" class="card-explore__link">Visit<i class="ti-arrow-right"></i></a>
+                <a asp-area="Business" asp-controller="Business" asp-action="Details" asp-route-name="@Model.Name" class="card-explore__link">Visit<i class="ti-arrow-right"></i></a>
             </div>
         </div>
     </div>
