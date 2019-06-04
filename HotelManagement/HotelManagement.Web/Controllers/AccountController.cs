@@ -102,8 +102,11 @@ namespace HotelManagement.Web.Controllers
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //After Registering a user, I don't want to sign in with him
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
+
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);

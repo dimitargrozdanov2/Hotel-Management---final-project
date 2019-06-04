@@ -23,6 +23,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             this.userManagerWrapper = userManagerWrapper;
             this.userService = userService;
         }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var model = new IndexViewModel();
