@@ -84,19 +84,20 @@
                             }
                             @if (User.IsInRole("Admin"))
                             {
-                                <li class="nav-item">
-                                    <div class="dropdown" id="admindropdown">
-                                        <a class="nav-link" data-toggle="dropdown">
-                                            Administration
-                                        </a>
-                                        <div class="dropdown-menu" id="admindropdown-menu">
-                                            <a class="dropdown-item" asp-area="Administration" asp-controller="Admin" asp-action="Index">AllUsers</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" asp-area="Administration" asp-controller="Admin" asp-action="All Businesses">All Businesses</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" asp-area="Administration" asp-controller="Admin" asp-action="Categories">Categories</a>
-                                        </div>
-                                    </div>
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                       aria-expanded="false">Administration</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Administration" asp-controller="Admin" asp-action="Index">AllUsers</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Administration" asp-controller="Admin" asp-action="AllBusinesses">All Businesses</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" asp-area="Administration" asp-controller="Admin" asp-action="Categories">Categories</a>
+                                        </li>
+                                    </ul>
                                 </li>
                             }
                         </ul>

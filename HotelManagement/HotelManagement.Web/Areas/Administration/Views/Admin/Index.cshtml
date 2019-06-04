@@ -10,64 +10,113 @@
     </div>
 </div>
 
-
-<div class="col text-center">
-    <a style="vertical-align:middle" class="btn btn-lg text-danger "
-       asp-area="Administration" asp-controller="Admin" asp-action="CreateUser">
-        <i class="btn btn-primary btn-block">Create user</i>
-    </a>
+<div class="row">
+    <div class="col-sm-2">
+        <a class="btn btn-primary btn-block" style="margin-bottom:10px" 
+            asp-area="" asp-controller="Account" asp-action="Register">
+            <i class="fas fa-plus-circle"></i>
+            Create User
+        </a>
+    </div>
 </div>
-<table id="table" class="table table-hover">
+<table id="table" class="table table-striped table-bordered" style="width:100%">
     <thead>
         <tr>
             <th class="info ">Username</th>
             <th class="info ">Email</th>
             <th class="info ">Role</th>
-            <th class="info ">Promote</th>
-            <th class="info ">Delete</th> 
+            <th class="info" id="Operations" width="25%">Operations </th>
         </tr>
     </thead>
     @foreach (var user in Model.Users)
     {
-    <tr>
-        <td style="vertical-align:middle">@user.UserName</td>
-        <td style="vertical-align:middle">@user.Email</td>
-        <td style="vertical-align:middle">@await UserManager.GetRole(user.UserName)</td>
-        <td style="vertical-align:top">
-            @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-            <div class="form-group">
-                <button type="submit" class="btn btn-success btn-block">Delete user</button>
-            </div>
+        <tr>
+            <td>@user.UserName</td>
+            <td>@user.Email</td>
+            <td>@await UserManager.GetRole(user.UserName)</td>
+            <td>
+                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
+                        </div>
 
-        </form>*@
-            <a class="btn btn-lg text-danger "
-               asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@user.Id">
-                <i class="btn btn-success btn-block">Promote user</i>
-            </a>
-        </td>
-        <td>
-            <a class="btn btn-lg text-danger "
-               asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                <i class="btn btn-danger btn-block">Delete user</i>
-            </a>
-
-        </td>
-    </tr>
+                    </form>*@
+                <a class="btn btn-success btn-sm"
+                   asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@user.Id">
+                    <i class="fas fa-pencil-alt"></i>
+                    Promote user
+                </a>
+                <a class="btn btn-danger btn-sm float-right"
+                   asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
+                    <i class="fa fa-trash"></i>
+                    Delete user
+                </a>
+            </td>
+        </tr>
     }
 </table>
+
+@*Popup modal with registration form*@ 
+@*<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m)
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" id="CreateUserRecord">Register</a>
+                        </div>
+                    </fieldset>
+</form>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
 @section Scripts
     {
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#table').DataTable({
-                "ordering": false,
                 responsive: true,
                 stateSave: true,
-                searching: false,
-                "iDisplayLength": 5,
-                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
+                //"lengthChange": false,
+                "iDisplayLength": 10,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    { "orderable": false }
+                ]
             });
         });
     </script>

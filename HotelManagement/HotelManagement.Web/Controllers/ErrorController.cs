@@ -18,6 +18,12 @@ namespace HotelManagement.Web.Controllers
             return this.View();
         }
 
+        public IActionResult AlreadyExistsError(string error)
+        {
+            this.ViewData["Error"] = error;
+            return this.View();
+        }
+
         public IActionResult Invalid(string error)
         {
             this.ViewData["Error"] = error;
