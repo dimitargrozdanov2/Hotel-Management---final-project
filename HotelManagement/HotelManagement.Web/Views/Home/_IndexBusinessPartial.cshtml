@@ -7,7 +7,10 @@
     <div>
         <div class="card card-explore">
             <div class="card-explore__img">
-                <img class="card-img" src="~/images/Project/@Model.Images.FirstOrDefault(i => i.Name.Contains("logo")).Name" alt="Business Image">
+                @if (Model.Images.Count != 0)
+                {
+                    <img class="card-img" src="~/images/Project/@Model.Images.FirstOrDefault(i => i.Name.Contains("logo")).Name" alt="Business Image">
+                }
             </div>
             <div class="card-body">
                 <h3 class="card-explore__title">@Model.Name</h3>
