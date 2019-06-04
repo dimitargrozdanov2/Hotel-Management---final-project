@@ -36,19 +36,6 @@ namespace HotelManagement.Services
             return mappedBusiness;
         }
 
-        public async Task<ICollection<BusinessViewModel>> GetAllBusinessesAsync()
-        {
-            //includes images and logbooks, does not include feedback
-            var businesses = await this.context.Businesses
-                .Include(b => b.BusinessUnits)
-                .Include(b => b.Images)
-                 .OrderByDescending(x => x.Name).ToListAsync();
-
-            var returnBusinesses = this.mappingProvider.MapTo<ICollection<BusinessViewModel>>(businesses);
-
-            return returnBusinesses;
-        }
-
         public async Task<BusinessViewModel> CreateBusinessAsync(string name, string location, string description)
         {
             if (await this.context.Businesses.AnyAsync(m => m.Name == name))
