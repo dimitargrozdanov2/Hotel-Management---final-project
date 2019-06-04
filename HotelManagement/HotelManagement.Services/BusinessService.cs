@@ -31,6 +31,10 @@ namespace HotelManagement.Services
                 .Include(f => f.Feedback)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
+            if (business == null)
+            {
+                throw new EntityInvalidException($"Business `{name}` does not exist.");
+            }
             var mappedBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
 
             return mappedBusiness;
@@ -119,6 +123,34 @@ namespace HotelManagement.Services
             var mappedBusinesses = this.mappingProvider.MapTo<ICollection<BusinessViewModel>>(businesses);
 
             return mappedBusinesses;
+        }
+        public async Task<BusinessViewModel> AddImageToBusiness(string name, string imageUrl)
+        {
+            var business = await this.context.Businesses
+                .Include(bu => bu.BusinessUnits)
+                .Include(i => i.Images)
+                .Include(f => f.Feedback)
+                .FirstOrDefaultAsync(b => b.Name == name);
+
+            if (business == null)
+            {
+                throw new EntityInvalidException($"Business `{name}` does not exist.");
+            }
+            imageUrl = $"{business.Name} + _logo";
+
+            var image = new Image() { Name = imageUrl };
+
+            if (business.Images.Contains(image))
+            {
+                throw new EntityAlreadyExistsException($"Business with '{name}' already has a logo!");
+            }
+            business.Images.Add(image);
+
+            await this.context.SaveChangesAsync();
+
+            var returnBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
+
+            return returnBusiness;
         }
     }
 }
