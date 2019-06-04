@@ -4,16 +4,14 @@ using HotelManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190604173613_Initial")]
-    partial class Initial
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,6 +211,38 @@ namespace HotelManagement.Data.Migrations
                             CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Rove Dubai Marina_logo.jpg"
+                        },
+                        new
+                        {
+                            Id = "c8cae9c7-d536-4049-ad77-8324187fbc83",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
+                            CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Rove Dubai Marina_Restaurant.jpg"
+                        },
+                        new
+                        {
+                            Id = "55973f04-9f96-45e0-8ea2-3ceb0fb7ce5e",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
+                            CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "Rove Dubai Marina_Exclusive Lounge.jpg"
+                        },
+                        new
+                        {
+                            Id = "93a31b5d-671b-42bb-a457-bd60b5f124e3",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "The Palm_Restaurant.jpg"
+                        },
+                        new
+                        {
+                            Id = "0d07b40a-ef2b-4c5e-99ed-5ead465b6b1e",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "The Palm_Bar.jpg"
                         });
                 });
 
@@ -224,6 +254,8 @@ namespace HotelManagement.Data.Migrations
                     b.Property<string>("BusinessId");
 
                     b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<string>("Description");
 
                     b.Property<bool>("IsDeleted");
 
@@ -245,6 +277,25 @@ namespace HotelManagement.Data.Migrations
                             Id = "3d71d939-dc61-46f8-af46-ed6a618036c2",
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             CreatedOn = new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified),
+                            Description = "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!",
+                            IsDeleted = false,
+                            Name = "Restaurant"
+                        },
+                        new
+                        {
+                            Id = "1fc92a85-06de-4c97-9230-295d4d2b445c",
+                            BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
+                            CreatedOn = new DateTime(2019, 5, 4, 14, 41, 5, 0, DateTimeKind.Unspecified),
+                            Description = "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.",
+                            IsDeleted = false,
+                            Name = "Exclusive Lounge"
+                        },
+                        new
+                        {
+                            Id = "834c3420-56d9-4dbc-900b-c792cb15be83",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            CreatedOn = new DateTime(2019, 3, 4, 16, 21, 10, 0, DateTimeKind.Unspecified),
+                            Description = "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!",
                             IsDeleted = false,
                             Name = "Restaurant"
                         },
@@ -253,8 +304,9 @@ namespace HotelManagement.Data.Migrations
                             Id = "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae",
                             BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
                             CreatedOn = new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified),
+                            Description = "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!",
                             IsDeleted = false,
-                            Name = "Lounge Bar"
+                            Name = "Bar"
                         });
                 });
 

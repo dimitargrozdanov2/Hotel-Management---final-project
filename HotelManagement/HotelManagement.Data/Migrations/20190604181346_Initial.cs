@@ -241,6 +241,7 @@ namespace HotelManagement.Data.Migrations
                     CreatedOn = table.Column<DateTime>(nullable: true),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     BusinessId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -375,16 +376,22 @@ namespace HotelManagement.Data.Migrations
                 values: new object[,]
                 {
                     { "0f34be57-d215-43fb-b442-45f246b651d5", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_logo.jpg" },
-                    { "83705aa7-d523-4978-b799-84e15468a088", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_logo.jpg" }
+                    { "c8cae9c7-d536-4049-ad77-8324187fbc83", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Restaurant.jpg" },
+                    { "55973f04-9f96-45e0-8ea2-3ceb0fb7ce5e", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Exclusive Lounge.jpg" },
+                    { "83705aa7-d523-4978-b799-84e15468a088", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_logo.jpg" },
+                    { "93a31b5d-671b-42bb-a457-bd60b5f124e3", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Restaurant.jpg" },
+                    { "0d07b40a-ef2b-4c5e-99ed-5ead465b6b1e", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Bar.jpg" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Logbooks",
-                columns: new[] { "Id", "BusinessId", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
+                columns: new[] { "Id", "BusinessId", "CreatedOn", "Description", "IsDeleted", "ModifiedOn", "Name" },
                 values: new object[,]
                 {
-                    { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), false, null, "Restaurant" },
-                    { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), false, null, "Lounge Bar" }
+                    { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!", false, null, "Restaurant" },
+                    { "1fc92a85-06de-4c97-9230-295d4d2b445c", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 41, 5, 0, DateTimeKind.Unspecified), "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.", false, null, "Exclusive Lounge" },
+                    { "834c3420-56d9-4dbc-900b-c792cb15be83", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 21, 10, 0, DateTimeKind.Unspecified), "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!", false, null, "Restaurant" },
+                    { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!", false, null, "Bar" }
                 });
 
             migrationBuilder.InsertData(
