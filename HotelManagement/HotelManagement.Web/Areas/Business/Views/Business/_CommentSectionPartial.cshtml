@@ -1,0 +1,86 @@
+﻿@model FeedbackViewModel
+
+<div class="col-md-12 col-xl-12 mb-12">
+    <div class="comments-area">
+        <h4>Total amount of comments: @Model.Business.Feedback.Count()</h4>
+        <div class="comment-list">
+            <div class="single-comment justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c1.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5>
+                            <a href="#">@Model.Name</a>
+                        </h5>
+                        <p class="date">December 4, 2017 at 3:12 pm </p>
+                        <p class="comment">
+                            @Model.Comment
+                        </p>
+                    </div>
+                </div>
+                <div class="reply-btn">
+                    <a href="" class="btn-reply text-uppercase">reply</a>
+                </div>
+            </div>
+        </div>
+        @*<div class="comment-list left-padding">
+            @foreach (var reply in Model.Replies)
+            {
+                <partial name="_RepliesSectionPartial" model="reply" />
+            }
+        </div>*@
+        <div class="comment-list left-padding">
+            <div class="single-comment justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c2.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5>
+                            <a href="#">Elsie Cunningham</a>
+                        </h5>
+                        <p class="date">December 4, 2017 at 3:12 pm </p>
+                        <p class="comment">
+                            Never say goodbye till the end comes!
+                        </p>
+                    </div>
+                </div>
+                <div class="reply-btn">
+                    <a href="" class="btn-reply text-uppercase">reply</a>
+                </div>
+            </div>
+        </div>
+        <div class="comment-list left-padding">
+            <div class="single-comment justify-content-between d-flex">
+                <div class="user justify-content-between d-flex">
+                    <div class="thumb">
+                        <img src="img/blog/c3.jpg" alt="">
+                    </div>
+                    <div class="desc">
+                        <h5>
+                            <a href="#">Annie Stephens</a>
+                        </h5>
+                        <p class="date">December 4, 2017 at 3:12 pm </p>
+                        <p class="comment">
+                            Never say goodbye till the end comes!
+                        </p>
+                    </div>
+                </div>
+                <div class="reply-btn">
+                    <a href="" class="btn-reply text-uppercase">reply</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="card card-explore">
+            <div class="card-explore__img">
+                <img class="card-img" src="~/images/Project/@Model.Business.Images.FirstOrDefault(x => x.Name.Contains(Model.Name)).Name" alt="Business Image">
+            </div>
+            <div class="card-body">
+                <h3 class="card-explore__title">@Model.Name</h3>
+                <p>@Model.Description</p>
+                <a asp-area="Business" asp-controller="Business" asp-action="Details" asp-route-id="@Model.Name" class="card-explore__link">Visit<i class="ti-arrow-right"></i></a>
+            </div>
+        </div>*@
+</div>
