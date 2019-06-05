@@ -15,6 +15,8 @@ namespace HotelManagement.DataModels
 
         public double? Rating { get; set; }
 
+        public ICollection<Reply> Replies { get; set; }
+
         public string BusinessId { get; set; }
         public Business Business { get; set; }
     }

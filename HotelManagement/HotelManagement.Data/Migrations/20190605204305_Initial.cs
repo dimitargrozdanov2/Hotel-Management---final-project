@@ -256,6 +256,29 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Replies",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
+                    Comment = table.Column<string>(maxLength: 200, nullable: false),
+                    FeedbackId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Replies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Replies_Feedback_FeedbackId",
+                        column: x => x.FeedbackId,
+                        principalTable: "Feedback",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LogbookManagers",
                 columns: table => new
                 {
@@ -404,6 +427,15 @@ namespace HotelManagement.Data.Migrations
                 columns: new[] { "Id", "CategoryId", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "PriorityType", "Text", "UserId" },
                 values: new object[] { "f7257688-84ea-4327-8841-ac78f3e8d2f6", "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, 1, "Check reception documents!", "6404c00f-c0e6-4a92-ad71-43b24f5f0e97" });
 
+            migrationBuilder.InsertData(
+                table: "Replies",
+                columns: new[] { "Id", "Comment", "CreatedOn", "FeedbackId", "IsDeleted", "ModifiedOn", "Name" },
+                values: new object[,]
+                {
+                    { "e069b9bc-6f43-443d-8aa6-842029f37072", "I do agree with you, perfect place!", new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified), "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "John McJane" },
+                    { "c5b2c466-4b2f-45e3-ad1b-9ba999a39037", "Could add that the restaurant is great!", new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified), "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "Ashley Collins" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -477,6 +509,11 @@ namespace HotelManagement.Data.Migrations
                 name: "IX_Notes_UserId",
                 table: "Notes",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Replies_FeedbackId",
+                table: "Replies",
+                column: "FeedbackId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -497,9 +534,6 @@ namespace HotelManagement.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Feedback");
-
-            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
@@ -507,6 +541,9 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Notes");
+
+            migrationBuilder.DropTable(
+                name: "Replies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -519,6 +556,9 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Feedback");
 
             migrationBuilder.DropTable(
                 name: "Businesses");

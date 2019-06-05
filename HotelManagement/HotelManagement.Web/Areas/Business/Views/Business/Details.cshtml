@@ -18,11 +18,14 @@
                         }
                     </div>
                 </div>
-                <div class="col-lg-8">
-                    @foreach (var comment in Model.Feedback)
-                    {
-                        <partial name="_CommentSectionPartial" model="comment" />
-                    }
+                <div class="col-md-10 col-xl-10 mb-10">
+                    <div class="comments-area">
+                        <h4>Total amount of comments: @Model.Feedback.Count()</h4>
+                        @foreach (var comment in Model.Feedback)
+                        {
+                            <partial name="_CommentSectionPartial" model="comment" />
+                        }
+                    </div>
                 </div>
             </div>
         </div>
