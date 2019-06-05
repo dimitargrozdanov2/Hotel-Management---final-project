@@ -1,6 +1,6 @@
 ﻿@model ReplyViewModel
 
-<div class="replyComment justify-content-between d-flex">
+<div class="single-comment replyComment justify-content-between d-flex">
     <div class="user justify-content-between d-flex">
         <div class="thumb">
             <img src="~/images/blog/c6.jpg" alt="">
@@ -9,13 +9,10 @@
             <h5>
                 <a href="#">@Model.Name</a>
             </h5>
-            <p class="date">@Model.CreatedOn</p>
+            <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
             <p class="comment">
                 @Model.Comment
             </p>
         </div>
-    </div>
-    <div class="reply-btn">
-        <a href="" class="btn-reply text-uppercase">reply</a>
     </div>
 </div>

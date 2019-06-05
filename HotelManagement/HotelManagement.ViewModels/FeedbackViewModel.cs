@@ -15,7 +15,7 @@ namespace HotelManagement.ViewModels
 
         public string Comment { get; set; }
 
-        public string Number { get; set; }
+        public string Email { get; set; }
 
         public double? Rating { get; set; }
 

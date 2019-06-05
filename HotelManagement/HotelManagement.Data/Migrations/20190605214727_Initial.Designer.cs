@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190605204305_Initial")]
+    [Migration("20190605214727_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,14 +121,14 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<DateTime?>("CreatedOn");
 
+                    b.Property<string>("Email");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
-
-                    b.Property<string>("Number");
 
                     b.Property<double?>("Rating");
 
@@ -145,9 +145,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
                             Comment = "Great location, really clean rooms, awesome staff!",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
+                            Email = "jeffGold@gmail.com",
                             IsDeleted = false,
                             Name = "Jeff Goldblum",
-                            Number = "+359 896 71 99 88",
                             Rating = 5.0
                         },
                         new
@@ -156,9 +156,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "We had a wonderful stay! The staff could not have been more helpful!",
                             CreatedOn = new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified),
+                            Email = "scarlettJoh@gmail.com",
                             IsDeleted = false,
                             Name = "Scarlett Johansson",
-                            Number = "+359 893 92 00 55",
                             Rating = 3.0
                         },
                         new
@@ -167,9 +167,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "The hotel is in a very good location, visited the restaurant and had a really great time!",
                             CreatedOn = new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified),
+                            Email = "sandyBullock@gmail.com",
                             IsDeleted = false,
                             Name = "Sandra Bullock",
-                            Number = "+359 898 11 23 44",
                             Rating = 1.0
                         });
                 });

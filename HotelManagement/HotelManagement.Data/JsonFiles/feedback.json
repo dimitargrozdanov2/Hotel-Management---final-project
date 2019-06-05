@@ -6,7 +6,7 @@
         "Comment": "Great location, really clean rooms, awesome staff!",
         "Rating": 5,
         "BusinessId": "687af33b-3084-43b6-bacb-4c8847559ee4",
-        "Number":  "+359 896 71 99 88"
+        "Email":  "jeffGold@gmail.com"
     },
     {
         "Id": "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
@@ -15,7 +15,7 @@
         "Comment": "We had a wonderful stay! The staff could not have been more helpful!",
         "Rating": 3,
         "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e",
-        "Number":  "+359 893 92 00 55"
+        "Email":  "scarlettJoh@gmail.com"
     },
     {
         "Id": "d2dd7ddf-ac78-42f1-963a-16f06406bd9d",
@@ -24,6 +24,6 @@
         "Comment": "The hotel is in a very good location, visited the restaurant and had a really great time!",
         "Rating": 1,
         "BusinessId": "14f77522-b07f-4ad8-855b-d93923bea56e",
-        "Number":  "+359 898 11 23 44"
+        "Email":  "sandyBullock@gmail.com"
     }
 ]

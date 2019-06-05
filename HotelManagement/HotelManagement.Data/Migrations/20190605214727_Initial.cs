@@ -195,7 +195,7 @@ namespace HotelManagement.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(maxLength: 50, nullable: true),
                     Comment = table.Column<string>(maxLength: 200, nullable: false),
-                    Number = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Rating = table.Column<double>(nullable: true),
                     BusinessId = table.Column<string>(nullable: true)
                 },
@@ -385,12 +385,12 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Feedback",
-                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "IsDeleted", "ModifiedOn", "Name", "Number", "Rating" },
+                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "Email", "IsDeleted", "ModifiedOn", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Scarlett Johansson", "+359 893 92 00 55", 3.0 },
-                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Sandra Bullock", "+359 898 11 23 44", 1.0 },
-                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Jeff Goldblum", "+359 896 71 99 88", 5.0 }
+                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), "scarlettJoh@gmail.com", false, null, "Scarlett Johansson", 3.0 },
+                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), "sandyBullock@gmail.com", false, null, "Sandra Bullock", 1.0 },
+                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), "jeffGold@gmail.com", false, null, "Jeff Goldblum", 5.0 }
                 });
 
             migrationBuilder.InsertData(

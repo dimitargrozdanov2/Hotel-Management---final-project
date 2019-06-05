@@ -17,7 +17,7 @@ namespace HotelManagement.Infrastructure.Mappings
                 .ForMember(dest => dest.CreatedOn, opts => opts.MapFrom(src => src.CreatedOn))
                 .ForMember(dest => dest.ModifiedOn, opts => opts.MapFrom(src => src.ModifiedOn))
                 .ForMember(dest => dest.Comment, opts => opts.MapFrom(src => src.Comment))
-                .ForMember(dest => dest.Number, opts => opts.MapFrom(src => src.Number))
+                .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Rating, opts => opts.MapFrom(src => src.Rating))
                 .ForMember(dest => dest.Replies, opts => opts.MapFrom(src => src.Replies))
                 .ForMember(dest => dest.Business, opts => opts.MapFrom(src => src.Business))
