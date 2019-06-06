@@ -29,7 +29,7 @@ namespace HotelManagement.Web.Controllers
             // FOR TESTING PURPOSES: TODO
             var model = new HomeIndexViewModel();
 
-            var business = await this.businessService.GetBusinesses("name");
+            var business = await this.businessService.GetBusinesses("date", true);
             //var users = await this.userService.GetAllUsers();
 
 
