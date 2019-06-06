@@ -1,6 +1,8 @@
 ﻿using HotelManagement.Data;
+using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,6 +36,37 @@ namespace HotelManagement.Services
 
             return returnLogbooks;
         }
+
+        public async Task<LogbookViewModel> CreateLogbookAsync(string businessname, string name, string description)
+        {
+            var business = await this.context.Businesses
+                .Include(bu => bu.BusinessUnits)
+                .Include(i => i.Images)
+                .Include(f => f.Feedback)
+                    .ThenInclude(r => r.Replies)
+                .FirstOrDefaultAsync(b => b.Name == businessname);
+
+            if (business == null)
+            {
+                throw new EntityInvalidException($"Business `{businessname}` does not exist.");
+            }
+
+            if (business.BusinessUnits.Any(bu => bu.Name == name))
+            {
+                throw new EntityAlreadyExistsException($"Logbook '{name}' already exist in Business '{businessname}'!");
+            }
+
+            var logbook = new Logbook() { Name = name, Description = description, Business = business };
+
+            await this.context.Logbooks.AddAsync(logbook);
+            await this.context.SaveChangesAsync();
+
+            var returnLogbook = this.mappingProvider.MapTo<LogbookViewModel>(logbook);
+
+            return returnLogbook;
+        }
+
+
 
     }
 }

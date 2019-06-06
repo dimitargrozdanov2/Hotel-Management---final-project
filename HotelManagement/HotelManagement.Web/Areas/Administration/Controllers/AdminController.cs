@@ -124,6 +124,28 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
             model.Logbooks = logbooks;
 
+            model.BusinessName = name;
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult CreateLogbook()
+        {
+            var model = new CreateLogbookViewModel();
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateLogbook(string businessname, CreateLogbookViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var logbook = await this.logbookService.CreateLogbookAsync(businessname, model.Name, model.Description);
+                return this.RedirectToAction("AllLogbooksForBusiness", "Admin", new { name = businessname });
+            }
+
             return this.View(model);
         }
     }

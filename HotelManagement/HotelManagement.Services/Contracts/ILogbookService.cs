@@ -9,5 +9,7 @@ namespace HotelManagement.Services.Contracts
     public interface ILogbookService
     {
         Task<IEnumerable<LogbookViewModel>> GetLogBooksForBusiness(string name);
+
+        Task<LogbookViewModel> CreateLogbookAsync(string businessname, string name, string description);
     }
 }

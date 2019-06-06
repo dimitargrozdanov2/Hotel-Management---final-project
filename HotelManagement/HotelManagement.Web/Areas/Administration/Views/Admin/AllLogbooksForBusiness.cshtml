@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-sm-2">
         <a class="btn btn-primary btn-block" style="margin-bottom:10px"
-           asp-area="Administration" asp-controller="Admin" asp-action="CreateBusiness">
+           asp-area="Administration" asp-controller="Admin" asp-action="CreateLogbook" asp-route-businessname="@Model.BusinessName">
             <i class="fas fa-plus-circle"></i>
             Create Logbook
         </a>
@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-success btn-block">Delete user</button>
                         </div>
-
+                    
                     </form>*@
                 <a class="btn btn-info btn-sm"
                    asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@logbook.Name">
