@@ -24,7 +24,22 @@
 <div class="comment-list left-padding">
     @foreach (var reply in Model.Replies)
     {
-        <partial name="_ReplySectionPartial" model="reply" />
-        
+        @*<partial name="_ReplySectionPartial" model="reply" />*@
+        <div class="single-comment replyComment justify-content-between d-flex">
+            <div class="user justify-content-between d-flex">
+                <div class="thumb">
+                    <img src="~/images/blog/c6.jpg" alt="">
+                </div>
+                <div class="desc">
+                    <h5>
+                        <a href="#">@Model.Name</a>
+                    </h5>
+                    <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
+                    <p class="comment">
+                        @Model.Comment
+                    </p>
+                </div>
+            </div>
+        </div>
     }
 </div>

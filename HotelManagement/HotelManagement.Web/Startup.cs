@@ -42,6 +42,7 @@ namespace HotelManagement.Web
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBusinessService, BusinessService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IUserManagerWrapper, UserManagerWrapper>();
             services.AddScoped<IRoleManagerWrapper, RoleManagerWrapper>();
 
