@@ -9,7 +9,7 @@
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
             debugger;
-            $('.comments-area').append(serverData);
+            $('.comments-area').prepend(serverData);
         })
     })
 })

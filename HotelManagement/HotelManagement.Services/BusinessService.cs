@@ -32,6 +32,7 @@ namespace HotelManagement.Services
                     .ThenInclude(r => r.Replies)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
+
             var mappedBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
 
             return mappedBusiness;
