@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services
@@ -32,6 +33,7 @@ namespace HotelManagement.Services
                     .ThenInclude(r => r.Replies)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
+            //business.Feedback.OrderByDescending(x => x.CreatedOn);
 
             var mappedBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
 
@@ -45,7 +47,7 @@ namespace HotelManagement.Services
                 throw new EntityAlreadyExistsException($"Business with '{name}' name already exist!");
             }
 
-            var business = new Business() { Name = name, Location = location, Description = description};
+            var business = new Business() { Name = name, Location = location, Description = description };
 
             await this.context.Businesses.AddAsync(business);
             await this.context.SaveChangesAsync();
@@ -80,51 +82,74 @@ namespace HotelManagement.Services
 
             // END OF TEST CODE;
 
-            if (key == "name")
-            {
-                businesses = await this.context.Businesses
-                    .Include(bu => bu.BusinessUnits)
-                    .Include(f => f.Feedback)
-                        .ThenInclude(r => r.Replies)
-                    .Include(i => i.Images)
-                    .OrderBy(k => k.Name)
-                    .ToListAsync();
-            }
-            else if (key == "rating")
-            {
-                businesses = await this.context.Businesses
-                    .Include(bu => bu.BusinessUnits)
-                    .Include(i => i.Images)
-                    .Include(f => f.Feedback)
-                        .ThenInclude(r => r.Replies)
-                    .OrderByDescending(k => k.Feedback.Sum(x => x.Rating))
-                    .ToListAsync();
-            }
-            else if (key == "date")
-            {
-                businesses = await this.context.Businesses
-                    .Include(bu => bu.BusinessUnits)
-                   .Include(i => i.Images)
-                   .Include(f => f.Feedback)
-                        .ThenInclude(r => r.Replies)
-                   .OrderBy(k => k.CreatedOn)
-                   .ToListAsync();
+            // 
 
-            }
-            else if (key == "location") // by country mostly
+            var dic = new Dictionary<string, Expression<Func<Business, object>>>();
+
+            Expression<Func<Business, object>> orderByName = (Business b) => b.Name;
+
+            Expression<Func<Business, object>> orderByRating = (Business b) => b.Feedback.Sum(x => x.Rating);
+
+            Expression<Func<Business, object>> orderByDate = (Business b) => b.CreatedOn;
+
+            dic.Add("name", orderByName);
+            dic.Add("rating", orderByName);
+            dic.Add("date", orderByName);
+
+            //if (key == "name")
+            //{
+            if (dic.ContainsKey(key))
             {
                 businesses = await this.context.Businesses
-                    .Include(bu => bu.BusinessUnits)
-                    .Include(i => i.Images)
-                    .Include(f => f.Feedback)
-                        .ThenInclude(r => r.Replies)
-                    .Where(l => l.Location.Contains(location))
-                    .ToListAsync();
+    .Include(bu => bu.BusinessUnits)
+    .Include(f => f.Feedback)
+        .ThenInclude(r => r.Replies)
+    .Include(i => i.Images)
+    .OrderBy(dic[key])
+    .ToListAsync();
             }
+
+            //}
+            //else if (key == "rating")
+            //{
+            //    businesses = await this.context.Businesses
+            //        .Include(bu => bu.BusinessUnits)
+            //        .Include(i => i.Images)
+            //        .Include(f => f.Feedback)
+            //            .ThenInclude(r => r.Replies)
+            //        .OrderByDescending(k => k.Feedback.Sum(x => x.Rating))
+            //        .ToListAsync();
+            //}
+            //else if (key == "date")
+            //{
+            //    businesses = await this.context.Businesses
+            //        .Include(bu => bu.BusinessUnits)
+            //       .Include(i => i.Images)
+            //       .Include(f => f.Feedback)
+            //            .ThenInclude(r => r.Replies)
+            //       .OrderBy(k => k.CreatedOn)
+            //       .ToListAsync();
+
+            //}
+            //else if (key == "location") // by country mostly
+            //{
+            //    businesses = await this.context.Businesses
+            //        .Include(bu => bu.BusinessUnits)
+            //        .Include(i => i.Images)
+            //        .Include(f => f.Feedback)
+            //            .ThenInclude(r => r.Replies)
+            //        .Where(l => l.Location.Contains(location))
+            //        .ToListAsync();
+            //}
 
             var mappedBusinesses = this.mappingProvider.MapTo<ICollection<BusinessViewModel>>(businesses);
 
             return mappedBusinesses;
+        }
+
+        public string GetName(Business business)
+        {
+            return business.Name;
         }
     }
 }

@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-xl-10 mb-10">
-                    <div id="comments-amount"><h4>Total amount of comments: @Model.Feedback.Count()</h4></div>
+                    <div id="comments-amount"><h4>Total amount of comments: <span id="amount">@Model.Feedback.Count()</span></h4></div>
                     <div class="comments-area">
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {

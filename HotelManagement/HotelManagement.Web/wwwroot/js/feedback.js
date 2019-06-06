@@ -8,8 +8,12 @@
         const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
-            debugger;
             $('.comments-area').prepend(serverData);
+
+            const commentCount = $('.single-comment').length
+            $('#amount').html(commentCount);
         })
+
+
     })
 })
