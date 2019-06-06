@@ -1790,7 +1790,8 @@ button {
   .comments-area a {
     color: #303030; }
   .comments-area .comment-list {
-    padding-bottom: 48px; }
+    padding: 10px 0px 20px 0px
+  }
     .comments-area .comment-list:last-child {
       padding-bottom: 0px; }
     .comments-area .comment-list.left-padding {

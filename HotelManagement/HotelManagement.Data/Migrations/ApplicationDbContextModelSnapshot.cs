@@ -119,14 +119,14 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<DateTime?>("CreatedOn");
 
+                    b.Property<string>("Email");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50);
-
-                    b.Property<string>("Number");
 
                     b.Property<double?>("Rating");
 
@@ -143,9 +143,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
                             Comment = "Great location, really clean rooms, awesome staff!",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
+                            Email = "jeffGold@gmail.com",
                             IsDeleted = false,
                             Name = "Jeff Goldblum",
-                            Number = "+359 896 71 99 88",
                             Rating = 5.0
                         },
                         new
@@ -154,9 +154,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "We had a wonderful stay! The staff could not have been more helpful!",
                             CreatedOn = new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified),
+                            Email = "scarlettJoh@gmail.com",
                             IsDeleted = false,
                             Name = "Scarlett Johansson",
-                            Number = "+359 893 92 00 55",
                             Rating = 3.0
                         },
                         new
@@ -165,9 +165,9 @@ namespace HotelManagement.Data.Migrations
                             BusinessId = "14f77522-b07f-4ad8-855b-d93923bea56e",
                             Comment = "The hotel is in a very good location, visited the restaurant and had a really great time!",
                             CreatedOn = new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified),
+                            Email = "sandyBullock@gmail.com",
                             IsDeleted = false,
                             Name = "Sandra Bullock",
-                            Number = "+359 898 11 23 44",
                             Rating = 1.0
                         });
                 });
@@ -374,6 +374,53 @@ namespace HotelManagement.Data.Migrations
                             PriorityType = 1,
                             Text = "Check reception documents!",
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97"
+                        });
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Reply", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime?>("CreatedOn");
+
+                    b.Property<string>("FeedbackId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<DateTime?>("ModifiedOn");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FeedbackId");
+
+                    b.ToTable("Replies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e069b9bc-6f43-443d-8aa6-842029f37072",
+                            Comment = "I do agree with you, perfect place!",
+                            CreatedOn = new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified),
+                            FeedbackId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+                            IsDeleted = false,
+                            Name = "John McJane"
+                        },
+                        new
+                        {
+                            Id = "c5b2c466-4b2f-45e3-ad1b-9ba999a39037",
+                            Comment = "Could add that the restaurant is great!",
+                            CreatedOn = new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified),
+                            FeedbackId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+                            IsDeleted = false,
+                            Name = "Ashley Collins"
                         });
                 });
 
@@ -644,6 +691,13 @@ namespace HotelManagement.Data.Migrations
                     b.HasOne("HotelManagement.DataModels.User", "User")
                         .WithMany("Notes")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Reply", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.Feedback", "Feedback")
+                        .WithMany("Replies")
+                        .HasForeignKey("FeedbackId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

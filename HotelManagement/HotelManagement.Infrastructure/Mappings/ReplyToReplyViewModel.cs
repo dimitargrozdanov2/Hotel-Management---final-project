@@ -7,20 +7,17 @@ using System.Text;
 
 namespace HotelManagement.Infrastructure.Mappings
 {
-    public class FeedbackToFeedbackViewModel : Profile
+    public class ReplyToReplyViewModel : Profile
     {
-        public FeedbackToFeedbackViewModel()
+        public ReplyToReplyViewModel()
         {
-            this.CreateMap<Feedback, FeedbackViewModel>()
+            this.CreateMap<Reply, ReplyViewModel>()
                 .ForMember(dest => dest.Id, opts => opts.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opts => opts.MapFrom(src => src.Name))
                 .ForMember(dest => dest.CreatedOn, opts => opts.MapFrom(src => src.CreatedOn))
                 .ForMember(dest => dest.ModifiedOn, opts => opts.MapFrom(src => src.ModifiedOn))
                 .ForMember(dest => dest.Comment, opts => opts.MapFrom(src => src.Comment))
-                .ForMember(dest => dest.Email, opts => opts.MapFrom(src => src.Email))
-                .ForMember(dest => dest.Rating, opts => opts.MapFrom(src => src.Rating))
-                .ForMember(dest => dest.Replies, opts => opts.MapFrom(src => src.Replies))
-                .ForMember(dest => dest.Business, opts => opts.MapFrom(src => src.Business))
+                .ForMember(dest => dest.Feedback, opts => opts.MapFrom(src => src.Feedback))
                 .ReverseMap();
         }
     }

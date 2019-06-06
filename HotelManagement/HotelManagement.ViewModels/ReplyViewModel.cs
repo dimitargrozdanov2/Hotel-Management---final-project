@@ -5,7 +5,7 @@ using System.Text;
 
 namespace HotelManagement.ViewModels
 {
-    public class FeedbackViewModel
+    public class ReplyViewModel
     {
         [Required]
         public string Id { get; set; }
@@ -15,17 +15,11 @@ namespace HotelManagement.ViewModels
 
         public string Comment { get; set; }
 
-        public string Email { get; set; }
-
-        public double? Rating { get; set; }
-
-        public ICollection<ReplyViewModel> Replies { get; set; }
-
         [Required]
         public DateTime? CreatedOn { get; set; }
 
         public DateTime? ModifiedOn { get; set; }
 
-        public BusinessViewModel Business { get; set; }
+        public FeedbackViewModel Feedback { get; set; }
     }
 }

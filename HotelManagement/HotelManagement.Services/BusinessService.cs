@@ -29,6 +29,7 @@ namespace HotelManagement.Services
                 .Include(bu => bu.BusinessUnits)
                 .Include(i => i.Images)
                 .Include(f => f.Feedback)
+                    .ThenInclude(r => r.Replies)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
             if (business == null)
@@ -87,6 +88,7 @@ namespace HotelManagement.Services
                 businesses = await this.context.Businesses
                     .Include(bu => bu.BusinessUnits)
                     .Include(f => f.Feedback)
+                        .ThenInclude(r => r.Replies)
                     .Include(i => i.Images)
                     .OrderBy(k => k.Name)
                     .ToListAsync();
@@ -97,6 +99,7 @@ namespace HotelManagement.Services
                     .Include(bu => bu.BusinessUnits)
                     .Include(i => i.Images)
                     .Include(f => f.Feedback)
+                        .ThenInclude(r => r.Replies)
                     .OrderByDescending(k => k.Feedback.Sum(x => x.Rating))
                     .ToListAsync();
             }
@@ -106,6 +109,7 @@ namespace HotelManagement.Services
                     .Include(bu => bu.BusinessUnits)
                    .Include(i => i.Images)
                    .Include(f => f.Feedback)
+                        .ThenInclude(r => r.Replies)
                    .OrderBy(k => k.CreatedOn)
                    .ToListAsync();
 
@@ -116,6 +120,7 @@ namespace HotelManagement.Services
                     .Include(bu => bu.BusinessUnits)
                     .Include(i => i.Images)
                     .Include(f => f.Feedback)
+                        .ThenInclude(r => r.Replies)
                     .Where(l => l.Location.Contains(location))
                     .ToListAsync();
             }
