@@ -142,7 +142,6 @@ namespace HotelManagement.Services
             {
                 throw new EntityInvalidException($"Business `{name}` does not exist.");
             }
-            imageUrl = $"{business.Name}" + "_logo.jpg";
 
             if (!Image.ContentType.Contains("image"))
             {
@@ -151,7 +150,7 @@ namespace HotelManagement.Services
 
             if (business.Images.Any(x => x.Name == imageUrl))
             {
-                throw new EntityAlreadyExistsException($"Business with '{name}' already has a logo!");
+                throw new EntityAlreadyExistsException($"Business '{name}' already has an image with this name!");
             }
 
             var image = new Image() { Name = imageUrl };

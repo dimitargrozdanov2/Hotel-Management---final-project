@@ -94,9 +94,9 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var imageNameToSave = $"{model.Name}" + "_logo.jpg";
+                var imageNameToSave = model.ImageName + ".jpg";
 
-                var business = await this.businessService.AddImageToBusiness(model.Name, imageNameToSave, model.Image);
+                var business = await this.businessService.AddImageToBusiness(model.BusinessName, imageNameToSave, model.Image);
 
                 using (var ms = new MemoryStream())
                 {

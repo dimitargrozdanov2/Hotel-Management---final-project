@@ -1,12 +1,12 @@
-﻿@model ListBusinessesViewModel
+﻿@model ListLogbooksViewModel
 
 @{
-    ViewData["Title"] = "All Businesses";
+    ViewData["Title"] = "All Logbooks for business";
 }
 
 <div class="divider">
     <div class="text-center">
-        <h2>All Businesses</h2>
+        <h2>All Logbooks for business</h2>
     </div>
 </div>
 
@@ -15,7 +15,7 @@
         <a class="btn btn-primary btn-block" style="margin-bottom:10px"
            asp-area="Administration" asp-controller="Admin" asp-action="CreateBusiness">
             <i class="fas fa-plus-circle"></i>
-            Create Business
+            Create Logbook
         </a>
     </div>
 </div>
@@ -23,17 +23,15 @@
     <thead>
         <tr>
             <th class="info ">Name</th>
-            <th class="info ">Location</th>
             <th class="info ">Description</th>
             <th class="info" id="Operations" width="25%">Operations </th>
         </tr>
     </thead>
-    @foreach (var business in Model.Businesses)
+    @foreach (var logbook in Model.Logbooks)
     {
         <tr>
-            <td>@business.Name</td>
-            <td>@business.Location</td>
-            <td>@business.Description</td>
+            <td>@logbook.Name</td>
+            <td>@logbook.Description</td>
             <td>
                 @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
                         <div class="form-group">
@@ -42,14 +40,14 @@
 
                     </form>*@
                 <a class="btn btn-info btn-sm"
-                   asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@business.Name">
-                    <i class="fas fa-pencil-alt"></i>
-                    Manage Logbooks
+                   asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@logbook.Name">
+                    <i class="fas fa-info"></i>
+                    Details
                 </a>
-                <a class="btn btn-primary btn-sm" style="margin-top:10px"
-                   asp-area="Administration" asp-controller="Admin" asp-action="AddImageToBusiness" asp-route-businessname="@business.Name">
-                    <i class="fas fa-images"></i>
-                    Add Image
+                <a class="btn btn-danger btn-sm float-right"
+                   asp-area="Administration" asp-controller="Admin" asp-action="AddImageToBusiness" asp-route-name="@logbook.Name">
+                    <i class="fa fa-trash"></i>
+                    Delete Logbook
                 </a>
             </td>
         </tr>
