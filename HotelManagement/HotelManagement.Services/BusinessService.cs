@@ -4,6 +4,7 @@ using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -129,7 +130,7 @@ namespace HotelManagement.Services
 
             return mappedBusinesses;
         }
-        public async Task<BusinessViewModel> AddImageToBusiness(string name, string imageUrl)
+        public async Task<BusinessViewModel> AddImageToBusiness(string name, string imageUrl, IFormFile Image)
         {
             var business = await this.context.Businesses
                 .Include(bu => bu.BusinessUnits)
@@ -143,6 +144,10 @@ namespace HotelManagement.Services
             }
             imageUrl = $"{business.Name}" + "_logo.jpg";
 
+            if (!Image.ContentType.Contains("image"))
+            {
+                throw new EntityInvalidException("Uploaded file must be of type image");
+            }
 
             if (business.Images.Any(x => x.Name == imageUrl))
             {

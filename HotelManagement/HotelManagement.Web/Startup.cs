@@ -45,6 +45,7 @@ namespace HotelManagement.Web
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<IUserManagerWrapper, UserManagerWrapper>();
             services.AddScoped<IRoleManagerWrapper, RoleManagerWrapper>();
+            services.AddScoped<ILogbookService, LogbookService>();
 
             services.AddAutoMapper(typeof(Startup));
 

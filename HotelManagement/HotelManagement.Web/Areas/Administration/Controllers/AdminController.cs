@@ -21,16 +21,19 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         private readonly IUserService userService;
         private readonly IBusinessService businessService;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ILogbookService logbookService;
 
 
 
         public AdminController(IUserManagerWrapper userManagerWrapper,
-            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment)
+            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, ILogbookService logbookService)
         {
             this.userManagerWrapper = userManagerWrapper;
             this.userService = userService;
             this.businessService = businessService ?? throw new ArgumentNullException(nameof(businessService));
             this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            this.logbookService = logbookService ?? throw new ArgumentNullException(nameof(logbookService));
+
         }
 
         [HttpGet]
@@ -91,13 +94,9 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                if (model.Image.ContentType.Contains("image"))
-                {
-
-                
                 var imageNameToSave = $"{model.Name}" + "_logo.jpg";
 
-                var business = await this.businessService.AddImageToBusiness(model.Name, imageNameToSave);
+                var business = await this.businessService.AddImageToBusiness(model.Name, imageNameToSave, model.Image);
 
                 using (var ms = new MemoryStream())
                 {
@@ -112,11 +111,18 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
                 return this.RedirectToAction("AllBusinesses", "Admin");
                 }
-                else
-                {
-                    throw new EntityInvalidException("Uploaded file must be of type image");
-                }
-            }
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllLogbooksForBusiness(string name)
+        {
+            var model = new ListLogbooksViewModel();
+
+            var logbooks = await this.logbookService.GetLogBooksForBusiness(name);
+
+            model.Logbooks = logbooks;
 
             return this.View(model);
         }
