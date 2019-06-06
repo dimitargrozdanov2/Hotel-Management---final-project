@@ -19,8 +19,8 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-xl-10 mb-10">
+                    <h4>Total amount of comments: @Model.Feedback.Count()</h4>
                     <div class="comments-area">
-                        <h4>Total amount of comments: @Model.Feedback.Count()</h4>
                         @foreach (var comment in Model.Feedback)
                         {
                             <partial name="_CommentSectionPartial" model="comment" />
@@ -30,7 +30,7 @@
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
                     @*<form action="/business/business/comment/@Model.Id" method="post">*@
-                    <form asp-action="Comment" asp-controller="Business" asp-area="Business" asp-route-id="@Model.Id">
+                    <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business" asp-route-id="@Model.Id">
                         <input type="hidden" name="businessId" value="@Model.Id" />
                         @Html.AntiForgeryToken()
                         @*<div class="form-group">

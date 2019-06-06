@@ -1,14 +1,15 @@
 ﻿$(function () {
-    const $commentForm = $('.comment-form');
+    const $commentForm = $('#send-feedback-form');
+    console.log($commentForm);
 
     $commentForm.on('submit', function (event) {
         event.preventDefault();
-
-        const dataToSend = $('.comment-form').serialize();
+        debugger;
+        const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
             debugger;
-            $('.comments-area').prepend(serverData);
+            $('.comments-area').append(serverData);
         })
     })
 })
