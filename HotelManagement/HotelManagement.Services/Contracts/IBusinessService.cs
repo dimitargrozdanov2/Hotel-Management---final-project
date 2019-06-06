@@ -14,5 +14,8 @@ namespace HotelManagement.Services.Contracts
         Task<ICollection<BusinessViewModel>> GetBusinesses(string key, string location = null);
 
         Task<BusinessViewModel> CreateBusinessAsync(string name, string location, string description);
+
+        Task<BusinessViewModel> AddImageToBusiness(string name, string imageUrl);
+
     }
 }
