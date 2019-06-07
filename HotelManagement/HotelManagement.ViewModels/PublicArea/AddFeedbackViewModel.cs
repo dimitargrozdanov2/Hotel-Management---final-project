@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace HotelManagement.Web.Areas.Business.Models
+namespace HotelManagement.ViewModels.PublicArea
 {
-    public class CreateFeedbackViewModel
+    public class AddFeedbackViewModel
     {
         public string BusinessId { get; set; }
+
+        public string FeedbackParentId { get; set; }
 
         [Required]
         public string AuthorName { get; set; }
@@ -16,5 +17,7 @@ namespace HotelManagement.Web.Areas.Business.Models
         public string Comment { get; set; }
 
         public string Email { get; set; }
+
+        public double Rating { get; set; }
     }
 }

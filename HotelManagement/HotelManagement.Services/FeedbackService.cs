@@ -3,6 +3,7 @@ using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
+using HotelManagement.ViewModels.PublicArea;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace HotelManagement.Services
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
-        public async Task<FeedbackViewModel> AddComment(string businessId, string authorName, string email, string comment)
+        public async Task<FeedbackViewModel> AddComment(AddFeedbackViewModel model)
         {
-            var business = await this.context.Businesses.FirstOrDefaultAsync(b => b.Id == businessId);
+            var business = await this.context.Businesses.FirstOrDefaultAsync(b => b.Id == model.BusinessId);
 
-            var feedback = new Feedback() { Name = authorName, BusinessId = businessId, Comment = comment, Email = email };
+            var feedback = new Feedback() { Name = model.AuthorName, BusinessId = model.BusinessId, Comment = model.Comment, Email = model.Email };
             this.context.Feedback.Add(feedback);
             await this.context.SaveChangesAsync();
 
@@ -35,5 +36,7 @@ namespace HotelManagement.Services
 
             return returnBusiness;
         }
+
+
     }
 }

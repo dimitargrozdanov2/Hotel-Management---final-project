@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
-using HotelManagement.Web.Areas.Business.Models;
+using HotelManagement.ViewModels.PublicArea;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagement.Web.Areas.Business.Controllers
@@ -30,9 +30,9 @@ namespace HotelManagement.Web.Areas.Business.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Comment(string id, CreateFeedbackViewModel model)
+        public async Task<IActionResult> Comment(string id, AddFeedbackViewModel model)
         {
-            var feedbackModel = await this.feedbackService.AddComment(model.BusinessId, model.AuthorName, model.Email, model.Comment);
+            var feedbackModel = await this.feedbackService.AddComment(model);
 
             return this.PartialView("_CommentSectionPartial", feedbackModel);
         }
