@@ -23,6 +23,11 @@
                         <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Submit Feedback</button>
                     </div>
                     <div class="comments-area">
+                        @if (Model.Feedback.Count() == 0)
+                        {
+                            <p>This business has no feedback. Be the first to submit one!</p>
+                        }
+
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
                             <partial name="_CommentSectionPartial" model="comment" />

@@ -16,7 +16,7 @@
 })
 
 $(".comments-area").click(function () {
-    $('html, body').animate({
+    $('html, body').stop().animate({
         scrollTop: $("#comments-amount").offset().top
     }, 1000);
 });
