@@ -18,7 +18,10 @@
                     </div>
                 </div>
                 <div class="col-md-10 col-xl-10 mb-10">
-                    <div id="comments-amount"><h4>Total amount of comments: <span id="amount">@Model.Feedback.Count()</span></h4></div>
+                    <div id="comments-amount" class="commentsAmount">
+                        Total amount of comments: <span id="amount">@Model.Feedback.Count()</span>
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Submit Feedback</button>
+                    </div>
                     <div class="comments-area">
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
@@ -26,29 +29,37 @@
                         }
                     </div>
                 </div>
-                <div class="comment-form">
-                    <h4>Leave a Reply</h4>
-                    @*<form action="/business/business/comment/@Model.Id" method="post">*@
-                    <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business" asp-route-id="@Model.Id">
-                        <input type="hidden" name="businessId" value="@Model.Id" />
-                        @Html.AntiForgeryToken()
-                        @*<div class="form-group">
-                                <textarea name="comment" class="form-control" rows="5"></textarea>
-                            </div>*@
-                        <div class="form-group form-inline">
-                            <div class="form-group col-lg-6 col-md-6 name">
-                                <input type="text" name="authorName" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Submit Feedback for @Model.Name</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="form-group col-lg-6 col-md-6 email">
-                                <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                            <div class="modal-body">
+                                <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business" asp-route-id="@Model.Id">
+                                    <input type="hidden" name="businessId" value="@Model.Id" />
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group form-inline">
+                                        <div class="form-group col-lg-6 col-md-6 name">
+                                            <input type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                        </div>
+                                        <div class="form-group col-lg-6 col-md-6 email">
+                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
+                                                  required=""></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Send Feedback</button>
+                                </form>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
-                                      required=""></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
