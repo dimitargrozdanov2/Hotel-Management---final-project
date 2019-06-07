@@ -1,6 +1,5 @@
 ﻿$(function () {
     const $commentForm = $('#send-feedback-form');
-    console.log($commentForm);
 
     $commentForm.on('submit', function (event) {
         event.preventDefault();
@@ -15,3 +14,13 @@
         })
     })
 })
+
+$(".comments-area").click(function () {
+    $('html, body').animate({
+        scrollTop: $("#comments-amount").offset().top
+    }, 1000);
+});
+
+
+
+
