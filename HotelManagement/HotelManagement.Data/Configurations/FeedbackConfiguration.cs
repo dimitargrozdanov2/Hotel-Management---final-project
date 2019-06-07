@@ -17,6 +17,7 @@ namespace HotelManagement.Data.Configurations
             builder.Property(a => a.Comment)
                 .HasMaxLength(ConfigConstants.CommentLength)
                 .IsRequired();
+
         }
     }
 }

@@ -37,8 +37,6 @@ namespace HotelManagement.Data
 
         public DbSet<Note> Notes { get; set; }
 
-        public DbSet<Reply> Replies { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -57,7 +55,6 @@ namespace HotelManagement.Data
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
             builder.ApplyConfiguration(new NoteConfiguration());
             builder.ApplyConfiguration(new BusinessConfiguration());
-            builder.ApplyConfiguration(new ReplyConfiguration());
 
         }
 
@@ -117,7 +114,6 @@ namespace HotelManagement.Data
             var logbooksPath = @"..\HotelManagement.Data\JsonFiles\logbooks.json";
             var businessesPath = @"..\HotelManagement.Data\JsonFiles\businesses.json";
             var imagesPath = @"..\HotelManagement.Data\JsonFiles\images.json";
-            var repliesPath = @"..\HotelManagement.Data\JsonFiles\replies.json";
 
             var logbookManagersPath = @"..\HotelManagement.Data\JsonFiles\logbookManagers.json";
 
@@ -128,7 +124,7 @@ namespace HotelManagement.Data
 
             var isPathFound = File.Exists(feedbackPath) && File.Exists(categoriesPath) && File.Exists(notesPath)
                                 && File.Exists(logbooksPath) && File.Exists(logbookManagersPath) && File.Exists(businessesPath)
-                                && File.Exists(imagesPath) && File.Exists(repliesPath);
+                                && File.Exists(imagesPath);
             if (isPathFound)
             {
                 var feedback = JsonConvert.DeserializeObject<Feedback[]>(File.ReadAllText(feedbackPath));
@@ -137,7 +133,6 @@ namespace HotelManagement.Data
                 var logbooks = JsonConvert.DeserializeObject<Logbook[]>(File.ReadAllText(logbooksPath));
                 var businesses = JsonConvert.DeserializeObject<Business[]>(File.ReadAllText(businessesPath));
                 var images = JsonConvert.DeserializeObject<Image[]>(File.ReadAllText(imagesPath));
-                var replies = JsonConvert.DeserializeObject<Reply[]>(File.ReadAllText(repliesPath));
 
                 var logbookManagers = JsonConvert.DeserializeObject<LogbookManagers[]>(File.ReadAllText(logbookManagersPath));
 
@@ -151,10 +146,8 @@ namespace HotelManagement.Data
                 modelBuilder.Entity<Logbook>().HasData(logbooks);
                 modelBuilder.Entity<Business>().HasData(businesses);
                 modelBuilder.Entity<Image>().HasData(images);
-                modelBuilder.Entity<Reply>().HasData(replies);
 
                 modelBuilder.Entity<LogbookManagers>().HasData(logbookManagers);
-
 
                 modelBuilder.Entity<User>().HasData(users);
                 modelBuilder.Entity<IdentityRole>().HasData(roles);
@@ -170,7 +163,6 @@ namespace HotelManagement.Data
             builder.Entity<Image>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Business>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             builder.Entity<Category>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
-            builder.Entity<Reply>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
             //builder.Entity<BaseEntity>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
         }
     }

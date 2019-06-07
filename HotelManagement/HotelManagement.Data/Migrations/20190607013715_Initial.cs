@@ -197,6 +197,7 @@ namespace HotelManagement.Data.Migrations
                     Comment = table.Column<string>(maxLength: 200, nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Rating = table.Column<double>(nullable: true),
+                    FeedbackParentId = table.Column<string>(nullable: true),
                     BusinessId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -206,6 +207,12 @@ namespace HotelManagement.Data.Migrations
                         name: "FK_Feedback_Businesses_BusinessId",
                         column: x => x.BusinessId,
                         principalTable: "Businesses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Feedback_Feedback_FeedbackParentId",
+                        column: x => x.FeedbackParentId,
+                        principalTable: "Feedback",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -251,29 +258,6 @@ namespace HotelManagement.Data.Migrations
                         name: "FK_Logbooks_Businesses_BusinessId",
                         column: x => x.BusinessId,
                         principalTable: "Businesses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Replies",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: true),
-                    Comment = table.Column<string>(maxLength: 200, nullable: false),
-                    FeedbackId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Replies", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Replies_Feedback_FeedbackId",
-                        column: x => x.FeedbackId,
-                        principalTable: "Feedback",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -385,12 +369,12 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Feedback",
-                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "Email", "IsDeleted", "ModifiedOn", "Name", "Rating" },
+                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "Email", "FeedbackParentId", "IsDeleted", "ModifiedOn", "Name", "Rating" },
                 values: new object[,]
                 {
-                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), "scarlettJoh@gmail.com", false, null, "Scarlett Johansson", 3.0 },
-                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), "sandyBullock@gmail.com", false, null, "Sandra Bullock", 1.0 },
-                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), "jeffGold@gmail.com", false, null, "Jeff Goldblum", 5.0 }
+                    { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), "scarlettJoh@gmail.com", null, false, null, "Scarlett Johansson", 3.0 },
+                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), "sandyBullock@gmail.com", null, false, null, "Sandra Bullock", 1.0 },
+                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), "jeffGold@gmail.com", null, false, null, "Jeff Goldblum", 5.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -418,6 +402,15 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Feedback",
+                columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "Email", "FeedbackParentId", "IsDeleted", "ModifiedOn", "Name", "Rating" },
+                values: new object[,]
+                {
+                    { "e069b9bc-6f43-443d-8aa6-842029f37072", "687af33b-3084-43b6-bacb-4c8847559ee4", "I do agree with you, perfect place!", new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified), null, "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "John McJane", null },
+                    { "c5b2c466-4b2f-45e3-ad1b-9ba999a39037", "687af33b-3084-43b6-bacb-4c8847559ee4", "Could add that the restaurant is great!", new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified), null, "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "Ashley Collins", null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "LogbookManagers",
                 columns: new[] { "ManagerId", "LogbookId" },
                 values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "3d71d939-dc61-46f8-af46-ed6a618036c2" });
@@ -426,15 +419,6 @@ namespace HotelManagement.Data.Migrations
                 table: "Notes",
                 columns: new[] { "Id", "CategoryId", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "PriorityType", "Text", "UserId" },
                 values: new object[] { "f7257688-84ea-4327-8841-ac78f3e8d2f6", "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, 1, "Check reception documents!", "6404c00f-c0e6-4a92-ad71-43b24f5f0e97" });
-
-            migrationBuilder.InsertData(
-                table: "Replies",
-                columns: new[] { "Id", "Comment", "CreatedOn", "FeedbackId", "IsDeleted", "ModifiedOn", "Name" },
-                values: new object[,]
-                {
-                    { "e069b9bc-6f43-443d-8aa6-842029f37072", "I do agree with you, perfect place!", new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified), "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "John McJane" },
-                    { "c5b2c466-4b2f-45e3-ad1b-9ba999a39037", "Could add that the restaurant is great!", new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified), "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", false, null, "Ashley Collins" }
-                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -481,6 +465,11 @@ namespace HotelManagement.Data.Migrations
                 column: "BusinessId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Feedback_FeedbackParentId",
+                table: "Feedback",
+                column: "FeedbackParentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Images_BusinessId",
                 table: "Images",
                 column: "BusinessId");
@@ -509,11 +498,6 @@ namespace HotelManagement.Data.Migrations
                 name: "IX_Notes_UserId",
                 table: "Notes",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Replies_FeedbackId",
-                table: "Replies",
-                column: "FeedbackId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -534,6 +518,9 @@ namespace HotelManagement.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Feedback");
+
+            migrationBuilder.DropTable(
                 name: "Images");
 
             migrationBuilder.DropTable(
@@ -541,9 +528,6 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Notes");
-
-            migrationBuilder.DropTable(
-                name: "Replies");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -556,9 +540,6 @@ namespace HotelManagement.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Feedback");
 
             migrationBuilder.DropTable(
                 name: "Businesses");

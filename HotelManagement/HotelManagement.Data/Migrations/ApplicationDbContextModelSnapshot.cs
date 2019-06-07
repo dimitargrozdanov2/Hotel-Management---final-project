@@ -121,6 +121,8 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("FeedbackParentId");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime?>("ModifiedOn");
@@ -133,6 +135,8 @@ namespace HotelManagement.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BusinessId");
+
+                    b.HasIndex("FeedbackParentId");
 
                     b.ToTable("Feedback");
 
@@ -169,6 +173,26 @@ namespace HotelManagement.Data.Migrations
                             IsDeleted = false,
                             Name = "Sandra Bullock",
                             Rating = 1.0
+                        },
+                        new
+                        {
+                            Id = "e069b9bc-6f43-443d-8aa6-842029f37072",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            Comment = "I do agree with you, perfect place!",
+                            CreatedOn = new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified),
+                            FeedbackParentId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+                            IsDeleted = false,
+                            Name = "John McJane"
+                        },
+                        new
+                        {
+                            Id = "c5b2c466-4b2f-45e3-ad1b-9ba999a39037",
+                            BusinessId = "687af33b-3084-43b6-bacb-4c8847559ee4",
+                            Comment = "Could add that the restaurant is great!",
+                            CreatedOn = new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified),
+                            FeedbackParentId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
+                            IsDeleted = false,
+                            Name = "Ashley Collins"
                         });
                 });
 
@@ -374,53 +398,6 @@ namespace HotelManagement.Data.Migrations
                             PriorityType = 1,
                             Text = "Check reception documents!",
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97"
-                        });
-                });
-
-            modelBuilder.Entity("HotelManagement.DataModels.Reply", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime?>("CreatedOn");
-
-                    b.Property<string>("FeedbackId");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<DateTime?>("ModifiedOn");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FeedbackId");
-
-                    b.ToTable("Replies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e069b9bc-6f43-443d-8aa6-842029f37072",
-                            Comment = "I do agree with you, perfect place!",
-                            CreatedOn = new DateTime(2019, 5, 4, 14, 11, 5, 0, DateTimeKind.Unspecified),
-                            FeedbackId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
-                            IsDeleted = false,
-                            Name = "John McJane"
-                        },
-                        new
-                        {
-                            Id = "c5b2c466-4b2f-45e3-ad1b-9ba999a39037",
-                            Comment = "Could add that the restaurant is great!",
-                            CreatedOn = new DateTime(2019, 5, 4, 17, 22, 15, 0, DateTimeKind.Unspecified),
-                            FeedbackId = "1e67e958-37fc-46cc-a6b9-5d1f28e9e532",
-                            IsDeleted = false,
-                            Name = "Ashley Collins"
                         });
                 });
 
@@ -649,6 +626,10 @@ namespace HotelManagement.Data.Migrations
                     b.HasOne("HotelManagement.DataModels.Business", "Business")
                         .WithMany("Feedback")
                         .HasForeignKey("BusinessId");
+
+                    b.HasOne("HotelManagement.DataModels.Feedback", "FeedbackParent")
+                        .WithMany("Replies")
+                        .HasForeignKey("FeedbackParentId");
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.Image", b =>
@@ -691,13 +672,6 @@ namespace HotelManagement.Data.Migrations
                     b.HasOne("HotelManagement.DataModels.User", "User")
                         .WithMany("Notes")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("HotelManagement.DataModels.Reply", b =>
-                {
-                    b.HasOne("HotelManagement.DataModels.Feedback", "Feedback")
-                        .WithMany("Replies")
-                        .HasForeignKey("FeedbackId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

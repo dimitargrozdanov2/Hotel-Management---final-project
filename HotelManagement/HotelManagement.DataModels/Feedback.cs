@@ -1,6 +1,7 @@
 ﻿using HotelManagement.DataModels.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace HotelManagement.DataModels
@@ -15,11 +16,10 @@ namespace HotelManagement.DataModels
 
         public double? Rating { get; set; }
 
-        // bool isPrimary, parentId, 
+        public List<Feedback> Replies { get; set; }
 
-            // self relation entity framework, s Feedback
-
-        public IEnumerable<Reply> Replies { get; set; }
+        public string FeedbackParentId { get; set; }
+        public Feedback FeedbackParent { get; set; }
 
         public string BusinessId { get; set; }
         public Business Business { get; set; }

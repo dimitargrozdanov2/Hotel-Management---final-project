@@ -19,7 +19,7 @@ namespace HotelManagement.ViewModels
 
         public double? Rating { get; set; }
 
-        public ICollection<ReplyViewModel> Replies { get; set; }
+        public ICollection<FeedbackViewModel> Replies { get; set; }
 
         [Required]
         public DateTime? CreatedOn { get; set; }
