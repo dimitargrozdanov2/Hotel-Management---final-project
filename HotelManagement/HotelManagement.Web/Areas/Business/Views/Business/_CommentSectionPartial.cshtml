@@ -1,6 +1,6 @@
 ﻿@model FeedbackViewModel
 
-<div class="comment-list">
+<div class="comment-list" id="@Model.Id">
     <div class="single-comment justify-content-between d-flex">
         <div class="user justify-content-between d-flex">
             <div class="thumb">
@@ -17,30 +17,46 @@
             </div>
         </div>
         <div class="reply-btn">
-            @*<a href="" class="btn-reply text-uppercase">reply</a>*@
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Reply</button>
+            <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="replyModalLabel">Submit Feedback for @Model.Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="send-reply-form" asp-action="AddReply" asp-controller="Business" asp-area="Business">
+                                <input type="hidden" name="feedbackparentId" value="@Model.Id" />
+                                <input type="hidden" name="businessid" value="@Model.Business.Id" />
+                                @Html.AntiForgeryToken()
+                                <div class="form-group form-inline">
+                                    <div class="form-group col-lg-6 col-md-6 name">
+                                        <input type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                    </div>
+                                    <div class="form-group col-lg-6 col-md-6 email">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
+                                              required=""></textarea>
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send Feedback</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#replyModal">Reply</button>
         </div>
     </div>
 </div>
 <div class="comment-list left-padding">
     @foreach (var reply in Model.Replies)
     {
-        @*<partial name="_ReplySectionPartial" model="reply" />*@
-        <div class="single-comment replyComment justify-content-between d-flex">
-            <div class="user justify-content-between d-flex">
-                <div class="thumb">
-                    <img src="~/images/blog/c6.jpg" alt="">
-                </div>
-                <div class="desc">
-                    <h5>
-                        <a href="#">@Model.Name</a>
-                    </h5>
-                    <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
-                    <p class="comment">
-                        @Model.Comment
-                    </p>
-                </div>
-            </div>
-        </div>
+        <partial name="_ReplySectionPartial" model="reply" />
     }
 </div>

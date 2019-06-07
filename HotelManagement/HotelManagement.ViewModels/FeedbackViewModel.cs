@@ -27,5 +27,8 @@ namespace HotelManagement.ViewModels
         public DateTime? ModifiedOn { get; set; }
 
         public BusinessViewModel Business { get; set; }
+
+        public FeedbackViewModel FeedbackParent { get; set; }
+
     }
 }

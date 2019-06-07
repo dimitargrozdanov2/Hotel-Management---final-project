@@ -21,6 +21,7 @@ namespace HotelManagement.Infrastructure.Mappings
                 .ForMember(dest => dest.Rating, opts => opts.MapFrom(src => src.Rating))
                 .ForMember(dest => dest.Replies, opts => opts.MapFrom(src => src.Replies))
                 .ForMember(dest => dest.Business, opts => opts.MapFrom(src => src.Business))
+                .ForMember(dest => dest.FeedbackParent, opts => opts.MapFrom(src => src.FeedbackParent))
                 .ReverseMap();
         }
     }

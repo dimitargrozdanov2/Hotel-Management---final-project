@@ -30,11 +30,20 @@ namespace HotelManagement.Web.Areas.Business.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Comment(string id, AddFeedbackViewModel model)
+        public async Task<IActionResult> Comment(AddFeedbackViewModel model)
         {
             var feedbackModel = await this.feedbackService.AddComment(model);
 
             return this.PartialView("_CommentSectionPartial", feedbackModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReply(AddFeedbackViewModel model)
+        {
+            var feedbackModel = await this.feedbackService.AddComment(model);
+
+            return this.PartialView("_ReplySectionPartial", feedbackModel);
         }
     }
 }

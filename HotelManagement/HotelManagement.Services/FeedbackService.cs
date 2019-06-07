@@ -28,7 +28,9 @@ namespace HotelManagement.Services
         {
             var business = await this.context.Businesses.FirstOrDefaultAsync(b => b.Id == model.BusinessId);
 
-            var feedback = new Feedback() { Name = model.AuthorName, BusinessId = model.BusinessId, Comment = model.Comment, Email = model.Email };
+            var feedback = new Feedback() { Name = model.AuthorName, BusinessId = model.BusinessId,
+                FeedbackParentId = model.FeedbackParentId, Comment = model.Comment, Email = model.Email };
+
             this.context.Feedback.Add(feedback);
             await this.context.SaveChangesAsync();
 

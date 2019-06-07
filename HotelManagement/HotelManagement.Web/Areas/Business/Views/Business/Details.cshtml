@@ -44,7 +44,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business" asp-route-id="@Model.Id">
+                                <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business">
                                     <input type="hidden" name="businessId" value="@Model.Id" />
                                     @Html.AntiForgeryToken()
                                     <div class="form-group form-inline">
@@ -70,51 +70,3 @@
         </div>
     </div>
 </section>
-
-@*<div class="col-lg-12">
-        <div class="navigation-area">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                    <div class="thumb">
-                        <a href="#">
-                            <img class="img-fluid" src="~/images/blog/prev.jpg" alt="">
-                        </a>
-                    </div>
-                    <div class="arrow">
-                        <a href="#">
-                            <span class="lnr text-white lnr-arrow-left"></span>
-                        </a>
-                    </div>
-                    <div class="details">
-                        <p>Prev Post</p>
-                        <a href="#">
-                            <h4>Space The Final Frontier</h4>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                    <div class="detials">
-                        <p>Next Post</p>
-                        <a href="#">
-                            <h4>Telescopes 101</h4>
-                        </a>
-                    </div>
-                    <div class="arrow">
-                        <a href="#">
-                            <span class="lnr text-white lnr-arrow-right"></span>
-                        </a>
-                    </div>
-                    <div class="thumb">
-                        <a href="#">
-                            <img class="img-fluid" src="~/images/blog/next.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-@section Scripts{
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script src="~/js/feedback.js"></script>
-}
