@@ -32,9 +32,9 @@ namespace HotelManagement.Web.Areas.Business.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(string id, CreateFeedbackViewModel model)
         {
-            var opsa = await this.feedbackService.AddComment(model.BusinessId, model.AuthorName, model.Email, model.Comment);
+            var feedbackModel = await this.feedbackService.AddComment(model.BusinessId, model.AuthorName, model.Email, model.Comment);
 
-            return this.PartialView("_CommentSectionPartial", opsa);
+            return this.PartialView("_CommentSectionPartial", feedbackModel);
         }
     }
 }
