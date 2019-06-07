@@ -13,7 +13,5 @@
             const commentCount = $('.single-comment').length
             $('#amount').html(commentCount);
         })
-
-
     })
 })

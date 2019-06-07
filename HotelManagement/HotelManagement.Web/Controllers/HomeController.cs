@@ -26,12 +26,9 @@ namespace HotelManagement.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // FOR TESTING PURPOSES: TODO
             var model = new HomeIndexViewModel();
 
             var business = await this.businessService.GetBusinesses("date", true);
-            //var users = await this.userService.GetAllUsers();
-
 
             model.Businesses = business;
 
