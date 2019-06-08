@@ -16,20 +16,28 @@
 
 // using this to set the id of the feedback someone is replying to, in the modal, otherwise the modal will always take the first feedback id.
 $(document).on("click", "#reply-button", function () {
-    var myBookId = $(this).data('id');
-    $(".modal-body #feedbackparentId").val(myBookId);
-    console.log(myBookId);
+    var feedbackId = $(this).data('id');
+    $(".modal-body #feedbackparentId").val(feedbackId);
+    console.log(feedbackId);
 });
 
 // reply ajax;
 $(function () {
     const $replyForm = $('#send-reply-form');
+
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
+        //console.log(dataToSend);
+        const dataArray = $replyForm.serializeArray();
+        var feedbackId = dataArray[0].value;
+        console.log(dataArray);
+
+        const feedbackParentElement = $('#' + feedbackId);
+        //console.log(feedbackParentElement);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
-            $('.comments-list').prepend(serverData);
+            $(feedbackParentElement).prepend(serverData);
         })
     })
 })
