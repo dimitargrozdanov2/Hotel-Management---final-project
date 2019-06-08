@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <a class="btn btn-primary btn-block" style="margin-bottom:10px"
+        <a class="btn btn-primary" style="margin-bottom:5%"
            asp-area="Administration" asp-controller="Admin" asp-action="CreateLogbook" asp-route-businessname="@Model.BusinessName">
             <i class="fas fa-plus-circle"></i>
             Create Logbook
@@ -42,9 +42,9 @@
                 <a class="btn btn-info btn-sm"
                    asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@logbook.Name">
                     <i class="fas fa-info"></i>
-                    Details
+                    Logbook Details
                 </a>
-                <a class="btn btn-danger btn-sm float-right"
+                <a class="btn btn-danger btn-sm" style="margin-top:5%"
                    asp-area="Administration" asp-controller="Admin" asp-action="AddImageToBusiness" asp-route-name="@logbook.Name">
                     <i class="fa fa-trash"></i>
                     Delete Logbook

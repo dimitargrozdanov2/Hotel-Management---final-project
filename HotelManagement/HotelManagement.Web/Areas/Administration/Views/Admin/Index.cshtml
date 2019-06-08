@@ -12,8 +12,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <a class="btn btn-primary btn-block" style="margin-bottom:10px" 
-            asp-area="" asp-controller="Account" asp-action="Register">
+        <a href="#" class="btn btn-primary" style="margin-bottom:5%" data-target="#MyModal" data-toggle="modal">
             <i class="fas fa-plus-circle"></i>
             Create User
         </a>
@@ -56,43 +55,41 @@
     }
 </table>
 
-@*Popup modal with registration form*@ 
-@*<div class="modal fade" id="MyModal">
+@*Popup modal with registration form*@
+<div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">Create user</h4>
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle"></h4>
             </div>
             <div class="modal-body">
-                <form id="form">
-                    <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m)
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="Email"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Password"></label>
-                            <input asp-for="Password" class="form-control" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ConfirmPassword"></label>
-                            <input asp-for="ConfirmPassword" class="form-control" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" id="CreateUserRecord">Register</a>
-                        </div>
-                    </fieldset>
-</form>
+                <form id="formRegister" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    @Html.AntiForgeryToken()
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-block btn-success" id="CreateUserRecord">Register</a>
             </div>
         </div>
     </div>
-</div>*@
+</div>
 
 
 
@@ -118,6 +115,44 @@
                     { "orderable": false }
                 ]
             });
+            $("#CreateUserRecord").click(function () {
+                var myformdata = $("#formRegister").serialize();
+                if ($("#formRegister").valid()) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Account/RegisterUser",
+                        data: myformdata,
+                        success: function (response) {
+                            if (response.success) {
+                                location.reload();
+                            }
+                            else {
+                                var container = $("#MyModal .validation-summary-errors ul");
+                                if (container.length === 0) {
+                                    var div = $('<div>');
+                                    div.addClass('text-danger');
+                                    div.addClass('validation-summary-errors');
+                                    div.attr('data-valmsg-summary', 'true');
+                                    var ul = $('<ul>');
+                                    div.append(ul);
+                                    $("#formRegister").prepend(div);
+                                }
+                                container = $("#MyModal .validation-summary-errors ul");
+                                // REMOVE OLD ERROR MESSAGES
+                                container.empty();
+                                $.each(response.errors, function (index, serverError) {
+                                    var errorElement = $('<li>');
+                                    errorElement.text(serverError.description);
+                                    container.append(errorElement);
+                                })
+                            }
+                        }
+                    });
+                }
+            })
         });
     </script>
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
 }

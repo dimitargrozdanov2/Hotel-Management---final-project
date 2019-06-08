@@ -85,6 +85,35 @@ namespace HotelManagement.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<object> RegisterUser(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    //After Registering a user, I don't want to sign in with him
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+
+                    return new { success = true };
+                }
+
+                return new { success = false, errors = result.Errors.ToArray() };
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         [HttpPost]
         [AllowAnonymous]
