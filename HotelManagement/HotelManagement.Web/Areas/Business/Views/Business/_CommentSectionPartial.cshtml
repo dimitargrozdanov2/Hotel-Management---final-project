@@ -1,6 +1,6 @@
 ﻿@model FeedbackViewModel
 
-<div class="comment-list" id="@Model.Id">
+<div class="comment-list">
     <div class="single-comment justify-content-between d-flex">
         <div class="user justify-content-between d-flex">
             <div class="thumb">
@@ -28,9 +28,10 @@
                         </div>
                         <div class="modal-body">
                             <form id="send-reply-form" asp-action="AddReply" asp-controller="Business" asp-area="Business">
-                                <input type="hidden" name="feedbackparentId" value="@Model.Id" />
+                                <input type="hidden" name="feedbackparentId" id="feedbackparentId"/>
                                 <input type="hidden" name="businessid" value="@Model.Business.Id" />
                                 @Html.AntiForgeryToken()
+
                                 <div class="form-group form-inline">
                                     <div class="form-group col-lg-6 col-md-6 name">
                                         <input type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
@@ -50,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#replyModal">Reply</button>
+            <button id="reply-button" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
         </div>
     </div>
 </div>

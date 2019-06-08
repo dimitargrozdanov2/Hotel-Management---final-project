@@ -27,7 +27,6 @@
                         {
                             <p>This business has no feedback. Be the first to submit one!</p>
                         }
-
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
                             <partial name="_CommentSectionPartial" model="comment" />

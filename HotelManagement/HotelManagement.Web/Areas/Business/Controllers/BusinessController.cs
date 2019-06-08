@@ -41,7 +41,7 @@ namespace HotelManagement.Web.Areas.Business.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReply(AddFeedbackViewModel model)
         {
-            var feedbackModel = await this.feedbackService.AddComment(model);
+            var feedbackModel = await this.feedbackService.AddReply(model);
 
             return this.PartialView("_ReplySectionPartial", feedbackModel);
         }

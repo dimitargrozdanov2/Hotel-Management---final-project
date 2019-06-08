@@ -10,5 +10,7 @@ namespace HotelManagement.Services.Contracts
     public interface IFeedbackService
     {
         Task<FeedbackViewModel> AddComment(AddFeedbackViewModel model);
+
+        Task<FeedbackViewModel> AddReply(AddFeedbackViewModel model);
     }
 }
