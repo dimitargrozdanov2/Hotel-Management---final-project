@@ -6,6 +6,10 @@
         const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
+            if ($('.comments-area').find('#noBusinesses').length) {
+                $('#noBusinesses').hide();
+            } 
+
             $('.comments-area').prepend(serverData);
 
             const commentCount = $('.single-comment').length
@@ -28,13 +32,11 @@ $(function () {
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
-        //console.log(dataToSend);
+
         const dataArray = $replyForm.serializeArray();
         var feedbackId = dataArray[0].value;
-        console.log(dataArray);
 
         const feedbackParentElement = $('#' + feedbackId);
-        //console.log(feedbackParentElement);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
             $(feedbackParentElement).prepend(serverData);
