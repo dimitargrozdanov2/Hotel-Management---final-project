@@ -8,11 +8,13 @@
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
             if ($('.comments-area').find('#noBusinesses').length) {
                 $('#noBusinesses').hide();
-            } 
+            }
+            // used to clear modal input fields.
+            $('#send-feedback-form')[0].reset();
 
             $('.comments-area').prepend(serverData);
 
-            const commentCount = $('.single-comment').length
+            const commentCount = $('.feedbackCom').length
             $('#amount').html(commentCount);
         })
     })
@@ -39,6 +41,7 @@ $(function () {
         const feedbackParentElement = $('#' + feedbackId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
+            $('#send-reply-form')[0].reset();
             $(feedbackParentElement).prepend(serverData);
         })
     })
