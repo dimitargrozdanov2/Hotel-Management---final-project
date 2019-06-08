@@ -86,7 +86,6 @@ namespace HotelManagement.Web.Controllers
             return View();
         }
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<object> RegisterUser(RegisterViewModel model)
         {
@@ -94,6 +93,7 @@ namespace HotelManagement.Web.Controllers
             {
                 var user = new User { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -116,7 +116,6 @@ namespace HotelManagement.Web.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -143,6 +142,21 @@ namespace HotelManagement.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string name)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await _userManager.FindByNameAsync(name);
+
+                await _userManager.DeleteAsync(user);
+
+                return RedirectToAction("Index", "Admin", new { Area = "Administration" });
+            }
+
+            return this.View();
         }
 
         [HttpPost]
