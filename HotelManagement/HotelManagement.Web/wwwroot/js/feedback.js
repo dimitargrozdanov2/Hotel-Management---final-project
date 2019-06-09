@@ -33,6 +33,7 @@ $(document).on("click", "#reply-button", function () {
 $(function () {
     const $replyForm = $('#send-reply-form');
 
+    // $(document).on('submit' , '#send-reply-form' , function(event){
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
