@@ -20,9 +20,11 @@
     })
 })
 
-// using this to set the id of the feedback someone is replying to, in the modal, otherwise the modal will always take the first feedback id.
+// using this to set the id of the feedback someone is replying to, in the modal, 
+        //otherwise the modal will always take the first feedback id.
 $(document).on("click", "#reply-button", function () {
     var feedbackId = $(this).data('id');
+
     $(".modal-body #feedbackparentId").val(feedbackId);
     console.log(feedbackId);
 });
@@ -47,19 +49,27 @@ $(function () {
     })
 })
 
-//$(function () {
-//    $('.comment-list').dblclick(function () {
-//        var contentPanelId = jQuery(this).attr("id");
-//        console.log(contentPanelId);
-//    })
-//})
 
+//scroll button
+jQuery(document).ready(function () {
 
-// scrolling to the top parent of the comment section upon clicking on the comment section
-$(".comments-area").click(function () {
-    $('html, body').stop().animate({
-        scrollTop: $("#comments-amount").offset().top
-    }, 1000);
+    var btn = $('#button');
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 400) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function (e) {
+        e.preventDefault();
+        //$('html, body').animate({ scrollTop: 0 }, '300'); // could scroll to the top;
+        $('html, body').stop().animate({
+            scrollTop: $("#comments-amount").offset().top
+        }, 1000);
+    });
 });
 
 
