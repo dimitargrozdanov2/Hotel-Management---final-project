@@ -65,7 +65,6 @@ jQuery(document).ready(function () {
 
     btn.on('click', function (e) {
         e.preventDefault();
-        //$('html, body').animate({ scrollTop: 0 }, '300'); // could scroll to the top;
         $('html, body').stop().animate({
             scrollTop: $("#comments-amount").offset().top
         }, 1000);

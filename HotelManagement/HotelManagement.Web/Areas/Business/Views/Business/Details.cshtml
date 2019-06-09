@@ -3,7 +3,7 @@
     ViewData["Title"] = "Details";
 }
 <section class="section-margin section-margin--small">
-    <a id="button"></a>
+    @*<a id="button"></a>*@
     <div class="container">
         <div class="section-intro text-center pb-80px">
             <h2>@Model.Name</h2>
@@ -70,3 +70,8 @@
         </div>
     </div>
 </section>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/feedback.js"></script>
+}
