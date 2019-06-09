@@ -673,6 +673,10 @@ button {
       padding-bottom: 1px; }
   .card-explore .card-body {
     padding: 5px 18px 15px 40px; }
+  .card-explore .card-body p {
+      height: 70px;
+      overflow: hidden;
+  }
   .card-explore__price {
     font-size: 40px; }
     .card-explore__price sub {

@@ -6,6 +6,7 @@
         const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
+            console.log(serverData);
             if ($('.comments-area').find('#noBusinesses').length) {
                 $('#noBusinesses').hide();
             }
@@ -26,7 +27,6 @@ $(document).on("click", "#reply-button", function () {
     var feedbackId = $(this).data('id');
 
     $(".modal-body #feedbackparentId").val(feedbackId);
-    console.log(feedbackId);
 });
 
 // reply ajax;
@@ -37,13 +37,15 @@ $(function () {
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
-
+        // get feedbackParent ID from event;
         const dataArray = $replyForm.serializeArray();
         var feedbackId = dataArray[0].value;
 
         const feedbackParentElement = $('#' + feedbackId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
+            debugger;
+            console.log(serverData);
             $('#send-reply-form')[0].reset();
             $(feedbackParentElement).prepend(serverData);
         })

@@ -25,6 +25,7 @@ namespace HotelManagement.Web.Areas.Business.Controllers
         public async Task<IActionResult> Details(string name)
         {
             var business = await this.businessService.GetBusinessByNameAsync(name);
+
             return View(business);
         }
 

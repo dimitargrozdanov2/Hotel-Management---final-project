@@ -48,15 +48,15 @@
                                     @Html.AntiForgeryToken()
                                     <div class="form-group form-inline">
                                         <div class="form-group col-lg-6 col-md-6 name">
-                                            <input type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                                            <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 email">
-                                            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                                            <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
-                                                  required=""></textarea>
+                                                  required></textarea>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Send Feedback</button>
@@ -64,6 +64,40 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="replyModalLabel">Submit Reply</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="send-reply-form" asp-action="AddReply" asp-controller="Business" asp-area="Business">
+                        <input type="hidden" name="feedbackparentId" id="feedbackparentId" />
+                        <input type="hidden" name="businessid" value="@Model.Id" />
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group form-inline">
+                            <div class="form-group col-lg-6 col-md-6 name">
+                                <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 email">
+                                <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
+                                      required=""></textarea>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send Feedback</button>
+                    </form>
                 </div>
             </div>
         </div>
