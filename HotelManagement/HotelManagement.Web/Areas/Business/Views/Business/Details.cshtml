@@ -20,7 +20,7 @@
                 <div class="col-md-10 col-xl-10 mb-10">
                     <div id="comments-amount" class="commentsAmount">
                         Total amount of comments: <span id="amount">@Model.Feedback.Count()</span>
-                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">Submit Feedback</button>
+                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#commentModal">Submit Feedback</button>
                     </div>
                     <div class="comments-area">
                         @if (Model.Feedback.Count() == 0)
@@ -33,11 +33,11 @@
                         }
                     </div>
                 </div>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Submit Feedback for @Model.Name</h5>
+                                <h5 class="modal-title" id="commentModalLabel">Submit Feedback for @Model.Name</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

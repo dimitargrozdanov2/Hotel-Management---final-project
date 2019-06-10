@@ -38,11 +38,14 @@ $(function () {
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
-        // get feedbackParent ID from event;
-        const dataArray = $replyForm.serializeArray();
-        var feedbackId = dataArray[0].value;
 
-        const feedbackParentElement = $('#' + feedbackId);
+        // get feedbackParent ID from event;
+        //const dataArray = $replyForm.serializeArray();
+        //var feedbackId = dataArray[0].value;
+        //console.log(feedbackId);
+
+        var feedbackParentId = $(this).find('input:hidden').val();
+        const feedbackParentElement = $('#' + feedbackParentId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
             $('#send-reply-form')[0].reset();
