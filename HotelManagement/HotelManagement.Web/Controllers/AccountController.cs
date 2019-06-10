@@ -105,10 +105,14 @@ namespace HotelManagement.Web.Controllers
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
 
-                    return new { success = true };
+                    return Ok("Succesfully registered user!");
+
+                    //return new { success = true };
                 }
 
-                return new { success = false, errors = result.Errors.ToArray() };
+                var test = result.Errors;
+
+                return BadRequest(result.Errors);
             }
 
             // If we got this far, something failed, redisplay form
@@ -145,15 +149,15 @@ namespace HotelManagement.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string name)
+        public async Task<IActionResult> Delete(string userId)
         {
             if (this.ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(name);
+                var user = await _userManager.FindByIdAsync(userId);
 
                 await _userManager.DeleteAsync(user);
 
-                return RedirectToAction("Index", "Admin", new { Area = "Administration" });
+                return Ok("Succesfully deleted user!");
             }
 
             return this.View();
