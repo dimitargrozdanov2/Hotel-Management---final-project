@@ -6,7 +6,6 @@
         const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
-            console.log(serverData);
             if ($('.comments-area').find('#noBusinesses').length) {
                 $('#noBusinesses').hide();
             }
@@ -17,9 +16,12 @@
 
             const commentCount = $('.feedbackCom').length
             $('#amount').html(commentCount);
+
+            $('.modal').modal('hide'); // used to hide the modal on success.
         })
     })
 })
+
 
 // using this to set the id of the feedback someone is replying to, in the modal, 
         //otherwise the modal will always take the first feedback id.
@@ -33,7 +35,6 @@ $(document).on("click", "#reply-button", function () {
 $(function () {
     const $replyForm = $('#send-reply-form');
 
-    // $(document).on('submit' , '#send-reply-form' , function(event){
     $replyForm.on('submit', function (event) {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
@@ -44,10 +45,10 @@ $(function () {
         const feedbackParentElement = $('#' + feedbackId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
-            debugger;
-            console.log(serverData);
             $('#send-reply-form')[0].reset();
             $(feedbackParentElement).prepend(serverData);
+
+            $('.modal').modal('hide'); // used to hide the modal on success.
         })
     })
 })
