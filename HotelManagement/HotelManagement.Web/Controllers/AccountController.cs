@@ -149,6 +149,7 @@ namespace HotelManagement.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string userId)
         {
             if (this.ModelState.IsValid)
@@ -159,7 +160,6 @@ namespace HotelManagement.Web.Controllers
 
                 return Ok("Succesfully deleted user!");
             }
-
             return this.View();
         }
 

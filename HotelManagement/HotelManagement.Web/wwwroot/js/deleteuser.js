@@ -1,6 +1,5 @@
 ﻿
-$('.delete-user-button').on('click', function (deleteUserEvent)
-{
+$('.delete-user-button').on('click', function (deleteUserEvent) {
     confirm("Are you sure you want to delete this user?");
     var $this = $(this);
 
@@ -13,8 +12,14 @@ $('.delete-user-button').on('click', function (deleteUserEvent)
     debugger;
 
     $.post("/Account/Delete", postData)
-        .done(function (dataResponse)
-        {
+        .done(function (dataResponse) {
+            toastr.options.onHidden = function () {
+                window.location.reload();
+            };
+
+            toastr.options.timeOut = 100;
+            toastr.options.fadeOut = 100;
+
             toastr.success(dataResponse);
 
         }).fail(function (dataResponse) {

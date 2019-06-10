@@ -1,4 +1,5 @@
 ﻿using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -27,5 +28,7 @@ namespace HotelManagement.Web.Areas.Administration.Models.Admin
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public IEnumerable<SelectListItem> RoleList { get; set; }
     }
 }

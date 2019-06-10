@@ -10,6 +10,7 @@ using HotelManagement.Web.Areas.Administration.Models.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HotelManagement.Web.Areas.Administration.Controllers
 {
@@ -22,18 +23,19 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         private readonly IBusinessService businessService;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogbookService logbookService;
+        private readonly IRoleManagerWrapper roleManagerWrapper;
 
 
 
         public AdminController(IUserManagerWrapper userManagerWrapper,
-            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, ILogbookService logbookService)
+            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, ILogbookService logbookService, IRoleManagerWrapper roleManagerWrapper)
         {
             this.userManagerWrapper = userManagerWrapper;
             this.userService = userService;
             this.businessService = businessService ?? throw new ArgumentNullException(nameof(businessService));
             this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
             this.logbookService = logbookService ?? throw new ArgumentNullException(nameof(logbookService));
-
+            this.roleManagerWrapper = roleManagerWrapper ?? throw new ArgumentNullException(nameof(roleManagerWrapper));
         }
 
         [HttpGet]
@@ -44,6 +46,10 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             var users = await this.userService.GetAllUsers();
 
             model.Users = users;
+
+            var allRoles = this.roleManagerWrapper.GetAllRoles();
+
+            model.RoleList = allRoles.Select(r => new SelectListItem(r.Name, r.Name)).ToList();
 
             return this.View(model);
         }
@@ -144,6 +150,27 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             {
                 var logbook = await this.logbookService.CreateLogbookAsync(businessname, model.Name, model.Description);
                 return this.RedirectToAction("AllLogbooksForBusiness", "Admin", new { name = businessname });
+            }
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PromoteUser(PromoteRoleViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var user = await this.userManagerWrapper.FindByIdAsync(model.UserId);
+
+                if (user == null)
+                {
+                    throw new EntityInvalidException("User not found!");
+                }
+
+                await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
+
+                return Ok("Succesfully promoted user!");
             }
 
             return this.View(model);
