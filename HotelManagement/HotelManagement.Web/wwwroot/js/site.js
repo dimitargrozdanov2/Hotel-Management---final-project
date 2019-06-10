@@ -24,3 +24,4 @@ jQuery(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, '100'); // could scroll to the top;
     });
 });
+

@@ -1,0 +1,16 @@
+﻿@model ManagementIndexViewModel
+
+@{
+    ViewData["Title"] = "Management Page";
+}
+
+<!------ Include the above in your HEAD tag ---------->
+<h1 class="demo-title">Material responsive pricing tables</h1>
+@foreach (var logbook in Model.Logbooks)
+{
+    <button type="button" class="btn btn-warning" id="logbookButton">@logbook.Name</button>
+}
+@*@foreach (var logbook in Model.Logbooks)
+    {
+        <partial name="_NotePartial" model="logbook" />
+    }*@

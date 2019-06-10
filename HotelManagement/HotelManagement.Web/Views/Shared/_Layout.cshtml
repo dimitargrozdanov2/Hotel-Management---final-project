@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="~/lib/magnefic-popup/magnific-popup.css" />
         <link rel="stylesheet" href="~/lib/nice-select/nice-select.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> @*Used for management note section*@
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -75,14 +76,15 @@
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
                             @if (User.IsInRole("Manager"))
                             {
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                       aria-expanded="false">Management</a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="CreateNote">Create Note</a></li>
-                                        <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="Index">Review Business</a></li>
-                                    </ul>
-                                </li>
+                                @*<li class="nav-item submenu dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                           aria-expanded="false">Management</a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="CreateNote">Create Note</a></li>
+                                            <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="Index">Review Business</a></li>
+                                        </ul>
+                                    </li>*@
+                                <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Management" asp-action="Index" asp-route-email="@User.Identity.Name">Management</a></li>
                             }
                             @if (User.IsInRole("Admin"))
                             {

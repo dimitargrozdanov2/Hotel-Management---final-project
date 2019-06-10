@@ -9,5 +9,9 @@ namespace HotelManagement.Services.Contracts
     public interface IUserService
     {
         Task<IEnumerable<UserViewModel>> GetAllUsers();
+
+        Task<UserViewModel> GetUserAsync(string email);
+
+        Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email);
     }
 }

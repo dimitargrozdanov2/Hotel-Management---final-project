@@ -6,9 +6,8 @@ using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace HotelManagement.Services
 {
@@ -38,6 +37,43 @@ namespace HotelManagement.Services
             var returnUsers = this.mappingProvider.MapTo<ICollection<UserViewModel>>(users);
 
             return returnUsers;
+        }
+
+        public async Task<UserViewModel> GetUserAsync(string email)
+        {
+            var user = await this.context.Users
+                .Include(lb => lb.LogbookManagers)
+                .Include(n => n.Notes)
+                    .ThenInclude(l => l.Logbook)
+                .Include(n => n.Notes)
+                    .ThenInclude(c => c.Category)
+                .FirstOrDefaultAsync(u => u.Email == email);
+
+            var mappedUser = this.mappingProvider.MapTo<UserViewModel>(user);
+
+            return mappedUser;
+        }
+
+        public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email)
+        {
+            //.Include(lb => lb.LogbookManagers)
+            //.Include(n => n.Notes)
+            //    .ThenInclude(l => l.Logbook)
+            //.Include(n => n.Notes)
+            //    .ThenInclude(c => c.Category)
+            //.FirstOrDefaultAsync(u => u.Email == email);
+            var logbooks = await this.context.Logbooks
+                .Include(n => n.Notes)
+                    .ThenInclude(l => l.Logbook)
+                .Include(lb => lb.LogbookManagers)
+                    .ThenInclude(m => m.Manager)
+                .Include(b => b.Business)
+                .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
+                .ToListAsync();
+
+            var mappedLogbooks = this.mappingProvider.MapTo<IEnumerable<LogbookViewModel>>(logbooks);
+
+            return mappedLogbooks;
         }
     }
 }
