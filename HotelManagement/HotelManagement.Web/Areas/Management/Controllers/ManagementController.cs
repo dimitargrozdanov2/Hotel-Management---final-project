@@ -20,13 +20,20 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
-        public async Task<IActionResult> Index(string email)
+        public async Task<IActionResult> Index(string email, string specifiedLogbook)
         {
             var model = new ManagementIndexViewModel();
 
             var userLogbooks = await this.userService.GetUserLogbooksAsync(email);
             model.Logbooks = userLogbooks;
-
+            if(specifiedLogbook == null)
+            {
+                model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
+            }
+            else
+            {
+                model.SpecifiedLogbook = userLogbooks.FirstOrDefault(l => l.Name == specifiedLogbook);
+            }
             return View(model);
         }
     }

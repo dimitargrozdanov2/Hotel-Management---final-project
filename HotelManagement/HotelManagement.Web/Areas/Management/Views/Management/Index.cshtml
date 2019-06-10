@@ -5,12 +5,14 @@
 }
 
 <!------ Include the above in your HEAD tag ---------->
-<h1 class="demo-title">Material responsive pricing tables</h1>
 @foreach (var logbook in Model.Logbooks)
 {
-    <button type="button" class="btn btn-warning" id="logbookButton">@logbook.Name</button>
+    <a asp-area="Management" asp-controller="Management" asp-action="Index" asp-route-email="@User.Identity.Name" asp-route-specifiedLogbook="@logbook.Name" class="btn btn-warning" id="logbookButton">
+        @logbook.Name
+    </a>
 }
-@*@foreach (var logbook in Model.Logbooks)
-    {
-        <partial name="_NotePartial" model="logbook" />
-    }*@
+
+@foreach (var logbook in Model.Logbooks)
+{
+    <partial name="_LogbookPartial" model="logbook" />
+}

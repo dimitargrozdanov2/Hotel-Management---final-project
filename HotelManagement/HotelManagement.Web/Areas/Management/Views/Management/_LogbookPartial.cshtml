@@ -1,0 +1,14 @@
+﻿@model LogbookViewModel
+@{
+    ViewData["Title"] = "_LogbookPartial";
+}
+
+<div class="pricing-table">
+    @foreach (var note in Model.Notes)
+    {
+        <partial name="_NotePartial" model="note" />
+        <partial name="_NotePartial" model="note" />
+        <partial name="_NotePartial" model="note" />
+        <partial name="_NotePartial" model="note" />
+    }
+</div>
