@@ -1,24 +1,22 @@
 ﻿@model FeedbackViewModel
 
-<div class="comment-list">
-    <div class="single-comment justify-content-between d-flex feedbackCom">
-        <div class="user justify-content-between d-flex">
-            <div class="thumb">
-                <img src="~/images/blog/c3.jpg" alt="">
-            </div>
-            <div class="desc">
-                <h5>
-                    <a href="#">@Model.Name</a>
-                </h5>
-                <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
-                <p class="comment">
-                    @Model.Comment
-                </p>
-            </div>
+<div class="single-comment justify-content-between d-flex feedbackCom">
+    <div class="user justify-content-between d-flex">
+        <div class="thumb">
+            <img src="~/images/blog/c3.jpg" alt="">
         </div>
-        <div class="reply-btn">
-            <button id="reply-button" type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
+        <div class="desc">
+            <h5>
+                <a href="#">@Model.Name</a>
+            </h5>
+            <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
+            <p class="comment">
+                @Model.Comment
+            </p>
         </div>
+    </div>
+    <div class="reply-btn">
+        <button id="reply-button" type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
     </div>
 </div>
 <div class="comment-list left-padding" id="@Model.Id">

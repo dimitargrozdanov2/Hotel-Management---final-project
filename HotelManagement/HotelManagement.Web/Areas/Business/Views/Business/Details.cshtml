@@ -20,7 +20,7 @@
                 <div class="col-md-10 col-xl-10 mb-10">
                     <div id="comments-amount" class="commentsAmount">
                         Total amount of comments: <span id="amount">@Model.Feedback.Count()</span>
-                        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#commentModal">Submit Feedback</button>
+                        <button type="button" class="btn btn-warning float-right" data-toggle="modal" data-target="#commentModal">Submit Feedback</button>
                     </div>
                     <div class="comments-area">
                         @if (Model.Feedback.Count() == 0)
@@ -29,7 +29,9 @@
                         }
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
-                            <partial name="_CommentSectionPartial" model="comment" />
+                            <div class="comment-list">
+                                <partial name="_CommentSectionPartial" model="comment" />
+                            </div>
                         }
                     </div>
                 </div>
