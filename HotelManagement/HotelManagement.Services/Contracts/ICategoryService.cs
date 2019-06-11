@@ -8,6 +8,6 @@ namespace HotelManagement.Services.Contracts
 {
     public interface ICategoryService
     {
-        Task<ICollection<CategoryViewModel>> GetAllCategoriesAsync();
+        Task<ICollection<string>> GetAllCategoriesAsync();
     }
 }

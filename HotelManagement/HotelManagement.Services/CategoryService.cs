@@ -1,10 +1,12 @@
 ﻿using HotelManagement.Data;
+using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,13 +23,13 @@ namespace HotelManagement.Services
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
-        public async Task<ICollection<CategoryViewModel>> GetAllCategoriesAsync()
+        public async Task<ICollection<string>> GetAllCategoriesAsync()
         {
-            var categories = await this.context.Categories.ToListAsync();
+            var categories = await this.context.Categories.Select(x => x.Name).ToListAsync();
 
-            var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
+            //var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
 
-            return mappedCategories;
+            return categories;
         }
     }
 }

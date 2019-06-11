@@ -3,11 +3,10 @@
 @{
     ViewData["Title"] = "Management Page";
 }
-<a asp-area="Management" asp-controller="Management" asp-action="CreateNote" class="btn btn-warning float-right logbookButton" data-toggle="modal" data-target="#noteModal">
-    Create Note
-</a>
-
 <div class="dropdown">
+    <a asp-area="Management" asp-controller="Management" asp-action="CreateNote" class="btn btn-warning float-right logbookButton" data-toggle="modal" data-target="#noteModal" id="createNoteButton">
+        Create Note
+    </a>
     <button class="btn btn-warning dropdown-toggle logbookButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Select Logbook
     </button>
@@ -51,9 +50,6 @@
                     <div class="form-group">
                         <label for="department">Select Department</label>
                         <select class="form-control" id="department">
-                            <option>Option1</option>
-                            <option>Option2</option>
-                            <option>Option3</option>
                         </select>
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

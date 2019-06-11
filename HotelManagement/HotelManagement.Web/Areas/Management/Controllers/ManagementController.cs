@@ -8,6 +8,7 @@ using HotelManagement.ViewModels.Management;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace HotelManagement.Web.Areas.Management.Controllers
 {
@@ -43,15 +44,17 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return View(model);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> CreateNote()
-        //{
-        //    var model = new CreateNoteViewModel();
-        //    var categories = await this.categoryService.GetAllCategoriesAsync();
-        //    model.CategoryList = categories.Select(t => new SelectListItem(t.Name, t.Name)).ToList();
+        [HttpGet]
+        public async Task<IActionResult> CreateNote()
+        {
+            var categories = await this.categoryService.GetAllCategoriesAsync();
+            var json = JsonConvert.SerializeObject(categories);
+            //var model = new CreateNoteViewModel();
 
-        //    return this.View(model);
-        //}
+            //model.CategoryList = categories.Select(t => new SelectListItem(t.Name, t.Name)).ToList();
+
+            return Json(json);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateNote(CreateNoteViewModel model)
