@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Administration.Models.Admin
 {
-    public class IndexViewModel
+    public class ListUsersViewModel
     {
         public IEnumerable<UserViewModel> Users { get; set; }
 

@@ -7,7 +7,8 @@
 <h1 class="headerText">Create Business</h1>
 
 <div class="form-row">
-    <form class="col-lg-7" method="post">
+    <form id="create-business-form" class="col-lg-7" asp-area="Administration" 
+asp-controller="Admin" asp-action="CreateBusiness" data-id="@Model.Id" method="post">
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input class="form-control" asp-for="Name" />

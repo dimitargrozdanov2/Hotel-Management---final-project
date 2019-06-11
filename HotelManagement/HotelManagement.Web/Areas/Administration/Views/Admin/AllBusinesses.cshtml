@@ -4,6 +4,9 @@
     ViewData["Title"] = "All Businesses";
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
 <div class="divider">
     <div class="text-center">
         <h2>All Businesses</h2>
@@ -58,8 +61,7 @@
 
 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
 @section Scripts
     {
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -79,6 +81,26 @@
                     null,
                     { "orderable": false }
                 ]
+            });
+        });
+        $('#create-business-form').submit(function (ev) {
+            ev.preventDefault();
+
+            var $this = $(this);
+
+            var url = $this.attr('action');
+
+            var inputs = $this.find('input');
+
+            var dataToSend = $this.serialize();
+
+            debugger;
+
+            $.post(url, dataToSend, function (response) {
+                debugger;
+                toastr.success('Just created business' + response.Name);
+
+
             });
         });
     </script>

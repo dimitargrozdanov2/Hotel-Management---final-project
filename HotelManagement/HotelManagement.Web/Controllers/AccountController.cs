@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using HotelManagement.Web.Models.AccountViewModels;
 using HotelManagement.DataModels;
 using HotelManagement.Services.Contracts;
+using HotelManagement.ViewModels;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -104,9 +105,12 @@ namespace HotelManagement.Web.Controllers
 
                     //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
-
-                    return Ok("Succesfully registered user!");
-
+                    var userViewModel = new UserViewModel
+                    {
+                        Email = user.Email,
+                        UserName = user.UserName
+                    };
+                    return PartialView("_UserPartialView", userViewModel);
                     //return new { success = true };
                 }
 

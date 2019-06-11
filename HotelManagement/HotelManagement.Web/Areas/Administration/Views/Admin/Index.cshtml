@@ -1,4 +1,4 @@
-﻿@model IndexViewModel
+﻿@model ListUsersViewModel
 @inject IUserManagerWrapper UserManager
 
 @{
@@ -6,7 +6,6 @@
 }
 <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
 <div class="divider">
     <div class="text-center">
@@ -34,35 +33,7 @@
     </thead>
     @foreach (var user in Model.Users)
     {
-        <tr class="deleteUserRow" id="user-tr-@user.Id">
-            <td>@user.UserName</td>
-            <td>@user.Email</td>
-            <td>@await UserManager.GetRole(user.UserName)</td>
-            <td>
-                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
-                        </div>
-
-                    </form>*@
-                <a class="btn btn-success btn-sm" data-target="#MyModal2" data-toggle="modal" att="@user.Id"
-                   asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@user.Id">
-                    <i class="fas fa-pencil-alt"></i>
-                    Promote user
-                </a>
-                @*@using (Html.BeginForm("Delete", "Account", new { name = user.UserName }))
-                    { }*@
-                <div class="col-sm-2" style="margin-top:5%"></div>
-                <button class="btn btn-danger btn-sm delete-user-button" att="@user.Id">
-                    <i class="fa fa-trash"></i> Delete user
-                </button>
-
-                @*<form class="delete-form "  asp-action="Delete" asp-controller="Account" asp-route-name="@user.UserName" method="post">
-                        <input type="hidden" class="userValue" value="@user.UserName" />
-
-                    </form>*@
-            </td>
-        </tr>
+        <partial name="_UserPartialView" model="user" />
     }
 </table>
 
@@ -103,42 +74,15 @@
 </div>
 
 @*Popup modal for changing role*@
+<partial name="_PromoteUserModalPartial" model="new PromoteRoleViewModel { RoleList = Model.RoleList}" />
 
-<div class="modal fade" id="MyModal2">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Promote user</h4>
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-            </div>
-            <div class="modal-body">
-                <form id="formPromote" method="post">
-                    <div asp-validation-summary="All" class="text-danger"></div>
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label asp-for="RoleList">List of Roles</label>
-                            <select asp-for="RoleList" class="custom-select" asp-items="@Model?.RoleList"></select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-block btn-success" id="PromoteUser">Promote</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<span id="anti-forgery-span">@Html.AntiForgeryToken()</span>
 
 
 
 @section Scripts {
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -155,14 +99,64 @@
                     { "orderable": false }
                 ]
             });
+            $("#formRegister").on('submit', function (event) {
+                console.log("test");
+
+            });
             $("#CreateUserRecord").click(function (event) {
 
                 event.preventDefault();
-
                 var myformdata = $("#formRegister").serialize();
+                console.log(myformdata);
 
                 console.log(myformdata);
                 $.post("/Account/RegisterUser", myformdata)
+                    .done(function (dataResponse) {
+                        toastr.options.onHidden = function () {
+                            //window.location.reload();
+                        };
+                        toastr.options.timeOut = 100;
+                        toastr.options.fadeOut = 100;
+                        toastr.success(dataResponse);
+
+                        $("#MyModal").modal('hide');
+                        $("#table").prepend(dataResponse);
+
+
+
+                    }).fail(function (dataResponse) {
+
+                        for (var key in dataResponse.responseJSON) {
+
+                            var result = (dataResponse.responseJSON[key].description).toString();
+                            toastr.error(result);
+
+                        }
+                    });
+            })
+
+            $('.promote-toggler').click(function () {
+                console.log($(this).attr('att'))
+                $('.email-hidden').val($(this).attr('att'));
+                console.log($(".email-hidden"));
+            });
+
+            $("#PromoteUser").click(function (event) {
+                event.preventDefault();
+
+                //var $this = $(this);
+                //console.log($this);
+
+                //var idOfUserToDelete = $this.attr('att');
+
+                //console.log(idOfUserToDelete);
+                //var antiForgery = ($('#anti-forgery-span').find('input'))[0];
+
+                //var postData = "userId=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
+
+                var myformdata = $("#formPromote").serialize();
+
+                $.post("/Administration/Admin/PromoteUser", myformdata)
                     .done(function (dataResponse) {
 
                         toastr.options.onHidden = function () {
@@ -184,40 +178,6 @@
                         }
                     });
             })
-
-        $("#PromoteUser").click(function (event) {
-            var $this = $(this);
-            console.log($this);
-
-            var idOfUserToDelete = $this.attr('att');
-
-            console.log(idOfUserToDelete);
-            var antiForgery = ($('#anti-forgery-span').find('input'))[0];
-
-            var postData = "userId=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
-
-            $.post("/Administration/Admin/PromoteUser", postData)
-                .done(function (dataResponse) {
-
-                    toastr.options.onHidden = function () {
-                        window.location.reload();
-                    };
-
-                    toastr.options.timeOut = 100;
-                    toastr.options.fadeOut = 100;
-
-                    toastr.success(dataResponse);
-
-                }).fail(function (dataResponse) {
-
-                    for (var key in dataResponse.responseJSON) {
-
-                        var result = (dataResponse.responseJSON[key].description).toString();
-                        toastr.error(result);
-
-                    }
-                });
-        })
         });
     </script>
 

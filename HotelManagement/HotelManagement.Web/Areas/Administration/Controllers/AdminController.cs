@@ -41,7 +41,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = new IndexViewModel();
+            var model = new ListUsersViewModel();
 
             var users = await this.userService.GetAllUsers();
 
@@ -81,7 +81,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             if (this.ModelState.IsValid)
             {
                 var business = await this.businessService.CreateBusinessAsync(model.Name, model.Location, model.Description);
-                return this.RedirectToAction("AllBusinesses", "Admin");
+
+                return Json(business);
             }
 
             return this.View(model);
