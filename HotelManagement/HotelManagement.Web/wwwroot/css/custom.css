@@ -74,10 +74,10 @@
 }
 
 .note-title {
-    font-size: 20px;
+    font-size: 18px;
 }
 
-#logbookButton {
+.logbookButton {
     margin-bottom: 20px;
     background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
 }

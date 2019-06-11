@@ -3,16 +3,63 @@
 @{
     ViewData["Title"] = "Management Page";
 }
+<a asp-area="Management" asp-controller="Management" asp-action="CreateNote" class="btn btn-warning float-right logbookButton" data-toggle="modal" data-target="#noteModal">
+    Create Note
+</a>
 
-<!------ Include the above in your HEAD tag ---------->
-@foreach (var logbook in Model.Logbooks)
-{
-    <a asp-area="Management" asp-controller="Management" asp-action="Index" asp-route-email="@User.Identity.Name" asp-route-specifiedLogbook="@logbook.Name" class="btn btn-warning" id="logbookButton">
-        @logbook.Name
-    </a>
-}
+<div class="dropdown">
+    <button class="btn btn-warning dropdown-toggle logbookButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Logbook
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach (var logbook in Model.Logbooks)
+        {
+            <a asp-area="Management" asp-controller="Management" asp-action="Index" asp-route-email="@User.Identity.Name" asp-route-specifiedLogbook="@logbook.Name" class="dropdown-item">
+                @logbook.Name
+            </a>
+        }
+    </div>
+</div>
 
 @foreach (var logbook in Model.Logbooks)
 {
     <partial name="_LogbookPartial" model="logbook" />
 }
+
+<div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noteModalLabel">Creating a note...</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="send-feedback-form" asp-action="CreateNote" asp-controller="Management" asp-area="Management">
+                    <input type="hidden" name="businessId" value="..." />
+                    @Html.AntiForgeryToken()
+                    <div class="form-group form-inline">
+                        <div class="form-group col-lg-6 col-md-6 name">
+                            <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Text'"
+                                  required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Select Department</label>
+                        <select class="form-control" id="department">
+                            <option>Option1</option>
+                            <option>Option2</option>
+                            <option>Option3</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success btnSave">Create Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

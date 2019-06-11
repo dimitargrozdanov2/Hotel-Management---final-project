@@ -64,7 +64,7 @@ namespace HotelManagement.Services
             //.FirstOrDefaultAsync(u => u.Email == email);
             var logbooks = await this.context.Logbooks
                 .Include(n => n.Notes)
-                    .ThenInclude(l => l.Logbook)
+                    .ThenInclude(l => l.Category)
                 .Include(lb => lb.LogbookManagers)
                     .ThenInclude(m => m.Manager)
                 .Include(b => b.Business)

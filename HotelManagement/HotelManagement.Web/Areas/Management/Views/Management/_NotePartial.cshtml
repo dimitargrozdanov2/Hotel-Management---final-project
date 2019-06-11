@@ -5,17 +5,22 @@
 }
 
 <div class="pricing-option">
-    <i class="material-icons">important_devices</i>
-    <h1 class="note-title">Ui design</h1>
+    <i class="material-icons">mode_comment</i>
+    <h1 class="note-title">@Model.User.UserName</h1>
     <hr />
     <p>@Model.Text</p>
     <hr />
+    <p>@Model.PriorityType</p>
+    <hr />
     <div class="price">
         <div class="front">
-            <span class="price">199 <b>$</b></span>
+            <span class="note-title">@Model.Category?.Name </span>
         </div>
         <div class="back">
-            <a href="#" class="button">Purchase now</a>
+            <i class="material-icons" id="editNote">edit</i>
+            <i class="material-icons" id="deleteNote">cancel</i>
+            <i class="material-icons" id="addImage">photo_camera</i>
+
         </div>
     </div>
 </div>

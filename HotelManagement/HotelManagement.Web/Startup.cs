@@ -40,6 +40,7 @@ namespace HotelManagement.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IMappingProvider, MappingProvider>();
             services.AddScoped<INoteService, NoteService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBusinessService, BusinessService>();
             services.AddScoped<IFeedbackService, FeedbackService>();

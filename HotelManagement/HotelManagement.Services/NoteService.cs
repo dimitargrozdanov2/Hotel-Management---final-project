@@ -1,6 +1,8 @@
 ﻿using HotelManagement.Data;
 using HotelManagement.DataModels;
 using HotelManagement.Services.Contracts;
+using HotelManagement.ViewModels;
+using HotelManagement.ViewModels.Management;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,15 @@ namespace HotelManagement.Services
         public NoteService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
+
+        public Task<NoteViewModel> CreateNoteAsync(CreateNoteViewModel model)
+        {
+            var logbook = this.dbContext.Logbooks.FirstOrDefaultAsync(l => l.Id == model.LogbookId);
+
+            // add functionality to create note; TODO
+
+            return null;
         }
 
         // Having 2 thenInclude on the same property written twice is okay
