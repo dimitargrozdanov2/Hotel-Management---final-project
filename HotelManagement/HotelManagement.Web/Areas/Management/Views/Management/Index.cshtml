@@ -39,23 +39,26 @@
             </div>
             <div class="modal-body">
                 <form id="createNoteForm" asp-action="CreateNote" asp-controller="Management" asp-area="Management" asp-route-name="@User.Identity.Name">
-                    <input type="hidden" name="logbookId" value="..." />
+                    <input type="hidden" name="email" value="@User.Identity.Name" />
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
-                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Text'"
+                        <textarea class="form-control mb-10" rows="5" name="text" placeholder="Text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Text'"
                                   required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="department">Select Category</label>
-                        <select class="form-control" id="department">
-                        <option>None</option>
+                        <select class="form-control" id="department" name="category">
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="pickLogbook">Select Logbook</label>
-                        <select class="form-control" id="pickLogbook"></select>
+                        <select class="form-control" id="pickLogbook" name="logbook"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickPriority">Select Priority</label>
+                        <select class="form-control" id="pickPriority" asp-items="@Html.GetEnumSelectList<PriorityType>()" name="priority"></select>
+                        <span></span>
                     </div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success btnSave">Create Note</button>
@@ -64,3 +67,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/management.js"></script>
+}

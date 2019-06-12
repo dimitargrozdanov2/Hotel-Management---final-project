@@ -15,7 +15,6 @@
             if ($('#department option:contains(' + val + ')').length === 0) {
                 $("#department").append("<option>" + val + "</option>");
             }
-            
         });
 
         $.each(userLogbooksJson, function (i, val) {
@@ -25,3 +24,26 @@
         });
     });
 });
+
+$(function () {
+    const $createNoteForm = $('#createNoteForm');
+
+    $createNoteForm.on('submit', function (event) {
+        event.preventDefault();
+
+        const dataToSend = $createNoteForm.serialize();
+        console.log(dataToSend);
+        //var categorySel = $("#department option:selected").text();
+        //var logbookSel = $("#pickLogbook option:selected").text();
+        //var prioritySel = $("#pickPriority option:selected").text();
+        console.log($createNoteForm.attr('action'));
+
+        $.post($createNoteForm.attr('action'), dataToSend, function (serverData) {
+            $('#createNoteForm')[0].reset();
+
+            $('.pricing-table').prepend(serverData);
+
+            $('.modal').modal('hide'); // used to hide the modal on success.
+        })
+    })
+})

@@ -44,26 +44,18 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return View(model);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetLogbooks(string email)
-        //{
-        //    var userLogbooks = await this.userService.GetUserLogbookNamesAsync(email);
-        //    var json = JsonConvert.SerializeObject(userLogbooks);
-
-        //    return Json(json);
-        //}
-
         [HttpGet]
         public async Task<IActionResult> CreateNote(string name)
         {
             var categories = await this.categoryService.GetAllCategoryNamesAsync();
             var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);
 
-            var returnField = new { categories = categories, userLogbooks = userLogbooks };
+            var returnField = new { categories, userLogbooks };
             return Json(returnField);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateNote(CreateNoteViewModel model)
         {
             if (this.ModelState.IsValid)
