@@ -25,6 +25,21 @@
     });
 });
 
+$(document).ready(function () {
+    // Construct URL object using current browser URL
+    var url = new URL(document.location);
+
+    // Get query parameters object
+    var params = url.searchParams;
+
+    // Get value of delivery results
+    var specifiedLogbook = params.get("specifiedLogbook");
+    console.log(specifiedLogbook);
+
+    // Set it as the dropdown value
+    $("#dropdownMenuButton").text(specifiedLogbook);
+});
+
 $(function () {
     const $createNoteForm = $('#createNoteForm');
 
