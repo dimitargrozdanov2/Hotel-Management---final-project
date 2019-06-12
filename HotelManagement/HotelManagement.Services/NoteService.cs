@@ -57,8 +57,24 @@ namespace HotelManagement.Services
 
             await this.dbContext.Notes.AddAsync(note);
             await this.dbContext.SaveChangesAsync();
+
             var mappedNote = this.mappingProvider.MapTo<NoteViewModel>(note);
             return mappedNote;
+        }
+
+        public async Task<string> DeleteNoteAsync(string id)
+        {
+            var note = await this.dbContext.Notes.FirstOrDefaultAsync(l => l.Id == id);
+
+            if (note == null)
+            {
+                throw new EntityInvalidException($"Note with id `{id}` has not been found!");
+            }
+
+            this.dbContext.Notes.Remove(note);
+            await this.dbContext.SaveChangesAsync();
+
+            return id;
         }
 
         // Having 2 thenInclude on the same property written twice is okay

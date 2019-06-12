@@ -69,5 +69,18 @@ namespace HotelManagement.Web.Areas.Management.Controllers
 
             return this.View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteNote(string data)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.noteService.DeleteNoteAsync(data);
+
+                return StatusCode(200);
+            }
+
+            return BadRequest();
+        }
     }
 }

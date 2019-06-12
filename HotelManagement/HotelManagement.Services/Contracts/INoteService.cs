@@ -14,6 +14,8 @@ namespace HotelManagement.Services.Contracts
 
         Task<NoteViewModel> CreateNoteAsync(CreateNoteViewModel model);
 
+        Task<string> DeleteNoteAsync(string id);
+
 
     }
 }

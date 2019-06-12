@@ -33,9 +33,6 @@ $(function () {
 
         const dataToSend = $createNoteForm.serialize();
         console.log(dataToSend);
-        //var categorySel = $("#department option:selected").text();
-        //var logbookSel = $("#pickLogbook option:selected").text();
-        //var prioritySel = $("#pickPriority option:selected").text();
         console.log($createNoteForm.attr('action'));
 
         $.post($createNoteForm.attr('action'), dataToSend, function (serverData) {
@@ -47,3 +44,32 @@ $(function () {
         })
     })
 })
+
+$(document).on("click", "#deleteNote", function (event) {
+    var id = $(this).attr('data-Id')
+    console.log(id);
+
+    //$.ajax({
+    //    url: '/Management/Management/DeleteNote',
+    //    type: 'POST',
+    //    data: id: id,
+    //    success: function (result) {
+    //        console.log(result);
+    //    }
+    //});
+    $.post("/Management/Management/DeleteNote", { "data": id }, function () {
+        $('#' + id).remove();
+    })
+});
+
+//$(document).on("click", "#editNote", function (event) {
+//    var idx = $(this).attr('data-Id')
+
+//    $.post('Management/Management/Delete, dataToSend, function (serverData) {
+//        $('#send-reply-form')[0].reset();
+//        $(feedbackParentElement).prepend(serverData);
+
+//        $('.modal').modal('hide'); // used to hide the modal on success.
+//    })
+//    //$(".modal-body #feedbackparentId").val(feedbackId);
+//});

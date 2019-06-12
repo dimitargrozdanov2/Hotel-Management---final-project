@@ -4,9 +4,9 @@
     ViewData["Title"] = "_NotePartial";
 }
 
-<div class="pricing-option">
+<div class="pricing-option" id="@Model.Id">
     <i class="material-icons">mode_comment</i>
-    @*<h1 class="note-title">@Model.User.Email</h1>*@
+    <h1 class="note-title">@Model.User.Email</h1>
     <hr />
     <p>@Model.Text</p>
     <hr />
@@ -17,10 +17,10 @@
             <span class="note-title">@Model.Category?.Name </span>
         </div>
         <div class="back">
-            <i class="material-icons" id="editNote">edit</i>
-            <i class="material-icons" id="deleteNote">cancel</i>
-            <i class="material-icons" id="addImage">photo_camera</i>
-
+            <i class="material-icons" id="editNote" data-Id="@Model.Id">edit</i>
+            @*<i class="material-icons" style="font-size:36px">camera_alt</i>*@
+            <i class="material-icons" id="deleteNote" data-Id="@Model.Id">remove_circle</i>
+            <i class="material-icons" id="archiveNote">archive</i>
         </div>
     </div>
 </div>
