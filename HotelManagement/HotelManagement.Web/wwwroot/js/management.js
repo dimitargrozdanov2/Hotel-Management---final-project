@@ -37,7 +37,12 @@ $(document).ready(function () {
     console.log(specifiedLogbook);
 
     // Set it as the dropdown value
-    $("#dropdownMenuButton").text(specifiedLogbook);
+    if (specifiedLogbook === null) {
+        $("#dropdownMenuButton").text('Select your option');
+    } else {
+        $("#dropdownMenuButton").text(specifiedLogbook);
+    }
+
 });
 
 $(function () {
