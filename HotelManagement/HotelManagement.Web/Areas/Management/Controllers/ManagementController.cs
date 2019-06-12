@@ -31,11 +31,12 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         {
             var model = new ManagementIndexViewModel();
 
-            var userLogbooks = await this.userService.GetUserLogbooksAsync(email);
+            var userLogbooks = await this.userService.GetUserLogbooksAsync(email, specifiedLogbook);
             model.Logbooks = userLogbooks;
             if(specifiedLogbook == null)
             {
-                model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
+                //model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
+                model.SpecifiedLogbook = userLogbooks.FirstOrDefault(x => x.Notes.Count > 0);
             }
             else
             {

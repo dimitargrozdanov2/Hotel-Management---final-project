@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using HotelManagement.DataModels;
 
 namespace HotelManagement.Services
 {
@@ -54,9 +55,12 @@ namespace HotelManagement.Services
             return mappedUser;
         }
 
-        public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email)
+        public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email, string specifiedLogbook = null)
         {
-            var logbooks = await this.context.Logbooks
+            IEnumerable<Logbook> logbooks;
+            if(specifiedLogbook == null)
+            {
+                logbooks = await this.context.Logbooks
                 .Include(n => n.Notes)
                     .ThenInclude(l => l.Category)
                 .Include(lb => lb.LogbookManagers)
@@ -64,7 +68,19 @@ namespace HotelManagement.Services
                 .Include(b => b.Business)
                 .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
                 .ToListAsync();
-
+            }
+            else
+            {
+                logbooks = await this.context.Logbooks
+               .Include(n => n.Notes)
+                   .ThenInclude(l => l.Category)
+               .Include(lb => lb.LogbookManagers)
+                   .ThenInclude(m => m.Manager)
+               .Include(b => b.Business)
+               .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
+               .ToListAsync();
+            }
+           
             var mappedLogbooks = this.mappingProvider.MapTo<IEnumerable<LogbookViewModel>>(logbooks);
 
             return mappedLogbooks;

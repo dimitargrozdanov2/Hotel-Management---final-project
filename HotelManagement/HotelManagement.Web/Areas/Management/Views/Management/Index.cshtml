@@ -23,10 +23,11 @@
     </div>
 </div>
 
-@foreach (var logbook in Model.Logbooks)
+<partial name="_LogbookPartial" model="@Model.SpecifiedLogbook" />
+@*@foreach (var logbook in Model.Logbooks)
 {
     <partial name="_LogbookPartial" model="logbook" />
-}
+}*@
 
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

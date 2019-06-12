@@ -358,6 +358,16 @@ namespace HotelManagement.Data.Migrations
                         {
                             ManagerId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
                             LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2"
+                        },
+                        new
+                        {
+                            ManagerId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            LogbookId = "1fc92a85-06de-4c97-9230-295d4d2b445c"
+                        },
+                        new
+                        {
+                            ManagerId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            LogbookId = "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae"
                         });
                 });
 

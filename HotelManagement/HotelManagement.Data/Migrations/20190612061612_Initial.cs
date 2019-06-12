@@ -414,7 +414,12 @@ namespace HotelManagement.Data.Migrations
             migrationBuilder.InsertData(
                 table: "LogbookManagers",
                 columns: new[] { "ManagerId", "LogbookId" },
-                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "3d71d939-dc61-46f8-af46-ed6a618036c2" });
+                values: new object[,]
+                {
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "3d71d939-dc61-46f8-af46-ed6a618036c2" },
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "1fc92a85-06de-4c97-9230-295d4d2b445c" },
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Notes",
