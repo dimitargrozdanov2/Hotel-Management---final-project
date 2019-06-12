@@ -63,12 +63,14 @@
                         <input asp-for="ConfirmPassword" class="form-control" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
-
+                    <div>
+                        <input type="submit" class="btn btn-block btn-success" id="CreateUserRecord" value="Register" />
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            @*<div class="modal-footer">
                 <a href="#" class="btn btn-block btn-success" id="CreateUserRecord">Register</a>
-            </div>
+            </div>*@
         </div>
     </div>
 </div>
@@ -103,15 +105,22 @@
                 console.log("test");
 
             });
-            $("#CreateUserRecord").click(function (event) {
+            //$("#CreateUserRecord").click(function (event) {
+            $("#formRegister").submit(function (event) {
 
                 event.preventDefault();
                 var myformdata = $("#formRegister").serialize();
+
+                if (!$(this).valid()) {
+                    return;
+                }
+
                 console.log(myformdata);
 
                 console.log(myformdata);
                 $.post("/Account/RegisterUser", myformdata)
                     .done(function (dataResponse) {
+                        console.log(dataResponse);
                         toastr.options.onHidden = function () {
                             //window.location.reload();
                         };
@@ -120,7 +129,22 @@
                         toastr.success(dataResponse);
 
                         $("#MyModal").modal('hide');
-                        $("#table").prepend(dataResponse);
+                        //$("#table").prepend(dataResponse);
+
+                        console.log(dataResponse);
+
+                        var buttons = `
+        <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}"
+           href="/Administration/Admin/PromoteUser/${dataResponse.id}">
+            <i class="fas fa-pencil-alt"></i>
+            Promote user
+        </a>
+            <div class="col-sm-2" style="margin-top:5%"></div>
+            <button class="btn btn-danger btn-sm delete-user-button" att="${dataResponse.id}">
+                <i class="fa fa-trash"></i> Delete user
+            </button>`;
+
+                        $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw();
 
 
 
@@ -133,6 +157,7 @@
 
                         }
                     });
+
             })
 
             $('.promote-toggler').click(function () {
@@ -155,18 +180,23 @@
                 //var postData = "userId=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
 
                 var myformdata = $("#formPromote").serialize();
-
+                console.log(myformdata);
                 $.post("/Administration/Admin/PromoteUser", myformdata)
                     .done(function (dataResponse) {
 
                         toastr.options.onHidden = function () {
-                            window.location.reload();
                         };
 
                         toastr.options.timeOut = 100;
                         toastr.options.fadeOut = 100;
 
                         toastr.success(dataResponse);
+                        console.log(dataResponse);
+                        $("#MyModal2").modal('hide');
+                        $test = dataResponse.attr('RoleName');
+                        console.log($test);
+                        $(".roleofUser").append(dataResponse);
+
 
                     }).fail(function (dataResponse) {
 

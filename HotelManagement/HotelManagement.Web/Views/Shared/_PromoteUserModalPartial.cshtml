@@ -13,10 +13,11 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <div class="form-group">
-                            <label asp-for="RoleList">List of Roles</label>
-                            <select asp-for="RoleList" class="custom-select" asp-items="@Model?.RoleList"></select>
+                            <label asp-for="RoleName">List of Roles</label>
+                            <select asp-for="RoleName" class="custom-select" asp-items="@Model?.RoleList"></select>
                         </div>
-                        <input hidden class="email-hidden form-control" asp-for="UserId"  />
+                        <input hidden class="email-hidden form-control" asp-for="UserId" />
+                        <input hidden class="RoleName value" value="@Model.RoleName" />
                     </div>
                 </form>
             </div>

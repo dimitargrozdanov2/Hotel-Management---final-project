@@ -82,10 +82,10 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             {
                 var business = await this.businessService.CreateBusinessAsync(model.Name, model.Location, model.Description);
 
-                return Json(business);
+                return PartialView("_BusinessPartialView", business);
             }
 
-            return this.View(model);
+            return BadRequest();
         }
 
         [HttpGet]
@@ -171,7 +171,13 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
 
-                return Ok("Succesfully promoted user!");
+                var promoteRoleViewModel = new PromoteRoleViewModel
+                {
+                    RoleName = model.RoleName,
+                    UserId = user.Id
+                };
+
+                return PartialView("_PromoteUserModalPartial", promoteRoleViewModel);
             }
 
             return this.View(model);

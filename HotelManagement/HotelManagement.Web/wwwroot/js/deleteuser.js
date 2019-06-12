@@ -14,13 +14,14 @@ $('.delete-user-button').on('click', function (deleteUserEvent) {
     $.post("/Account/Delete", postData)
         .done(function (dataResponse) {
             toastr.options.onHidden = function () {
-                window.location.reload();
+                //  window.location.reload();
             };
 
             toastr.options.timeOut = 100;
             toastr.options.fadeOut = 100;
 
             toastr.success(dataResponse);
+            $("#table").remove(dataResponse);
 
         }).fail(function (dataResponse) {
             debugger;

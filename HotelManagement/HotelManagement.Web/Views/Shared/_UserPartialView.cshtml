@@ -7,30 +7,18 @@
 <tr class="deleteUserRow" id="user-tr-@Model.Id">
     <td>@Model.UserName</td>
     <td>@Model.Email</td>
-    <td>@await UserManager.GetRole(Model.UserName)</td>
-    <td> 
-        @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block">Delete user</button>
-                </div>
-
-            </form>*@
+    <td class="roleofUser">@await UserManager.GetRole(Model.UserName)</td>
+    <td>
         <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="@Model.Id"
            asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@Model.Id">
             <i class="fas fa-pencil-alt"></i>
             Promote user
         </a>
-        @*@using (Html.BeginForm("Delete", "Account", new { name = user.UserName }))
-            { }*@
-        <div class="col-sm-2" style="margin-top:5%"></div>
-        <button class="btn btn-danger btn-sm delete-user-button" att="@Model.Id">
-            <i class="fa fa-trash"></i> Delete user
-        </button>
-
-        @*<form class="delete-form "  asp-action="Delete" asp-controller="Account" asp-route-name="@user.UserName" method="post">
-                <input type="hidden" class="userValue" value="@user.UserName" />
-
-            </form>*@
+            <div class="col-sm-2" style="margin-top:5%"></div>
+            <button class="btn btn-danger btn-sm delete-user-button" att="@Model.Id">
+                <i class="fa fa-trash"></i> Delete user
+            </button>
     </td>
 </tr>
+<span id="anti-forgery-span">@Html.AntiForgeryToken()</span>
 

@@ -88,7 +88,7 @@ namespace HotelManagement.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<object> RegisterUser(RegisterViewModel model)
+        public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -107,10 +107,12 @@ namespace HotelManagement.Web.Controllers
                     _logger.LogInformation("User created a new account with password.");
                     var userViewModel = new UserViewModel
                     {
+                        Id = user.Id,
                         Email = user.Email,
                         UserName = user.UserName
                     };
-                    return PartialView("_UserPartialView", userViewModel);
+                    //return PartialView("_UserPartialView", userViewModel);
+                    return Json(userViewModel);
                     //return new { success = true };
                 }
 
@@ -162,7 +164,16 @@ namespace HotelManagement.Web.Controllers
 
                 await _userManager.DeleteAsync(user);
 
-                return Ok("Succesfully deleted user!");
+                _logger.LogInformation("User deleted.");
+
+                var userViewModel = new UserViewModel
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    UserName = user.UserName
+                };
+
+                return PartialView("_UserPartialView", userViewModel);
             }
             return this.View();
         }
