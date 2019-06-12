@@ -25,6 +25,7 @@
     });
 });
 
+// setting value for drop down button text
 $(document).ready(function () {
     // Construct URL object using current browser URL
     var url = new URL(document.location);
@@ -34,12 +35,9 @@ $(document).ready(function () {
 
     // Get value of delivery results
     var specifiedLogbook = params.get("specifiedLogbook");
-    console.log(specifiedLogbook);
 
     // Set it as the dropdown value
-    if (specifiedLogbook === null) {
-        $("#dropdownMenuButton").text('Select your option');
-    } else {
+    if (specifiedLogbook !== null) {
         $("#dropdownMenuButton").text(specifiedLogbook);
     }
 
@@ -52,44 +50,36 @@ $(function () {
         event.preventDefault();
 
         const dataToSend = $createNoteForm.serialize();
-        console.log(dataToSend);
-        console.log($createNoteForm.attr('action'));
 
+        // gets the logbook you are looking at right now
+        let currentLogbook = $("[name='currentLogbookOn']").val();
+        // gets the picked logbook
+        let pickedLogbook = $('#pickLogbook').val();
+
+        // Perform other work here ...
         $.post($createNoteForm.attr('action'), dataToSend, function (serverData) {
             $('#createNoteForm')[0].reset();
-
-            $('.pricing-table').prepend(serverData);
-
-            $('.modal').modal('hide'); // used to hide the modal on success.
+            // compares, if the current logbook and picked logbook are the same, it will prepend the result
+            if (currentLogbook == pickedLogbook) {
+                $('.pricing-table').prepend(serverData);
+            }
         })
+            .done(function () {
+                $('.modal').modal('hide'); // used to hide the modal on success.
+            })
+
+            .fail(function () {
+                // when it fails
+            })
+            .always(function () {
+            })
     })
 })
 
 $(document).on("click", "#deleteNote", function (event) {
     var id = $(this).attr('data-Id')
-    console.log(id);
 
-    //$.ajax({
-    //    url: '/Management/Management/DeleteNote',
-    //    type: 'POST',
-    //    data: id: id,
-    //    success: function (result) {
-    //        console.log(result);
-    //    }
-    //});
     $.post("/Management/Management/DeleteNote", { "data": id }, function () {
         $('#' + id).remove();
     })
 });
-
-//$(document).on("click", "#editNote", function (event) {
-//    var idx = $(this).attr('data-Id')
-
-//    $.post('Management/Management/Delete, dataToSend, function (serverData) {
-//        $('#send-reply-form')[0].reset();
-//        $(feedbackParentElement).prepend(serverData);
-
-//        $('.modal').modal('hide'); // used to hide the modal on success.
-//    })
-//    //$(".modal-body #feedbackparentId").val(feedbackId);
-//});

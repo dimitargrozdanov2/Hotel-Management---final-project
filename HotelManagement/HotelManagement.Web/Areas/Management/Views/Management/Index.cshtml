@@ -11,7 +11,7 @@
         </a>
     </div>
     <button class="btn btn-warning dropdown-toggle logbookButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select Logbook
+        @Model.SpecifiedLogbook.Name
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
         @foreach (var logbook in Model.Logbooks)
@@ -41,6 +41,7 @@
             <div class="modal-body">
                 <form id="createNoteForm" asp-action="CreateNote" asp-controller="Management" asp-area="Management" asp-route-name="@User.Identity.Name">
                     <input type="hidden" name="email" value="@User.Identity.Name" />
+                    <input type="hidden" name="currentLogbookOn" value="@Model.SpecifiedLogbook.Name" />
                     @Html.AntiForgeryToken()
 
                     <div class="form-group">
@@ -49,8 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label for="department">Select Category</label>
-                        <select class="form-control" id="department" name="category">
-                        </select>
+                        <select class="form-control" id="department" name="category"></select>
                     </div>
                     <div class="form-group">
                         <label for="pickLogbook">Select Logbook</label>

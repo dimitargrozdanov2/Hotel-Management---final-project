@@ -4,7 +4,7 @@
 }
 
 <div class="pricing-table">
-    @foreach (var note in Model.Notes)
+    @foreach (var note in Model.Notes.OrderByDescending(x => x.CreatedOn))
     {
         <partial name="_NotePartial" model="note" />
     }
