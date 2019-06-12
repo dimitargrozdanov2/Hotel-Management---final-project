@@ -58,6 +58,10 @@ $(function () {
 
         // Perform other work here ...
         $.post($createNoteForm.attr('action'), dataToSend, function (serverData) {
+            console.log($('.pricing-table'));
+            if ($('.pricing-table').find('#noNotes').length) {
+                $('#noNotes').hide();
+            }
             $('#createNoteForm')[0].reset();
             // compares, if the current logbook and picked logbook are the same, it will prepend the result
             if (currentLogbook == pickedLogbook) {
