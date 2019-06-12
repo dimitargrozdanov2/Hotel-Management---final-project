@@ -8,14 +8,20 @@
 
         var categoriesString = JSON.stringify(categoriesArray);
         var userLogbooksString = JSON.stringify(userLogbooksArray);
-        debugger;
         var categoriesJson = JSON.parse(categoriesString);
         var userLogbooksJson = JSON.parse(userLogbooksString);
+
         $.each(categoriesJson, function (i, val) {
-            $("#department").append("<option>" + val + "</option>");
+            if ($('#department option:contains(' + val + ')').length === 0) {
+                $("#department").append("<option>" + val + "</option>");
+            }
+            
         });
+
         $.each(userLogbooksJson, function (i, val) {
-            $("#pickLogbook").append("<option>" + val + "</option>");
+            if ($('#pickLogbook option:contains(' + val + ')').length === 0) {
+                $("#pickLogbook").append("<option>" + val + "</option>");
+            }
         });
     });
 });
