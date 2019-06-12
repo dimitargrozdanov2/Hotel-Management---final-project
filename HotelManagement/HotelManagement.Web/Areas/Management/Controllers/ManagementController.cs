@@ -44,16 +44,23 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return View(model);
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> GetLogbooks(string email)
+        //{
+        //    var userLogbooks = await this.userService.GetUserLogbookNamesAsync(email);
+        //    var json = JsonConvert.SerializeObject(userLogbooks);
+
+        //    return Json(json);
+        //}
+
         [HttpGet]
-        public async Task<IActionResult> CreateNote()
+        public async Task<IActionResult> CreateNote(string name)
         {
-            var categories = await this.categoryService.GetAllCategoriesAsync();
-            var json = JsonConvert.SerializeObject(categories);
-            //var model = new CreateNoteViewModel();
+            var categories = await this.categoryService.GetAllCategoryNamesAsync();
+            var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);
 
-            //model.CategoryList = categories.Select(t => new SelectListItem(t.Name, t.Name)).ToList();
-
-            return Json(json);
+            var returnField = new { categories = categories, userLogbooks = userLogbooks };
+            return Json(returnField);
         }
 
         [HttpPost]
@@ -61,9 +68,11 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var result = await this.noteService.CreateNoteAsync(model);
                 //return this.RedirectToAction("Details", "Movie", new { id = movie.Name });
-                return null;
+
+                var result = await this.noteService.CreateNoteAsync(model);
+
+                return this.PartialView("_NotePartial", result);
             }
 
             return this.View(model);

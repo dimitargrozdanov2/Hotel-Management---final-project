@@ -23,7 +23,7 @@ namespace HotelManagement.Services
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
-        public async Task<ICollection<string>> GetAllCategoriesAsync()
+        public async Task<ICollection<string>> GetAllCategoryNamesAsync()
         {
             var categories = await this.context.Categories.Select(x => x.Name).ToListAsync();
 

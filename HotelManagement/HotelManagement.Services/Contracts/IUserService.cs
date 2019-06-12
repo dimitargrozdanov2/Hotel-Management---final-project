@@ -13,5 +13,7 @@ namespace HotelManagement.Services.Contracts
         Task<UserViewModel> GetUserAsync(string email);
 
         Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email);
+
+        Task<IEnumerable<string>> GetUserLogbookNamesAsync(string email);
     }
 }
