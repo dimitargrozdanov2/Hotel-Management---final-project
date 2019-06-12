@@ -354,7 +354,8 @@ namespace HotelManagement.Data.Migrations
                 {
                     { "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "TODO" },
                     { "b73de489-d731-4f3a-8be7-a6613fe5eb6f", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Maintenance" },
-                    { "5c97553f-1557-4352-9622-d5bdd37f44f4", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Events" }
+                    { "5c97553f-1557-4352-9622-d5bdd37f44f4", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Events" },
+                    { "177922b2-3c7c-4d20-ab91-f36538f52ce9", new DateTime(2019, 5, 3, 18, 46, 23, 0, DateTimeKind.Unspecified), false, null, "None" }
                 });
 
             migrationBuilder.InsertData(

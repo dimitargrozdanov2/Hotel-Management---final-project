@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190607013715_Initial")]
+    [Migration("20190612035014_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,13 @@ namespace HotelManagement.Data.Migrations
                             CreatedOn = new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
                             Name = "Events"
+                        },
+                        new
+                        {
+                            Id = "177922b2-3c7c-4d20-ab91-f36538f52ce9",
+                            CreatedOn = new DateTime(2019, 5, 3, 18, 46, 23, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Name = "None"
                         });
                 });
 
