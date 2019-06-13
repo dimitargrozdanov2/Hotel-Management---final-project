@@ -87,7 +87,7 @@ $(document).on("click", "#deleteNote", function (event) {
 
     swal({
         title: "Are you sure?",
-        text: "Once deleted, only administration is able to recover the file!",
+        text: "Once deleted, only the administration will be able to recover the note!",
         icon: "warning",
         buttons: true,
         dangerMode: true,

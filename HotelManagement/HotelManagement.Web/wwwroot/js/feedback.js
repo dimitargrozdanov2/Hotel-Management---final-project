@@ -69,7 +69,7 @@ $(document).on("click", "#delete-button", function (event) {
     var id = $(this).attr('data-headCommentId')
     swal({
         title: "Are you sure?",
-        text: "Once deleted, only administration is able to recover the comment!",
+        text: "Once deleted, only the administration will be able to recover the comment!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -81,13 +81,13 @@ $(document).on("click", "#delete-button", function (event) {
                     $('#' + id).remove();
 
                     if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
-                        $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
+                        if ($('.comments-area').length === 0) {
+                            $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
+                        } else {
+                            $('.comments-area').append('<p id="noBusinesses">This business has no feedback. Be the first to submit one!</p>');
+                        }
                         console.log($('#comments-amount'));
                     }
-
-                    //if ($('.comments-area').find('#noBusinesses').length) {
-                    //    $('#noBusinesses').hide();
-                    //}
                 })
                 swal("Poof! The note has been deleted!", {
                     icon: "success",
