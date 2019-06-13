@@ -121,12 +121,12 @@
                 $.post("/Account/RegisterUser", myformdata)
                     .done(function (dataResponse) {
                         console.log(dataResponse);
-                        toastr.options.onHidden = function () {
-                            //window.location.reload();
-                        };
-                        toastr.options.timeOut = 100;
-                        toastr.options.fadeOut = 100;
-                        toastr.success(dataResponse);
+                        //toastr.options.onHidden = function () {
+                        //    //window.location.reload();
+                        //};
+                        //toastr.options.timeOut = 100;
+                        //toastr.options.fadeOut = 100;
+                        toastr.success('User succesfully registered');
 
                         $("#MyModal").modal('hide');
                         //$("#table").prepend(dataResponse);
@@ -160,11 +160,11 @@
 
             })
 
-            $('.promote-toggler').click(function () {
-                console.log($(this).attr('att'))
-                $('.email-hidden').val($(this).attr('att'));
-                console.log($(".email-hidden"));
-            });
+            //$('.promote-toggler').click(function () {
+            //    console.log($(this).attr('att'))
+            //    $('.email-hidden').val($(this).attr('att'));
+            //    console.log($(".email-hidden"));
+            //});
 
 
         });

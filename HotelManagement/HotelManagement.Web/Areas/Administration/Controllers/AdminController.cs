@@ -83,7 +83,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 return BadRequest(model);
             }
 
-           try
+            try
             {
                 var business = await this.businessService.CreateBusinessAsync(model.Name, model.Location, model.Description);
 
@@ -92,12 +92,12 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             catch (EntityAlreadyExistsException ex)
             {
                 this.ModelState.AddModelError("Error", ex.Message);
-                return BadRequest(new { message = ex.Message});
+                return BadRequest(new { message = ex.Message });
             }
         }
 
         [HttpGet]
-        public  IActionResult AddImageToBusiness()
+        public IActionResult AddImageToBusiness()
         {
             var model = new AddImageToBusinessViewModel();
             return this.View(model);
@@ -125,7 +125,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 }
 
                 return this.RedirectToAction("AllBusinesses", "Admin");
-                }
+            }
 
             return this.View(model);
         }
@@ -176,7 +176,11 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 {
                     throw new EntityInvalidException("User not found!");
                 }
-
+                // v service da proverq dali rolqta sashtestvuva v bazata 
+                if ((await userManagerWrapper.GetAllRoles(user.UserName)).Contains(model.RoleName))
+                {
+                    return BadRequest();
+                }
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
 
                 //this.userManagerWrapper
@@ -187,7 +191,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                     UserId = user.Id
                 };
 
-                return PartialView("_PromoteUserModalPartial", promoteRoleViewModel);
+                return Json(promoteRoleViewModel);
             }
 
             return this.View(model);
