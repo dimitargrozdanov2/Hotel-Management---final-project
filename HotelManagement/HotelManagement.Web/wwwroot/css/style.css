@@ -433,7 +433,7 @@ button {
   .footer-area .single-footer-widget input {
     height: 48px;
     border: none;
-    width: 67% !important;
+    /*width: 67% !important;*/
     font-weight: 400;
     background: #363a4b;
     color: #fff;

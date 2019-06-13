@@ -21,6 +21,8 @@
             @*<i class="material-icons" style="font-size:36px">camera_alt</i>*@
             <i class="material-icons" id="deleteNote" data-Id="@Model.Id">remove_circle</i>
             <i class="material-icons" id="archiveNote">archive</i>
+            <div class="note-createdOn">Created: @Model.CreatedOn.Value.ToLongDateString()</div>
+
         </div>
     </div>
 </div>

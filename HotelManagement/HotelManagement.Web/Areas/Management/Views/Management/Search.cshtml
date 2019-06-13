@@ -3,41 +3,18 @@
     ViewData["Title"] = "Search";
 }
 
-<form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
-    <fieldset>
-        <input class="form-control form-control-sm ml-4 w-12" id="target" type="text" placeholder="Enter text..." data-id="@User.Identity.Name">
-    </fieldset>
-</form>
+<div class="container">
+    <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
+        <fieldset>
+            <input class="form-control form-control-sm ml-4 w-12" id="target" type="text" placeholder="Enter text..." data-id="@User.Identity.Name">
+        </fieldset>
+    </form>
 
 
 
-<div class="pricing-table">
-    <p id="notShownNotes" class="mt-5">Enter the text you are looing for, only matched notes will be shown...</p>
+    <div class="pricing-table">
+        <p id="notShownNotes" class="mt-5">Enter the text you are looing for, only matched notes will be shown...</p>
+    </div>
 </div>
-
-@*@foreach (var note in Model.Notes)
-    {
-        <p>MAIKA TI WE EI</p>
-    }*@
-@*<input type="text" name="country" id="search-user-auto" />
-
-    <form asp-action="Index" method="post">
-        <div class="row input-group">
-            <input type="text" name="search" id="search"  class="form-control"/>
-            <div class="input-group-btn">
-                <input type="submit" value="Search" class="btn btn-primary"/>
-            </div>
-        </div>
-    </form>*@
-@*<div class="pricing-table">*@
-@*@if (Model.Notes.Count() == 0)
-    {
-        <p id="noNotes">This logbook has no notes. Be the first to submit one!</p>
-    }*@
-@*@foreach (var note in Model.Notes.OrderByDescending(x => x.CreatedOn))
-    {
-        <partial name="_NotePartial" model="note" />
-    }*@
-@*</div>*@
 
 

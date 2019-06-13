@@ -81,6 +81,13 @@
     font-size: 18px;
 }
 
+.note-createdOn {
+    font-size: 10px;
+}
+
+.footer-pushBottom{
+    margin-top: 300px;
+}
 .logbookButton {
     margin-bottom: 20px;
     background-image: linear-gradient(to right bottom, #ffb900, #ff7730);
