@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.PublicArea;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelManagement.Web.Areas.Business.Controllers
@@ -45,6 +46,20 @@ namespace HotelManagement.Web.Areas.Business.Controllers
             var feedbackModel = await this.feedbackService.AddReply(model);
 
             return this.PartialView("_ReplySectionPartial", feedbackModel);
+        }
+
+        [Authorize(Roles = "Moderator")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteFeedback(string data)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.feedbackService.DeleteCommentAsync(data);
+
+                return this.StatusCode(200);
+            }
+
+            return this.BadRequest();
         }
     }
 }

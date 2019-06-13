@@ -12,5 +12,7 @@ namespace HotelManagement.Services.Contracts
         Task<FeedbackViewModel> AddComment(AddFeedbackViewModel model);
 
         Task<FeedbackViewModel> AddReply(AddFeedbackViewModel model);
+
+        Task<string> DeleteCommentAsync(string id);
     }
 }

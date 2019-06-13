@@ -21,6 +21,10 @@
     padding-top: 15px;
 }
 
+.deleteFeedbackButton{
+    margin-left: 20px;
+}
+
 .commentsAmount {
     font-size: 18px;
 }

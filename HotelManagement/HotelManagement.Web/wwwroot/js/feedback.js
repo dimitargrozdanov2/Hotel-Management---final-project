@@ -59,6 +59,46 @@ $(function () {
         })
     })
 })
+//console.log($('.comments-area').children().length)
+//console.log($('.comments-area').find('#noBusinesses').length);
+
+
+
+// delete button for moderators
+$(document).on("click", "#delete-button", function (event) {
+    var id = $(this).attr('data-headCommentId')
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, only administration is able to recover the comment!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
+                    $('#' + id).parent().remove();
+                    $('#' + id).remove();
+
+                    if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
+                        $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
+                        console.log($('#comments-amount'));
+                    }
+
+                    //if ($('.comments-area').find('#noBusinesses').length) {
+                    //    $('#noBusinesses').hide();
+                    //}
+                })
+                swal("Poof! The note has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("You decided to keep the note, good!", {
+                    icon: "info",
+                });
+            }
+        });
+});
 
 
 //scroll button
