@@ -7,7 +7,7 @@
 <tr class="deleteUserRow" id="user-tr-@Model.Id">
     <td>@Model.UserName</td>
     <td>@Model.Email</td>
-    <td class="roleofUser">@await UserManager.GetRole(Model.UserName)</td>
+    <td class="roleofUser">@string.Join(", ", await UserManager.GetAllRoles(Model.UserName))</td>
     <td>
         <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="@Model.Id"
            asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@Model.Id">

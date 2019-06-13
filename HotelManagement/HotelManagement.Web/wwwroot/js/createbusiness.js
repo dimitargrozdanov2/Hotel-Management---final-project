@@ -10,12 +10,10 @@
     $.post("/Administration/Admin/CreateBusiness", myformdata)
         .done(function (dataResponse) {
             console.log(dataResponse);
-            toastr.options.onHidden = function () {
-                //window.location.reload();
-            };
-            toastr.options.timeOut = 100;
-            toastr.options.fadeOut = 100;
-            toastr.success(dataResponse);
+            //toastr.options.onHidden = function () {
+            //    //window.location.reload();
+            //};
+            toastr.success("Created business succesfully");
 
             $("#CreateBusinessModal").modal('hide');
             //$("#table").prepend(dataResponse);
@@ -32,17 +30,9 @@ href="Administration/Admin/AddImageToBusiness/${dataResponse.Name}">
             <i class="fas fa-images"></i>
             Add Image
         </a>`;
-          
+
             $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw();
-
-
-
         }).fail(function (dataResponse) {
-
-            for (var key in dataResponse.responseJSON) {
-
-                var result = (dataResponse.responseJSON[key].description).toString();
-                toastr.error(result);
-            }
-            });
+            toastr.error(dataResponse.responseJSON.message);
+        });
 });

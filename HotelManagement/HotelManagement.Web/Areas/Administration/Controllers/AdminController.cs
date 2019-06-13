@@ -80,7 +80,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return View(model);
+                return BadRequest(model);
             }
 
            try
@@ -89,10 +89,10 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
                 return Json(business);
             }
-            catch (ArgumentException ex)
+            catch (EntityAlreadyExistsException ex)
             {
                 this.ModelState.AddModelError("Error", ex.Message);
-                return BadRequest();
+                return BadRequest(new { message = ex.Message});
             }
         }
 
@@ -178,6 +178,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 }
 
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
+
+                //this.userManagerWrapper
 
                 var promoteRoleViewModel = new PromoteRoleViewModel
                 {

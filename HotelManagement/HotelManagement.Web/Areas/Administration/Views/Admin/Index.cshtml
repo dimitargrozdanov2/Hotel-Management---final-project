@@ -184,14 +184,7 @@
                 $.post("/Administration/Admin/PromoteUser", myformdata)
                     .done(function (dataResponse) {
 
-                        toastr.options.onHidden = function () {
-                        };
-
-                        toastr.options.timeOut = 100;
-                        toastr.options.fadeOut = 100;
-
-                        toastr.success(dataResponse);
-                        console.log(dataResponse);
+                        toastr.success("User succesfully promoted");
                         $("#MyModal2").modal('hide');
                         $test = dataResponse.attr('RoleName');
                         console.log($test);

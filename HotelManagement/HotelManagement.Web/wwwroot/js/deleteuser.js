@@ -14,11 +14,6 @@ $('.delete-user-form').on('submit', function (deleteUserEvent) {
     var url = "/Account/Delete/" + idOfUserToDelete
     $.post("/Account/Delete/", postData)
         .done(function (dataResponse) {
-            toastr.options.onHidden = function () {
-            };
-
-            toastr.options.timeOut = 100;
-            toastr.options.fadeOut = 100;
             toastr.success("User succesfully deleted!");
 
             $('#table').DataTable().row(tr).remove().draw();
