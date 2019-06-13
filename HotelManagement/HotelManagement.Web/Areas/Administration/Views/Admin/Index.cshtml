@@ -69,8 +69,8 @@
                 </form>
             </div>
             @*<div class="modal-footer">
-                <a href="#" class="btn btn-block btn-success" id="CreateUserRecord">Register</a>
-            </div>*@
+                    <a href="#" class="btn btn-block btn-success" id="CreateUserRecord">Register</a>
+                </div>*@
         </div>
     </div>
 </div>
@@ -134,15 +134,15 @@
                         console.log(dataResponse);
 
                         var buttons = `
-        <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}"
-           href="/Administration/Admin/PromoteUser/${dataResponse.id}">
-            <i class="fas fa-pencil-alt"></i>
-            Promote user
-        </a>
-            <div class="col-sm-2" style="margin-top:5%"></div>
-            <button class="btn btn-danger btn-sm delete-user-button" att="${dataResponse.id}">
-                <i class="fa fa-trash"></i> Delete user
-            </button>`;
+            <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}"
+               href="/Administration/Admin/PromoteUser/${dataResponse.id}">
+                <i class="fas fa-pencil-alt"></i>
+                Promote user
+            </a>
+                <div class="col-sm-2" style="margin-top:5%"></div>
+                <button class="btn btn-danger btn-sm delete-user-button" att="${dataResponse.id}">
+                    <i class="fa fa-trash"></i> Delete user
+                </button>`;
 
                         $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw();
 
@@ -166,44 +166,10 @@
                 console.log($(".email-hidden"));
             });
 
-            $("#PromoteUser").click(function (event) {
-                event.preventDefault();
 
-                //var $this = $(this);
-                //console.log($this);
-
-                //var idOfUserToDelete = $this.attr('att');
-
-                //console.log(idOfUserToDelete);
-                //var antiForgery = ($('#anti-forgery-span').find('input'))[0];
-
-                //var postData = "userId=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
-
-                var myformdata = $("#formPromote").serialize();
-                console.log(myformdata);
-                $.post("/Administration/Admin/PromoteUser", myformdata)
-                    .done(function (dataResponse) {
-
-                        toastr.success("User succesfully promoted");
-                        $("#MyModal2").modal('hide');
-                        $test = dataResponse.attr('RoleName');
-                        console.log($test);
-                        $(".roleofUser").append(dataResponse);
-
-
-                    }).fail(function (dataResponse) {
-
-                        for (var key in dataResponse.responseJSON) {
-
-                            var result = (dataResponse.responseJSON[key].description).toString();
-                            toastr.error(result);
-
-                        }
-                    });
-            })
         });
     </script>
-
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="~/js/deleteuser.js"></script>
+    <script src="~/js/promoteuser.js"></script>
 }

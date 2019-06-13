@@ -1,7 +1,10 @@
 ﻿
 $('.delete-user-form').on('submit', function (deleteUserEvent) {
     deleteUserEvent.preventDefault();
-    confirm("Are you sure you want to delete this user?");
+    var useraction = confirm("Are you sure you want to delete this user?");
+
+    if (useraction) {
+
     var $this = $(this);
 
     var idOfUserToDelete = $this.find(".DeleteUserRecord").data('id');
@@ -23,5 +26,5 @@ $('.delete-user-form').on('submit', function (deleteUserEvent) {
 
         });
 
-
+    }
 });
