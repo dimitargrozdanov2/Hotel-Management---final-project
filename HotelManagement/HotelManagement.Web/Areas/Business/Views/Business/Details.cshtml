@@ -48,16 +48,17 @@
                                 <form id="send-feedback-form" asp-action="Comment" asp-controller="Business" asp-area="Business">
                                     <input type="hidden" name="businessId" value="@Model.Id" />
                                     @Html.AntiForgeryToken()
-                                    <div class="form-group form-inline">
-                                        <div class="form-group col-lg-6 col-md-6 name">
-                                            <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                                        </div>
-                                        <div class="form-group col-lg-6 col-md-6 email">
-                                            <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                                        </div>
+                                    <div class="form-group  name">
+                                        <label>Your Name?</label>
+                                        <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name">
+                                    </div>
+                                    <div class="form-group email">
+                                        <label>Your Email?</label>
+                                        <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
+                                        <label>What do you want to post?</label>
+                                        <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message"
                                                   required></textarea>
                                     </div>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -85,16 +86,17 @@
                         <input type="hidden" name="businessid" value="@Model.Id" />
                         @Html.AntiForgeryToken()
 
-                        <div class="form-group form-inline">
-                            <div class="form-group col-lg-6 col-md-6 name">
-                                <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 email">
-                                <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-                            </div>
+                        <div class="form-group name">
+                            <label>Your Name?</label>
+                            <input required type="text" name="authorName" class="form-control col-form-label" id="name" placeholder="Enter Name">
+                        </div>
+                        <div class="form-group email">
+                            <label>Your Email?</label>
+                            <input required type="email" name="email" class="form-control" id="email" placeholder="Enter email address">
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'"
+                            <label>What do you want to post?</label>
+                            <textarea class="form-control mb-10" rows="5" name="comment" placeholder="Message"
                                       required=""></textarea>
                         </div>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
