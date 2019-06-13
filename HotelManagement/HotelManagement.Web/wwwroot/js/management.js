@@ -58,6 +58,7 @@ $(function () {
 
         // Perform other work here ...
         $.post($createNoteForm.attr('action'), dataToSend, function (serverData) {
+            toastr["success"]("Your note has been posted!", "Note")
             console.log($('.pricing-table'));
             if ($('.pricing-table').find('#noNotes').length) {
                 $('#noNotes').hide();
@@ -84,8 +85,28 @@ $(function () {
 $(document).on("click", "#deleteNote", function (event) {
     var id = $(this).attr('data-Id')
 
-    $.post("/Management/Management/DeleteNote", { "data": id }, function () {
-        $('#' + id).remove();
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
     })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.post("/Management/Management/DeleteNote", { "data": id }, function () {
+                    $('#' + id).remove();
+                })
+                swal("Poof! The note has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("You decided to keep the note, good!", {
+                    icon: "info",
+                });
+            }
+        });
+
+    
 });
 
