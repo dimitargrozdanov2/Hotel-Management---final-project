@@ -1,7 +1,7 @@
 ﻿@model FeedbackViewModel
 @if (User.IsInRole("Moderator"))
 {
-    <button id="delete-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
+    <button id="delete-reply-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
 }
 <div class="single-comment replyComment justify-content-between d-flex">
     <div class="user justify-content-between d-flex">

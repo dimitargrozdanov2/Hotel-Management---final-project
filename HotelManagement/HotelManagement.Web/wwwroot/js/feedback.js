@@ -88,12 +88,15 @@ $(document).on("click", "#delete-button", function (event) {
                         }
                         console.log($('#comments-amount'));
                     }
+
+                    const commentCount = $('.feedbackCom').length
+                    $('#amount').html(commentCount);
                 })
-                swal("Poof! The note has been deleted!", {
+                swal("Poof! The comment has been deleted!", {
                     icon: "success",
                 });
             } else {
-                swal("You decided to keep the note, good!", {
+                swal("You decided to keep the comment, good!", {
                     icon: "info",
                 });
             }
@@ -101,7 +104,7 @@ $(document).on("click", "#delete-button", function (event) {
 });
 
 // delete REPLY feedback button for moderators
-$(document).on("click", "#delete-button", function (event) {
+$(document).on("click", "#delete-reply-button", function (event) {
     var id = $(this).attr('data-headCommentId');
 
     swal({
@@ -117,11 +120,11 @@ $(document).on("click", "#delete-button", function (event) {
 
                     var element = $('*[data-headCommentId="' + id + '"]').parent().remove();
                 })
-                swal("Poof! The note has been deleted!", {
+                swal("Poof! The comment has been deleted!", {
                     icon: "success",
                 });
             } else {
-                swal("You decided to keep the note, good!", {
+                swal("You decided to keep the comment, good!", {
                     icon: "info",
                 });
             }
