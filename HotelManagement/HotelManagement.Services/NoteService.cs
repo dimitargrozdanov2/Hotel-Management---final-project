@@ -100,6 +100,7 @@ namespace HotelManagement.Services
                 .Include(c => c.Category)
                 .Include(u => u.User)
                 .Where(n => n.Text.Contains(data) && n.User.Email == userIdentity)
+                .OrderBy(d => d.CreatedOn)
                 .ToList();
 
             var mappedNotes = this.mappingProvider.MapTo<ICollection<NoteViewModel>>(notes);
