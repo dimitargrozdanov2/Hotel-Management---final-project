@@ -9,13 +9,12 @@
         });
 
         request.done(function (data) {
-            //toastr["success"]("Results were found!", "We got it!")
             $('.pricing-table').empty();
+            $('.pricing-table').append('<h5 id="resultsCount" class="text-info float-right">' + "Results found: " + data.length + "</h5 >");
             if (data.length == 0) {
                 $('.pricing-table').prepend('<p id="notShownNotes" class="mt-5">I couldnt find any notes that matched the requirements, please try again!</p>')
             }
             $.each(data, function (index) {
-                console.log(data[index]);
                 var textToPrepend =
                     "<div class='pricing-option' id='idPlace'>" +
                     "<i class='material-icons'> mode_comment</i>" +
