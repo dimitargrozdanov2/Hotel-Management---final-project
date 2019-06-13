@@ -14,6 +14,8 @@
 
             $('.comments-area').prepend(serverData);
 
+            toastr["success"]("You have submitted your feedback successfully!", "Business Feedback")
+
             const commentCount = $('.feedbackCom').length
             $('#amount').html(commentCount);
 
@@ -48,6 +50,8 @@ $(function () {
         const feedbackParentElement = $('#' + feedbackParentId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
+            toastr["success"]("Reply posted...", "Feedback Reply")
+
             $('#send-reply-form')[0].reset();
             $(feedbackParentElement).prepend(serverData);
 

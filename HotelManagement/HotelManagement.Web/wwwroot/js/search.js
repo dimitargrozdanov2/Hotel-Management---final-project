@@ -1,6 +1,5 @@
 ﻿$("#target").keyup(function (event) {
     var userIdentity = event.target.dataset.id;
-
     if ($(this).val().length >= 2) {
         var request = $.ajax({
             url: "/Management/Management/GetNotesAsyncJson",
@@ -10,6 +9,7 @@
         });
 
         request.done(function (data) {
+            //toastr["success"]("Results were found!", "We got it!")
             $('.pricing-table').empty();
             if (data.length == 0) {
                 $('.pricing-table').prepend('<p id="notShownNotes" class="mt-5">I couldnt find any notes that matched the requirements, please try again!</p>')
