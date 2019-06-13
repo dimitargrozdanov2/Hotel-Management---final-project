@@ -64,9 +64,9 @@ $(function () {
 
 
 
-// delete button for moderators
+// delete MAIN feedback button for moderators
 $(document).on("click", "#delete-button", function (event) {
-    var id = $(this).attr('data-headCommentId')
+    var id = $(this).attr('data-headCommentId');
     swal({
         title: "Are you sure?",
         text: "Once deleted, only the administration will be able to recover the comment!",
@@ -88,6 +88,34 @@ $(document).on("click", "#delete-button", function (event) {
                         }
                         console.log($('#comments-amount'));
                     }
+                })
+                swal("Poof! The note has been deleted!", {
+                    icon: "success",
+                });
+            } else {
+                swal("You decided to keep the note, good!", {
+                    icon: "info",
+                });
+            }
+        });
+});
+
+// delete REPLY feedback button for moderators
+$(document).on("click", "#delete-button", function (event) {
+    var id = $(this).attr('data-headCommentId');
+
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, only the administration will be able to recover the comment!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
+
+                    var element = $('*[data-headCommentId="' + id + '"]').parent().remove();
                 })
                 swal("Poof! The note has been deleted!", {
                     icon: "success",
