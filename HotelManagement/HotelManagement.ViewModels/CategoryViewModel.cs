@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -18,6 +19,7 @@ namespace HotelManagement.ViewModels
 
         public DateTime? ModifiedOn { get; set; }
 
+        [JsonIgnore]
         public ICollection<NoteViewModel> Notes { get; set; }
     }
 }

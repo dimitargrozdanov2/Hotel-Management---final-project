@@ -25,6 +25,7 @@ namespace HotelManagement.ViewModels
 
         public UserViewModel User { get; set; }
 
-        public PriorityType PriorityType { get; set; }
+        // might have to revert back to enum PriorityType TODO
+        public string PriorityType { get; set; }
     }
 }

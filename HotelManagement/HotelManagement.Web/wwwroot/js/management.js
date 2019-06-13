@@ -65,6 +65,7 @@ $(function () {
             $('#createNoteForm')[0].reset();
             // compares, if the current logbook and picked logbook are the same, it will prepend the result
             if (currentLogbook == pickedLogbook) {
+                console.log(serverData);
                 $('.pricing-table').prepend(serverData);
             }
         })
@@ -87,3 +88,4 @@ $(document).on("click", "#deleteNote", function (event) {
         $('#' + id).remove();
     })
 });
+

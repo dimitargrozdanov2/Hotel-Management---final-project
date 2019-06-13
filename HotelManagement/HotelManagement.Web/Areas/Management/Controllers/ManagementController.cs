@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelManagement.Services.Contracts;
+﻿using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Management.Controllers
 {
     [Area("Management")]
-    [Authorize(Roles ="Manager")]
+    [Authorize(Roles = "Manager")]
     public class ManagementController : Controller
     {
         private readonly IUserService userService;
@@ -33,7 +31,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
 
             var userLogbooks = await this.userService.GetUserLogbooksAsync(email, specifiedLogbook);
             model.Logbooks = userLogbooks;
-            if(specifiedLogbook == null)
+            if (specifiedLogbook == null)
             {
                 //model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
                 model.SpecifiedLogbook = userLogbooks.FirstOrDefault(x => x.Notes.Count > 0);
@@ -42,7 +40,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             {
                 model.SpecifiedLogbook = userLogbooks.FirstOrDefault(l => l.Name == specifiedLogbook);
             }
-            return View(model);
+            return this.View(model);
         }
 
         [HttpGet]
@@ -52,7 +50,23 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);
 
             var returnField = new { categories, userLogbooks };
-            return Json(returnField);
+            return this.Json(returnField);
+        }
+
+        public IActionResult Search(string data)
+        {
+            return View();
+        }
+
+        public JsonResult GetNotesAsyncJson(string data, string userIdentity)
+        {
+            var notes = this.noteService.SearchByTextAsync(data, userIdentity);
+            var model = new SearchViewModel();
+            model.Notes = notes;
+
+            var hey = JsonConvert.SerializeObject(model.Notes);
+
+            return Json(model.Notes);
         }
 
         [HttpPost]
@@ -78,10 +92,10 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             {
                 await this.noteService.DeleteNoteAsync(data);
 
-                return StatusCode(200);
+                return this.StatusCode(200);
             }
 
-            return BadRequest();
+            return this.BadRequest();
         }
     }
 }

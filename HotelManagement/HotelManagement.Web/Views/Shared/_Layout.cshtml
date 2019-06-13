@@ -72,18 +72,16 @@
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav">
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contacts</a></li>
                             @if (User.IsInRole("Manager"))
                             {
                                 @*<li class="nav-item submenu dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                                           aria-expanded="false">Management</a>
-                                        <ul class="dropdown-menu">
-                                            <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="CreateNote">Create Note</a></li>
-                                            <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="Index">Review Business</a></li>
-                                        </ul>
-                                    </li>*@
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                   aria-expanded="false">Management</a>
+                <ul class="dropdown-menu">
+                    <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="CreateNote">Create Note</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Manager" asp-action="Index">Review Business</a></li>
+                </ul>
+            </li>*@
                                 <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Management" asp-action="Index" asp-route-email="@User.Identity.Name">Management</a></li>
                             }
                             @if (User.IsInRole("Admin"))
@@ -104,6 +102,7 @@
                                     </ul>
                                 </li>
                             }
+                            <li class="nav-item"><a class="nav-link" asp-area="Management" asp-controller="Management" asp-action="Search"><i class="fa fa-search"></i></a></li>
                         </ul>
                     </div>
                     <ul class="social-icons ml-auto">
@@ -210,8 +209,10 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         @*<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
         @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.js"></script>
         <script src="~/js/mail-script.js"></script>
         <script src="~/js/site.js"></script>
+        <script src="~/js/search.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"

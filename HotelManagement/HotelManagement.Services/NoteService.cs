@@ -9,6 +9,7 @@ using HotelManagement.ViewModels.Management;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -90,6 +91,19 @@ namespace HotelManagement.Services
                 .Include(u => u.User).ToListAsync();
 
             return notes;
+        }
+
+        public ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity)
+        {
+            var notes = this.dbContext.Notes
+                .Include(l => l.Logbook)
+                .Include(c => c.Category)
+                .Include(u => u.User)
+                .Where(n => n.Text.Contains(data) && n.User.Email == userIdentity)
+                .ToList();
+
+            var mappedNotes = this.mappingProvider.MapTo<ICollection<NoteViewModel>>(notes);
+            return mappedNotes;
         }
     }
 }

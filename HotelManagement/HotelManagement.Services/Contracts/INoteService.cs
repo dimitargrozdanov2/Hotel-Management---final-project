@@ -1,9 +1,7 @@
 ﻿using HotelManagement.DataModels;
 using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services.Contracts
@@ -16,6 +14,6 @@ namespace HotelManagement.Services.Contracts
 
         Task<string> DeleteNoteAsync(string id);
 
-
+        ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity);
     }
 }

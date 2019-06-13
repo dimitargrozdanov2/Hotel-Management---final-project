@@ -1,4 +1,5 @@
 ﻿using HotelManagement.DataModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,6 +26,7 @@ namespace HotelManagement.ViewModels
         [Required]
         public string Description { get; set; }
 
+        [JsonIgnore]
         public ICollection<LogbookViewModel> BusinessUnits { get; set; }
 
         public ICollection<FeedbackViewModel> Feedback { get; set; }
