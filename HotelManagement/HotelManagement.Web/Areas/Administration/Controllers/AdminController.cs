@@ -78,14 +78,22 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateBusiness(CreateBusinessViewModel model)
         {
-            if (this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+           try
             {
                 var business = await this.businessService.CreateBusinessAsync(model.Name, model.Location, model.Description);
 
-                return PartialView("_BusinessPartialView", business);
+                return Json(business);
             }
-
-            return BadRequest();
+            catch (ArgumentException ex)
+            {
+                this.ModelState.AddModelError("Error", ex.Message);
+                return BadRequest();
+            }
         }
 
         [HttpGet]
