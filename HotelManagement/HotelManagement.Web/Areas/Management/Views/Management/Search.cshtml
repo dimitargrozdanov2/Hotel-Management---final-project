@@ -3,40 +3,16 @@
     ViewData["Title"] = "Search";
 }
 
-<!-- Search form -->
-@*<form class="form-inline md-form form-sm active-purple active-purple-2 mt-2" >
-        <input class="form-control form-control-sm ml-2 w-12" type="text" placeholder="Search" aria-label="Search" id="searchBox">
-    </form>*@
-
-<form>
+<form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
     <fieldset>
-        <input id="target" type="text" value="Hello there" data-id="@User.Identity.Name">
+        <input class="form-control form-control-sm ml-4 w-12" id="target" type="text" placeholder="Enter text..." data-id="@User.Identity.Name">
     </fieldset>
 </form>
-<div id="other">
-    Trigger the handler
-</div>
+
+
 
 <div class="pricing-table">
-    @*<div class="pricing-option" id="idPlace">
-        <i class="material-icons">mode_comment</i>
-        <h1 class="note-title" id="titlePlace"></h1>
-        <hr />
-        <p id="textPlace"></p>
-        <hr />
-        <p id="priorityPlace"></p>
-        <hr />
-        <div class="price">
-            <div class="front">
-                <span class="note-title">@Model.Category?.Name </span>
-            </div>
-            <div class="back">
-                <i class="material-icons" id="editNote" data-Id="@Model.Id">edit</i>
-                <i class="material-icons" id="deleteNote" data-Id="@Model.Id">remove_circle</i>
-                <i class="material-icons" id="archiveNote">archive</i>
-            </div>
-        </div>
-    </div>*@
+    <p id="notShownNotes" class="mt-5">Enter the text you are looing for, only matched notes will be shown...</p>
 </div>
 
 @*@foreach (var note in Model.Notes)
