@@ -1,32 +1,29 @@
 ﻿
-$('.delete-user-button').on('click', function (deleteUserEvent) {
+$('.delete-user-form').on('submit', function (deleteUserEvent) {
+    deleteUserEvent.preventDefault();
     confirm("Are you sure you want to delete this user?");
     var $this = $(this);
 
-    var idOfUserToDelete = $this.attr('att');
-
+    var idOfUserToDelete = $this.find(".DeleteUserRecord").data('id');
+    var tr = $(document).find("#user-tr-" + idOfUserToDelete);
     var antiForgery = ($('#anti-forgery-span').find('input'))[0];
 
-    var postData = "userId=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
+    var postData = "id=" + idOfUserToDelete + "&" + antiForgery.name + "=" + antiForgery.value;
 
-    debugger;
-
-    $.post("/Account/Delete", postData)
+    //debugger;
+    var url = "/Account/Delete/" + idOfUserToDelete
+    $.post("/Account/Delete/", postData)
         .done(function (dataResponse) {
             toastr.options.onHidden = function () {
-                //  window.location.reload();
             };
 
             toastr.options.timeOut = 100;
             toastr.options.fadeOut = 100;
+            toastr.success("User succesfully deleted!");
 
-            toastr.success(dataResponse);
-            $("#table").remove(dataResponse);
+            $('#table').DataTable().row(tr).remove().draw();
 
         }).fail(function (dataResponse) {
-            debugger;
-            console.log('we got an error');
-
             toastr.error("User deletion failed");
 
         });

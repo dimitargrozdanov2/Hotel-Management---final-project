@@ -14,10 +14,11 @@
             <i class="fas fa-pencil-alt"></i>
             Promote user
         </a>
+        <form class="delete-user-form">
             <div class="col-sm-2" style="margin-top:5%"></div>
-            <button class="btn btn-danger btn-sm delete-user-button" att="@Model.Id">
-                <i class="fa fa-trash"></i> Delete user
-            </button>
+            <input type="submit" class="btn btn-danger btn-sm delete-user-button DeleteUserRecord" value="&#x1F5D1;DeleteUser" data-id="@Model.Id"/>
+                @*<i class="fa fa-trash"></i>*@
+        </form>
     </td>
 </tr>
 <span id="anti-forgery-span">@Html.AntiForgeryToken()</span>

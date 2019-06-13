@@ -156,24 +156,33 @@ namespace HotelManagement.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(string userId)
+        public async Task<IActionResult> Delete(string id)
         {
+
             if (this.ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(userId);
-
-                await _userManager.DeleteAsync(user);
-
-                _logger.LogInformation("User deleted.");
-
-                var userViewModel = new UserViewModel
+                try
                 {
-                    Id = user.Id,
-                    Email = user.Email,
-                    UserName = user.UserName
-                };
+                    var user = await _userManager.FindByIdAsync(id);
 
-                return PartialView("_UserPartialView", userViewModel);
+                    await _userManager.DeleteAsync(user);
+
+                    _logger.LogInformation("User deleted.");
+
+                    var userViewModel = new UserViewModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        UserName = user.UserName
+                    };
+
+                    return Json(userViewModel);
+                }
+                catch (ArgumentException ex)
+                {
+                    this.ModelState.AddModelError("Error", ex.Message);
+                    return BadRequest();
+                }           
             }
             return this.View();
         }
