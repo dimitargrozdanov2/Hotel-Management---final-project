@@ -117,18 +117,17 @@ namespace HotelManagement.Services
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)
                 .Include(u => u.User)
-                .Where(n => n.Category.Name == data && n.User.Email == userIdentity)
+                .Where(n => n.Category.Name == data && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
                 .ToList();
             }
             else
             {
-                var tryDate = this.dbContext.Notes.FirstOrDefault().CreatedOn.Value.ToShortDateString().ToString();
                 notes = this.dbContext.Notes
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)
                 .Include(u => u.User)
-                .Where(n => n.CreatedOn.Value.ToShortDateString().ToString() == data && n.User.Email == userIdentity)
+                .Where(n => n.CreatedOn.Value.ToShortDateString().ToString() == data && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
                 .ToList();
             }
