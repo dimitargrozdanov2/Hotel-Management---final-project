@@ -10,7 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services
@@ -30,7 +29,7 @@ namespace HotelManagement.Services
         {
             var logbook = await this.dbContext.Logbooks.FirstOrDefaultAsync(l => l.Name == model.Logbook);
 
-            if(logbook == null)
+            if (logbook == null)
             {
                 throw new EntityInvalidException($"`{model.Logbook}` logbook has not been found!");
             }
@@ -93,15 +92,40 @@ namespace HotelManagement.Services
             return notes;
         }
 
-        public ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity)
+        public ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity, string searchByValue)
         {
-            var notes = this.dbContext.Notes
+            ICollection<Note> notes;
+
+            if (searchByValue == "Text")
+            {
+                notes = this.dbContext.Notes
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)
                 .Include(u => u.User)
                 .Where(n => n.Text.Contains(data) && n.User.Email == userIdentity)
                 .OrderBy(d => d.CreatedOn)
                 .ToList();
+            }
+            else if (searchByValue == "Category")
+            {
+                notes = this.dbContext.Notes
+                .Include(l => l.Logbook)
+                .Include(c => c.Category)
+                .Include(u => u.User)
+                .Where(n => n.Category.Name == data && n.User.Email == userIdentity)
+                .OrderBy(d => d.CreatedOn)
+                .ToList();
+            }
+            else
+            {
+                notes = this.dbContext.Notes
+                .Include(l => l.Logbook)
+                .Include(c => c.Category)
+                .Include(u => u.User)
+                .Where(n => n.CreatedOn.Value.ToShortDateString().ToString() == data && n.User.Email == userIdentity)
+                .OrderBy(d => d.CreatedOn)
+                .ToList();
+            }
 
             var mappedNotes = this.mappingProvider.MapTo<ICollection<NoteViewModel>>(notes);
             return mappedNotes;

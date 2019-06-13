@@ -1,10 +1,12 @@
 ﻿$("#target").keyup(function (event) {
     var userIdentity = event.target.dataset.id;
+    var searchByValue = $('#searchBySelector option:selected').text();
+
     if ($(this).val().length >= 2) {
         var request = $.ajax({
             url: "/Management/Management/GetNotesAsyncJson",
             type: "POST",
-            data: { "data": event.target.value, "userIdentity": userIdentity },
+            data: { "data": event.target.value, "userIdentity": userIdentity, "searchByValue": searchByValue },
             dataType: 'json'
         });
 

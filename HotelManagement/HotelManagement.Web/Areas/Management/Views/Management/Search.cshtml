@@ -4,11 +4,20 @@
 }
 
 <div class="container">
-    <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
-        <fieldset>
-            <input class="form-control form-control-sm ml-4 w-12" id="target" type="text" placeholder="Enter text..." data-id="@User.Identity.Name">
-        </fieldset>
-    </form>
+    <div class="form-group form-inline">
+        <div class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
+            <label for="pickPriority">Select Priority</label>
+            <select class="browser-default custom-select" id="searchBySelector">
+                <option selected value="1">Text</option>
+                <option value="2">Category</option>
+                <option value="3">Date Created</option>
+            </select>
+            <fieldset>
+                <input class="form-control form-control-sm ml-4 w-12" id="target" type="text" placeholder="Enter text..." data-id="@User.Identity.Name">
+            </fieldset>
+        </div>
+    </div>
+
 
 
 

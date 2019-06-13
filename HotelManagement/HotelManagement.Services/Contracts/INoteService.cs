@@ -14,6 +14,6 @@ namespace HotelManagement.Services.Contracts
 
         Task<string> DeleteNoteAsync(string id);
 
-        ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity);
+        ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity, string searchByValue);
     }
 }
