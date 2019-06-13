@@ -96,13 +96,18 @@ namespace HotelManagement.Services
         {
             ICollection<Note> notes;
 
+            //var user = this.dbContext.Users
+            //    .Include(l => l.LogbookManagers).ThenInclude(l => l.Logbook)
+            //    .FirstOrDefault(u => u.Email == userIdentity);
+
             if (searchByValue == "Text")
             {
                 notes = this.dbContext.Notes
                 .Include(l => l.Logbook)
+                    .ThenInclude(x => x.LogbookManagers)
                 .Include(c => c.Category)
                 .Include(u => u.User)
-                .Where(n => n.Text.Contains(data) && n.User.Email == userIdentity)
+                .Where(n => n.Text.Contains(data) && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
                 .ToList();
             }
@@ -118,6 +123,7 @@ namespace HotelManagement.Services
             }
             else
             {
+                var tryDate = this.dbContext.Notes.FirstOrDefault().CreatedOn.Value.ToShortDateString().ToString();
                 notes = this.dbContext.Notes
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)

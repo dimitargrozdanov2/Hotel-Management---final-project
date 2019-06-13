@@ -64,7 +64,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             var model = new SearchViewModel();
             model.Notes = notes;
 
-            var hey = JsonConvert.SerializeObject(model.Notes);
+            var hey = JsonConvert.SerializeObject(model.Notes); // testing if there is json self referencing loop
 
             return Json(model.Notes);
         }

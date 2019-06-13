@@ -28,6 +28,7 @@ namespace HotelManagement.ViewModels
         [JsonIgnore]
         public ICollection<NoteViewModel> Notes { get; set; }
 
+        [JsonIgnore]
         public ICollection<LogbookManagers> LogbookManagers { get; set; } // TODO: Should it be just the entity for many to many
     }
 }
