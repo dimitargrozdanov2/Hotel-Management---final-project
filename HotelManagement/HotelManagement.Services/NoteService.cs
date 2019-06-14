@@ -27,7 +27,10 @@ namespace HotelManagement.Services
 
         public async Task<NoteViewModel> CreateNoteAsync(CreateNoteViewModel model)
         {
-            var logbook = await this.dbContext.Logbooks.FirstOrDefaultAsync(l => l.Name == model.Logbook);
+            var logbook = await this.dbContext.Logbooks
+                .Include(m => m.LogbookManagers)
+                    .ThenInclude(m => m.Manager)
+                .FirstOrDefaultAsync(l => l.Name == model.Logbook && l.LogbookManagers.Any(m => m.Manager.Email == model.Email));
 
             if (logbook == null)
             {

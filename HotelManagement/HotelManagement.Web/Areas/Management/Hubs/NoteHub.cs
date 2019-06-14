@@ -1,4 +1,5 @@
-﻿using HotelManagement.Services.Contracts;
+﻿using HotelManagement.DataModels.Enums;
+using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels.Management;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,10 @@ namespace HotelManagement.Web.Areas.Management.Hubs
 
         public async Task Send(CreateNoteViewModel noteObject)
         {
-            await this.noteService.CreateNoteAsync(noteObject);
+            var note = await this.noteService.CreateNoteAsync(noteObject);
+
+            noteObject.Priority = note.PriorityType;
+
             var messageJsonString = JsonConvert.SerializeObject(noteObject);
             await this.Clients.All.SendAsync("NewMessage", noteObject);
         }
