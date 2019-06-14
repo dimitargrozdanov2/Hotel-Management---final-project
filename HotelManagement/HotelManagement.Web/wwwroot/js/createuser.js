@@ -16,12 +16,12 @@
                         //toastr.options.fadeOut = 100;
                         toastr.success('User succesfully registered');
 
-                        $("#MyModal").modal('hide');
+                        $("#CreateUserModal").modal('hide');
                         //$("#table").prepend(dataResponse);
 
                         var buttons = `
     <form class="promote-user-form">
-                <a data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}" class="open-promote-user"
+                <a data-target="#PromoteUserModal" data-toggle="modal" att="${dataResponse.id}" class="open-promote-user"
                    href="/Administration/Admin/PromoteUser/${dataResponse.id}">
                           <input type="submit" class="btn btn-success btn-sm promote-toggler" value="&#9998;Promote User" data-id="${dataResponse.id}" />
                 </a>

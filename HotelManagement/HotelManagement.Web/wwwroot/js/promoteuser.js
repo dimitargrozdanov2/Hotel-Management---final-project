@@ -12,9 +12,7 @@
 //});
 
 
-
-
-$('.open-promote-user').on('click', function () {
+$('#table').on('click', '.open-promote-user', function () {
     var userid = $(this).attr('att');
     console.log(userid);
     $('#UserId').val(userid);
@@ -32,7 +30,7 @@ $('#PromoteUserRecord').on('click', function (event) {
     $.post("/Administration/Admin/PromoteUser", myformdata)
         .done(function (dataResponse) {
             toastr.success("User promoted succesfully");
-            $("#MyModal2").modal('hide');
+            $("#PromoteUserModal").modal('hide');
             var idOfRoleTd = "#role-" + dataResponse.userId;
             var text = $(idOfRoleTd).text();
             if (text !== '') {
