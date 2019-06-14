@@ -48,7 +48,7 @@ namespace HotelManagement.Services
         {
             if (await this.context.Businesses.AnyAsync(m => m.Name == name))
             {
-                throw new EntityAlreadyExistsException($"Business with '{name}' name already exist!");
+                throw new EntityAlreadyExistsException($"Business with '{name}' name already exists!");
             }
 
             var business = new Business() { Name = name, Location = location, Description = description };

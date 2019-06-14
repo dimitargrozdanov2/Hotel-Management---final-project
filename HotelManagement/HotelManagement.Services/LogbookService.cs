@@ -116,5 +116,25 @@ namespace HotelManagement.Services
             return returnLogbook;
         }
 
+        public async Task<LogbookViewModel> DeleteLogbook(string logbookName)
+        {
+            var logbook = await this.context.Logbooks.FirstOrDefaultAsync(n => n.Name == logbookName);
+
+            if (logbook == null)
+            {
+                throw new EntityInvalidException($"Logbook `{logbookName}` has not been found!");
+            }
+
+            this.context.Logbooks.Remove(logbook);
+
+            await this.context.SaveChangesAsync();
+
+            var returnLogbooks = this.mappingProvider.MapTo<LogbookViewModel>(logbook);
+
+            return returnLogbooks;
+
+        }
+
+
     }
 }
