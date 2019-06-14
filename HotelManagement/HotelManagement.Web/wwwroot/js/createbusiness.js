@@ -18,15 +18,15 @@
             $("#CreateBusinessModal").modal('hide');
             //$("#table").prepend(dataResponse);
             console.log(dataResponse);
-
+            debugger;
             var buttons = `
 <a class="btn btn-info btn-sm"
-href="Administration/Admin/AllLogbooksForBusiness/${dataResponse.Name}">
+href="/Administration/Admin/AllLogbooksForBusiness/${dataResponse.name}">
             <i class="fas fa-pencil-alt"></i>
             Manage Logbooks
         </a>
         <a class="btn btn-primary btn-sm" style="margin-top:5%"
-href="Administration/Admin/AddImageToBusiness/${dataResponse.Name}">
+href="/Administration/Admin/AddImageToBusiness/${dataResponse.name}">
             <i class="fas fa-images"></i>
             Add Image
         </a>`;
