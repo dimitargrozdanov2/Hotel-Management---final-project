@@ -24,11 +24,11 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ILogbookService logbookService;
         private readonly IRoleManagerWrapper roleManagerWrapper;
-
-
+        private readonly ICategoryService categoryService;
 
         public AdminController(IUserManagerWrapper userManagerWrapper,
-            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, ILogbookService logbookService, IRoleManagerWrapper roleManagerWrapper)
+            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, 
+            ILogbookService logbookService, IRoleManagerWrapper roleManagerWrapper, ICategoryService categoryService)
         {
             this.userManagerWrapper = userManagerWrapper;
             this.userService = userService;
@@ -36,6 +36,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
             this.logbookService = logbookService ?? throw new ArgumentNullException(nameof(logbookService));
             this.roleManagerWrapper = roleManagerWrapper ?? throw new ArgumentNullException(nameof(roleManagerWrapper));
+            this.categoryService = categoryService ?? throw new ArgumentNullException(nameof(categoryService));
         }
 
         [HttpGet]
@@ -195,6 +196,83 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             }
 
             return BadRequest(model);
+        }
+
+        [HttpGet]
+        public IActionResult ManageManager(string name)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var model = new ManagerManageViewModel();
+                model.LogbookName = name;
+
+                return this.View(model);
+            }
+
+            return this.View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageManager(ManagerManageViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var logbook = await this.logbookService.ManageManagerAsync(model.LogbookName, model.ManagerEmail);
+
+                return this.RedirectToAction("AllBusinesses", "Admin");
+            }
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult CreateCategory(string name)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var model = new CreateCategoryViewModel();
+                model.LogbookName = name;
+            }
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCategory(CreateCategoryViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.categoryService.CreateCategoryAsync(model.CategoryName, model.LogbookName);
+
+                return this.RedirectToAction("AllBusinesses", "Admin");
+            }
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteLogbook(string name)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var model = new DeleteLogbookViewModel();
+                model.Name = name;
+            }
+            return this.View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteLogbook(DeleteLogbookViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                await this.logbookService.DeleteLogbook(model.Name);
+
+                return this.RedirectToAction("AllBusinesses", "Admin");
+            }
+
+            return this.View();
         }
     }
 }

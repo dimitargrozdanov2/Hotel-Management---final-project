@@ -2,6 +2,7 @@
 using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
+using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,6 +34,34 @@ namespace HotelManagement.Services
             //var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
 
             return categories;
+        }
+
+        public async Task<CategoryViewModel> CreateCategoryAsync(string categoryName, string logbookName)
+        {
+            var logbook = await this.context.Logbooks
+                .Include(l => l.Categories)
+                .FirstOrDefaultAsync(l => l.Name == logbookName);
+
+            if (logbook == null)
+            {
+                throw new EntityInvalidException($"Logbook `{logbookName}` has not been found!");
+            }
+
+            if (logbook.Categories.Any(m => m.Name == categoryName))
+            {
+                throw new EntityAlreadyExistsException($"Category '{categoryName}' already exists in Logbook '{logbookName}'!");
+            }
+
+            var category = new Category() { Name = categoryName };
+
+            logbook.Categories.Add(category);
+
+            await this.context.SaveChangesAsync();
+
+            var returnCategory= this.mappingProvider.MapTo<CategoryViewModel>(category);
+
+            return returnCategory;
+
         }
     }
 }

@@ -26,6 +26,9 @@ namespace HotelManagement.ViewModels
         public BusinessViewModel Business { get; set; }
 
         [JsonIgnore]
+        public ICollection<CategoryViewModel> Categories { get; set; }
+
+        [JsonIgnore]
         public ICollection<NoteViewModel> Notes { get; set; }
 
         [JsonIgnore]
