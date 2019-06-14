@@ -134,40 +134,41 @@
                         console.log(dataResponse);
 
                         var buttons = `
-            <a class="btn btn-success btn-sm promote-toggler" data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}"
-               href="/Administration/Admin/PromoteUser/${dataResponse.id}">
-                <i class="fas fa-pencil-alt"></i>
-                Promote user
-            </a>
-                <div class="col-sm-2" style="margin-top:5%"></div>
-                <button class="btn btn-danger btn-sm delete-user-button" att="${dataResponse.id}">
-                    <i class="fa fa-trash"></i> Delete user
-                </button>`;
+    <form class="promote-user-form">
+                <a data-target="#MyModal2" data-toggle="modal" att="${dataResponse.id}" class="open-promote-user"
+                   href="/Administration/Admin/PromoteUser/${dataResponse.id}">
+                          <input type="submit" class="btn btn-success btn-sm promote-toggler" value="&#9998;Promote User" data-id="${dataResponse.id}" />
+                </a>
+    </form>
+    <form class="delete-user-form>
+    <div class="col-sm-2" style="margin-top:5%"></div>
+    <input type="submit" class="btn btn-danger btn-sm delete-user-button DeleteUserRecord" value="&#x1F5D1;Delete User" data-id="${dataResponse.id}"/>
+    </form>`;
 
-                        $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw();
-
-
-
-                    }).fail(function (dataResponse) {
-
-                        for (var key in dataResponse.responseJSON) {
-
-                            var result = (dataResponse.responseJSON[key].description).toString();
-                            toastr.error(result);
-
-                        }
-                    });
-
-            })
-
-            //$('.promote-toggler').click(function () {
-            //    console.log($(this).attr('att'))
-            //    $('.email-hidden').val($(this).attr('att'));
-            //    console.log($(".email-hidden"));
-            //});
+                            $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw();
 
 
-        });
+
+                        }).fail(function (dataResponse) {
+
+                            for (var key in dataResponse.responseJSON) {
+
+                                var result = (dataResponse.responseJSON[key].description).toString();
+                                toastr.error(result);
+
+                            }
+                        });
+
+                })
+
+                //$('.promote-toggler').click(function () {
+                //    console.log($(this).attr('att'))
+                //    $('.email-hidden').val($(this).attr('att'));
+                //    console.log($(".email-hidden"));
+                //});
+
+
+            });
     </script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="~/js/deleteuser.js"></script>
