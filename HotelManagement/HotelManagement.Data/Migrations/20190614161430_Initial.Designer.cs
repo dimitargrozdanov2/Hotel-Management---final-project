@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190613111227_Initial")]
+    [Migration("20190614161430_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,6 +74,8 @@ namespace HotelManagement.Data.Migrations
 
                     b.Property<bool>("IsDeleted");
 
+                    b.Property<string>("LogbookId");
+
                     b.Property<DateTime?>("ModifiedOn");
 
                     b.Property<string>("Name")
@@ -81,6 +83,8 @@ namespace HotelManagement.Data.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LogbookId");
 
                     b.ToTable("Categories");
 
@@ -90,6 +94,7 @@ namespace HotelManagement.Data.Migrations
                             Id = "450b6f6e-95b3-400d-a258-aafc6b6ecd07",
                             CreatedOn = new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2",
                             Name = "TODO"
                         },
                         new
@@ -97,6 +102,7 @@ namespace HotelManagement.Data.Migrations
                             Id = "b73de489-d731-4f3a-8be7-a6613fe5eb6f",
                             CreatedOn = new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            LogbookId = "1fc92a85-06de-4c97-9230-295d4d2b445c",
                             Name = "Maintenance"
                         },
                         new
@@ -104,6 +110,7 @@ namespace HotelManagement.Data.Migrations
                             Id = "5c97553f-1557-4352-9622-d5bdd37f44f4",
                             CreatedOn = new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            LogbookId = "3d71d939-dc61-46f8-af46-ed6a618036c2",
                             Name = "Events"
                         },
                         new
@@ -111,6 +118,7 @@ namespace HotelManagement.Data.Migrations
                             Id = "177922b2-3c7c-4d20-ab91-f36538f52ce9",
                             CreatedOn = new DateTime(2019, 5, 3, 18, 46, 23, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            LogbookId = "1fc92a85-06de-4c97-9230-295d4d2b445c",
                             Name = "None"
                         });
                 });
@@ -674,6 +682,13 @@ namespace HotelManagement.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("HotelManagement.DataModels.Category", b =>
+                {
+                    b.HasOne("HotelManagement.DataModels.Logbook", "Logbook")
+                        .WithMany("Categories")
+                        .HasForeignKey("LogbookId");
                 });
 
             modelBuilder.Entity("HotelManagement.DataModels.Feedback", b =>

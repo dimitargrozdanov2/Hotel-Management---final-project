@@ -65,21 +65,6 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: true),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -263,6 +248,28 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: true),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    LogbookId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Logbooks_LogbookId",
+                        column: x => x.LogbookId,
+                        principalTable: "Logbooks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LogbookManagers",
                 columns: table => new
                 {
@@ -352,17 +359,6 @@ namespace HotelManagement.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
-                values: new object[,]
-                {
-                    { "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "TODO" },
-                    { "b73de489-d731-4f3a-8be7-a6613fe5eb6f", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, null, "Maintenance" },
-                    { "5c97553f-1557-4352-9622-d5bdd37f44f4", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, null, "Events" },
-                    { "177922b2-3c7c-4d20-ab91-f36538f52ce9", new DateTime(2019, 5, 3, 18, 46, 23, 0, DateTimeKind.Unspecified), false, null, "None" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
@@ -407,6 +403,17 @@ namespace HotelManagement.Data.Migrations
                     { "834c3420-56d9-4dbc-900b-c792cb15be83", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 21, 10, 0, DateTimeKind.Unspecified), "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!", false, null, "Restaurant" },
                     { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!", false, null, "Bar" },
                     { "1fc92a85-06de-4c97-9230-295d4d2b445c", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 41, 5, 0, DateTimeKind.Unspecified), "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.", false, null, "Exclusive Lounge" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CreatedOn", "IsDeleted", "LogbookId", "ModifiedOn", "Name" },
+                values: new object[,]
+                {
+                    { "450b6f6e-95b3-400d-a258-aafc6b6ecd07", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, "TODO" },
+                    { "5c97553f-1557-4352-9622-d5bdd37f44f4", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), false, "3d71d939-dc61-46f8-af46-ed6a618036c2", null, "Events" },
+                    { "b73de489-d731-4f3a-8be7-a6613fe5eb6f", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), false, "1fc92a85-06de-4c97-9230-295d4d2b445c", null, "Maintenance" },
+                    { "177922b2-3c7c-4d20-ab91-f36538f52ce9", new DateTime(2019, 5, 3, 18, 46, 23, 0, DateTimeKind.Unspecified), false, "1fc92a85-06de-4c97-9230-295d4d2b445c", null, "None" }
                 });
 
             migrationBuilder.InsertData(
@@ -472,6 +479,11 @@ namespace HotelManagement.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_LogbookId",
+                table: "Categories",
+                column: "LogbookId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_BusinessId",
@@ -550,10 +562,10 @@ namespace HotelManagement.Data.Migrations
                 name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Logbooks");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Logbooks");
 
             migrationBuilder.DropTable(
                 name: "Businesses");

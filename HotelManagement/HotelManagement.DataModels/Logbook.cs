@@ -16,6 +16,9 @@ namespace HotelManagement.DataModels
         public Business Business { get; set; }
 
         [JsonIgnore]
+        public ICollection<Category> Categories { get; set; }
+
+        [JsonIgnore]
         public ICollection<Note> Notes { get; set; }
 
         [JsonIgnore]
