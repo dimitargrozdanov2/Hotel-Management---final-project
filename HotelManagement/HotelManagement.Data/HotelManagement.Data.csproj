@@ -11,6 +11,7 @@
     <Compile Remove="Migrations\20190611152429_Initial.cs" />
     <Compile Remove="Migrations\20190614072814_Initial.cs" />
     <Compile Remove="Migrations\20190614101521_Initial.cs" />
+    <Compile Remove="Migrations\20190614175553_Initial.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HotelManagement.DataModels\HotelManagement.DataModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
