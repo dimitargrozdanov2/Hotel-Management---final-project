@@ -177,9 +177,12 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                     throw new EntityInvalidException("User not found!");
                 }
                 // v service da proverq dali rolqta sashtestvuva v bazata 
+
                 if ((await userManagerWrapper.GetAllRoles(user.UserName)).Contains(model.RoleName))
                 {
-                    return BadRequest();
+                    var userAlreadyHasRoleMessage = $"{user.UserName} is already assigned role {model.RoleName}";
+                    this.ModelState.AddModelError("Error", userAlreadyHasRoleMessage);
+                    return BadRequest(new { message = userAlreadyHasRoleMessage });
                 }
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
 

@@ -14,6 +14,7 @@ using HotelManagement.Web.Models.AccountViewModels;
 using HotelManagement.DataModels;
 using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
+using HotelManagement.Services.Exceptions;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -178,7 +179,7 @@ namespace HotelManagement.Web.Controllers
 
                     return Json(userViewModel);
                 }
-                catch (ArgumentException ex)
+                catch (EntityInvalidException ex)
                 {
                     this.ModelState.AddModelError("Error", ex.Message);
                     return BadRequest();

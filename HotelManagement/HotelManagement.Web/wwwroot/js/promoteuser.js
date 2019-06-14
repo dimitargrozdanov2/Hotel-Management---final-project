@@ -24,7 +24,7 @@ $('#PromoteUserRecord').on('click', function (event) {
     event.preventDefault();
     var myformdata = $("#formPromote").serialize();
 
-    console.log(myformdata);
+  //  console.log(myformdata);
     //if (!$(this).valid()) {
     //    return;
     //}
@@ -42,7 +42,8 @@ $('#PromoteUserRecord').on('click', function (event) {
 
 
         }).fail(function (dataResponse) {
-            toastr.error("User promotion failed");
+            console.log(dataResponse);
+            toastr.error(dataResponse.responseJSON.message);
 
         });
 });
