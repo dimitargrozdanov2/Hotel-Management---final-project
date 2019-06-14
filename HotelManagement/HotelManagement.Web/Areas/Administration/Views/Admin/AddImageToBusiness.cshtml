@@ -1,0 +1,33 @@
+﻿@model AddImageToBusinessViewModel
+
+@{
+    ViewData["Title"] = "Add Image to business";
+}
+
+<div class="divider">
+    <div class="text">
+        <h2>Add Image to business</h2>
+    </div>
+</div>
+<div class="row">
+    &nbsp;
+</div>
+
+
+<div class="form-row">
+    <form asp-action="Create" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label asp-for="ImageName">For logo rename the file to business_logo, for logbook to business_logbook</label>
+            <input asp-for="ImageName" class="form-control" />
+            <span asp-validation-for="ImageName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image">Image</label>
+            <input type="file" asp-for="Image" accept="image/*" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add Image" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

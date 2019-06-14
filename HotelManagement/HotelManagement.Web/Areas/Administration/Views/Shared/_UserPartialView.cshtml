@@ -1,0 +1,28 @@
+﻿@inject HotelManagement.Services.Wrappers.Contracts.IUserManagerWrapper UserManager
+@model UserViewModel
+@{
+    ViewData["Title"] = "_UserPartialView";
+}
+
+<tr id="user-tr-@Model.Id">
+    <td>@Model.UserName</td>
+    <td>@Model.Email</td>
+    <td id="role-@Model.Id">@string.Join(", ", await UserManager.GetAllRoles(Model.UserName))</td>
+    <td>
+        <form class="promote-user-form">
+            <a data-target="#PromoteUserModal" data-toggle="modal" att="@Model.Id" class="open-promote-user"
+               asp-area="Administration" asp-controller="Admin" asp-action="PromoteUser" asp-route-id="@Model.Id">
+                @*<i class="fas fa-pencil-alt"></i>
+        Promote user*@
+                <input type="submit" class="btn btn-success btn-sm promote-toggler" value="&#9998;Promote User" data-id="@Model.Id" />
+            </a>
+        </form>
+        <form class="delete-user-form" >
+            <div class="col-sm-2" style="margin-top:5%"></div>
+            <input type="submit" class="btn btn-danger btn-sm delete-user-button DeleteUserRecord" value="&#x1F5D1;Delete User" data-id="@Model.Id"/>
+                @*<i class="fa fa-trash"></i>*@
+        </form>
+    </td>
+</tr>
+<span id="anti-forgery-span">@Html.AntiForgeryToken()</span>
+

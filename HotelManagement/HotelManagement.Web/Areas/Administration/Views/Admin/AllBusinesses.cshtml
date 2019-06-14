@@ -4,6 +4,9 @@
     ViewData["Title"] = "All Businesses";
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
 <div class="divider">
     <div class="text-center">
         <h2>All Businesses</h2>
@@ -12,8 +15,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <a class="btn btn-primary btn-block" style="margin-bottom:10px"
-           asp-area="Administration" asp-controller="Admin" asp-action="CreateBusiness">
+        <a href="#" class="btn btn-primary" style="margin-bottom:5%" data-target="#CreateBusinessModal" data-toggle="modal">
             <i class="fas fa-plus-circle"></i>
             Create Business
         </a>
@@ -30,39 +32,50 @@
     </thead>
     @foreach (var business in Model.Businesses)
     {
-        <tr>
-            <td>@business.Name</td>
-            <td>@business.Location</td>
-            <td>@business.Description</td>
-            <td>
-                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
-                        </div>
-
-                    </form>*@
-                <a class="btn btn-info btn-sm"
-                   asp-area="Administration" asp-controller="BusinessManagement" asp-action="Details" asp-route-id="@business.Id">
-                    <i class="fas fa-pencil-alt"></i>
-                    Manage Logbooks
-                </a>
-                <a class="btn btn-primary btn-sm" style="margin-top:10px"
-                   asp-area="Administration" asp-controller="BusinessManagement" asp-action="AddImage" asp-route-id="@business.Id">
-                    <i class="fas fa-images"></i>
-                    Add Image
-                </a>
-            </td>
-        </tr>
+        <partial name="_BusinessPartialView" model="business" />
     }
 </table>
 
 
+@*Popup modal for creating business*@
+<div class="modal fade" id="CreateBusinessModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create business</h4>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="formCreateBusiness" asp-area="Administration" asp-controller="Admin" asp-action="CreateBusiness">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Location"></label>
+                        <input asp-for="Location" class="form-control" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-block btn-success" id="CreateBusinessRecord" value="Create Business" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" />
-<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
 @section Scripts
     {
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     <script>
@@ -82,4 +95,5 @@
             });
         });
     </script>
+    <script src="~/js/createbusiness.js"></script>
 }

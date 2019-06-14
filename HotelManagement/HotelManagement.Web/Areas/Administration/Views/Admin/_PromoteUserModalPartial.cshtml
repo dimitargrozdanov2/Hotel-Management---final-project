@@ -1,0 +1,31 @@
+﻿@model PromoteRoleViewModel
+
+@{
+    ViewData["Title"] = "_PromoteUserModalPartial";
+}
+
+<div class="modal fade" id="PromoteUserModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Promote user</h4>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="formPromote" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label asp-for="RoleName">List of Roles</label>
+                            <select asp-for="RoleName" class="custom-select" asp-items="@Model?.RoleList"></select>
+                        </div>
+                        <input hidden class="email-hidden form-control" asp-for="UserId" />
+                        <input hidden class="RoleName value" value="@Model.RoleName" />
+                    </div>
+                </form>
+                <input type="submit" class="btn btn-success btn-sm promote-toggler" id="PromoteUserRecord" value="Promote" data-id="@Model.UserId" />
+            </div>
+
+        </div>
+    </div>
+</div>

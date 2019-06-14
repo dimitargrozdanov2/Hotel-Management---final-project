@@ -11,6 +11,8 @@ namespace HotelManagement.Services.Wrappers.Contracts
     {
         Task<User> FindByNameAsync(string username);
 
+        Task<User> FindByIdAsync(string id);
+
         Task<IdentityResult> AddToRoleAsync(User user, string role);
 
         Task<IdentityResult> UpdateUserAsync(User user);

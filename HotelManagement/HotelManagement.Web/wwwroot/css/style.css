@@ -1891,3 +1891,6 @@ button {
     color: #777; }
 
 /*============ End Blog Single Styles  =============*/
+div.validation-summary-errors:not(:first-child) {
+    display: none;
+}

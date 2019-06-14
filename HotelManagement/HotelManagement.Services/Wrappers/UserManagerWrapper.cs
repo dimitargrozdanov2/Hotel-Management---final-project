@@ -23,6 +23,10 @@ namespace HotelManagement.Services.Wrappers
             return await this.userManager.FindByNameAsync(username);
         }
 
+        public async Task<User> FindByIdAsync(string id)
+        {
+            return await this.userManager.FindByIdAsync(id);
+        }
         public async Task<IdentityResult> AddToRoleAsync(User user, string role)
         {
             return await this.userManager.AddToRoleAsync(user, role);

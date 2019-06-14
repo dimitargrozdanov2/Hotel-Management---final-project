@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using HotelManagement.Web.Models.AccountViewModels;
 using HotelManagement.DataModels;
 using HotelManagement.Services.Contracts;
+using HotelManagement.ViewModels;
+using HotelManagement.Services.Exceptions;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -85,9 +87,46 @@ namespace HotelManagement.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterUser(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new User { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                    //After Registering a user, I don't want to sign in with him
+
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created a new account with password.");
+                    var userViewModel = new UserViewModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        UserName = user.UserName
+                    };
+                    //return PartialView("_UserPartialView", userViewModel);
+                    return Json(userViewModel);
+                    //return new { success = true };
+                }
+
+                var test = result.Errors;
+
+                return BadRequest(result.Errors);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
@@ -114,6 +153,39 @@ namespace HotelManagement.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(string id)
+        {
+
+            if (this.ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _userManager.FindByIdAsync(id);
+
+                    await _userManager.DeleteAsync(user);
+
+                    _logger.LogInformation("User deleted.");
+
+                    var userViewModel = new UserViewModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        UserName = user.UserName
+                    };
+
+                    return Json(userViewModel);
+                }
+                catch (EntityInvalidException ex)
+                {
+                    this.ModelState.AddModelError("Error", ex.Message);
+                    return BadRequest();
+                }           
+            }
+            return this.View();
         }
 
         [HttpPost]

@@ -1,24 +1,17 @@
-﻿@model CreateBusinessViewModel
+﻿@model CreateLogbookViewModel
 
 @{
-    ViewData["Title"] = "Create Business";
+    ViewData["Title"] = "Create Logbook";
 }
 
-<h1 class="headerText">Create Business</h1>
+<h1 class="headerText">Create Logbook</h1>
 
 <div class="form-row">
-    <form id="create-business-form" class="col-lg-7" asp-area="Administration" 
-asp-controller="Admin" asp-action="CreateBusiness" data-id="@Model.Id" method="post">
+    <form class="col-lg-7" method="post">
         <div class="form-group">
             <label asp-for="Name">Name</label>
             <input class="form-control" asp-for="Name" />
             <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Location">Location</label>
-            <input class="form-control" asp-for="Location" />
-            <span asp-validation-for="Location" class="text-danger"></span>
         </div>
 
         <div class="form-group">
