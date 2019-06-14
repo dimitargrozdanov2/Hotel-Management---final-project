@@ -123,32 +123,34 @@ $(function () {
     })
 })
 
+function updateCategories(logbookName) {
+    $.getJSON('/Management/Management/CreateNote', {
+        logbookName,
+    }, function (retrievedCategoriesData) {
+        var categoriesArray = retrievedCategoriesData.categories;
+
+        var departmentSelect = $('#department');
+        var categoryElements = categoriesArray.map(function (category) {
+            return $('<option />').text(category);
+        });
+
+        departmentSelect.html(categoryElements);
+    });
+}
+
 $(document).on("click", "#createNoteButton", function (event) {
     event.preventDefault();
     $('#noteModal').modal('show');
-    debugger;
-    console.log(event.target);
-    $.getJSON('/Management/Management/CreateNote', { name: event.target.dataset.name, logbookname: event.target.dataset.logbookname }, function (retrievedCategoriesData) {
-        var categoriesArray = retrievedCategoriesData.categories;
-        var userLogbooksArray = retrievedCategoriesData.userLogbooks;
+    updateCategories(event.target.dataset.logbookname);
 
-        var categoriesString = JSON.stringify(categoriesArray);
-        var userLogbooksString = JSON.stringify(userLogbooksArray);
-        var categoriesJson = JSON.parse(categoriesString);
-        var userLogbooksJson = JSON.parse(userLogbooksString);
+    $('#pickLogbook').on('change', function (ev) {
+        var selectedValue = ev.target.value;
+        updateCategories(selectedValue);
+    })
+});
 
-        $.each(categoriesJson, function (i, val) {
-            if ($('#department option:contains(' + val + ')').length === 0) {
-                $("#department").append("<option>" + val + "</option>");
-            }
-        });
-
-        $.each(userLogbooksJson, function (i, val) {
-            if ($('#pickLogbook option:contains(' + val + ')').length === 0) {
-                $("#pickLogbook").append("<option>" + val + "</option>");
-            }
-        });
-    });
+$('#noteModal').on('hidden.bs.modal', function () {
+    $('#pickLogbook').off();
 });
 
 connection.start().catch(function (err) {
@@ -183,19 +185,19 @@ $(document).on("click", "#deleteNote", function (event) {
         buttons: true,
         dangerMode: true,
     })
-        .then((willDelete) => {
-            if (willDelete) {
-                $.post("/Management/Management/DeleteNote", { "data": id }, function () {
-                    $('#' + id).remove();
-                })
-                swal("Poof! The note has been deleted!", {
-                    icon: "success",
-                });
-            } else {
-                swal("You decided to keep the note, good!", {
-                    icon: "info",
-                });
-            }
-        });
+    .then((willDelete) => {
+        if (willDelete) {
+            $.post("/Management/Management/DeleteNote", { "data": id }, function () {
+                $('#' + id).remove();
+            })
+            swal("Poof! The note has been deleted!", {
+                icon: "success",
+            });
+        } else {
+            swal("You decided to keep the note, good!", {
+                icon: "info",
+            });
+        }
+    });
 });
 

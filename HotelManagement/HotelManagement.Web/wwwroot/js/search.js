@@ -12,7 +12,7 @@
 
         request.done(function (data) {
             $('.pricing-table').empty();
-            $('.pricing-table').append('<h5 id="resultsCount" class="text-info float-right">' + "Results found: " + data.length + "</h5 >");
+            $('#resultsCount').html(`Results found: ${data.length}`);
             if (data.length == 0) {
                 $('.pricing-table').prepend('<p id="notShownNotes" class="mt-5">I couldnt find any notes that matched the requirements, please try again!</p>')
             }

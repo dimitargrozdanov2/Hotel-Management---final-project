@@ -47,12 +47,17 @@
                                   required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="department">Select Category</label>
-                        <select class="form-control" id="department" name="category"></select>
+                        <label for="pickLogbook">Select Logbook</label>
+                        <select class="form-control" id="pickLogbook" name="logbook">
+                            @foreach (var logbook in Model.Logbooks)
+                            {
+                                <option>@logbook.Name</option>
+                            }
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="pickLogbook">Select Logbook</label>
-                        <select class="form-control" id="pickLogbook" name="logbook"></select>
+                        <label for="department">Select Category</label>
+                        <select class="form-control" id="department" name="category"></select>
                     </div>
                     <div class="form-group">
                         <label for="pickPriority">Select Priority</label>

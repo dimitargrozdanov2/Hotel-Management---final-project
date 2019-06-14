@@ -7,8 +7,10 @@
 @if (SignInManager.IsSignedIn(User))
 {
 
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    <li class="nav-item avatar-nav">
+        <div class="avatar">
+            <a class="avatar-name" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User)[0]</a>
+        </div>
     </li>
 }
 else
