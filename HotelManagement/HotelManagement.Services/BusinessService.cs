@@ -11,6 +11,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HotelManagement.Services.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace HotelManagement.Services
 {
@@ -53,6 +54,40 @@ namespace HotelManagement.Services
             var business = new Business() { Name = name, Location = location, Description = description };
 
             await this.context.Businesses.AddAsync(business);
+            await this.context.SaveChangesAsync();
+
+            var returnBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
+
+            return returnBusiness;
+        }
+
+        public async Task<BusinessViewModel> AddImageToBusiness(string name, string imageUrl, IFormFile Image)
+        {
+            var business = await this.context.Businesses
+                .Include(bu => bu.BusinessUnits)
+                .Include(i => i.Images)
+                .Include(f => f.Feedback)
+                .FirstOrDefaultAsync(b => b.Name == name);
+
+            if (business == null)
+            {
+                throw new EntityInvalidException($"Business `{name}` does not exist.");
+            }
+
+            if (!Image.ContentType.Contains("image"))
+            {
+                throw new EntityInvalidException("Uploaded file must be of type image");
+            }
+
+            if (business.Images.Any(x => x.Name == imageUrl))
+            {
+                throw new EntityAlreadyExistsException($"Business '{name}' already has an image with this name!");
+            }
+
+            var image = new Image() { Name = imageUrl };
+
+            business.Images.Add(image);
+
             await this.context.SaveChangesAsync();
 
             var returnBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
