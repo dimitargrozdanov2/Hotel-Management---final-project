@@ -126,8 +126,9 @@ $(function () {
 $(document).on("click", "#createNoteButton", function (event) {
     event.preventDefault();
     $('#noteModal').modal('show');
-
-    $.getJSON('/Management/Management/CreateNote', { name: event.target.dataset.name }, function (retrievedCategoriesData) {
+    debugger;
+    console.log(event.target);
+    $.getJSON('/Management/Management/CreateNote', { name: event.target.dataset.name, logbookname: event.target.dataset.logbookname }, function (retrievedCategoriesData) {
         var categoriesArray = retrievedCategoriesData.categories;
         var userLogbooksArray = retrievedCategoriesData.userLogbooks;
 

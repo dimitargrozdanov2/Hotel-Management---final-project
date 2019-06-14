@@ -6,7 +6,8 @@
 
 <div class="dropdown">
     <div class="">
-        <a asp-area="Management" asp-controller="Management" asp-action="CreateNote" data-name="@User.Identity.Name" class="btn btn-warning float-right logbookButton" id="createNoteButton">
+        <a asp-area="Management" asp-controller="Management" asp-action="CreateNote" data-name="@User.Identity.Name" 
+                data-logbookname="@Model.SpecifiedLogbook?.Name" class="btn btn-warning float-right logbookButton" id="createNoteButton">
             Create Note
         </a>
     </div>

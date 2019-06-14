@@ -62,7 +62,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateNote(string name)
+        public async Task<IActionResult> CreateNote(string name, string logbookName)
         {
             var categories = await this.categoryService.GetAllCategoryNamesAsync();
             var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);

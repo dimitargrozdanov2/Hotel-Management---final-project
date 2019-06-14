@@ -25,6 +25,7 @@ namespace HotelManagement.Services
 
         public async Task<ICollection<string>> GetAllCategoryNamesAsync()
         {
+
             var categories = await this.context.Categories.Select(x => x.Name).ToListAsync();
 
             //var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
