@@ -11,5 +11,7 @@ namespace HotelManagement.Services.Contracts
         Task<IEnumerable<LogbookViewModel>> GetLogBooksForBusiness(string name);
 
         Task<LogbookViewModel> CreateLogbookAsync(string businessname, string name, string description);
+
+        Task<LogbookViewModel> ManageManagerAsync(string logbookName, string managerEmail);
     }
 }

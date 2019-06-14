@@ -196,5 +196,32 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
             return BadRequest(model);
         }
+
+        [HttpGet]
+        public IActionResult ManageManager(string name)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var model = new ManagerManageViewModel();
+                model.LogbookName = name;
+
+                return this.View(model);
+            }
+
+            return this.View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ManageManager(ManagerManageViewModel model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var logbook = await this.logbookService.ManageManagerAsync(model.LogbookName, model.ManagerEmail);
+
+                return this.RedirectToAction("AllLogbooksForBusiness", "Admin", new { id = logbook.Name });
+            }
+
+            return this.View(model);
+        }
     }
 }

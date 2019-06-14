@@ -38,14 +38,14 @@
             <td>@logbook.Description</td>
             <td>
                 <a class="btn btn-info btn-sm"
-                   asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@logbook.Name">
+                   asp-area="Administration" asp-controller="Admin" asp-action="ManageManager" asp-route-name="@logbook.Name">
                     <i class="fas fa-info"></i>
-                    Logbook Details
+                    Manage Manager
                 </a>
                 <a class="btn btn-danger btn-sm" style="margin-top:5%"
-                   asp-area="Administration" asp-controller="Admin" asp-action="AddImageToBusiness" asp-route-name="@logbook.Name">
+                   asp-area="Administration" asp-controller="Admin" asp-action="ManageCategory" asp-route-name="@logbook.Name">
                     <i class="fa fa-trash"></i>
-                    Delete Logbook
+                    Manage Category
                 </a>
             </td>
         </tr>
