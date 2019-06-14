@@ -4,7 +4,7 @@
     ViewData["Title"] = "_UserPartialView";
 }
 
-<tr class="deleteUserRow" id="user-tr-@Model.Id">
+<tr id="user-tr-@Model.Id">
     <td>@Model.UserName</td>
     <td>@Model.Email</td>
     <td id="role-@Model.Id">@string.Join(", ", await UserManager.GetAllRoles(Model.UserName))</td>

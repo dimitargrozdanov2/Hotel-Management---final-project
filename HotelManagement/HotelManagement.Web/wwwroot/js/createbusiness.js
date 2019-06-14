@@ -9,16 +9,9 @@
 
     $.post("/Administration/Admin/CreateBusiness", myformdata)
         .done(function (dataResponse) {
-            console.log(dataResponse);
-            //toastr.options.onHidden = function () {
-            //    //window.location.reload();
-            //};
             toastr.success("Created business succesfully");
-
             $("#CreateBusinessModal").modal('hide');
-            //$("#table").prepend(dataResponse);
-            console.log(dataResponse);
-            debugger;
+
             var buttons = `
 <a class="btn btn-info btn-sm"
 href="/Administration/Admin/AllLogbooksForBusiness/${dataResponse.name}">

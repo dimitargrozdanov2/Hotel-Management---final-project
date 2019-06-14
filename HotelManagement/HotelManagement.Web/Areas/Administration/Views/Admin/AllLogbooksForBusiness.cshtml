@@ -37,12 +37,6 @@
             <td>@logbook.Name</td>
             <td>@logbook.Description</td>
             <td>
-                @*<form asp-area="Administration" asp-controller="Admin" asp-action="DeleteUser" asp-route-id="@user.Id">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-block">Delete user</button>
-                        </div>
-
-                    </form>*@
                 <a class="btn btn-info btn-sm"
                    asp-area="Administration" asp-controller="Admin" asp-action="AllLogbooksForBusiness" asp-route-name="@logbook.Name">
                     <i class="fas fa-info"></i>

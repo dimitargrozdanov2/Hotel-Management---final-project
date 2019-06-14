@@ -186,8 +186,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 }
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
 
-                //this.userManagerWrapper
-
                 var promoteRoleViewModel = new PromoteRoleViewModel
                 {
                     RoleName = model.RoleName,
@@ -197,7 +195,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 return Json(promoteRoleViewModel);
             }
 
-            return this.View(model);
+            return BadRequest(model);
+            //  return this.View(model);
         }
     }
 }
