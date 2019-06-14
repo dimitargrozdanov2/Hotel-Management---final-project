@@ -176,7 +176,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                 {
                     throw new EntityInvalidException("User not found!");
                 }
-                // v service da proverq dali rolqta sashtestvuva v bazata 
 
                 if ((await userManagerWrapper.GetAllRoles(user.UserName)).Contains(model.RoleName))
                 {
@@ -196,7 +195,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             }
 
             return BadRequest(model);
-            //  return this.View(model);
         }
     }
 }
