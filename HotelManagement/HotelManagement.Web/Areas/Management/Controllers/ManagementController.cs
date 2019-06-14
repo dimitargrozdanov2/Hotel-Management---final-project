@@ -1,8 +1,10 @@
 ﻿using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
+using HotelManagement.Web.Areas.Management.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -18,7 +20,8 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         private readonly INoteService noteService;
         private readonly ICategoryService categoryService;
 
-        public ManagementController(IUserService userService, INoteService noteService, ICategoryService categoryService)
+        public ManagementController(IUserService userService, INoteService noteService, 
+            ICategoryService categoryService, IHubContext<NoteHub> hubContext)
         {
             this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
             this.noteService = noteService ?? throw new ArgumentNullException(nameof(noteService));
@@ -33,24 +36,13 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             model.Logbooks = userLogbooks;
             if (specifiedLogbook == null)
             {
-                //model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
-                model.SpecifiedLogbook = userLogbooks.FirstOrDefault(x => x.Notes.Count > 0);
+                model.SpecifiedLogbook = userLogbooks.FirstOrDefault();
             }
             else
             {
                 model.SpecifiedLogbook = userLogbooks.FirstOrDefault(l => l.Name == specifiedLogbook);
             }
             return this.View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CreateNote(string name)
-        {
-            var categories = await this.categoryService.GetAllCategoryNamesAsync();
-            var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);
-
-            var returnField = new { categories, userLogbooks };
-            return this.Json(returnField);
         }
 
         public IActionResult Search(string data)
@@ -69,21 +61,31 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return Json(model.Notes);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNote(CreateNoteViewModel model)
+        [HttpGet]
+        public async Task<IActionResult> CreateNote(string name)
         {
-            if (this.ModelState.IsValid)
-            {
-                //return this.RedirectToAction("Details", "Movie", new { id = movie.Name });
+            var categories = await this.categoryService.GetAllCategoryNamesAsync();
+            var userLogbooks = await this.userService.GetUserLogbookNamesAsync(name);
 
-                var result = await this.noteService.CreateNoteAsync(model);
-
-                return this.PartialView("_NotePartial", result);
-            }
-
-            return this.View(model);
+            var returnField = new { categories, userLogbooks };
+            return this.Json(returnField);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> CreateNote(CreateNoteViewModel model)
+        //{
+        //    if (this.ModelState.IsValid)
+        //    {
+        //        //return this.RedirectToAction("Details", "Movie", new { id = movie.Name });
+
+        //        var result = await this.noteService.CreateNoteAsync(model);
+
+        //        return this.PartialView("_NotePartial", result);
+        //    }
+
+        //    return this.View(model);
+        //}
 
         [HttpPost]
         public async Task<IActionResult> DeleteNote(string data)

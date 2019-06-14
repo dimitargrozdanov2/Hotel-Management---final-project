@@ -4,7 +4,7 @@
 }
 
 <div class="pricing-table">
-    @if (Model.Notes.Count() == 0)
+    @if (Model.Notes?.Count() == 0)
     {
         <p id="noNotes">This logbook has no notes. Be the first to submit one!</p>
     }

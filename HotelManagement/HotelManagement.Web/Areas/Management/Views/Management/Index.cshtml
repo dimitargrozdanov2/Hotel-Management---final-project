@@ -11,7 +11,7 @@
         </a>
     </div>
     <button class="btn btn-warning dropdown-toggle logbookButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        @Model.SpecifiedLogbook.Name
+        @Model.SpecifiedLogbook?.Name
     </button>
 
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -24,12 +24,7 @@
     </div>
 </div>
 
-<partial name="_LogbookPartial" model="@Model.SpecifiedLogbook" />
-@*@foreach (var logbook in Model.Logbooks)
-    {
-        <partial name="_LogbookPartial" model="logbook" />
-    }*@
-
+<partial name="_LogbookPartial" model="@Model?.SpecifiedLogbook" />
 
 <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -73,5 +68,7 @@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script src="~/js/management.js"></script>
+
+    <script src="~/js/management.js">
+    </script>
 }

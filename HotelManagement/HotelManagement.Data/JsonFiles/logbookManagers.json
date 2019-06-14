@@ -10,5 +10,9 @@
   {
     "LogbookId": "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae",
     "ManagerId": "6404c00f-c0e6-4a92-ad71-43b24f5f0e97"
+  },
+  { // second admin logbooks
+    "LogbookId": "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae",
+    "ManagerId": "118fed24-fc6a-4f4c-a2a3-a728d1628d90"
   }
 ]

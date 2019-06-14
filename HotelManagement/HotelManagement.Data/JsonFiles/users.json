@@ -8,5 +8,15 @@
     "PasswordHash": "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==",
     "SecurityStamp": "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
     "ConcurrencyStamp": "b318fa87-5d53-4bc3-8019-23d7aa37da20"
+  },
+  {
+    "Id": "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
+    "UserName": "secondadmin@bg.bg",
+    "NormalizedUserName": "SECONDADMIN@BG.BG",
+    "Email": "secondadmin@bg.bg",
+    "NormalizedEmail": "SECONDADMIN@BG.BG",
+    "PasswordHash": "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==",
+    "SecurityStamp": "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
+    "ConcurrencyStamp": "110113a3-74d7-4a97-bdb5-ed9e92b6f1d3"
   }
 ]

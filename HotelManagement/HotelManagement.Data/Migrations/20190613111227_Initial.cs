@@ -336,7 +336,11 @@ namespace HotelManagement.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", 0, "b318fa87-5d53-4bc3-8019-23d7aa37da20", "admin@admin.admin", false, false, null, "ADMIN@ADMIN.ADMIN", "ADMIN@ADMIN.ADMIN", "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "admin@admin.admin" });
+                values: new object[,]
+                {
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", 0, "b318fa87-5d53-4bc3-8019-23d7aa37da20", "admin@admin.admin", false, false, null, "ADMIN@ADMIN.ADMIN", "ADMIN@ADMIN.ADMIN", "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "admin@admin.admin" },
+                    { "118fed24-fc6a-4f4c-a2a3-a728d1628d90", 0, "110113a3-74d7-4a97-bdb5-ed9e92b6f1d3", "secondadmin@bg.bg", false, false, null, "SECONDADMIN@BG.BG", "SECONDADMIN@BG.BG", "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==", null, false, "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX", false, "secondadmin@bg.bg" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Businesses",
@@ -363,8 +367,11 @@ namespace HotelManagement.Data.Migrations
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
                 {
-                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" },
+                    { "118fed24-fc6a-4f4c-a2a3-a728d1628d90", "2c9e83b9-1015-42b6-9df5-ad54b3d98224" },
+                    { "118fed24-fc6a-4f4c-a2a3-a728d1628d90", "ca8a9288-1bda-4320-8929-731d721be047" },
                     { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "ca8a9288-1bda-4320-8929-731d721be047" },
+                    { "118fed24-fc6a-4f4c-a2a3-a728d1628d90", "0e78767e-b4d2-456f-b029-5ad4c454589a" },
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "0e78767e-b4d2-456f-b029-5ad4c454589a" },
                     { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "2c9e83b9-1015-42b6-9df5-ad54b3d98224" }
                 });
 
@@ -373,9 +380,9 @@ namespace HotelManagement.Data.Migrations
                 columns: new[] { "Id", "BusinessId", "Comment", "CreatedOn", "Email", "FeedbackParentId", "IsDeleted", "ModifiedOn", "Name", "Rating" },
                 values: new object[,]
                 {
+                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), "jeffGold@gmail.com", null, false, null, "Jeff Goldblum", 5.0 },
                     { "1e67e958-37fc-46cc-a6b9-5d1f28e9e532", "14f77522-b07f-4ad8-855b-d93923bea56e", "We had a wonderful stay! The staff could not have been more helpful!", new DateTime(2019, 5, 2, 15, 26, 10, 0, DateTimeKind.Unspecified), "scarlettJoh@gmail.com", null, false, null, "Scarlett Johansson", 3.0 },
-                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), "sandyBullock@gmail.com", null, false, null, "Sandra Bullock", 1.0 },
-                    { "b4f2f3c8-a725-44a0-8fd6-651ee45a9690", "687af33b-3084-43b6-bacb-4c8847559ee4", "Great location, really clean rooms, awesome staff!", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), "jeffGold@gmail.com", null, false, null, "Jeff Goldblum", 5.0 }
+                    { "d2dd7ddf-ac78-42f1-963a-16f06406bd9d", "14f77522-b07f-4ad8-855b-d93923bea56e", "The hotel is in a very good location, visited the restaurant and had a really great time!", new DateTime(2019, 5, 3, 18, 45, 23, 0, DateTimeKind.Unspecified), "sandyBullock@gmail.com", null, false, null, "Sandra Bullock", 1.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -383,12 +390,12 @@ namespace HotelManagement.Data.Migrations
                 columns: new[] { "Id", "BusinessId", "CreatedOn", "IsDeleted", "ModifiedOn", "Name" },
                 values: new object[,]
                 {
-                    { "0f34be57-d215-43fb-b442-45f246b651d5", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_logo.jpg" },
-                    { "c8cae9c7-d536-4049-ad77-8324187fbc83", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Restaurant.jpg" },
-                    { "55973f04-9f96-45e0-8ea2-3ceb0fb7ce5e", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Exclusive Lounge.jpg" },
                     { "83705aa7-d523-4978-b799-84e15468a088", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 5, 4, 16, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_logo.jpg" },
-                    { "93a31b5d-671b-42bb-a457-bd60b5f124e3", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Restaurant.jpg" },
-                    { "0d07b40a-ef2b-4c5e-99ed-5ead465b6b1e", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Bar.jpg" }
+                    { "0d07b40a-ef2b-4c5e-99ed-5ead465b6b1e", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Bar.jpg" },
+                    { "55973f04-9f96-45e0-8ea2-3ceb0fb7ce5e", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Exclusive Lounge.jpg" },
+                    { "c8cae9c7-d536-4049-ad77-8324187fbc83", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_Restaurant.jpg" },
+                    { "0f34be57-d215-43fb-b442-45f246b651d5", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "Rove Dubai Marina_logo.jpg" },
+                    { "93a31b5d-671b-42bb-a457-bd60b5f124e3", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 15, 36, 5, 0, DateTimeKind.Unspecified), false, null, "The Palm_Restaurant.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -397,9 +404,9 @@ namespace HotelManagement.Data.Migrations
                 values: new object[,]
                 {
                     { "3d71d939-dc61-46f8-af46-ed6a618036c2", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 40, 5, 0, DateTimeKind.Unspecified), "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!", false, null, "Restaurant" },
-                    { "1fc92a85-06de-4c97-9230-295d4d2b445c", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 41, 5, 0, DateTimeKind.Unspecified), "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.", false, null, "Exclusive Lounge" },
                     { "834c3420-56d9-4dbc-900b-c792cb15be83", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 21, 10, 0, DateTimeKind.Unspecified), "Deliciously international cuisine awaits you at our on-site restaurant, Mosaic Restaurant & Terrace, offering an adventurous array of dishes from Egypt, Lebanon, Russia, India and China and beyond!", false, null, "Restaurant" },
-                    { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!", false, null, "Bar" }
+                    { "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae", "687af33b-3084-43b6-bacb-4c8847559ee4", new DateTime(2019, 3, 4, 16, 20, 10, 0, DateTimeKind.Unspecified), "Amazing views, perfect place to meet friends and relax. Check out our latest collection of summer drinks. Our bar is open 24/7, hosting the best parties in Dubai, every night, every day! Visit us!", false, null, "Bar" },
+                    { "1fc92a85-06de-4c97-9230-295d4d2b445c", "14f77522-b07f-4ad8-855b-d93923bea56e", new DateTime(2019, 5, 4, 14, 41, 5, 0, DateTimeKind.Unspecified), "Spectacular views, awesome place to meet friends and relax. Check out our creative and refreshing drinks. The Exclusive Lounge is restricted to our V.I.P guests, feel free to request acccess anytime.", false, null, "Exclusive Lounge" }
                 });
 
             migrationBuilder.InsertData(
@@ -418,7 +425,8 @@ namespace HotelManagement.Data.Migrations
                 {
                     { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "3d71d939-dc61-46f8-af46-ed6a618036c2" },
                     { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "1fc92a85-06de-4c97-9230-295d4d2b445c" },
-                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae" }
+                    { "6404c00f-c0e6-4a92-ad71-43b24f5f0e97", "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae" },
+                    { "118fed24-fc6a-4f4c-a2a3-a728d1628d90", "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae" }
                 });
 
             migrationBuilder.InsertData(

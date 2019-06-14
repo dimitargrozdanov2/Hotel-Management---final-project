@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190612061612_Initial")]
+    [Migration("20190613111227_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -370,6 +370,11 @@ namespace HotelManagement.Data.Migrations
                         {
                             ManagerId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
                             LogbookId = "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae"
+                        },
+                        new
+                        {
+                            ManagerId = "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
+                            LogbookId = "cc9ea717-1788-49d8-9a3d-bd0bc3eb73ae"
                         });
                 });
 
@@ -487,6 +492,22 @@ namespace HotelManagement.Data.Migrations
                             SecurityStamp = "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.admin"
+                        },
+                        new
+                        {
+                            Id = "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "110113a3-74d7-4a97-bdb5-ed9e92b6f1d3",
+                            Email = "secondadmin@bg.bg",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SECONDADMIN@BG.BG",
+                            NormalizedUserName = "SECONDADMIN@BG.BG",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG5yDdPexa5KQHAhorczw165qs8mxitFXgC5YGEA1XRuewjCiAB4VDHSpuWZ1oY/Ow==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7I2NUNAXILZUAHNGX7TRSNQCNRWCEOSX",
+                            TwoFactorEnabled = false,
+                            UserName = "secondadmin@bg.bg"
                         });
                 });
 
@@ -621,6 +642,21 @@ namespace HotelManagement.Data.Migrations
                         new
                         {
                             UserId = "6404c00f-c0e6-4a92-ad71-43b24f5f0e97",
+                            RoleId = "2c9e83b9-1015-42b6-9df5-ad54b3d98224"
+                        },
+                        new
+                        {
+                            UserId = "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
+                            RoleId = "0e78767e-b4d2-456f-b029-5ad4c454589a"
+                        },
+                        new
+                        {
+                            UserId = "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
+                            RoleId = "ca8a9288-1bda-4320-8929-731d721be047"
+                        },
+                        new
+                        {
+                            UserId = "118fed24-fc6a-4f4c-a2a3-a728d1628d90",
                             RoleId = "2c9e83b9-1015-42b6-9df5-ad54b3d98224"
                         });
                 });

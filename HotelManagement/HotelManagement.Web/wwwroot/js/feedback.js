@@ -79,7 +79,7 @@ $(document).on("click", "#delete-button", function (event) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
                     $('#' + id).parent().remove();
                     $('#' + id).remove();
-
+                    console.log(id);
                     if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
                         if ($('.comments-area').length === 0) {
                             $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');

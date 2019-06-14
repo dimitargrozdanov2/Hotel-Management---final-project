@@ -6,6 +6,7 @@ using HotelManagement.Services;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Wrappers;
 using HotelManagement.Services.Wrappers.Contracts;
+using HotelManagement.Web.Areas.Management.Hubs;
 using HotelManagement.Web.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,8 @@ namespace HotelManagement.Web
 
             services.AddAutoMapper(typeof(Startup));
 
+            services.AddSignalR();
+
             services.AddMvc()
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
         }
@@ -71,6 +74,12 @@ namespace HotelManagement.Web
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseSignalR(
+                routes =>
+                {
+                    routes.MapHub<NoteHub>("/notesHub");
+                });
 
             app.UseMvc(routes =>
             {
