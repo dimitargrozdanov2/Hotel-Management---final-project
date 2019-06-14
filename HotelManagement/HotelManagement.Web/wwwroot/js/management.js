@@ -103,7 +103,7 @@ connection.on("NewMessage",
             $('.pricing-table').prepend(textToPrepend);
 
         }
-        toastr["success"]("Your note has been posted!", "Note")
+        toastr["success"]("A new note has been posted in logbook: " + message.logbook, "Note")
         $('.modal').modal('hide');
         $('#createNoteForm')[0].reset();
     });
