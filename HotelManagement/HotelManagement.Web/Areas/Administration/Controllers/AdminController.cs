@@ -68,12 +68,12 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult CreateBusiness()
-        {
-            var model = new CreateBusinessViewModel();
-            return this.View(model);
-        }
+        //[HttpGet]
+        //public IActionResult CreateBusiness()
+        //{
+        //    var model = new CreateBusinessViewModel();
+        //    return this.View(model);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]

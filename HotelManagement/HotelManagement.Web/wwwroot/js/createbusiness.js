@@ -1,4 +1,4 @@
-﻿$("#formCreateBusiness").submit(function (event) {
+﻿$("#formCreateBusiness").on('submit', function (event) {
 
     event.preventDefault();
     var myformdata = $("#formCreateBusiness").serialize();
@@ -24,7 +24,8 @@ href="/Administration/Admin/AddImageToBusiness/${dataResponse.name}">
             Add Image
         </a>`;
 
-            $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw();
+            var newRow = $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw(false).node();
+            $('td:eq(3) a', newRow).attr('asp-route-name', `?${dataResponse.name}`);
 
         }).fail(function (dataResponse) {
             toastr.error(dataResponse.responseJSON.message);
