@@ -1,0 +1,10 @@
+version: 1.0.{build}
+nuget:
+  project_feed: true
+before_build:
+- cmd: nuget restore ./HotelManagement/HotelManagement.sln
+build:
+  project: ./HotelManagement/HotelManagement.sln
+  publish_nuget: true
+  include_nuget_references: true
+  verbosity: minimal

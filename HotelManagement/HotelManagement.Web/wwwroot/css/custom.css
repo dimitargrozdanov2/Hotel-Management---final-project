@@ -125,10 +125,6 @@ body, .header-top {
         transition: all .3s ease-in-out;
     }
 
-        .pricing-table .pricing-option:nth-child(even) {
-            margin: 0 2%;
-        }
-
         .pricing-table .pricing-option:hover {
             cursor: pointer;
             box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.3);
@@ -234,7 +230,13 @@ body, .header-top {
 .pricing-table {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
+
+.pricing-option {
+    margin-top: 20px;
+}
+
 
 @media screen and (max-width: 768px) {
     .pricing-table .pricing-option {
@@ -247,10 +249,6 @@ body, .header-top {
         padding: 5%;
         width: 90%;
     }
-
-        .pricing-table .pricing-option:nth-child(even) {
-            margin: 3px 0 !important;
-        }
 }
 
 .dropdown-menu {
@@ -282,7 +280,7 @@ body, .header-top {
     text-transform: uppercase;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
     .avatar-nav {
         position: absolute;
         right: 10px;
