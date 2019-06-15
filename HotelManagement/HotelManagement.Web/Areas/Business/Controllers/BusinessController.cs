@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelManagement.Services.Contracts;
-using HotelManagement.ViewModels;
+﻿using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels.PublicArea;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Business.Controllers
 {
@@ -27,25 +25,48 @@ namespace HotelManagement.Web.Areas.Business.Controllers
         {
             var business = await this.businessService.GetBusinessByNameAsync(name);
 
-            return View(business);
+            return this.View(business);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Comment(AddFeedbackViewModel model)
         {
-            var feedbackModel = await this.feedbackService.AddComment(model);
+            if (this.ModelState.IsValid)
+            {
+                try
+                {
+                    var feedbackModel = await this.feedbackService.AddComment(model);
+                    return this.PartialView("_CommentSectionPartial", feedbackModel);
+                }
+                catch (Exception ex)
+                {
 
-            return this.PartialView("_CommentSectionPartial", feedbackModel);
+                    return this.StatusCode((int)HttpStatusCode.InternalServerError, ex);
+                }
+            }
+
+            return this.BadRequest();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddReply(AddFeedbackViewModel model)
         {
-            var feedbackModel = await this.feedbackService.AddReply(model);
+            if (this.ModelState.IsValid)
+            {
+                try
+                {
+                    var feedbackModel = await this.feedbackService.AddReply(model);
 
-            return this.PartialView("_ReplySectionPartial", feedbackModel);
+                    return this.PartialView("_ReplySectionPartial", feedbackModel);
+                }
+                catch (Exception ex)
+                {
+                    return this.StatusCode((int)HttpStatusCode.InternalServerError, ex);
+                }
+            }
+            return this.BadRequest();
         }
 
         [Authorize(Roles = "Moderator")]
@@ -54,7 +75,14 @@ namespace HotelManagement.Web.Areas.Business.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                await this.feedbackService.DeleteCommentAsync(data);
+                try
+                {
+                    await this.feedbackService.DeleteCommentAsync(data);
+                }
+                catch (Exception ex)
+                {
+                    return this.StatusCode((int)HttpStatusCode.InternalServerError, ex);
+                }
 
                 return this.StatusCode(200);
             }

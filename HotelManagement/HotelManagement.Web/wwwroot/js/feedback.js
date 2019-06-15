@@ -6,27 +6,32 @@
         const dataToSend = $commentForm.serialize();
 
         $.post($commentForm.attr('action'), dataToSend, function (serverData) {
-            if ($('.comments-area').find('#noBusinesses').length) {
-                $('#noBusinesses').hide();
-            }
-            // used to clear modal input fields.
-            $('#send-feedback-form')[0].reset();
-
-            $('.comments-area').prepend(serverData);
-
-            toastr["success"]("You have submitted your feedback successfully!", "Business Feedback")
-
-            const commentCount = $('.feedbackCom').length
-            $('#amount').html(commentCount);
-
-            $('.modal').modal('hide'); // used to hide the modal on success.
         })
-    })
+            .done(function (serverData) {
+                if ($('.comments-area').find('#noBusinesses').length) {
+                    $('#noBusinesses').hide();
+                }
+                // used to clear modal input fields.
+                $('#send-feedback-form')[0].reset();
+
+                $('.comments-area').prepend(serverData);
+
+                toastr["success"]("You have submitted your feedback successfully!", "Business Feedback")
+
+                const commentCount = $('.feedbackCom').length
+                $('#amount').html(commentCount);
+
+                $('.modal').modal('hide'); // used to hide the modal on success.
+            })
+            .fail(function (dataResponse) {
+                toastr["error"](dataResponse.responseJSON.Message, "Failed to submit feedback!")
+            })
+    });
 })
 
 
 // using this to set the id of the feedback someone is replying to, in the modal, 
-        //otherwise the modal will always take the first feedback id.
+//otherwise the modal will always take the first feedback id.
 $(document).on("click", "#reply-button", function () {
     var feedbackId = $(this).data('id');
 
@@ -50,13 +55,19 @@ $(function () {
         const feedbackParentElement = $('#' + feedbackParentId);
 
         $.post($replyForm.attr('action'), dataToSend, function (serverData) {
-            toastr["success"]("Reply posted...", "Feedback Reply")
 
-            $('#send-reply-form')[0].reset();
-            $(feedbackParentElement).prepend(serverData);
-
-            $('.modal').modal('hide'); // used to hide the modal on success.
         })
+            .done(function (serverData) {
+                toastr["success"]("Reply posted...", "Feedback Reply")
+
+                $('#send-reply-form')[0].reset();
+                $(feedbackParentElement).prepend(serverData);
+
+                $('.modal').modal('hide'); // used to hide the modal on success.
+            })
+            .fail(function (dataResponse) {
+                toastr["error"](dataResponse.responseJSON.Message, "Failed to submit reply!")
+            })
     })
 })
 //console.log($('.comments-area').children().length)

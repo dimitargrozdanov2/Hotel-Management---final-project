@@ -99,10 +99,6 @@ namespace HotelManagement.Services
         {
             ICollection<Note> notes;
 
-            //var user = this.dbContext.Users
-            //    .Include(l => l.LogbookManagers).ThenInclude(l => l.Logbook)
-            //    .FirstOrDefault(u => u.Email == userIdentity);
-
             if (searchByValue == "Text")
             {
                 notes = this.dbContext.Notes
@@ -112,6 +108,7 @@ namespace HotelManagement.Services
                 .Include(u => u.User)
                 .Where(n => n.Text.Contains(data) && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
+                .Take(10)
                 .ToList();
             }
             else if (searchByValue == "Category")

@@ -96,7 +96,6 @@ namespace HotelManagement.Web.Areas.Management.Controllers
                 try
                 {
                     await this.noteService.DeleteNoteAsync(data);
-
                 }
                 catch (Exception ex)
                 {

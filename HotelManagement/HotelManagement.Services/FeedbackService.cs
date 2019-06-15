@@ -26,6 +26,11 @@ namespace HotelManagement.Services
         {
             var business = await this.context.Businesses.FirstOrDefaultAsync(b => b.Id == model.BusinessId);
 
+            if (business == null)
+            {
+                throw new ArgumentException($"The business has not been found!");
+            }
+
             var feedback = new Feedback()
             {
                 Name = model.AuthorName,
@@ -45,6 +50,11 @@ namespace HotelManagement.Services
         public async Task<FeedbackViewModel> AddReply(AddFeedbackViewModel model)
         {
             var business = await this.context.Businesses.FirstOrDefaultAsync(b => b.Id == model.BusinessId);
+
+            if (business == null)
+            {
+                throw new ArgumentException($"The business has not been found!");
+            }
 
             var feedback = new Feedback()
             {
