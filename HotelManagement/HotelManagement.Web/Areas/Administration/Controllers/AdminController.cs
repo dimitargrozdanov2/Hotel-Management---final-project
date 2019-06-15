@@ -98,10 +98,14 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddImageToBusiness()
+        public IActionResult AddImageToBusiness(string name)
         {
-            var model = new AddImageToBusinessViewModel();
-            return this.View(model);
+            if (this.ModelState.IsValid)
+            {
+                var model = new AddImageToBusinessViewModel();
+                model.name = name;
+            }
+            return this.View();
         }
 
         [HttpPost]
@@ -112,7 +116,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             {
                 var imageNameToSave = model.ImageName + ".jpg";
 
-                var business = await this.businessService.AddImageToBusiness(model.BusinessName, imageNameToSave, model.Image);
+                var business = await this.businessService.AddImageToBusiness(model.name, imageNameToSave, model.Image);
 
                 using (var ms = new MemoryStream())
                 {
@@ -134,15 +138,19 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> AllLogbooksForBusiness(string name)
         {
-            var model = new ListLogbooksViewModel();
+            if (this.ModelState.IsValid)
+            {
+                var model = new ListLogbooksViewModel();
 
-            var logbooks = await this.logbookService.GetLogBooksForBusiness(name);
+                var logbooks = await this.logbookService.GetLogBooksForBusiness(name);
 
-            model.Logbooks = logbooks;
+                model.Logbooks = logbooks;
 
-            model.BusinessName = name;
+                model.BusinessName = name;
 
-            return this.View(model);
+                return this.View(model);
+            }
+            return this.View();
         }
 
         [HttpGet]
@@ -199,18 +207,17 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         }
 
         [HttpGet]
-        public IActionResult ManageManager(string name)
+        public IActionResult ManageManager(string LogbookName)
         {
             if (this.ModelState.IsValid)
             {
                 var model = new ManagerManageViewModel();
-                model.LogbookName = name;
+                model.LogbookName = LogbookName;
 
-                return this.View(model);
             }
-
             return this.View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ManageManager(ManagerManageViewModel model)
@@ -226,12 +233,12 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateCategory(string name)
+        public IActionResult CreateCategory(string LogbookName)
         {
             if (this.ModelState.IsValid)
             {
                 var model = new CreateCategoryViewModel();
-                model.LogbookName = name;
+                model.LogbookName = LogbookName;
             }
             return this.View();
         }
