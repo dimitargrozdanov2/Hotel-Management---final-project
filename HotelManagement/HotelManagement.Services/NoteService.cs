@@ -71,7 +71,7 @@ namespace HotelManagement.Services
 
             if (note == null)
             {
-                throw new EntityInvalidException($"Note with id `{id}` has not been found!");
+                throw new ArgumentException($"Note with name `{id}` has not been found!");
             }
 
             this.dbContext.Notes.Remove(note);

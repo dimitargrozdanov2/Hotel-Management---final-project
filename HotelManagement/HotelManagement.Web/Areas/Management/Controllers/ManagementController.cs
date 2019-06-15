@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace HotelManagement.Web.Areas.Management.Controllers
 {
@@ -91,7 +93,15 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                await this.noteService.DeleteNoteAsync(data);
+                try
+                {
+                    await this.noteService.DeleteNoteAsync(data);
+
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+                }
 
                 return this.StatusCode(200);
             }

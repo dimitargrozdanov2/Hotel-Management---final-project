@@ -6,7 +6,10 @@
 <div class="col-md-4 col-xl-4 mb-4 homeBusinessListAlign">
     <div class="card card-explore">
         <div class="card-explore__img">
-            <img class="card-img" src="~/images/Project/@Model.Business.Images.FirstOrDefault(x => x.Name.Contains(Model.Name)).Name" alt="Business Image">
+            @if (@Model.Business.Images.Count != 0)
+            {
+                <img class="card-img" src="~/images/Project/@Model.Business.Images?.FirstOrDefault(x => x.Name.Contains(Model.Name)).Name" alt="Business Image">
+            }
         </div>
         <div class="card-body">
             <h3 class="card-explore__title">@Model.Name</h3>

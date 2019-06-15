@@ -194,11 +194,17 @@ $(document).on("click", "#deleteNote", function (event) {
     .then((willDelete) => {
         if (willDelete) {
             $.post("/Management/Management/DeleteNote", { "data": id }, function () {
-                $('#' + id).remove();
+                
             })
-            swal("Poof! The note has been deleted!", {
-                icon: "success",
-            });
+                .done(function (dataResponse) {
+                    $('#' + id).remove();
+                    swal("Poof! The note has been deleted!", {
+                        icon: "success",
+                    });
+                })
+                .fail(function (dataResponse) {
+                    toastr["error"](dataResponse.responseJSON.Message, "Failed to create note!")
+                })
         } else {
             swal("You decided to keep the note, good!", {
                 icon: "info",
