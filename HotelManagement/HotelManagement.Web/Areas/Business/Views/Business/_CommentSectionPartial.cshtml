@@ -1,33 +1,34 @@
 ﻿@model FeedbackViewModel
-
-<div class="single-comment justify-content-between d-flex feedbackCom">
-    <div class="user justify-content-between d-flex">
-        <div class="thumb">
-            <div class="avatar">
-                <div class="avatar-name">@Model.Name[0]</div>
+<div class="comment-list">
+    <div class="single-comment justify-content-between d-flex feedbackCom">
+        <div class="user justify-content-between d-flex">
+            <div class="thumb">
+                <div class="avatar">
+                    <div class="avatar-name">@Model.Name[0]</div>
+                </div>
+            </div>
+            <div class="desc">
+                <h5>
+                    <a href="#">@Model.Name</a>
+                </h5>
+                <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
+                <p class="comment">
+                    @Model.Comment
+                </p>
             </div>
         </div>
-        <div class="desc">
-            <h5>
-                <a href="#">@Model.Name</a>
-            </h5>
-            <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
-            <p class="comment">
-                @Model.Comment
-            </p>
+        <div class="reply-btn">
+            @if (User.IsInRole("Moderator"))
+            {
+                <button id="delete-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
+            }
+            <button id="reply-button" type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
         </div>
     </div>
-    <div class="reply-btn">
-        @if (User.IsInRole("Moderator"))
+    <div class="comment-list left-padding" id="@Model.Id">
+        @foreach (var reply in Model.Replies.OrderByDescending(r => r.CreatedOn))
         {
-            <button id="delete-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
+            <partial name="_ReplySectionPartial" model="reply" />
         }
-        <button id="reply-button" type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
     </div>
-</div>
-<div class="comment-list left-padding" id="@Model.Id">
-    @foreach (var reply in Model.Replies.OrderByDescending(r => r.CreatedOn))
-    {
-        <partial name="_ReplySectionPartial" model="reply" />
-    }
 </div>

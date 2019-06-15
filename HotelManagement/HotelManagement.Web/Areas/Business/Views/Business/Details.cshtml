@@ -29,9 +29,7 @@
                         }
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
-                            <div class="comment-list">
                                 <partial name="_CommentSectionPartial" model="comment" />
-                            </div>
                         }
                     </div>
                 </div>

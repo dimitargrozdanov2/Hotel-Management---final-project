@@ -89,15 +89,16 @@ $(document).on("click", "#delete-button", function (event) {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
                     $('#' + id).parent().remove();
-                    $('#' + id).remove();
-                    console.log(id);
+                    console.log($('#noBusinesses').is(':hidden'));
+                    console.log($('#noBusinesses'));
                     if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
                         if ($('.comments-area').length === 0) {
                             $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
                         } else {
                             $('.comments-area').append('<p id="noBusinesses">This business has no feedback. Be the first to submit one!</p>');
                         }
-                        console.log($('#comments-amount'));
+                    } else if ($('.comments-area').children().length === 1 && $('#noBusinesses').is(':hidden')) {
+                        $('#noBusinesses').show();
                     }
 
                     const commentCount = $('.feedbackCom').length
