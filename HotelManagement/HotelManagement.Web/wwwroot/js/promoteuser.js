@@ -14,7 +14,7 @@
 
 $('#table').on('click', '.open-promote-user', function () {
     var userid = $(this).attr('att');
-    console.log(userid);
+  //  console.log(userid);
     $('#UserId').val(userid);
 });
 
@@ -35,8 +35,11 @@ $('#PromoteUserRecord').on('click', function (event) {
             var text = $(idOfRoleTd).text();
             if (text !== '') {
                 dataResponse.roleName = ', ' + dataResponse.roleName;
+                debugger;
             }
+            console.log(dataResponse);
             $(idOfRoleTd).append(dataResponse.roleName);
+            console.log(this);
 
 
         }).fail(function (dataResponse) {
