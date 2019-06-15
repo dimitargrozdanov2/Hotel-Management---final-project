@@ -26,13 +26,16 @@
                           <input type="submit" class="btn btn-success btn-sm promote-toggler" value="&#9998;Promote User" data-id="${dataResponse.id}" />
                 </a>
     </form>
-    <form class="delete-user-form>
+    <form class="delete-user-form">
     <div class="col-sm-2" style="margin-top:5%"></div>
     <input type="submit" class="btn btn-danger btn-sm delete-user-button DeleteUserRecord" value="&#x1F5D1;Delete User" data-id="${dataResponse.id}"/>
     </form>`;
 
-            $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw();
+            var newRow = $('#table').DataTable().row.add([dataResponse.userName, dataResponse.email, "", buttons]).draw().node();
 
+            $('td:eq(2)', newRow).attr('id', `role-${dataResponse.id}`);
+            $(newRow).attr('id', `user-tr-${dataResponse.id}`);
+            $('.delete-user-form', newRow).on('submit', deleteUser);
 
 
         }).fail(function (dataResponse) {
