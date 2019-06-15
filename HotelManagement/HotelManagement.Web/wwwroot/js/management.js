@@ -70,6 +70,12 @@ var connection =
         .withUrl("/notesHub")
         .build();
 
+connection.on("handle_exception", function (err) {
+    if (err.ClassName === "System.ArgumentException") {
+        toastr["error"](err.Message, "Failed to create note!")
+    }
+});
+
 connection.on("NewMessage",
     function (message) {
         var currentLogbookValue = $('#dropdownMenuButton').text().trim();

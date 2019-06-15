@@ -34,19 +34,19 @@ namespace HotelManagement.Services
 
             if (logbook == null)
             {
-                throw new EntityInvalidException($"`{model.Logbook}` logbook has not been found!");
+                throw new ArgumentException($"{model.Logbook} logbook has not been found!");
             }
 
             var category = await this.dbContext.Categories.FirstOrDefaultAsync(c => c.Name == model.Category);
             if (category == null)
             {
-                throw new EntityInvalidException($"`{model.Logbook}` category has not been found!");
+                throw new ArgumentException($"{model.Logbook} category has not been found!");
             }
 
             var user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
             if (user == null)
             {
-                throw new EntityInvalidException($"`{model.Email}` user has not been found!");
+                throw new ArgumentException($"{model.Email} user has not been found!");
             }
 
             var note = new Note()

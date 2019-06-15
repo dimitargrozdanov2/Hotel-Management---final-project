@@ -25,12 +25,22 @@ namespace HotelManagement.Web.Areas.Management.Hubs
 
         public async Task Send(CreateNoteViewModel noteObject)
         {
-            var note = await this.noteService.CreateNoteAsync(noteObject);
+            try
+            {
+                var note = await this.noteService.CreateNoteAsync(noteObject);
 
-            noteObject.Priority = note.PriorityType;
+                noteObject.Priority = note.PriorityType;
 
-            var messageJsonString = JsonConvert.SerializeObject(noteObject);
-            await this.Clients.All.SendAsync("NewMessage", noteObject);
+                var messageJsonString = JsonConvert.SerializeObject(noteObject);
+                await this.Clients.All.SendAsync("NewMessage", noteObject);
+            }
+            catch (Exception ex)
+            {
+                await Clients.Caller.SendAsync("handle_exception", ex);
+            }
+
+
+            
         }
     }
 }
