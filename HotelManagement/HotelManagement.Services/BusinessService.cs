@@ -73,6 +73,17 @@ namespace HotelManagement.Services
             {
                 throw new EntityInvalidException($"Business `{name}` does not exist.");
             }
+            if (!imageUrl.Contains("logo"))
+            {
+                int startIndex = imageUrl.IndexOf('_');
+                string logbookName = imageUrl.Substring((startIndex + 1), (imageUrl.Length - 5 - startIndex));
+                var logbook = await this.context.Logbooks.FirstOrDefaultAsync(b => b.Name == logbookName);
+
+                if (logbook == null)
+                {
+                    throw new EntityInvalidException($"Logbook {logbookName} does not exist!");
+                }
+            }
 
             if (!Image.ContentType.Contains("image"))
             {
