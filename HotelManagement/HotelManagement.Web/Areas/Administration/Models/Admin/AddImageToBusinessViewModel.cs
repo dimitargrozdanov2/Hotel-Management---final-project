@@ -10,7 +10,7 @@ namespace HotelManagement.Web.Areas.Administration.Models.Admin
     public class AddImageToBusinessViewModel
     {
         [Required]
-        public string BusinessName { get; set; }
+        public string name { get; set; }
 
         [Required]
         public string ImageName { get; set; }
