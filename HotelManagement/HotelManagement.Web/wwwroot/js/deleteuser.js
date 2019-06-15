@@ -1,4 +1,6 @@
-﻿$('.delete-user-form').on('submit', function (deleteUserEvent) {
+﻿$('.delete-user-form').on('submit', deleteUser);
+
+function deleteUser(deleteUserEvent) {
     deleteUserEvent.preventDefault();
     var useraction = confirm("Are you sure you want to delete this user?");
 
@@ -20,4 +22,4 @@
                 toastr.error("User deletion failed");
             });
     }
-});
+}
