@@ -1,2 +1,4 @@
-before_build:
-  - nuget restore ./HotelManagement/HotelManagement.sln
+dotnet: 2.2.0
+script:
+  - dotnet restore
+  - dotnet build
