@@ -25,6 +25,7 @@ href="/Administration/Admin/AddImageToBusiness/${dataResponse.name}">
         </a>`;
 
             $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw();
+
         }).fail(function (dataResponse) {
             toastr.error(dataResponse.responseJSON.message);
         });
