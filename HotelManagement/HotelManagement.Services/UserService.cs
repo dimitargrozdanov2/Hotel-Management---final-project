@@ -40,21 +40,6 @@ namespace HotelManagement.Services
             return returnUsers;
         }
 
-        public async Task<UserViewModel> GetUserAsync(string email)
-        {
-            var user = await this.context.Users
-                .Include(lb => lb.LogbookManagers)
-                .Include(n => n.Notes)
-                    .ThenInclude(l => l.Logbook)
-                .Include(n => n.Notes)
-                    .ThenInclude(c => c.Category)
-                .FirstOrDefaultAsync(u => u.Email == email);
-
-            var mappedUser = this.mappingProvider.MapTo<UserViewModel>(user);
-
-            return mappedUser;
-        }
-
         public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email, string specifiedLogbook = null)
         {
             IEnumerable<Logbook> logbooks;
@@ -84,35 +69,6 @@ namespace HotelManagement.Services
             var mappedLogbooks = this.mappingProvider.MapTo<IEnumerable<LogbookViewModel>>(logbooks);
 
             return mappedLogbooks;
-        }
-
-        public async Task<IEnumerable<string>> GetUserLogbookNamesAsync(string email)
-        {
-            // just use logbookmanagers instead of logbooks
-            //var logbooks2 = await this.context.Logbooks
-            //    .Include(n => n.Notes)
-            //        .ThenInclude(l => l.Category)
-            //    .Include(lb => lb.LogbookManagers)
-            //        .ThenInclude(m => m.Manager)
-            //    .Include(b => b.Business)
-            //    .Where(s => s.LogbookManagers.Any(x => x.Manager.UserName == email))
-            //    .ToListAsync();
-
-            //var logbooks3 = await this.context.Logbooks
-            //    .Include(x => x.LogbookManagers)
-            //        .ThenInclude(m => m.Manager)
-            //    .ToListAsync();
-
-            //var result = logbooks3.Where(x => x.LogbookManagers.Any(s => s.Manager.Email == email));
-                
-            var logbooks = await this.context.Logbooks
-                .Include(lb => lb.LogbookManagers)
-                    .ThenInclude(m => m.Manager)
-                .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
-                .Select(x => x.Name)
-                .ToListAsync();
-
-            return logbooks;
         }
     }
 }
