@@ -314,3 +314,10 @@ body, .header-top {
     margin-left: 15px;
     outline: none;
 }
+
+
+/*LOGO*/
+.logo {
+    font-size: 27px;
+    color: goldenrod;
+}
