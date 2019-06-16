@@ -18,8 +18,8 @@
             }
             $.each(data, function (index) {
                 var textToPrepend =
-                    "<div class='pricing-option' id='idPlace'>" +
-                    "<i class='material-icons'> mode_comment</i>" +
+                    "<div class='pricing-option' id='" + data[index].id + "'>" +
+                    "<i class='fas fa-clipboard'></i>" +
                     "<h1 class='note-title' id='titlePlace'>" + data[index].user.email + "</h1>" +
                     "<hr />" +
                     "<p id='textPlace'>" + data[index].text + "</p>" +
@@ -31,9 +31,8 @@
                     "<span class='note-title'>" + data[index].category.name + "</span>" +
                     "</div>" +
                     "<div class='back'>" +
-                    "<i class='material-icons' id='editNote' data-Id='" + data[index].id + "'>edit</i>" +
-                    "<i class='material-icons' id='deleteNote' data-Id='" + data[index].id + "'>remove_circle</i>" +
-                    "<i class='material-icons' id='archiveNote' data-Id='" + data[index].id + "'>archive</i>" +
+                    "<i class='fas fa-edit' id='editNote' data-Id='" + data[index].id + "'></i>" +
+                    "<i class='fas fa-trash-alt' id='deleteNote' data-Id='" + data[index].id + "'></i>" +
                     "</div>" +
                     "</div>" +
                     "</div>";

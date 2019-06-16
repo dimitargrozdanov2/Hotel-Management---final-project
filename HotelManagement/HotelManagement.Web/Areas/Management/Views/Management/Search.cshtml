@@ -24,4 +24,12 @@
     <h5 id="resultsCount" class="text-info float-right"></h5>
 </div>
 
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script src="~/js/search.js">
+    </script>
+    <script src="~/js/management.js">
+    </script>
+}
 

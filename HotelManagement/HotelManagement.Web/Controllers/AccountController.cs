@@ -24,18 +24,15 @@ namespace HotelManagement.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
             _logger = logger;
         }
 

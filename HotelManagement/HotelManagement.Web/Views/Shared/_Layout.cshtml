@@ -15,16 +15,17 @@
         <link rel="stylesheet" href="~/lib/linericon/style.css" />
         <link rel="stylesheet" href="~/lib/magnefic-popup/magnific-popup.css" />
         <link rel="stylesheet" href="~/lib/nice-select/nice-select.css" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> @*Used for management note section*@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
+        <link rel="stylesheet" href="~/lib/fontawesome/css/all.min.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+
     </environment>
 
     <link rel="stylesheet" href="~/css/style.css">
@@ -38,21 +39,21 @@
             <div class="container">
                 <div class="d-flex align-items-center">
                     <div id="logo">
-                        <a asp-controller="Home" asp-action="Index"><img src="~/images/Project/logo_diamonds_hotels_e_resorts1.png" /></a>
+                        <a asp-controller="Home" asp-action="Index"><i class="fab fa-phoenix-framework logo">Business Management</i><i class="fab fa-phoenix-framework logo"></i></a>
                     </div>
                     <div class="ml-auto d-none d-md-block d-md-flex">
                         <div class="media header-top-info">
                             <span class="header-top-info__icon"><i class="fas fa-phone-volume"></i></span>
                             <div class="media-body">
                                 <p>Have any question?</p>
-                                <p>Free: <a href="tel:+12 365 5233">+12 365 5233</a></p>
+                                <p class="hi">Free: <a href="tel:+12 365 5233">+12 365 5233</a></p>
                             </div>
                         </div>
                         <div class="media header-top-info">
                             <span class="header-top-info__icon"><i class="ti-email"></i></span>
                             <div class="media-body">
                                 <p>Have any question?</p>
-                                <p>Free: <a href="tel:+12 365 5233">+12 365 5233</a></p>
+                                <p>Free: <a href="tel:bm@gmail.com">bm@gmail.com</a></p>
                             </div>
                         </div>
                     </div>
@@ -116,20 +117,12 @@
 
 
     <environment include="Development">
-        @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-        @*<script src="~/lib/magnefic-popup/jquery.magnific-popup.min.js"></script>*@
-        @*<script src="~/js/easing.min.js"></script>*@
-        @*<script src="~/js/superfish.min.js"></script>*@
-        @*<script src="~/lib/nice-select/jquery.nice-select.min.js"></script>*@
         <script src="~/lib/jquery/dist/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        @*<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
-        @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
         <script src="~/lib/@@aspnet/signalr/dist/browser/signalr.min.js"></script>
         <script src="~/js/mail-script.js"></script>
         <script src="~/js/site.js"></script>
-        <script src="~/js/search.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </environment>
@@ -140,13 +133,17 @@
                 crossorigin="anonymous"
                 integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
         </script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/lib/@@aspnet/signalr/dist/browser/signalr.min.js"></script>
+        <script src="~/js/mail-script.js"></script>
+        <script src="~/js/site.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </environment>
     @RenderSection("Scripts", required: false)
 

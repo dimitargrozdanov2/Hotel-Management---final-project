@@ -21,9 +21,11 @@
             </div>
             <div class="card-body">
                 <h3 class="card-explore__title">@Model.Name</h3>
-                <p>@Model.Description</p>
+                <p id="businessDescription">@Model.Description</p>
+                
                 <a asp-area="Business" asp-controller="Business" asp-action="Details" asp-route-name="@Model.Name" class="card-explore__link">Visit<i class="ti-arrow-right"></i></a>
             </div>
         </div>
     </div>
 </div>
+

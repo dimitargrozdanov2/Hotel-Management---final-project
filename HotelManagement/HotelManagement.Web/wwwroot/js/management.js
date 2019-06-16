@@ -80,14 +80,14 @@ connection.on("NewMessage",
     function (message) {
         var currentLogbookValue = $('#dropdownMenuButton').text().trim();
         var selectedLogbook = message.logbook;
-
+        console.log(message);
         if (currentLogbookValue === selectedLogbook) {
             if ($('.pricing-table').find('#noNotes').length) {
                 $('#noNotes').hide();
             }
             var textToPrepend =
-                "<div class='pricing-option' id='idPlace'>" +
-                "<i class='material-icons'> mode_comment</i>" +
+                "<div class='pricing-option' id='" + message.id + "'>" +
+                "<i class='fas fa-clipboard'></i>" +
                 "<h1 class='note-title' id='titlePlace'>" + message.email + "</h1>" +
                 "<hr />" +
                 "<p id='textPlace'>" + message.text + "</p>" +
@@ -99,9 +99,8 @@ connection.on("NewMessage",
                 "<span class='note-title'>" + message.category + "</span>" +
                 "</div>" +
                 "<div class='back'>" +
-                "<i class='material-icons' id='editNote' data-Id='" + message.id + "'>edit</i>" +
-                "<i class='material-icons' id='deleteNote' data-Id='" + message.id + "'>remove_circle</i>" +
-                "<i class='material-icons' id='archiveNote' data-Id='" + message.id + "'>archive</i>" +
+                "<i class='fas fa-edit' id='editNote' data-Id='" + message.id + "'></i>" +
+                "<i class='fas fa-trash-alt' id='deleteNote' data-Id='" + message.id + "'></i>" +
                 "</div>" +
                 "</div>" +
                 "</div>";
@@ -109,7 +108,6 @@ connection.on("NewMessage",
             $('.pricing-table').prepend(textToPrepend);
 
         }
-        toastr["success"]("A new note has been posted in logbook: " + message.logbook, "Note")
         $('.modal').modal('hide');
         $('#createNoteForm')[0].reset();
     });
@@ -203,7 +201,7 @@ $(document).on("click", "#deleteNote", function (event) {
                     });
                 })
                 .fail(function (dataResponse) {
-                    toastr["error"](dataResponse.responseJSON.Message, "Failed to create note!")
+                    toastr["error"](dataResponse.responseJSON.Message, "Failed to delete note!")
                 })
         } else {
             swal("You decided to keep the note, good!", {

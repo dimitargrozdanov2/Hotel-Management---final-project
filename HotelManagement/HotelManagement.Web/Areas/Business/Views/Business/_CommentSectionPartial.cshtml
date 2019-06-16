@@ -25,10 +25,8 @@
             <button id="reply-button" type="button" class="btn btn-dark float-right" data-toggle="modal" data-target="#replyModal" data-id="@Model.Id">Reply</button>
         </div>
     </div>
-    <div class="comment-list left-padding" id="@Model.Id">
-        @foreach (var reply in Model.Replies.OrderByDescending(r => r.CreatedOn))
-        {
-            <partial name="_ReplySectionPartial" model="reply" />
-        }
-    </div>
+    @foreach (var reply in Model.Replies.OrderByDescending(r => r.CreatedOn))
+    {
+        <partial name="_ReplySectionPartial" model="reply" />
+    }
 </div>

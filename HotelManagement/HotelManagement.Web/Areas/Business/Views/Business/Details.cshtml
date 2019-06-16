@@ -5,7 +5,8 @@
 <section class="section-margin section-margin--small">
     <div class="container">
         <div class="section-intro text-center pb-80px">
-            <h2>@Model.Name</h2>
+            <p class="display-4">@Model?.Name</p>
+            <p>@Model?.Description</p>
         </div>
         <div class="container">
             <div class="row">
@@ -29,7 +30,7 @@
                         }
                         @foreach (var comment in Model.Feedback.OrderByDescending(x => x.CreatedOn))
                         {
-                                <partial name="_CommentSectionPartial" model="comment" />
+                            <partial name="_CommentSectionPartial" model="comment" />
                         }
                     </div>
                 </div>

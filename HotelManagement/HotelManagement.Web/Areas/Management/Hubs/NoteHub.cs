@@ -30,6 +30,7 @@ namespace HotelManagement.Web.Areas.Management.Hubs
                 var note = await this.noteService.CreateNoteAsync(noteObject);
 
                 noteObject.Priority = note.PriorityType;
+                noteObject.Id = note.Id;
 
                 var messageJsonString = JsonConvert.SerializeObject(noteObject);
                 await this.Clients.All.SendAsync("NewMessage", noteObject);

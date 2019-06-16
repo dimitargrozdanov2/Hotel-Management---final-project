@@ -46,20 +46,18 @@ $(function () {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
 
-        // get feedbackParent ID from event;
-        //const dataArray = $replyForm.serializeArray();
-        //var feedbackId = dataArray[0].value;
-        //console.log(feedbackId);
-
         var feedbackParentId = $(this).find('input:hidden').val();
-        const feedbackParentElement = $('#' + feedbackParentId);
+        const feedbackParentElement = $('#reply-button[data-id="' + feedbackParentId + '"]').parent().parent().parent();
+        console.log(feedbackParentElement);
 
         $.post($replyForm.attr('action'), dataToSend)
             .done(function (serverData) {
                 toastr["success"]("Reply posted...", "Feedback Reply")
+                console.log(serverData);
+
 
                 $('#send-reply-form')[0].reset();
-                $(feedbackParentElement).prepend(serverData);
+                $(feedbackParentElement).append(serverData);
 
                 $('.modal').modal('hide'); // used to hide the modal on success.
             })
@@ -86,7 +84,7 @@ $(document).on("click", "#delete-button", function (event) {
         .then((willDelete) => {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
-                    $('#' + id).parent().remove();
+                    $('#delete-button[data-headCommentId="' + id + '"]').parent().parent().parent().remove();
                     if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
                         if ($('.comments-area').length === 0) {
                             $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
@@ -126,6 +124,7 @@ $(document).on("click", "#delete-reply-button", function (event) {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
 
+                    console.log($('*[data-headCommentId="' + id + '"]').parent());
                     var element = $('*[data-headCommentId="' + id + '"]').parent().remove();
                 })
                 swal("Poof! The comment has been deleted!", {
