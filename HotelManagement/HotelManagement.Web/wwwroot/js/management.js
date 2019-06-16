@@ -201,7 +201,7 @@ $(document).on("click", "#deleteNote", function (event) {
                     });
                 })
                 .fail(function (dataResponse) {
-                    toastr["error"](dataResponse.responseJSON.Message, "Failed to create note!")
+                    toastr["error"](dataResponse.responseJSON.Message, "Failed to delete note!")
                 })
         } else {
             swal("You decided to keep the note, good!", {

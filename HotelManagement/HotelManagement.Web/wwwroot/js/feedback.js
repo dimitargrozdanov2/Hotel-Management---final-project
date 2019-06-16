@@ -86,7 +86,7 @@ $(document).on("click", "#delete-button", function (event) {
         .then((willDelete) => {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
-                    $('#' + id).parent().remove();
+                    $('#delete-button[data-headCommentId="' + id + '"]').parent().parent().parent().remove();
                     if ($('.comments-area').children().length === 0 && $('.comments-area').find('#noBusinesses').length === 0) {
                         if ($('.comments-area').length === 0) {
                             $('#comments-amount').append('<p id="noBusinesses" class="comments-area">This business has no feedback. Be the first to submit one!</p>');
@@ -126,6 +126,7 @@ $(document).on("click", "#delete-reply-button", function (event) {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
 
+                    console.log($('*[data-headCommentId="' + id + '"]').parent());
                     var element = $('*[data-headCommentId="' + id + '"]').parent().remove();
                 })
                 swal("Poof! The comment has been deleted!", {
