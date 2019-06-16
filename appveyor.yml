@@ -1,4 +1,0 @@
-dotnet: 2.2.0
-script:
-  - dotnet restore
-  - dotnet build
