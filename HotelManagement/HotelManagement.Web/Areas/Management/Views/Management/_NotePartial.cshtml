@@ -5,7 +5,7 @@
 }
 
 <div class="pricing-option" id="@Model.Id">
-    <i class="material-icons">mode_comment</i>
+    <i class="fas fa-clipboard"></i>
     <h1 class="note-title">@Model.User.Email</h1>
     <hr />
     <p>@Model.Text</p>
@@ -17,12 +17,10 @@
             <span class="note-title">@Model.Category?.Name </span>
         </div>
         <div class="back">
-            <i class="material-icons" id="editNote" data-Id="@Model.Id">edit</i>
+            <i class="fas fa-edit" id="editNote" data-Id="@Model.Id"></i>
             @*<i class="material-icons" style="font-size:36px">camera_alt</i>*@
-            <i class="material-icons" id="deleteNote" data-Id="@Model.Id">remove_circle</i>
-            <i class="material-icons" id="archiveNote">archive</i>
+            <i class="fas fa-trash-alt" id="deleteNote" data-Id="@Model.Id"></i>
             <div class="note-createdOn">Created: @Model.CreatedOn.Value.ToLongDateString()</div>
-
         </div>
     </div>
 </div>
