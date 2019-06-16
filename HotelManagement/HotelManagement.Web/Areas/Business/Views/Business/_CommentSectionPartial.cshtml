@@ -27,8 +27,6 @@
     </div>
     @foreach (var reply in Model.Replies.OrderByDescending(r => r.CreatedOn))
     {
-        <div class="comment-list left-padding" id="@reply.Id">
-            <partial name="_ReplySectionPartial" model="reply" />
-        </div>
+        <partial name="_ReplySectionPartial" model="reply" />
     }
 </div>

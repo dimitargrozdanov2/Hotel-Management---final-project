@@ -1,23 +1,25 @@
 ﻿@model FeedbackViewModel
-@if (User.IsInRole("Moderator"))
-{
-    <button id="delete-reply-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
-}
-<div class="single-comment replyComment justify-content-between d-flex">
-    <div class="user justify-content-between d-flex">
-        <div class="thumb">
-            <div class="avatar">
-                <div class="avatar-name">@Model.Name[0]</div>
+<div class="comment-list left-padding" id="@Model.Id">
+    @if (User.IsInRole("Moderator"))
+    {
+        <button id="delete-reply-button" type="button" class="btn btn-danger float-right deleteFeedbackButton" data-headCommentId="@Model.Id">Delete</button>
+    }
+    <div class="single-comment replyComment justify-content-between d-flex">
+        <div class="user justify-content-between d-flex">
+            <div class="thumb">
+                <div class="avatar">
+                    <div class="avatar-name">@Model.Name[0]</div>
+                </div>
             </div>
-        </div>
-        <div class="desc">
-            <h5>
-                <a href="#">@Model.Name</a>
-            </h5>
-            <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
-            <p class="comment">
-                @Model.Comment
-            </p>
+            <div class="desc">
+                <h5>
+                    <a href="#">@Model.Name</a>
+                </h5>
+                <p class="date">@Model.CreatedOn.Value.ToLongDateString()</p>
+                <p class="comment">
+                    @Model.Comment
+                </p>
+            </div>
         </div>
     </div>
 </div>

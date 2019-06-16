@@ -46,20 +46,18 @@ $(function () {
         event.preventDefault();
         const dataToSend = $replyForm.serialize();
 
-        // get feedbackParent ID from event;
-        //const dataArray = $replyForm.serializeArray();
-        //var feedbackId = dataArray[0].value;
-        //console.log(feedbackId);
-
         var feedbackParentId = $(this).find('input:hidden').val();
-        const feedbackParentElement = $('#' + feedbackParentId);
+        const feedbackParentElement = $('#reply-button[data-id="' + feedbackParentId + '"]').parent().parent().parent();
+        console.log(feedbackParentElement);
 
         $.post($replyForm.attr('action'), dataToSend)
             .done(function (serverData) {
                 toastr["success"]("Reply posted...", "Feedback Reply")
+                console.log(serverData);
+
 
                 $('#send-reply-form')[0].reset();
-                $(feedbackParentElement).prepend(serverData);
+                $(feedbackParentElement).append(serverData);
 
                 $('.modal').modal('hide'); // used to hide the modal on success.
             })
