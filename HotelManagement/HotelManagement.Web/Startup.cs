@@ -38,7 +38,6 @@ namespace HotelManagement.Web
                 .AddDefaultTokenProviders();
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IMappingProvider, MappingProvider>();
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<ICategoryService, CategoryService>();

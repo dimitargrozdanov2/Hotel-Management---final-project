@@ -23,7 +23,6 @@ namespace WebApplication3.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
 
@@ -32,13 +31,11 @@ namespace WebApplication3.Controllers
         public ManageController(
           UserManager<User> userManager,
           SignInManager<User> signInManager,
-          IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
         }
