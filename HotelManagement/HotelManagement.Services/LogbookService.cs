@@ -4,9 +4,11 @@ using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +19,13 @@ namespace HotelManagement.Services
     {
         private readonly ApplicationDbContext context;
         private readonly IMappingProvider mappingProvider;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public LogbookService(ApplicationDbContext context, IMappingProvider mappingProvider)
+        public LogbookService(ApplicationDbContext context, IMappingProvider mappingProvider, IHostingEnvironment hostingEnvironment)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
+            this.hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(mappingProvider));
         }
 
         public async Task<IEnumerable<LogbookViewModel>> GetLogBooksForBusiness(string name)
@@ -126,6 +130,23 @@ namespace HotelManagement.Services
             }
 
             this.context.Logbooks.Remove(logbook);
+
+            //remove image with the logbookname when logbook is deleted
+            var images = this.context.Images.ToList();
+
+            foreach (var image in images)
+            {
+                if (image.Name.Contains($"_{logbookName}"))
+                {
+                    this.context.Remove(image);
+                    var imageNametoDelete = image.Name;
+                    var currentDirectory = Directory.GetCurrentDirectory();
+                    var imageLocation = $"\\wwwroot\\images\\Project\\";
+                    var path = Path.Combine(currentDirectory + imageLocation + imageNametoDelete);
+                    File.Delete(path);
+
+                }
+            }
 
             await this.context.SaveChangesAsync();
 
