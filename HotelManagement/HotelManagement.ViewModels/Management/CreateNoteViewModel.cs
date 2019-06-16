@@ -7,6 +7,8 @@ namespace HotelManagement.ViewModels.Management
 {
     public class CreateNoteViewModel
     {
+        public string Id { get; set; }
+
         public string Text { get; set; }
 
         public string Logbook { get; set; }

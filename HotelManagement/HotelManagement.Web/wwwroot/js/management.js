@@ -80,6 +80,7 @@ connection.on("NewMessage",
     function (message) {
         var currentLogbookValue = $('#dropdownMenuButton').text().trim();
         var selectedLogbook = message.logbook;
+        console.log(message);
         if (currentLogbookValue === selectedLogbook) {
             if ($('.pricing-table').find('#noNotes').length) {
                 $('#noNotes').hide();
@@ -107,7 +108,6 @@ connection.on("NewMessage",
             $('.pricing-table').prepend(textToPrepend);
 
         }
-        toastr["success"]("A new note has been posted in logbook: " + message.logbook, "Note")
         $('.modal').modal('hide');
         $('#createNoteForm')[0].reset();
     });
