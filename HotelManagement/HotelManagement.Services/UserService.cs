@@ -25,7 +25,7 @@ namespace HotelManagement.Services
             this.userManagerWrapper = userManagerWrapper ?? throw new ArgumentNullException(nameof(userManagerWrapper));
         }
 
-        public async Task<IEnumerable<UserViewModel>> GetAllUsers()
+        public async Task<IEnumerable<UserViewModel>> GetAllUsersAsync()
         {
             var users = await this.context.Users
                 .Include(lb => lb.LogbookManagers)
