@@ -3,6 +3,7 @@ using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services;
 using HotelManagement.Services.Exceptions;
+using HotelManagement.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -67,41 +68,36 @@ namespace HotelManagement.ServiceTests.CategoryServiceTests
 
             var options = CategoryTestUtil.GetOptions(dabataseName);
 
-            CategoryTestUtil.FillContextWithCategories(options);
+             CategoryTestUtil.FillContextWithCategories(options);
 
             var mappingProviderMock = new Mock<IMappingProvider>();
 
-            //string categoryName = "Health and Safety";
-            //var category = new Category
-            //{
-            //    Name = "InProgress",
-            //};
-            //var category = new Mock<Category>();
-            //var listofCategories = new List<Category> { category };
+            var discoLogbook = new Logbook()
+            {
+                Name = "Disco",
+                Description = "A new room for clubbing has opened",
+                Id = "a0ab4621-a92c-4735-bcab-3e35eabae03d",
+                Categories = new List<Category>()
+            };
 
-            //var logbook = new Logbook
-            //{
-            //    Name = "Cleaners",
-            //    Description = "Enthusiastic team",
-            //    Id = "a0ab4621-a92c-4735-bcab-3e35eabae03d",
-            //    Categories = listofCategories
-            //};
-            string categoryName = "Health";
-
-            string logbookName = "ToDo";
+            string categoryName = "Staff";
 
             using (var arrangeContext = new ApplicationDbContext(options))
             {
-                var sut = new CategoryService(arrangeContext, mappingProviderMock.Object);
-
-                await sut.CreateCategoryAsync(categoryName, logbookName);
+                arrangeContext.Logbooks.Add(discoLogbook);
 
                 arrangeContext.SaveChanges();
             }
 
             using (var actAndAssertContext = new ApplicationDbContext(options))
             {
-                Assert.IsTrue(actAndAssertContext.Categories.Count() == 1);
+                var sut = new CategoryService(actAndAssertContext, mappingProviderMock.Object);
+
+                await sut.CreateCategoryAsync(categoryName, discoLogbook.Name);
+
+                var log = actAndAssertContext.Logbooks.FirstOrDefault(x => x.Name == discoLogbook.Name);
+
+                Assert.IsTrue(log.Categories.Count() == 1);
                 Assert.IsTrue(actAndAssertContext.Categories.Any(m => m.Name == categoryName));
             }
         }
@@ -109,6 +105,28 @@ namespace HotelManagement.ServiceTests.CategoryServiceTests
         [TestMethod]
         public async Task ReturnCorrectViewModel()
         {
+            var dabataseName = nameof(ReturnCorrectViewModel);
+
+            var options = CategoryTestUtil.GetOptions(dabataseName);
+
+            CategoryTestUtil.FillContextWithCategories(options);
+
+            var mappingProviderMock = new Mock<IMappingProvider>();
+
+            mappingProviderMock.Setup(x => x.MapTo<CategoryViewModel>(It.IsAny<Category>())).Returns(new CategoryViewModel());
+
+            string categoryName = "Waiting staff";
+
+            string logbookName = "Swimming Pool";
+
+            using (var actAndAssertContext = new ApplicationDbContext(options))
+            {
+                var sut = new CategoryService(actAndAssertContext, mappingProviderMock.Object);
+
+                var result = await sut.CreateCategoryAsync(categoryName, logbookName);
+
+                Assert.IsInstanceOfType(result, typeof(CategoryViewModel));
+            }
         }
     }
 }
