@@ -321,3 +321,8 @@ body, .header-top {
     font-size: 27px;
     color: goldenrod;
 }
+
+
+.changePasswordButton{
+    margin-bottom: 10px;
+}
