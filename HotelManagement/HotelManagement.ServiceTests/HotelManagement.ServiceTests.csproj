@@ -7,13 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Moq" Version="4.11.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
     <PackageReference Include="MSTest.TestFramework" Version="1.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UserServiceTests\" />
+    <ProjectReference Include="..\HotelManagement.DataModels\HotelManagement.DataModels.csproj" />
+    <ProjectReference Include="..\HotelManagement.Data\HotelManagement.Data.csproj" />
+    <ProjectReference Include="..\HotelManagement.Infrastructure\HotelManagement.Infrastructure.csproj" />
+    <ProjectReference Include="..\HotelManagement.Services\HotelManagement.Services.csproj" />
+    <ProjectReference Include="..\HotelManagement.ViewModels\HotelManagement.ViewModels.csproj" />
+    <ProjectReference Include="..\HotelManagement.Web\HotelManagement.Web.csproj" />
   </ItemGroup>
 
 </Project>

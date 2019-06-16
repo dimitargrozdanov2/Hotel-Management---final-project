@@ -44,7 +44,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         {
             var model = new ListUsersViewModel();
 
-            var users = await this.userService.GetAllUsers();
+            var users = await this.userService.GetAllUsersAsync();
 
             model.Users = users;
 

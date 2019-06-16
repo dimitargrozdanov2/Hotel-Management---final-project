@@ -14,18 +14,17 @@
 
             var buttons = `
 <a class="btn btn-info btn-sm"
-href="/Administration/Admin/AllLogbooksForBusiness/${dataResponse.name}">
+href="/Administration/Admin/AllLogbooksForBusiness?name=${dataResponse.name}">
             <i class="fas fa-pencil-alt"></i>
             Manage Logbooks
         </a>
         <a class="btn btn-primary btn-sm" style="margin-top:5%"
-href="/Administration/Admin/AddImageToBusiness/${dataResponse.name}">
+href="/Administration/Admin/AddImageToBusiness?name=${dataResponse.name}">
             <i class="fas fa-images"></i>
             Add Image
         </a>`;
 
-            var newRow = $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw(false).node();
-            $('td:eq(3) a', newRow).attr('asp-route-name', `?${dataResponse.name}`);
+            var newRow = $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw();
 
         }).fail(function (dataResponse) {
             toastr.error(dataResponse.responseJSON.message);
