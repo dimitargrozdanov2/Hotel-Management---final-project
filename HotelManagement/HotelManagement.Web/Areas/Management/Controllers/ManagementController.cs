@@ -23,7 +23,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         private readonly ICategoryService categoryService;
 
         public ManagementController(IUserService userService, INoteService noteService, 
-            ICategoryService categoryService, IHubContext<NoteHub> hubContext)
+            ICategoryService categoryService)
         {
             this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
             this.noteService = noteService ?? throw new ArgumentNullException(nameof(noteService));
@@ -57,8 +57,6 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             var notes = await this.noteService.SearchNotesAsync(data, userIdentity, searchByValue);
             var model = new SearchViewModel();
             model.Notes = notes;
-
-            var hey = JsonConvert.SerializeObject(model.Notes); // testing if there is json self referencing loop
 
             return Json(model.Notes);
         }
