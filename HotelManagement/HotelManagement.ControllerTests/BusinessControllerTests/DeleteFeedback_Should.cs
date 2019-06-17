@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace HotelManagement.ControllerTests.BusinessControllerTests
 {
     [TestClass]
-    public class Comment_Should
+    public class DeleteFeedback_Should
     {
         [TestMethod]
         public async Task Return_BadRequest_IfModelInvalid_OnPost()
@@ -23,12 +23,10 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
 
-            var model = new AddFeedbackViewModel();
-
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             sut.ModelState.AddModelError("error", "error");
             // Act
-            var result = await sut.Comment(model);
+            var result = await sut.DeleteFeedback("Id");
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
@@ -38,67 +36,51 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
         public async Task Call_FeedbackService_With_Correct_Params()
         {
             // Arrange
-            var model = new AddFeedbackViewModel();
-            model.BusinessId = "eaf45030-572b-4af1-add0-bf3b1f979168";
-            model.AuthorName = "Ivan";
-            model.Comment = "Nice place!";
-            model.Email = "ivan@ivan.com";
+            var id = "randomId";
 
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).ReturnsAsync(It.IsAny<FeedbackViewModel>());
+            feedbackService.Setup(f => f.DeleteCommentAsync(id)).ReturnsAsync(id);
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
-            var result = await sut.Comment(model);
+            var result = await sut.DeleteFeedback(id);
 
             // Assert
-            feedbackService.Verify(x => x.AddComment(model), Times.Once);
+            feedbackService.Verify(x => x.DeleteCommentAsync(id), Times.Once);
         }
 
         [TestMethod]
-        public async Task Return_Correct_PartialView_WhenPassedValidParams()
+        public async Task Return_Correct_StatusCode_200()
         {
             // Arrange
-            var model = new AddFeedbackViewModel();
-            model.BusinessId = "eaf45030-572b-4af1-add0-bf3b1f979168";
-            model.AuthorName = "Ivan";
-            model.Comment = "Nice place!";
-            model.Email = "ivan@ivan.com";
+            var id = "randomId";
 
-            var feedbackModel = new FeedbackViewModel();
-            
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).ReturnsAsync(feedbackModel);
+            feedbackService.Setup(f => f.DeleteCommentAsync("Hi")).ReturnsAsync(id);
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
-            var result = await sut.Comment(model) as PartialViewResult;
+            var result = await sut.DeleteFeedback(id) as StatusCodeResult;
 
             // Assert
-            Assert.IsInstanceOfType(result.Model, typeof(FeedbackViewModel));
+            Assert.AreEqual(200, result.StatusCode);
         }
 
         [TestMethod]
         public async Task Return_StatusCode_When_Exception_IsThrown()
         {
             // Arrange
-            var model = new AddFeedbackViewModel();
-            model.BusinessId = "eaf45030-572b-4af1-add0-bf3b1f979168";
-            model.AuthorName = null;
-            model.Comment = "Nice place!";
-            model.Email = "ivan@ivan.com";
-
-            var feedbackModel = new FeedbackViewModel();
+            var id = "randomId";
 
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).Throws<Exception>();
+            feedbackService.Setup(f => f.DeleteCommentAsync(id)).Throws<Exception>();
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
-            var result = await sut.Comment(model) as ObjectResult;
+            var result = await sut.DeleteFeedback(id) as ObjectResult;
 
             Assert.AreEqual(500, result.StatusCode);
         }

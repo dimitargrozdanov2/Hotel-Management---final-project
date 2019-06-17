@@ -6,15 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.BusinessControllerTests
 {
     [TestClass]
-    public class Comment_Should
+    public class AddReply_Should
     {
         [TestMethod]
         public async Task Return_BadRequest_IfModelInvalid_OnPost()
@@ -28,7 +25,7 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             sut.ModelState.AddModelError("error", "error");
             // Act
-            var result = await sut.Comment(model);
+            var result = await sut.AddReply(model);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(BadRequestResult));
@@ -46,7 +43,7 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
 
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).ReturnsAsync(It.IsAny<FeedbackViewModel>());
+            feedbackService.Setup(f => f.AddReply(model)).ReturnsAsync(It.IsAny<FeedbackViewModel>());
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
@@ -67,14 +64,14 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
             model.Email = "ivan@ivan.com";
 
             var feedbackModel = new FeedbackViewModel();
-            
+
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).ReturnsAsync(feedbackModel);
+            feedbackService.Setup(f => f.AddReply(model)).ReturnsAsync(feedbackModel);
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
-            var result = await sut.Comment(model) as PartialViewResult;
+            var result = await sut.AddReply(model) as PartialViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.Model, typeof(FeedbackViewModel));
@@ -94,11 +91,11 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
 
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
-            feedbackService.Setup(f => f.AddComment(model)).Throws<Exception>();
+            feedbackService.Setup(f => f.AddReply(model)).Throws<Exception>();
 
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
             // Act
-            var result = await sut.Comment(model) as ObjectResult;
+            var result = await sut.AddReply(model) as ObjectResult;
 
             Assert.AreEqual(500, result.StatusCode);
         }
