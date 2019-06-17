@@ -4,9 +4,6 @@ using HotelManagement.Web.Areas.Business.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.BusinessControllerTests
@@ -52,7 +49,7 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
             var sut = new BusinessController(businessService.Object, feedbackService.Object);
 
             // Act
-           var result = await sut.Details(businessName) as ViewResult;
+            var result = await sut.Details(businessName) as ViewResult;
 
             // Assert
             Assert.IsInstanceOfType(result.Model, typeof(BusinessViewModel));
