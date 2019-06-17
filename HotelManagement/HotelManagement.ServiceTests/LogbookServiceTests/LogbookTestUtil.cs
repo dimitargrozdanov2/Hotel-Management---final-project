@@ -43,6 +43,19 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
                 BusinessId = "4f3e3358-055f-49f6-a48e-5e0c9d9fe6c8"
             };
 
+            var pastaUser = new User()
+            {
+                Id = "6536bb9a-3af0-40fe-a878-e5ab8212cd55",
+                UserName = "dimitar.pasta@admin.admin",
+                Email = "dimitar.pasta@admin.admin",
+            };
+
+            var pastaManager = new User()
+            {
+                Id = "6536bb9a-3af0-40fe-a878-e5ab8212cd55",
+                UserName = "dimitar.pasta@admin.admin",
+                Email = "dimitar.pasta@admin.admin",
+            };
             var hotelApartment = new Business()
             {
                 Id = "6bc4021b-1c35-48b7-8d3b-a853bfc5e050",
@@ -58,11 +71,14 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
                 Id = "03f02eb0-073d-4c48-a641-5b105831cac3",
                 BusinessId = "6bc4021b-1c35-48b7-8d3b-a853bfc5e050"
             };
+
             context.Businesses.Add(pastaBusiness);
 
             context.Logbooks.Add(manufacturingLogbook);
 
             pastaBusiness.BusinessUnits.Add(manufacturingLogbook);
+
+            context.Users.Add(pastaUser);
 
             context.Businesses.Add(hotelApartment);
 
