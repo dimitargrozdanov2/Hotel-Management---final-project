@@ -52,9 +52,9 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return View();
         }
 
-        public JsonResult GetNotesAsyncJson(string data, string userIdentity, string searchByValue)
+        public async Task<JsonResult> GetNotesAsyncJson(string data, string userIdentity, string searchByValue)
         {
-            var notes = this.noteService.SearchByTextAsync(data, userIdentity, searchByValue);
+            var notes = await this.noteService.SearchNotesAsync(data, userIdentity, searchByValue);
             var model = new SearchViewModel();
             model.Notes = notes;
 

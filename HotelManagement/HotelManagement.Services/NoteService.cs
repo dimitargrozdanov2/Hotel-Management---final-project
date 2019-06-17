@@ -44,10 +44,6 @@ namespace HotelManagement.Services
             }
 
             var user = await this.dbContext.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
-            if (user == null)
-            {
-                throw new ArgumentException($"{model.Email} user has not been found!");
-            }
 
             var note = new Note()
             {
@@ -80,28 +76,13 @@ namespace HotelManagement.Services
             return id;
         }
 
-        // Having 2 thenInclude on the same property written twice is okay
-        //  ..because ef will NOT generate redundant joins
-        public async Task<ICollection<Note>> GetNotes()
-        {
-            var notes = await this.dbContext.Notes
-                .Include(l => l.Logbook)
-                    .ThenInclude(x => x.LogbookManagers)
-                .Include(x => x.Logbook)
-                    .ThenInclude(s => s.Business)
-                .Include(c => c.Category)
-                .Include(u => u.User).ToListAsync();
-
-            return notes;
-        }
-
-        public ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity, string searchByValue)
+        public async Task<ICollection<NoteViewModel>> SearchNotesAsync(string data, string userIdentity, string searchByValue)
         {
             ICollection<Note> notes;
 
             if (searchByValue == "Text")
             {
-                notes = this.dbContext.Notes
+                notes = await this.dbContext.Notes
                 .Include(l => l.Logbook)
                     .ThenInclude(x => x.LogbookManagers)
                 .Include(c => c.Category)
@@ -109,27 +90,27 @@ namespace HotelManagement.Services
                 .Where(n => n.Text.Contains(data) && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
                 .Take(10)
-                .ToList();
+                .ToListAsync();
             }
             else if (searchByValue == "Category")
             {
-                notes = this.dbContext.Notes
+                notes = await this.dbContext.Notes
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)
                 .Include(u => u.User)
                 .Where(n => n.Category.Name == data && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
-                .ToList();
+                .ToListAsync();
             }
             else
             {
-                notes = this.dbContext.Notes
+                notes = await this.dbContext.Notes
                 .Include(l => l.Logbook)
                 .Include(c => c.Category)
                 .Include(u => u.User)
                 .Where(n => n.CreatedOn.Value.ToShortDateString().ToString() == data && n.Logbook.LogbookManagers.Any(x => x.Manager.Email == userIdentity))
                 .OrderBy(d => d.CreatedOn)
-                .ToList();
+                .ToListAsync();
             }
 
             var mappedNotes = this.mappingProvider.MapTo<ICollection<NoteViewModel>>(notes);

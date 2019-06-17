@@ -8,12 +8,10 @@ namespace HotelManagement.Services.Contracts
 {
     public interface INoteService
     {
-        Task<ICollection<Note>> GetNotes();
-
         Task<NoteViewModel> CreateNoteAsync(CreateNoteViewModel model);
 
         Task<string> DeleteNoteAsync(string id);
 
-        ICollection<NoteViewModel> SearchByTextAsync(string data, string userIdentity, string searchByValue);
+        Task<ICollection<NoteViewModel>> SearchNotesAsync(string data, string userIdentity, string searchByValue);
     }
 }
