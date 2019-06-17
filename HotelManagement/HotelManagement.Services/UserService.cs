@@ -35,7 +35,7 @@ namespace HotelManagement.Services
                     .ThenInclude(c => c.Category)
                 .ToListAsync();
 
-            var returnUsers = this.mappingProvider.MapTo<ICollection<UserViewModel>>(users);
+            var returnUsers = this.mappingProvider.MapTo<IEnumerable<UserViewModel>>(users);
 
             return returnUsers;
         }
