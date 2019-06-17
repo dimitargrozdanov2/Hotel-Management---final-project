@@ -98,9 +98,10 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
 
         //    var sut = new BusinessController(businessService.Object, feedbackService.Object);
         //    // Act
-        //    var result = await sut.Comment(model) as StatusCodeResult;
+        //    var result = await sut.Comment(model);
 
-        //    Assert.AreEqual(result.StatusCode, HttpStatusCode.InternalServerError);
+        //    //Assert.IsInstanceOfType(result, typeof(StatusCodeResult));
+        //    Assert.AreEqual(500, result);
         //}
     }
 }

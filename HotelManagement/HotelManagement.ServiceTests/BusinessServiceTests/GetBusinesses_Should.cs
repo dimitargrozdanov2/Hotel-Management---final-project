@@ -17,9 +17,9 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
     public class GetBusinesses_Should
     {
         [TestMethod]
-        public async Task Return_Movies_OrderedByName_DescendingFalse()
+        public async Task Return_Businesses_OrderedByName_DescendingFalse()
         {
-            var dabataseName = nameof(Return_Movies_OrderedByName_DescendingFalse);
+            var dabataseName = nameof(Return_Businesses_OrderedByName_DescendingFalse);
 
             var options = BusinessTestUtil.GetOptions(dabataseName);
 
@@ -66,9 +66,9 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
         }
 
         [TestMethod]
-        public async Task Return_Movies_OrderedByName_DescendingTrue()
+        public async Task Return_Businesses_OrderedByName_DescendingTrue()
         {
-            var dabataseName = nameof(Return_Movies_OrderedByName_DescendingTrue);
+            var dabataseName = nameof(Return_Businesses_OrderedByName_DescendingTrue);
 
             var options = BusinessTestUtil.GetOptions(dabataseName);
 
@@ -115,9 +115,9 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
         }
 
         [TestMethod]
-        public async Task Return_Movies_OrderedByDate_DescendingTrue()
+        public async Task Return_Businesses_OrderedByDate_DescendingTrue()
         {
-            var dabataseName = nameof(Return_Movies_OrderedByDate_DescendingTrue);
+            var dabataseName = nameof(Return_Businesses_OrderedByDate_DescendingTrue);
 
             var options = BusinessTestUtil.GetOptions(dabataseName);
 
@@ -164,9 +164,9 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
         }
 
         [TestMethod]
-        public async Task Return_Movies_OrderedByDate_DescendingFalse()
+        public async Task Return_Businesses_OrderedByDate_DescendingFalse()
         {
-            var dabataseName = nameof(Return_Movies_OrderedByDate_DescendingFalse);
+            var dabataseName = nameof(Return_Businesses_OrderedByDate_DescendingFalse);
 
             var options = BusinessTestUtil.GetOptions(dabataseName);
 
