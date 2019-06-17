@@ -41,7 +41,6 @@ namespace HotelManagement.Web.Areas.Business.Controllers
                 }
                 catch (Exception ex)
                 {
-
                     return this.StatusCode((int)HttpStatusCode.InternalServerError, ex);
                 }
             }

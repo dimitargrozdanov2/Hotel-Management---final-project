@@ -72,22 +72,6 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             return this.Json(returnField);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> CreateNote(CreateNoteViewModel model)
-        //{
-        //    if (this.ModelState.IsValid)
-        //    {
-        //        //return this.RedirectToAction("Details", "Movie", new { id = movie.Name });
-
-        //        var result = await this.noteService.CreateNoteAsync(model);
-
-        //        return this.PartialView("_NotePartial", result);
-        //    }
-
-        //    return this.View(model);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> DeleteNote(string data)
         {

@@ -32,10 +32,6 @@
     <Folder Include="Areas\Business\Views\Shared\" />
     <Folder Include="Areas\Management\Data\" />
     <Folder Include="Areas\Management\Models\" />
-    <Folder Include="Areas\Moderation\Controllers\" />
-    <Folder Include="Areas\Moderation\Data\" />
-    <Folder Include="Areas\Moderation\Models\" />
-    <Folder Include="Areas\Moderation\Views\" />
   </ItemGroup>
 
 </Project>
