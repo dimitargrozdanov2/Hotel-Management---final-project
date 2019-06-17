@@ -34,7 +34,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         {
             var model = new ManagementIndexViewModel();
 
-            var userLogbooks = await this.userService.GetUserLogbooksAsync(email, specifiedLogbook);
+            var userLogbooks = await this.userService.GetUserLogbooksAsync(email);
             model.Logbooks = userLogbooks;
             if (specifiedLogbook == null)
             {

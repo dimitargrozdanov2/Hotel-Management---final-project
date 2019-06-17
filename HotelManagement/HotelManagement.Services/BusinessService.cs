@@ -37,7 +37,10 @@ namespace HotelManagement.Services
                     .ThenInclude(r => r.Replies)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
-            //business.Feedback.OrderByDescending(x => x.CreatedOn);
+            if(business == null)
+            {
+                throw new EntityInvalidException($"Business `{name}` does not exist.");
+            }
 
             var mappedBusiness = this.mappingProvider.MapTo<BusinessViewModel>(business);
 

@@ -10,6 +10,6 @@ namespace HotelManagement.Services.Contracts
     {
         Task<IEnumerable<UserViewModel>> GetAllUsersAsync();
 
-        Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email, string specifiedLogbook);
+        Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email);
     }
 }

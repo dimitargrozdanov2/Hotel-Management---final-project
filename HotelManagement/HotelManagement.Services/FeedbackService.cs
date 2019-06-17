@@ -75,7 +75,7 @@ namespace HotelManagement.Services
         public async Task<string> DeleteCommentAsync(string id)
         {
             var feedback = await this.context.Feedback
-                .Include(r => r.Replies)
+                .Include(r => r.Replies) // Including replies because they will be removed with RemoveRange when the comment is deleted
                 .FirstOrDefaultAsync(l => l.Id == id);
 
             if (feedback == null)
@@ -89,7 +89,5 @@ namespace HotelManagement.Services
 
             return id;
         }
-
-
     }
 }

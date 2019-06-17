@@ -26,12 +26,21 @@ namespace HotelManagement.Services
 
         public async Task<ICollection<string>> GetAllCategoryNamesAsync(string logbookName)
         {
-            var logbook = await this.context.Logbooks.Include(x => x.Categories)
+            var logbook = await this.context.Logbooks
+                .Include(x => x.Categories)
                 .FirstOrDefaultAsync(x => x.Name == logbookName);
+
+            if(logbook == null)
+            {
+                throw new EntityInvalidException("Logbook has not been found!");
+            }
 
             var categories = logbook.Categories.Select(x => x.Name).ToList();
 
-            //var mappedCategories = this.mappingProvider.MapTo<ICollection<CategoryViewModel>>(categories);
+            if (categories == null)
+            {
+                throw new EntityInvalidException("This logbook has no categories!");
+            }
 
             return categories;
         }

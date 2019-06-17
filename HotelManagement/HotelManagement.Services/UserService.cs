@@ -1,4 +1,5 @@
 ﻿using HotelManagement.Data;
+using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Wrappers.Contracts;
@@ -6,9 +7,8 @@ using HotelManagement.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
-using HotelManagement.DataModels;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Services
 {
@@ -40,32 +40,17 @@ namespace HotelManagement.Services
             return returnUsers;
         }
 
-        public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email, string specifiedLogbook = null)
+        public async Task<IEnumerable<LogbookViewModel>> GetUserLogbooksAsync(string email)
         {
-            IEnumerable<Logbook> logbooks;
-            if(specifiedLogbook == null)
-            {
-                logbooks = await this.context.Logbooks
-                .Include(n => n.Notes)
-                    .ThenInclude(l => l.Category)
-                .Include(lb => lb.LogbookManagers)
-                    .ThenInclude(m => m.Manager)
-                .Include(b => b.Business)
-                .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
-                .ToListAsync();
-            }
-            else
-            {
-                logbooks = await this.context.Logbooks
-               .Include(n => n.Notes)
-                   .ThenInclude(l => l.Category)
-               .Include(lb => lb.LogbookManagers)
-                   .ThenInclude(m => m.Manager)
-               .Include(b => b.Business)
-               .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
-               .ToListAsync();
-            }
-           
+            IEnumerable<Logbook> logbooks = await this.context.Logbooks
+            .Include(n => n.Notes)
+                .ThenInclude(l => l.Category)
+            .Include(lb => lb.LogbookManagers)
+                .ThenInclude(m => m.Manager)
+            .Include(b => b.Business)
+            .Where(s => s.LogbookManagers.Any(x => x.Manager.Email == email))
+            .ToListAsync();
+
             var mappedLogbooks = this.mappingProvider.MapTo<IEnumerable<LogbookViewModel>>(logbooks);
 
             return mappedLogbooks;
