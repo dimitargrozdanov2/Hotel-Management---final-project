@@ -38,14 +38,20 @@ The administrators are able to initialize new LogBooks and Categories/Tags for t
 # Home Page
 ![Home Page](homepage.png)<br>
 # Feedback Page
-![Home Page](feedback-section.png)<br>
+![feedback-section](feedback-section.png)<br>
 # Management Page
-![Home Page](management-notes.png)<br>
+![management-notes](management-notes.png)<br>
 # Search Page
-![Home Page](search-by-category.png)<br>
+![search-by-category](search-by-category.png)<br>
 # Admin Business Page
-![Home Page](all-businesses.png)<br>
+![all-businessese](all-businesses.png)<br>
 # Admin Logbooks Page
-![Home Page](business-logbooks.png)<br>
+![business-logbooks](business-logbooks.png)<br>
 # Admin Users Page
-![Home Page](all-users.png)<br>
+![all-users](all-users.png)<br>
+# Azure Continuous Integration Builds
+![azure-ci-builds](azure-ci-builds.png)<br>
+# Azure CI Build example
+![example-build](example-build.png)<br>
+# Azure CI Releases
+![azure-releases](azure-releases.png)<br>
