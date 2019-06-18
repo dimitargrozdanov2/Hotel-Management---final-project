@@ -84,5 +84,85 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
 
             Assert.IsInstanceOfType(result.Model, typeof(ManagementIndexViewModel));
         }
+
+        [TestMethod]
+        public async Task Assign_SpecifiedLogbook_When_IsNotNull_Correctly()
+        {
+            // Arrange
+            string email = "admin@admin.admin";
+            string specifiedLogbook = "LogbookTwo";
+
+            var model = new ManagementIndexViewModel();
+
+            var collectionOfLogbooks = new List<LogbookViewModel>
+            {
+                new LogbookViewModel()
+                {
+                    Name = "LogbookOne"
+                },
+                new LogbookViewModel()
+                {
+                    Name = "LogbookTwo"
+                }
+            };
+
+            var userServiceMock = new Mock<IUserService>();
+            var noteServiceMock = new Mock<INoteService>();
+            var categoryServiceMock = new Mock<ICategoryService>();
+            userServiceMock
+            .Setup(g => g.GetUserLogbooksAsync(email))
+                .ReturnsAsync(collectionOfLogbooks);
+
+            var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
+
+            // Act
+            var result = await sut.Index(email, specifiedLogbook) as ViewResult;
+
+            Assert.IsInstanceOfType(result.Model, typeof(ManagementIndexViewModel));
+
+            var castedManagementModel = (ManagementIndexViewModel)result.Model;
+
+            Assert.IsTrue(castedManagementModel.SpecifiedLogbook.Name == specifiedLogbook);
+        }
+
+        [TestMethod]
+        public async Task Assign_SpecifiedLogbook_WhenIsNull_Correctly()
+        {
+            // Arrange
+            string email = "admin@admin.admin";
+            string logbookOne = "LogbookOne";
+
+            var model = new ManagementIndexViewModel();
+
+            var collectionOfLogbooks = new List<LogbookViewModel>
+            {
+                new LogbookViewModel()
+                {
+                    Name = "LogbookOne"
+                },
+                new LogbookViewModel()
+                {
+                    Name = "LogbookTwo"
+                }
+            };
+
+            var userServiceMock = new Mock<IUserService>();
+            var noteServiceMock = new Mock<INoteService>();
+            var categoryServiceMock = new Mock<ICategoryService>();
+            userServiceMock
+            .Setup(g => g.GetUserLogbooksAsync(email))
+                .ReturnsAsync(collectionOfLogbooks);
+
+            var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
+
+            // Act
+            var result = await sut.Index(email, null) as ViewResult;
+
+            Assert.IsInstanceOfType(result.Model, typeof(ManagementIndexViewModel));
+
+            var castedManagementModel = (ManagementIndexViewModel)result.Model;
+
+            Assert.IsTrue(castedManagementModel.SpecifiedLogbook.Name == logbookOne);
+        }
     }
 }
