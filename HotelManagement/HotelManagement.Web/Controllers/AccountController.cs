@@ -70,14 +70,6 @@ namespace HotelManagement.Web.Controllers
             return this.View(model);
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
-        {
-            this.ViewData["ReturnUrl"] = returnUrl;
-            return this.View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterUser(RegisterViewModel model)
@@ -105,35 +97,6 @@ namespace HotelManagement.Web.Controllers
                 return this.BadRequest(result.Errors);
             }
 
-            return this.View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
-        {
-            this.ViewData["ReturnUrl"] = returnUrl;
-            if (this.ModelState.IsValid)
-            {
-                var user = new User { UserName = model.Email, Email = model.Email };
-                var result = await this._userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    this._logger.LogInformation("User created a new account with password.");
-
-                    var code = await this._userManager.GenerateEmailConfirmationTokenAsync(user);
-
-                    //After Registering a user, I don't want to sign in with him
-
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    this._logger.LogInformation("User created a new account with password.");
-
-                    return this.RedirectToLocal(returnUrl);
-                }
-                this.AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
             return this.View(model);
         }
 

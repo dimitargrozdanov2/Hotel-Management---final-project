@@ -80,6 +80,12 @@ namespace HotelManagement.Services
             {
                 int startIndex = imageUrl.IndexOf('_');
                 string logbookName = imageUrl.Substring((startIndex + 1), (imageUrl.Length - 5 - startIndex));
+
+                if (!business.BusinessUnits.Any(x => x.Name == logbookName))
+                {
+                    throw new EntityInvalidException("This logbook does not exist!");
+                }
+
                 var logbook = await this.context.Logbooks.FirstOrDefaultAsync(b => b.Name == logbookName);
 
                 if (logbook == null)
