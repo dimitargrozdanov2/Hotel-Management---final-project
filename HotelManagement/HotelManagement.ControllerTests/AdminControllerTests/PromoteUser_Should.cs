@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -41,6 +38,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             // Assert
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
+
         public async Task Call_BusinessService_With_Correct_Params()
         {
             var userManagerWrapperMock = new Mock<IUserManagerWrapper>();
@@ -73,7 +71,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
 
             userManagerWrapperMock.Verify(b => b.FindByIdAsync(model.UserId), Times.Once);
         }
-        
+
         [TestMethod]
         public async Task Throw_WhenUser_DoesNotExist()
         {

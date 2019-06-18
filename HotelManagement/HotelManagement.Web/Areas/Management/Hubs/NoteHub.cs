@@ -1,13 +1,9 @@
-﻿using HotelManagement.DataModels.Enums;
-using HotelManagement.Services.Contracts;
+﻿using HotelManagement.Services.Contracts;
 using HotelManagement.ViewModels.Management;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Management.Hubs
@@ -37,11 +33,8 @@ namespace HotelManagement.Web.Areas.Management.Hubs
             }
             catch (Exception ex)
             {
-                await Clients.Caller.SendAsync("handle_exception", ex);
+                await this.Clients.Caller.SendAsync("handle_exception", ex);
             }
-
-
-            
         }
     }
 }

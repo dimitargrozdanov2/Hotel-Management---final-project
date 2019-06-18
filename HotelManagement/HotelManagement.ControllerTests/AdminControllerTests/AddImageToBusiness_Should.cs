@@ -1,18 +1,11 @@
 ﻿using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Wrappers.Contracts;
-using HotelManagement.ViewModels;
 using HotelManagement.Web.Areas.Administration.Controllers;
 using HotelManagement.Web.Areas.Administration.Models.Admin;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests

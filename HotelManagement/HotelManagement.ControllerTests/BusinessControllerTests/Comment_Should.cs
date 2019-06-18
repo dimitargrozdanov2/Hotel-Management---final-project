@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.BusinessControllerTests
@@ -67,7 +64,7 @@ namespace HotelManagement.ControllerTests.BusinessControllerTests
             model.Email = "ivan@ivan.com";
 
             var feedbackModel = new FeedbackViewModel();
-            
+
             var businessService = new Mock<IBusinessService>();
             var feedbackService = new Mock<IFeedbackService>();
             feedbackService.Setup(f => f.AddComment(model)).ReturnsAsync(feedbackModel);

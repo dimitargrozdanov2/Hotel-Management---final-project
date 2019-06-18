@@ -135,7 +135,6 @@ namespace HotelManagement.ServiceTests.NoteServiceTests
 
                 Assert.IsTrue(collectionOfNotes.Count() == 1);
                 Assert.IsTrue(collectionOfNotes.First().Text.Contains("New Note"));
-
             }
         }
 
@@ -197,7 +196,6 @@ namespace HotelManagement.ServiceTests.NoteServiceTests
 
                 Assert.IsTrue(collectionOfNotes.Count() == 1);
                 Assert.IsTrue(collectionOfNotes.First().Text.Contains("New Note"));
-
             }
         }
 
@@ -258,7 +256,6 @@ namespace HotelManagement.ServiceTests.NoteServiceTests
                 await sut.SearchNotesAsync(searchedText, userEmail, searchByValue);
 
                 mappingProviderMock.Verify(m => m.MapTo<ICollection<NoteViewModel>>(collectionOfNotes), Times.Once);
-
             }
         }
     }

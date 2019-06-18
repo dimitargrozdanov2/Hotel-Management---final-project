@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services
@@ -144,7 +143,6 @@ namespace HotelManagement.Services
                     var imageLocation = $"\\wwwroot\\images\\Project\\";
                     var path = Path.Combine(currentDirectory + imageLocation + imageNametoDelete);
                     File.Delete(path);
-
                 }
             }
 
@@ -153,9 +151,6 @@ namespace HotelManagement.Services
             var returnLogbooks = this.mappingProvider.MapTo<LogbookViewModel>(logbook);
 
             return returnLogbooks;
-
         }
-
-
     }
 }

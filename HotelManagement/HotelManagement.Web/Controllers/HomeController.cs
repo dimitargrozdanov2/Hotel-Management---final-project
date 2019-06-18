@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HotelManagement.Web.Models;
-using HotelManagement.Services.Contracts;
-using HotelManagement.Web.Models.HomeViewModels;
+﻿using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Wrappers.Contracts;
+using HotelManagement.Web.Models;
+using HotelManagement.Web.Models.HomeViewModels;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Controllers
 {
@@ -32,7 +30,7 @@ namespace HotelManagement.Web.Controllers
 
             model.Businesses = business;
 
-            return View(model);
+            return this.View(model);
         }
 
         public IActionResult Error()
