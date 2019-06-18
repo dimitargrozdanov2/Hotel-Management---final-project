@@ -59,7 +59,7 @@ feature.formdata = window.FormData !== undefined;
 var hasProp = !!$.fn.prop;
 
 // attr2 uses prop when it can but checks the return type for
-// an expected string.  this accounts for the case where a form 
+// an expected string.  this accounts for the case where a form
 // contains inputs with names like "action" or "method"; in those
 // cases "prop" returns the element
 $.fn.attr2 = function() {
@@ -335,7 +335,6 @@ $.fn.ajaxSubmit = function(options) {
         }
         io = $io[0];
 
-
         xhr = { // mock object
             aborted: 0,
             responseText: null,
@@ -405,7 +404,7 @@ $.fn.ajaxSubmit = function(options) {
 
         var CLIENT_TIMEOUT_ABORT = 1;
         var SERVER_ABORT = 2;
-                
+
         function getDoc(frame) {
             /* it looks like contentWindow or contentDocument do not
              * carry the protocol property in ie8, when running under ssl
@@ -413,9 +412,9 @@ $.fn.ajaxSubmit = function(options) {
              * the protocol is know but not on the other two objects. strange?
              * "Same origin policy" http://en.wikipedia.org/wiki/Same_origin_policy
              */
-            
+
             var doc = null;
-            
+
             // IE8 cascading access check
             try {
                 if (frame.contentWindow) {
@@ -555,7 +554,7 @@ $.fn.ajaxSubmit = function(options) {
             if (xhr.aborted || callbackProcessed) {
                 return;
             }
-            
+
             doc = getDoc(io);
             if(!doc) {
                 log('cannot access response document');
@@ -726,7 +725,6 @@ $.fn.ajaxSubmit = function(options) {
         };
 
         var httpData = function( xhr, type, s ) { // mostly lifted from jq1.4.4
-
             var ct = xhr.getResponseHeader('content-type') || '',
                 xml = type === 'xml' || !type && ct.indexOf('xml') >= 0,
                 data = xml ? xhr.responseXML : xhr.responseText;
@@ -840,7 +838,6 @@ function captureSubmittingElement(e) {
     // clear form vars
     setTimeout(function() { form.clk = form.clk_x = form.clk_y = null; }, 100);
 }
-
 
 // ajaxFormUnbind unbinds the event handlers that were bound by ajaxForm
 $.fn.ajaxFormUnbind = function() {
@@ -1170,5 +1167,4 @@ function log() {
         window.opera.postError(msg);
     }
 }
-
 })(jQuery);

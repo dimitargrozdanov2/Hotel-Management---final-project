@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services
@@ -30,7 +29,7 @@ namespace HotelManagement.Services
                 .Include(x => x.Categories)
                 .FirstOrDefaultAsync(x => x.Name == logbookName);
 
-            if(logbook == null)
+            if (logbook == null)
             {
                 throw new EntityInvalidException("Logbook has not been found!");
             }
@@ -67,10 +66,9 @@ namespace HotelManagement.Services
 
             await this.context.SaveChangesAsync();
 
-            var returnCategory= this.mappingProvider.MapTo<CategoryViewModel>(category);
+            var returnCategory = this.mappingProvider.MapTo<CategoryViewModel>(category);
 
             return returnCategory;
-
         }
     }
 }

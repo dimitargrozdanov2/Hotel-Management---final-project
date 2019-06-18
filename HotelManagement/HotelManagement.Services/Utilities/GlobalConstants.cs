@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelManagement.Services.Utilities
+﻿namespace HotelManagement.Services.Utilities
 {
     public class GlobalConstants
     {
@@ -19,6 +15,5 @@ namespace HotelManagement.Services.Utilities
         public const string Manager = "Manager";
 
         public const string Moderator = "Moderator";
-
     }
 }

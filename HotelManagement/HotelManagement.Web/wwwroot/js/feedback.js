@@ -29,8 +29,7 @@
     });
 })
 
-
-// using this to set the id of the feedback someone is replying to, in the modal, 
+// using this to set the id of the feedback someone is replying to, in the modal,
 //otherwise the modal will always take the first feedback id.
 $(document).on("click", "#reply-button", function () {
     var feedbackId = $(this).data('id');
@@ -55,7 +54,6 @@ $(function () {
                 toastr["success"]("Reply posted...", "Feedback Reply")
                 console.log(serverData);
 
-
                 $('#send-reply-form')[0].reset();
                 $(feedbackParentElement).append(serverData);
 
@@ -68,8 +66,6 @@ $(function () {
 })
 //console.log($('.comments-area').children().length)
 //console.log($('.comments-area').find('#noBusinesses').length);
-
-
 
 // delete MAIN feedback button for moderators
 $(document).on("click", "#delete-button", function (event) {
@@ -123,7 +119,6 @@ $(document).on("click", "#delete-reply-button", function (event) {
         .then((willDelete) => {
             if (willDelete) {
                 $.post("/Business/Business/DeleteFeedback", { "data": id }, function () {
-
                     console.log($('*[data-headCommentId="' + id + '"]').parent());
                     var element = $('*[data-headCommentId="' + id + '"]').parent().remove();
                 })
@@ -138,10 +133,8 @@ $(document).on("click", "#delete-reply-button", function (event) {
         });
 });
 
-
 //scroll button
 jQuery(document).ready(function () {
-
     var btn = $('#button');
 
     $(window).scroll(function () {
@@ -159,7 +152,3 @@ jQuery(document).ready(function () {
         }, 1000);
     });
 });
-
-
-
-

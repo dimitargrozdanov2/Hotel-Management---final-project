@@ -25,7 +25,6 @@
 //    });
 //});
 
-
 //$(function () {
 //    const $createNoteForm = $('#createNoteForm');
 
@@ -106,7 +105,6 @@ connection.on("NewMessage",
                 "</div>";
 
             $('.pricing-table').prepend(textToPrepend);
-
         }
         $('.modal').modal('hide');
         $('#createNoteForm')[0].reset();
@@ -176,7 +174,6 @@ $(document).ready(function () {
     if (specifiedLogbook !== null) {
         $("#dropdownMenuButton").text(specifiedLogbook);
     }
-
 });
 
 $(document).on("click", "#deleteNote", function (event) {
@@ -192,7 +189,6 @@ $(document).on("click", "#deleteNote", function (event) {
     .then((willDelete) => {
         if (willDelete) {
             $.post("/Management/Management/DeleteNote", { "data": id }, function () {
-                
             })
                 .done(function (dataResponse) {
                     $('#' + id).remove();
@@ -210,4 +206,3 @@ $(document).on("click", "#deleteNote", function (event) {
         }
     });
 });
-

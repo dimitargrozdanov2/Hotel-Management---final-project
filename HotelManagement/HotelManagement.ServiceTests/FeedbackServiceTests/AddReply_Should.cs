@@ -105,6 +105,5 @@ namespace HotelManagement.ServiceTests.FeedbackServiceTests
                 mappingProviderMock.Verify(m => m.MapTo<FeedbackViewModel>(feedback), Times.Once);
             }
         }
-
     }
 }

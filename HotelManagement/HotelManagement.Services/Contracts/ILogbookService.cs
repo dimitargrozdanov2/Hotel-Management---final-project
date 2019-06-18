@@ -1,7 +1,5 @@
 ﻿using HotelManagement.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services.Contracts
@@ -15,6 +13,5 @@ namespace HotelManagement.Services.Contracts
         Task<LogbookViewModel> ManageManagerAsync(string logbookName, string managerEmail);
 
         Task<LogbookViewModel> DeleteLogbook(string logbookName);
-
     }
 }

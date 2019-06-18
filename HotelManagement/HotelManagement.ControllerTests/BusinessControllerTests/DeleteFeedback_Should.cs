@@ -1,14 +1,9 @@
 ﻿using HotelManagement.Services.Contracts;
-using HotelManagement.ViewModels;
-using HotelManagement.ViewModels.PublicArea;
 using HotelManagement.Web.Areas.Business.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.BusinessControllerTests

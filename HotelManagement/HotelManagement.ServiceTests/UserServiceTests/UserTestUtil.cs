@@ -2,9 +2,6 @@
 using HotelManagement.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelManagement.ServiceTests.UserServiceTests
 {
@@ -12,7 +9,6 @@ namespace HotelManagement.ServiceTests.UserServiceTests
     {
         public static DbContextOptions<ApplicationDbContext> GetOptions(string databaseName)
         {
-
             var serviceCollection = new ServiceCollection()
                 .AddEntityFrameworkInMemoryDatabase()
                 .BuildServiceProvider();

@@ -1,15 +1,10 @@
 ﻿using HotelManagement.Data;
-using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services;
 using HotelManagement.Services.Exceptions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ServiceTests.LogbookServiceTests
@@ -86,7 +81,6 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
 
             using (var actAndAssertContext = new ApplicationDbContext(options))
             {
-
                 var sut = new LogbookService(actAndAssertContext, mappingProviderMock.Object, hostingEnvironmentMock.Object); ;
 
                 await Assert.ThrowsExceptionAsync<EntityInvalidException>(
@@ -95,4 +89,3 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
         }
     }
 }
-

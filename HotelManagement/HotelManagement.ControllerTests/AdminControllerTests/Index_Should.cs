@@ -4,14 +4,10 @@ using HotelManagement.ViewModels;
 using HotelManagement.Web.Areas.Administration.Controllers;
 using HotelManagement.Web.Areas.Administration.Models.Admin;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests

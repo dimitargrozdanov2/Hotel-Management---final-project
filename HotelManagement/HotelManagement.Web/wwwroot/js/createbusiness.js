@@ -1,5 +1,4 @@
 ﻿$("#formCreateBusiness").on('submit', function (event) {
-
     event.preventDefault();
     var myformdata = $("#formCreateBusiness").serialize();
 
@@ -25,7 +24,6 @@ href="/Administration/Admin/AddImageToBusiness?name=${dataResponse.name}">
         </a>`;
 
             var newRow = $('#table').DataTable().row.add([dataResponse.name, dataResponse.location, dataResponse.description, buttons]).draw();
-
         }).fail(function (dataResponse) {
             toastr.error(dataResponse.responseJSON.message);
         });

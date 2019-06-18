@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace HotelManagement.ViewModels
 {
@@ -29,6 +28,5 @@ namespace HotelManagement.ViewModels
         public BusinessViewModel Business { get; set; }
 
         public FeedbackViewModel FeedbackParent { get; set; }
-
     }
 }

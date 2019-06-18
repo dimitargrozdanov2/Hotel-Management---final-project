@@ -1,7 +1,5 @@
 ﻿using HotelManagement.DataModels.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HotelManagement.DataModels
 {

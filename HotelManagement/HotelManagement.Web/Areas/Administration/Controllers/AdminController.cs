@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using HotelManagement.Services.Contracts;
+﻿using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Exceptions;
 using HotelManagement.Services.Wrappers.Contracts;
 using HotelManagement.Web.Areas.Administration.Models.Admin;
@@ -11,6 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Administration.Controllers
 {
@@ -27,7 +26,7 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         private readonly ICategoryService categoryService;
 
         public AdminController(IUserManagerWrapper userManagerWrapper,
-            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment, 
+            IUserService userService, IBusinessService businessService, IHostingEnvironment hostingEnvironment,
             ILogbookService logbookService, IRoleManagerWrapper roleManagerWrapper, ICategoryService categoryService)
         {
             this.userManagerWrapper = userManagerWrapper;
@@ -65,7 +64,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
             model.Businesses = businesses;
 
             return this.View(model);
-
         }
 
         [HttpPost]
@@ -74,19 +72,19 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return BadRequest(model);
+                return this.BadRequest(model);
             }
 
             try
             {
                 var business = await this.businessService.CreateBusinessAsync(model.Name, model.Location, model.Description);
 
-                return Json(business);
+                return this.Json(business);
             }
             catch (EntityAlreadyExistsException ex)
             {
                 this.ModelState.AddModelError("Error", ex.Message);
-                return BadRequest(new { message = ex.Message });
+                return this.BadRequest(new { message = ex.Message });
             }
         }
 
@@ -172,11 +170,11 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                     throw new EntityInvalidException("User not found!");
                 }
 
-                if ((await userManagerWrapper.GetAllRoles(user.UserName)).Contains(model.RoleName))
+                if ((await this.userManagerWrapper.GetAllRoles(user.UserName)).Contains(model.RoleName))
                 {
                     var userAlreadyHasRoleMessage = $"{user.UserName} is already assigned role {model.RoleName}";
                     this.ModelState.AddModelError("Error", userAlreadyHasRoleMessage);
-                    return BadRequest(new { message = userAlreadyHasRoleMessage });
+                    return this.BadRequest(new { message = userAlreadyHasRoleMessage });
                 }
                 await this.userManagerWrapper.AddToRoleAsync(user, model.RoleName);
 
@@ -186,10 +184,10 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
                     UserId = user.Id
                 };
 
-                return Json(promoteRoleViewModel);
+                return this.Json(promoteRoleViewModel);
             }
 
-            return BadRequest(model);
+            return this.BadRequest(model);
         }
 
         [HttpGet]

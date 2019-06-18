@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -67,7 +65,6 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             var result = await sut.AllBusinesses() as ViewResult;
 
             Assert.IsInstanceOfType(result.Model, typeof(ListBusinessesViewModel));
-
         }
     }
 }

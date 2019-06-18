@@ -1,12 +1,9 @@
 ﻿using HotelManagement.Services.Contracts;
-using HotelManagement.ViewModels;
 using HotelManagement.Web.Areas.Management.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.ManagementControllerTests
@@ -27,7 +24,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
             noteServiceMock
                 .Setup(g => g.DeleteNoteAsync(noteName))
                 .ReturnsAsync(returnNoteService);
-
 
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
             sut.ModelState.AddModelError("error", "error");
@@ -53,7 +49,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
                 .Setup(g => g.DeleteNoteAsync(noteName))
                 .ReturnsAsync(returnNoteService);
 
-
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
 
             // Act
@@ -77,7 +72,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
                 .Setup(g => g.DeleteNoteAsync(noteName))
                 .ReturnsAsync(returnNoteService);
 
-
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
 
             // Act
@@ -99,7 +93,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
             noteServiceMock
                 .Setup(g => g.DeleteNoteAsync(noteName))
                 .Throws<Exception>();
-
 
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
 

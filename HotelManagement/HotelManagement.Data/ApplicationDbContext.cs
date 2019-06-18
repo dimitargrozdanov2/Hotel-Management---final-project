@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using HotelManagement.Data.Configurations;
+﻿using HotelManagement.Data.Configurations;
 using HotelManagement.DataModels;
 using HotelManagement.DataModels.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         public DbSet<Feedback> Feedback { get; set; }
@@ -36,7 +33,6 @@ namespace HotelManagement.Data
         public DbSet<LogbookManagers> LogbookManagers { get; set; }
 
         public DbSet<Note> Notes { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -55,7 +51,6 @@ namespace HotelManagement.Data
             builder.ApplyConfiguration(new LogBookManagersConfiguration());
             builder.ApplyConfiguration(new NoteConfiguration());
             builder.ApplyConfiguration(new BusinessConfiguration());
-
         }
 
         public override int SaveChanges()
@@ -116,7 +111,6 @@ namespace HotelManagement.Data
             var imagesPath = @"..\HotelManagement.Data\JsonFiles\images.json";
 
             var logbookManagersPath = @"..\HotelManagement.Data\JsonFiles\logbookManagers.json";
-
 
             var usersPath = @"..\HotelManagement.Data\JsonFiles\users.json";
             var rolesPath = @"..\HotelManagement.Data\JsonFiles\roles.json";

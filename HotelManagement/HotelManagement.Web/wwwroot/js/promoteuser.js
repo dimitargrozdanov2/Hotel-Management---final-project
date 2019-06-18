@@ -11,7 +11,6 @@
 
 //});
 
-
 $('#table').on('click', '.open-promote-user', function () {
     var userid = $(this).attr('att');
   //  console.log(userid);
@@ -40,21 +39,11 @@ $('#PromoteUserRecord').on('click', function (event) {
             console.log(dataResponse);
             $(idOfRoleTd).append(dataResponse.roleName);
             console.log(this);
-
-
         }).fail(function (dataResponse) {
             console.log(dataResponse);
             toastr.error(dataResponse.responseJSON.message);
-
         });
 });
-
-
-
-
-
-
-
 
 //$("#PromoteUser").click(function (event) {
 //    event.preventDefault();
@@ -73,13 +62,11 @@ $('#PromoteUserRecord').on('click', function (event) {
 //    console.log(postData);
 //    $.post("/Administration/Admin/PromoteUser", myformdata)
 //        .done(function (dataResponse) {
-
 //            toastr.success("User succesfully promoted");
 //            $("#MyModal2").modal('hide');
 //            $test = dataResponse.attr('RoleName');
 //            console.log($test);
 //            $(".roleofUser").append(dataResponse);
-
 
 //        }).fail(function (dataResponse) {
 //            toastr.error("User promotion failed");

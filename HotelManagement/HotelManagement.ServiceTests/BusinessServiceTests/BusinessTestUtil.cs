@@ -2,11 +2,6 @@
 using HotelManagement.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 
 namespace HotelManagement.ServiceTests.BusinessServiceTests
 {
@@ -23,6 +18,7 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
                 .UseInternalServiceProvider(serviceCollection)
                 .Options;
         }
+
         public static ApplicationDbContext FillContextWithBusinesses(DbContextOptions<ApplicationDbContext> options)
         {
             var context = new ApplicationDbContext(options);
@@ -72,7 +68,6 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
             context.SaveChanges();
 
             return context;
-
         }
     }
 }

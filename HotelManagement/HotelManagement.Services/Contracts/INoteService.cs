@@ -1,5 +1,4 @@
-﻿using HotelManagement.DataModels;
-using HotelManagement.ViewModels;
+﻿using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
 using System.Collections.Generic;
 using System.Threading.Tasks;

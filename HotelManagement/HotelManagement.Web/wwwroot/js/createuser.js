@@ -1,5 +1,4 @@
 ﻿$("#formRegister").on("submit", function (event) {
-
     event.preventDefault();
     var myformdata = $("#formRegister").serialize();
 
@@ -36,16 +35,10 @@
             $('td:eq(2)', newRow).attr('id', `role-${dataResponse.id}`);
             $(newRow).attr('id', `user-tr-${dataResponse.id}`);
             $('.delete-user-form', newRow).on('submit', deleteUser);
-
-
         }).fail(function (dataResponse) {
-
             for (var key in dataResponse.responseJSON) {
-
                 var result = (dataResponse.responseJSON[key].description).toString();
                 toastr.error(result);
-
             }
         });
-
 })

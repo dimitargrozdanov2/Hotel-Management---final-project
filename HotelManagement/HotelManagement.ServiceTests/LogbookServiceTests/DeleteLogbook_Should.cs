@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ServiceTests.LogbookServiceTests
@@ -95,4 +92,3 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
         }
     }
 }
-

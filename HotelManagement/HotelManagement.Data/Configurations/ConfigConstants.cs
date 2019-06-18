@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HotelManagement.Data.Configurations
+﻿namespace HotelManagement.Data.Configurations
 {
     internal class ConfigConstants
     {

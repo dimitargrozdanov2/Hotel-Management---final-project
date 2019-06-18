@@ -1,9 +1,5 @@
-﻿using HotelManagement.DataModels;
-using HotelManagement.ViewModels;
-using System;
+﻿using HotelManagement.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Models.HomeViewModels
 {

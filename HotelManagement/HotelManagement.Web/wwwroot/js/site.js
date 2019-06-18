@@ -8,7 +8,6 @@ $('#admindropdown').on('mouseleave', () => {
 
 //scroll button
 jQuery(document).ready(function () {
-
     var btn = $('#button');
 
     $(window).scroll(function () {
@@ -24,4 +23,3 @@ jQuery(document).ready(function () {
         $('html, body').animate({ scrollTop: 0 }, '100'); // could scroll to the top;
     });
 });
-

@@ -6,10 +6,8 @@ using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ServiceTests.CategoryServiceTests
@@ -68,7 +66,7 @@ namespace HotelManagement.ServiceTests.CategoryServiceTests
 
             var options = CategoryTestUtil.GetOptions(dabataseName);
 
-             CategoryTestUtil.FillContextWithCategories(options);
+            CategoryTestUtil.FillContextWithCategories(options);
 
             var mappingProviderMock = new Mock<IMappingProvider>();
 

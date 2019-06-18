@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -53,14 +51,12 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             var roleManagerWrapperMock = new Mock<IRoleManagerWrapper>();
             var categoryServiceMock = new Mock<ICategoryService>();
 
-
             var logbookList = new List<LogbookViewModel>();
             string businessName = "Shell";
 
             logbookServiceMock
             .Setup(g => g.GetLogBooksForBusiness(businessName))
             .ReturnsAsync(logbookList);
-
 
             var sut = new AdminController(userManagerWrapperMock.Object, userServiceMock.Object, businessServiceMock.Object,
                 hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);

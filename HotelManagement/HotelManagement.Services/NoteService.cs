@@ -3,7 +3,6 @@ using HotelManagement.DataModels;
 using HotelManagement.DataModels.Enums;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
-using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
 using Microsoft.EntityFrameworkCore;

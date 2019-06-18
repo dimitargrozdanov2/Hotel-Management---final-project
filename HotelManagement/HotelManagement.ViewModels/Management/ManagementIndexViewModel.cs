@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace HotelManagement.ViewModels.Management
 {
@@ -10,6 +7,5 @@ namespace HotelManagement.ViewModels.Management
         public IEnumerable<LogbookViewModel> Logbooks { get; set; }
 
         public LogbookViewModel SpecifiedLogbook { get; set; }
-
     }
 }

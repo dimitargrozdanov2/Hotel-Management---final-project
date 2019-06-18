@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using HotelManagement.DataModels;
-using HotelManagement.DataModels.Enums;
 using HotelManagement.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HotelManagement.Infrastructure.Mappings
 {

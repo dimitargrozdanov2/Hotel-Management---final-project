@@ -3,10 +3,6 @@ using HotelManagement.Web.Areas.Management.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.ManagementControllerTests
 {
@@ -28,7 +24,7 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
             // Act
             var result = sut.Search(noteName) as ViewResult;
 
-            // Assert   
+            // Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
     }

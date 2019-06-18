@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -96,7 +93,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
 
         [TestMethod]
         public async Task Return_StatusCode400_When_Exception_IsThrown()
-        { 
+        {
             var model = new CreateBusinessViewModel();
             model.Name = "Starbucks";
             model.Location = "Seattle";
@@ -114,11 +111,10 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
 
             var sut = new AdminController(userManagerWrapperMock.Object, userServiceMock.Object, businessServiceMock.Object,
              hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
- 
+
             var result = await sut.CreateBusiness(model) as ObjectResult;
 
             Assert.AreEqual(400, result.StatusCode);
-
         }
     }
 }

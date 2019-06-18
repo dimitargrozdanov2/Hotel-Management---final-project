@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.Services.Wrappers
@@ -27,6 +26,7 @@ namespace HotelManagement.Services.Wrappers
         {
             return await this.userManager.FindByIdAsync(id);
         }
+
         public async Task<IdentityResult> AddToRoleAsync(User user, string role)
         {
             return await this.userManager.AddToRoleAsync(user, role);

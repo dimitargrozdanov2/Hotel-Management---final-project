@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -136,6 +134,5 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             Assert.IsTrue(redirect.ControllerName == "Admin");
             Assert.IsTrue(redirect.ActionName == "AllBusinesses");
         }
-
     }
 }

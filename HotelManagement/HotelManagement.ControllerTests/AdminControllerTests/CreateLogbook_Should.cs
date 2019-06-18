@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -55,7 +52,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
                 hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
 
             sut.ModelState.AddModelError("error", "error");
-            var result = await sut.CreateLogbook(businessName,model);
+            var result = await sut.CreateLogbook(businessName, model);
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }
@@ -77,7 +74,6 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             {
                 Name = businessName
             };
-
 
             var addImageModel = new CreateLogbookViewModel()
             {
@@ -109,12 +105,11 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             var categoryServiceMock = new Mock<ICategoryService>();
 
             string businessName = "Wagamama";
-          
+
             var model = new LogbookViewModel()
             {
                 Name = businessName
             };
-
 
             var addImageModel = new CreateLogbookViewModel()
             {

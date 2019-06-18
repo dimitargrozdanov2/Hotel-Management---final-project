@@ -1,16 +1,11 @@
 ﻿using HotelManagement.Services.Contracts;
-using HotelManagement.ViewModels;
 using HotelManagement.ViewModels.Management;
-using HotelManagement.Web.Areas.Management.Hubs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace HotelManagement.Web.Areas.Management.Controllers
 {
@@ -22,7 +17,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
         private readonly INoteService noteService;
         private readonly ICategoryService categoryService;
 
-        public ManagementController(IUserService userService, INoteService noteService, 
+        public ManagementController(IUserService userService, INoteService noteService,
             ICategoryService categoryService)
         {
             this.userService = userService ?? throw new ArgumentNullException(nameof(userService));
@@ -49,7 +44,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
 
         public IActionResult Search(string data)
         {
-            return View();
+            return this.View();
         }
 
         public async Task<JsonResult> GetNotesAsyncJson(string data, string userIdentity, string searchByValue)
@@ -58,7 +53,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
             var model = new SearchViewModel();
             model.Notes = notes;
 
-            return Json(model.Notes);
+            return this.Json(model.Notes);
         }
 
         [HttpGet]
@@ -81,7 +76,7 @@ namespace HotelManagement.Web.Areas.Management.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return StatusCode((int)HttpStatusCode.InternalServerError, ex);
+                    return this.StatusCode((int)HttpStatusCode.InternalServerError, ex);
                 }
 
                 return this.StatusCode(200);

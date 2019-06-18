@@ -55,7 +55,7 @@ body, .header-top {
 
     #button::after {
         content: "\f077";
-        font-family: "Font Awesome 5 Free"; 
+        font-family: "Font Awesome 5 Free";
         font-weight: 900;
         font-style: normal;
         font-size: 2em;
@@ -76,7 +76,6 @@ body, .header-top {
     opacity: 1;
     visibility: visible;
 }
-
 
 /* management section - notes*/
 .demo-title {
@@ -226,7 +225,6 @@ body, .header-top {
                         background: #f62d3d;
                     }
 
-
 .pricing-table {
     display: flex;
     flex-wrap: wrap;
@@ -236,7 +234,6 @@ body, .header-top {
 .pricing-option {
     margin-top: 20px;
 }
-
 
 @media screen and (max-width: 768px) {
     .pricing-table .pricing-option {
@@ -315,13 +312,11 @@ body, .header-top {
     outline: none;
 }
 
-
 /*LOGO*/
 .logo {
     font-size: 27px;
     color: goldenrod;
 }
-
 
 .changePasswordButton{
     margin-bottom: 10px;

@@ -31,7 +31,6 @@ namespace HotelManagement.ServiceTests.FeedbackServiceTests
                 Description = "Basic Chicken business!"
             };
 
-
             var BurgerKing = new Business()
             {
                 Id = "2fce4ada-9ca4-450c-8916-c92f4ffa2dd4",
@@ -69,7 +68,6 @@ namespace HotelManagement.ServiceTests.FeedbackServiceTests
             context.SaveChanges();
 
             return context;
-
         }
     }
 }

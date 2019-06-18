@@ -3,15 +3,15 @@ using HotelManagement.DataModels;
 using HotelManagement.Infrastructure;
 using HotelManagement.Services.Contracts;
 using HotelManagement.Services.Exceptions;
+using HotelManagement.Services.Extensions;
 using HotelManagement.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using HotelManagement.Services.Extensions;
-using Microsoft.AspNetCore.Http;
 
 namespace HotelManagement.Services
 {
@@ -25,7 +25,7 @@ namespace HotelManagement.Services
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
             this.mappingProvider = mappingProvider ?? throw new ArgumentNullException(nameof(mappingProvider));
-            this.orderByDictionary = AddOrderElements();
+            this.orderByDictionary = this.AddOrderElements();
         }
 
         public async Task<BusinessViewModel> GetBusinessByNameAsync(string name)
@@ -37,7 +37,7 @@ namespace HotelManagement.Services
                     .ThenInclude(r => r.Replies)
                 .FirstOrDefaultAsync(b => b.Name == name);
 
-            if(business == null)
+            if (business == null)
             {
                 throw new EntityInvalidException($"Business `{name}` does not exist.");
             }
@@ -113,14 +113,14 @@ namespace HotelManagement.Services
         {
             ICollection<Business> businesses = null;
 
-            if (orderByDictionary.ContainsKey(key))
+            if (this.orderByDictionary.ContainsKey(key))
             {
                 businesses = await this.context.Businesses
                     .Include(bu => bu.BusinessUnits)
                     .Include(f => f.Feedback)
                         .ThenInclude(r => r.Replies)
                     .Include(i => i.Images)
-                    .OrderByWithDirection(orderByDictionary[key], isDescending)
+                    .OrderByWithDirection(this.orderByDictionary[key], isDescending)
                     .ToListAsync();
             }
 

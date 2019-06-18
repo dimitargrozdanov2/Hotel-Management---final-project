@@ -73,7 +73,6 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
                 Name = logbookName
             };
 
-
             var managerModel = new ManagerManageViewModel()
             {
                 LogbookName = logbookName,
@@ -109,7 +108,6 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             {
                 Name = logbookName
             };
-
 
             var managerModel = new ManagerManageViewModel()
             {

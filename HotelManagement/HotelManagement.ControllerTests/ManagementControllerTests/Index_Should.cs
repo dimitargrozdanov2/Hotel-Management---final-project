@@ -41,7 +41,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
             .Setup(g => g.GetUserLogbooksAsync(email))
                 .ReturnsAsync(collectionOfLogbooks);
 
-
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
 
             // Act
@@ -77,7 +76,6 @@ namespace HotelManagement.ControllerTests.ManagementControllerTests
             userServiceMock
             .Setup(g => g.GetUserLogbooksAsync(email))
                 .ReturnsAsync(collectionOfLogbooks);
-
 
             var sut = new ManagementController(userServiceMock.Object, noteServiceMock.Object, categoryServiceMock.Object);
 

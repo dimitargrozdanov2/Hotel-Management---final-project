@@ -6,10 +6,7 @@ using HotelManagement.Services.Exceptions;
 using HotelManagement.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ServiceTests.BusinessServiceTests
@@ -34,13 +31,13 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
 
             using (var actAndAssertContext = new ApplicationDbContext(options))
             {
-                var sut = new BusinessService(actAndAssertContext, mappingProviderMock.Object);;
-
+                var sut = new BusinessService(actAndAssertContext, mappingProviderMock.Object); ;
 
                 await Assert.ThrowsExceptionAsync<EntityAlreadyExistsException>(
                         async () => await sut.CreateBusinessAsync(businessName, location, description));
             }
         }
+
         [TestMethod]
         public async Task AddNewBusiness_WhenAllParametersAreValid()
         {
@@ -68,7 +65,6 @@ namespace HotelManagement.ServiceTests.BusinessServiceTests
                 Assert.IsTrue(actAndAssertContext.Businesses.Count() == 1);
                 Assert.IsTrue(actAndAssertContext.Businesses.Any(m => m.Name == businessName));
             }
-
         }
 
         [TestMethod]
