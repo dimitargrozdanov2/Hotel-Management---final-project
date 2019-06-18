@@ -1,6 +1,10 @@
 # Hotel Management
 <br>
 Final project for the Telerik Alpha Academy
+<br>
+
+
+[![Build Status](https://dev.azure.com/ttodorov17116241/HotelManagement3/_apis/build/status/HotelManagement3%20-%20CI?branchName=develop)](https://dev.azure.com/ttodorov17116241/HotelManagement3/_build/latest?definitionId=1&branchName=develop)
 
 # Topic
 The application allows Restaurant / Hotel customers and managers to log comments about the service. Customers will be able to add comments with positive/negative service feedback and view others’ feedback.
