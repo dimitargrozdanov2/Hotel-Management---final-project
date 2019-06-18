@@ -42,4 +42,4 @@ The administrators are able to initialize new LogBooks and Categories/Tags for t
 ![Home Page](search-by-category.png)<br>
 ![Home Page](all-businesses.png)<br>
 ![Home Page](business-logbooks.png)<br>
-![Home Page](homeall-userspage.png)<br>
+![Home Page](all-users.png)<br>
