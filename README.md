@@ -35,11 +35,17 @@ The administrators are able to initialize new LogBooks and Categories/Tags for t
 
 
 
-# Screenshots
+# Home Page
 ![Home Page](homepage.png)<br>
+# Feedback Page
 ![Home Page](feedback-section.png)<br>
+# Management Page
 ![Home Page](management-notes.png)<br>
+# Search Page
 ![Home Page](search-by-category.png)<br>
+# Admin Business Page
 ![Home Page](all-businesses.png)<br>
+# Admin Logbooks Page
 ![Home Page](business-logbooks.png)<br>
+# Admin Users Page
 ![Home Page](all-users.png)<br>
