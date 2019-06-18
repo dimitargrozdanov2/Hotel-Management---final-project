@@ -7,9 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HotelManagement.ControllerTests.AdminControllerTests
@@ -18,7 +15,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
     public class ManageManager_Should
     {
         [TestMethod]
-        public async Task ReturnCorrectTypeofViewResult_OnGet()
+        public void ReturnCorrectTypeofViewResult_OnGet()
         {
             var userManagerWrapperMock = new Mock<IUserManagerWrapper>();
             var userServiceMock = new Mock<IUserService>();
@@ -32,7 +29,7 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
                 hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
 
             string businessName = "Shell";
-            var result = sut.CreateLogbook();
+            var result = sut.ManageManager(businessName) as ViewResult;
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
         }

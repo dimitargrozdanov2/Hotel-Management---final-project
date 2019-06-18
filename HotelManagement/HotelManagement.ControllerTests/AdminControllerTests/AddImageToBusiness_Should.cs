@@ -120,55 +120,56 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
         //    File.Delete(path + $"\\Images\\Project\\{imageUrl}.jpg");
         //}
 
-        [TestMethod]
-        public async Task RedirectToCorrectAction_WhenModelState_IsValid()
-        {
-            var userManagerWrapperMock = new Mock<IUserManagerWrapper>();
-            var userServiceMock = new Mock<IUserService>();
-            var businessServiceMock = new Mock<IBusinessService>();
-            var hostingEnvironmentMock = new Mock<IHostingEnvironment>();
-            var logbookServiceMock = new Mock<ILogbookService>();
-            var roleManagerWrapperMock = new Mock<IRoleManagerWrapper>();
-            var categoryServiceMock = new Mock<ICategoryService>();
+        //    [TestMethod]
+        //    public async Task RedirectToCorrectAction_WhenModelState_IsValid()
+        //    {
+        //        var userManagerWrapperMock = new Mock<IUserManagerWrapper>();
+        //        var userServiceMock = new Mock<IUserService>();
+        //        var businessServiceMock = new Mock<IBusinessService>();
+        //        var hostingEnvironmentMock = new Mock<IHostingEnvironment>();
+        //        var logbookServiceMock = new Mock<ILogbookService>();
+        //        var roleManagerWrapperMock = new Mock<IRoleManagerWrapper>();
+        //        var categoryServiceMock = new Mock<ICategoryService>();
 
-            string businessName = "Wagamama";
-            string imageUrl = "Wagamama_logo";
-            IFormFile Image = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a dummy file")), 0, 0, "Data", "dummy.jpg");
-            var currDir = Directory.GetCurrentDirectory();
-            var startIndex = currDir.IndexOf(@"\HotelManagement.ControllerTests\");
-            var folderImagesUsedForTests = "\\HotelManagement.ControllerTests\\ImagesUsedForTests";
-            var path = Path.Combine(currDir.Substring(0, startIndex) + folderImagesUsedForTests);
+        //        string businessName = "Wagamama";
+        //        string imageUrl = "Wagamama_logo";
+        //        IFormFile Image = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a dummy file")), 0, 0, "Data", "dummy.jpg");
+        //        var currDir = Directory.GetCurrentDirectory();
+        //        var startIndex = currDir.IndexOf(@"\HotelManagement.ControllerTests\");
+        //        var folderImagesUsedForTests = "\\HotelManagement.ControllerTests\\ImagesUsedForTests";
+        //        var path = Path.Combine(currDir.Substring(0, startIndex) + folderImagesUsedForTests);
 
-            hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(path);
+        //        hostingEnvironmentMock.SetupGet(x => x.WebRootPath).Returns(path);
 
-            var model = new BusinessViewModel()
-            {
-                Name = businessName
-            };
+        //        var model = new BusinessViewModel()
+        //        {
+        //            Name = businessName
+        //        };
 
-            var addImageModel = new AddImageToBusinessViewModel()
-            {
-                name = businessName,
-                ImageName = imageUrl,
-                Image = Image
-            };
+        //        var addImageModel = new AddImageToBusinessViewModel()
+        //        {
+        //            name = businessName,
+        //            ImageName = imageUrl,
+        //            Image = Image
+        //        };
 
-            businessServiceMock
-           .Setup(g => g.AddImageToBusiness(businessName, imageUrl, Image))
-           .ReturnsAsync(model);
+        //        businessServiceMock
+        //       .Setup(g => g.AddImageToBusiness(businessName, imageUrl, Image))
+        //       .ReturnsAsync(model);
 
-            var sut = new AdminController(userManagerWrapperMock.Object, userServiceMock.Object, businessServiceMock.Object,
-               hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
+        //        var sut = new AdminController(userManagerWrapperMock.Object, userServiceMock.Object, businessServiceMock.Object,
+        //           hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
 
-            var result = await sut.AddImageToBusiness(addImageModel);
+        //        var result = await sut.AddImageToBusiness(addImageModel);
 
-            Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
-            var redirect = (RedirectToActionResult)result;
+        //        Assert.IsInstanceOfType(result, typeof(RedirectToActionResult));
+        //        var redirect = (RedirectToActionResult)result;
 
-            Assert.IsTrue(redirect.ControllerName == "Admin");
-            Assert.IsTrue(redirect.ActionName == "AllBusinesses");
+        //        Assert.IsTrue(redirect.ControllerName == "Admin");
+        //        Assert.IsTrue(redirect.ActionName == "AllBusinesses");
 
-            File.Delete(path + $"\\Images\\Project\\{imageUrl}.jpg");
-        }
+        //        File.Delete(path + $"\\Images\\Project\\{imageUrl}.jpg");
+        //    }
+        //}
     }
 }

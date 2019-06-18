@@ -195,8 +195,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult ManageManager(string LogbookName)
         {
-            var model = new ManagerManageViewModel();
-            model.LogbookName = LogbookName;
             return this.View();
         }
 

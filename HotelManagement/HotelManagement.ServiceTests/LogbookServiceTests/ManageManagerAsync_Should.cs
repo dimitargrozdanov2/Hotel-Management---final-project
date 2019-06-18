@@ -93,47 +93,6 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
                         async () => await sut.ManageManagerAsync(logbookName, userEmail));
             }
         }
-
-        //[TestMethod]
-        //public async Task AssignManagerSuccesfully()
-        //{
-        //    var dabataseName = nameof(Throw_WhenManager_DoesNotExist);
-
-        //    var options = LogbookTestUtil.GetOptions(dabataseName);
-
-        //    LogbookTestUtil.FillContextWithLogbooks(options);
-
-        //    var mappingProviderMock = new Mock<IMappingProvider>();
-
-        //    var hostingEnvironmentMock = new Mock<IHostingEnvironment>();
-
-        //    string logbookName = "Manufacturing";
-
-        //    string userEmail = "gros2@admin.admin";
-
-        //    // NEED TO ADD USER TO ROLE MANAGER
-        //    using (var actAndAssertContext = new ApplicationDbContext(options))
-        //    {
-        //        var sut = new LogbookService(actAndAssertContext, mappingProviderMock.Object, hostingEnvironmentMock.Object); ;
-
-        //        var result = await sut.ManageManagerAsync(logbookName, userEmail);
-
-        //        Assert.IsTrue(actAndAssertContext
-        //            .Logbooks.FirstOrDefault(l => l.Name == logbookName)
-        //            .LogbookManagers.Any(lm => lm.Manager?.UserName == userEmail));
-        //    }
-        //}
-
-        //[TestMethod]
-        //public async Task UnassignManagerSuccesfully()
-        //{
-        //    // TO DO
-        //}
-        //[TestMethod]
-        //public async Task ReturnCorrectViewModel()
-        //{
-        //    // TO DO
-        //}
     }
 }
 
