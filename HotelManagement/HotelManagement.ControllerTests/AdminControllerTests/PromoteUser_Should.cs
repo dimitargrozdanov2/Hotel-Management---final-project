@@ -107,45 +107,5 @@ namespace HotelManagement.ControllerTests.AdminControllerTests
             await Assert.ThrowsExceptionAsync<EntityInvalidException>(
                        async () => await sut.PromoteUser(model));
         }
-
-        //[TestMethod]
-        //public async Task Return_StatusCode400_When_Exception_IsThrown()
-        //{
-        //    var userManagerWrapperMock = new Mock<IUserManagerWrapper>();
-        //    var userServiceMock = new Mock<IUserService>();
-        //    var businessServiceMock = new Mock<IBusinessService>();
-        //    var hostingEnvironmentMock = new Mock<IHostingEnvironment>();
-        //    var logbookServiceMock = new Mock<ILogbookService>();
-        //    var roleManagerWrapperMock = new Mock<IRoleManagerWrapper>();
-        //    var categoryServiceMock = new Mock<ICategoryService>();
-
-        //    string businessName = "Wagamama";
-
-        //    var model = new PromoteRoleViewModel()
-        //    {
-        //        UserId = "91120f3c-57f1-421d-8e11-277c96f4c9d3",
-        //        RoleName = "Manager"
-        //    };
-        //    var user = new User()
-        //    {
-        //        Id = "0510572b-de76-4f6a-ae97-76194128859f"
-        //    };
-
-        //    userManagerWrapperMock
-        //   .Setup(g => g.FindByIdAsync(model.UserId))
-        //   .ReturnsAsync(user);
-
-        //    var sut = new AdminController(userManagerWrapperMock.Object, userServiceMock.Object, businessServiceMock.Object,
-        //       hostingEnvironmentMock.Object, logbookServiceMock.Object, roleManagerWrapperMock.Object, categoryServiceMock.Object);
-
-        //    await sut.PromoteUser(model);
-
-        //}
-
-        //[TestMethod]
-        //public async Task Return_Json()
-        //{
-
-        //}
     }
 }

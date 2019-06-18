@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ImagesUsedForTests\**" />
+    <EmbeddedResource Remove="ImagesUsedForTests\**" />
+    <None Remove="ImagesUsedForTests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="Moq" Version="4.11.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
@@ -16,10 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HotelManagement.Services\HotelManagement.Services.csproj" />
     <ProjectReference Include="..\HotelManagement.Web\HotelManagement.Web.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ImagesUsedForTests\Images\Project\" />
   </ItemGroup>
 
 </Project>
