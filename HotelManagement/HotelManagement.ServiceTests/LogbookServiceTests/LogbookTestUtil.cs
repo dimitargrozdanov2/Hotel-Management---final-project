@@ -40,9 +40,16 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
                 Name = "Manufacturing",
                 Description = "One of the core procedures in the factory is manufacturing the different kinds of pasta",
                 Id = "7d7292ab-30d8-4c30-b972-568fcd1000eb",
-                BusinessId = "4f3e3358-055f-49f6-a48e-5e0c9d9fe6c8"
+                BusinessId = "4f3e3358-055f-49f6-a48e-5e0c9d9fe6c8",
+                LogbookManagers = new List<LogbookManagers>()
+                //{
+                //    new LogbookManagers
+                //    {
+                //        LogbookId = "7d7292ab-30d8-4c30-b972-568fcd1000eb",
+                //        ManagerId = "6940346e-7493-4822-8a19-c6462bc70921"
+                //    }
+                //}
             };
-
             var pastaUser = new User()
             {
                 Id = "6536bb9a-3af0-40fe-a878-e5ab8212cd55",
@@ -52,9 +59,9 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
 
             var pastaManager = new User()
             {
-                Id = "6536bb9a-3af0-40fe-a878-e5ab8212cd55",
-                UserName = "dimitar.pasta@admin.admin",
-                Email = "dimitar.pasta@admin.admin",
+                Id = "6940346e-7493-4822-8a19-c6462bc70921",
+                UserName = "gros2@admin.admin",
+                Email = "gros2@admin.admin",
             };
             var hotelApartment = new Business()
             {
@@ -79,6 +86,14 @@ namespace HotelManagement.ServiceTests.LogbookServiceTests
             pastaBusiness.BusinessUnits.Add(manufacturingLogbook);
 
             context.Users.Add(pastaUser);
+
+            context.Users.Add(pastaManager);
+
+            context.LogbookManagers.Add(new LogbookManagers()
+            {
+                LogbookId = "7d7292ab-30d8-4c30-b972-568fcd1000eb",
+                ManagerId = "6940346e-7493-4822-8a19-c6462bc70921"
+            });
 
             context.Businesses.Add(hotelApartment);
 

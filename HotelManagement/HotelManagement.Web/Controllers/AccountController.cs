@@ -96,22 +96,14 @@ namespace HotelManagement.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-                    //After Registering a user, I don't want to sign in with him
-
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
                     var userViewModel = new UserViewModel
                     {
                         Id = user.Id,
                         Email = user.Email,
                         UserName = user.UserName
                     };
-                    //return PartialView("_UserPartialView", userViewModel);
+
                     return Json(userViewModel);
-                    //return new { success = true };
                 }
 
                 var test = result.Errors;
@@ -119,7 +111,6 @@ namespace HotelManagement.Web.Controllers
                 return BadRequest(result.Errors);
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 

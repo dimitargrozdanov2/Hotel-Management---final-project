@@ -68,13 +68,6 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
 
         }
 
-        //[HttpGet]
-        //public IActionResult CreateBusiness()
-        //{
-        //    var model = new CreateBusinessViewModel();
-        //    return this.View(model);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateBusiness(CreateBusinessViewModel model)
@@ -100,11 +93,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult AddImageToBusiness(string name)
         {
-            if (this.ModelState.IsValid)
-            {
-                var model = new AddImageToBusinessViewModel();
-                model.name = name;
-            }
+            var model = new AddImageToBusinessViewModel();
+            model.name = name;
             return this.View();
         }
 
@@ -138,19 +128,15 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> AllLogbooksForBusiness(string name)
         {
-            if (this.ModelState.IsValid)
-            {
-                var model = new ListLogbooksViewModel();
+            var model = new ListLogbooksViewModel();
 
-                var logbooks = await this.logbookService.GetLogBooksForBusiness(name);
+            var logbooks = await this.logbookService.GetLogBooksForBusiness(name);
 
-                model.Logbooks = logbooks;
+            model.Logbooks = logbooks;
 
-                model.BusinessName = name;
+            model.BusinessName = name;
 
-                return this.View(model);
-            }
-            return this.View();
+            return this.View(model);
         }
 
         [HttpGet]
@@ -209,12 +195,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult ManageManager(string LogbookName)
         {
-            if (this.ModelState.IsValid)
-            {
-                var model = new ManagerManageViewModel();
-                model.LogbookName = LogbookName;
-
-            }
+            var model = new ManagerManageViewModel();
+            model.LogbookName = LogbookName;
             return this.View();
         }
 
@@ -235,11 +217,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult CreateCategory(string LogbookName)
         {
-            if (this.ModelState.IsValid)
-            {
-                var model = new CreateCategoryViewModel();
-                model.LogbookName = LogbookName;
-            }
+            var model = new CreateCategoryViewModel();
+            model.LogbookName = LogbookName;
             return this.View();
         }
 
@@ -260,11 +239,8 @@ namespace HotelManagement.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult DeleteLogbook(string name)
         {
-            if (this.ModelState.IsValid)
-            {
-                var model = new DeleteLogbookViewModel();
-                model.Name = name;
-            }
+            var model = new DeleteLogbookViewModel();
+            model.Name = name;
             return this.View();
         }
 
