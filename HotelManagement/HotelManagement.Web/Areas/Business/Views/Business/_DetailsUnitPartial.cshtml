@@ -8,7 +8,7 @@
         <div class="card-explore__img">
             @if (@Model.Business.Images.Count != 0)
             {
-                <img class="card-img" src="~/images/Project/@Model.Business.Images?.FirstOrDefault(x => x.Name.Contains(Model.Name)).Name" alt="Business Image">
+                <img class="card-img" src="~/images/Project/@Model.Business.Images?.FirstOrDefault(x => x.Name.Contains(Model.Name))?.Name" alt="Business Image">
             }
         </div>
         <div class="card-body">
